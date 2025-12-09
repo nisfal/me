@@ -1,6 +1,6 @@
 /**
  * Personal Portfolio - JavaScript Animations & Interactions
- * Fullstack Developer | Go & Svelte
+ * Fullstack Developer | NodeJS & ReactJS
  */
 
 // ===== DOM Elements =====
