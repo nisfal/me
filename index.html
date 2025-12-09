@@ -5,12 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Nisfal Filsa - Fullstack Developer specializing in NodeJS, GO backend systems and ReactJS frontend. Expert in high-performance, scalable applications.">
+    content="Nisfal Filsa - Fullstack Developer specializing in Backend (NodeJS, Go, PHP, Laravel, Java Spring Boot) and Frontend (ReactJS, AngularJS, Next.js). Expert in high-performance, scalable applications.">
   <meta name="keywords"
-    content="Nisfal Filsa, Fullstack Developer, Go, Golang, ReactJS, AngularJS, Node.js, Backend, Frontend, Web Developer">
+    content="Nisfal Filsa, Fullstack Developer, Go, Golang, ReactJS, AngularJS, Next.js, Node.js, PHP, Laravel, Java Spring Boot, Backend, Frontend, Web Developer">
   <meta name="author" content="Nisfal Filsa">
 
-  <title>Nisfal Filsa | Fullstack Developer - NodeJS & ReactJS</title>
+  <title>Nisfal Filsa | Fullstack Developer</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml"
@@ -29,9 +29,8 @@
       </a>
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="backend.html" class="nav-link">Backend</a></li>
+        <li><a href="frontend.html" class="nav-link">Frontend</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
@@ -63,8 +62,8 @@
       </h1>
 
       <p class="hero-subtitle">
-        Crafting high-performance backend with <strong>NodeJS</strong> and
-        modern, reactive interfaces with <strong>ReactJS</strong>
+        Crafting high-performance backends and modern, reactive frontends.
+        <br>Choose your path to explore my expertise.
       </p>
 
       <div class="hero-tech">
@@ -72,250 +71,61 @@
         <span class="divider"></span>
         <span>Node.js</span>
         <span class="divider"></span>
+        <span>PHP</span>
+        <span class="divider"></span>
         <span>ReactJS</span>
         <span class="divider"></span>
-        <span>PostgreSQL</span>
-        <span class="divider"></span>
-        <span>Redis</span>
+        <span>Next.js</span>
       </div>
 
-      <div class="hero-cta">
-        <a href="#portfolio" class="btn btn-primary">
-          <span>View Projects</span>
+      <!-- Persona Choice Buttons -->
+      <div class="hero-cta persona-choice">
+        <a href="backend.html" class="btn btn-backend">
+          <span>⚙️ Explore Backend</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
-        <a href="#contact" class="btn btn-secondary">
-          Get In Touch
+        <a href="frontend.html" class="btn btn-frontend">
+          <span>🎨 Explore Frontend</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section class="skills" id="skills">
+  <!-- Brief Overview Section -->
+  <section class="overview" id="overview">
     <div class="container">
-      <header class="section-header fade-in">
-        <span class="section-label">// What I Do</span>
-        <h2 class="section-title">Technical <span class="gradient-text">Expertise</span></h2>
-        <p class="section-subtitle">
-          Combining high-performance backend systems with efficient, reactive frontends
-        </p>
-      </header>
-
-      <div class="skills-grid">
-        <!-- Backend Card -->
-        <article class="skill-card fade-in delay-1">
-          <div class="skill-icon">⚙️</div>
-          <h3 class="skill-card-title">Backend Engineering</h3>
-          <p class="skill-card-subtitle">High Performance · Scalability</p>
-          <p class="skill-card-desc">
-            Building robust, concurrent systems with Go for maximum throughput.
-            Designing RESTful APIs and microservices architecture that handle
-            millions of requests efficiently.
-          </p>
-          <div class="skill-tags">
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M1.811 10.231c-.047 0-.058-.023-.035-.059l.246-.315c.023-.035.081-.058.128-.058h4.172c.046 0 .058.035.035.07l-.199.303c-.023.036-.082.07-.117.07l-4.23-.011zM.047 11.306c-.047 0-.059-.023-.035-.058l.245-.316c.023-.035.082-.058.129-.058h5.328c.047 0 .07.035.058.07l-.093.28c-.012.047-.058.07-.105.07l-5.527.012zm2.828 1.075c-.047 0-.059-.035-.035-.07l.163-.292c.023-.035.07-.07.117-.07h2.337c.047 0 .07.035.07.082l-.023.28c0 .047-.047.082-.082.082l-2.547-.012z" />
-                <path
-                  d="M18.91 10.138c-.724.186-1.22.328-1.943.514-.176.047-.187.059-.34-.117-.177-.199-.316-.328-.573-.445-.761-.363-1.497-.257-2.187.14-.819.47-1.241 1.181-1.229 2.082.011.878.608 1.603 1.474 1.719.75.093 1.392-.14 1.921-.633.117-.105.222-.222.351-.363H14.02c-.246 0-.304-.152-.222-.351.152-.363.432-.866.596-1.135.047-.07.152-.187.304-.187h4.615c-.023.304-.023.596-.07.89-.117.749-.398 1.439-.84 2.058-.737 1.041-1.708 1.742-2.934 2.023-1.006.234-1.978.175-2.887-.281-1.006-.503-1.673-1.286-1.966-2.36-.351-1.276-.082-2.465.678-3.529.84-1.17 1.954-1.883 3.354-2.105 1.17-.187 2.293-.047 3.319.538.724.409 1.264.995 1.626 1.766.082.129.035.199-.152.246z" />
-              </svg>
-              Go
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M11.998 24c-.321 0-.641-.084-.922-.247l-2.936-1.737c-.438-.245-.224-.332-.08-.383.585-.203.703-.25 1.328-.604.065-.037.151-.023.218.017l2.256 1.339c.082.045.198.045.275 0l8.795-5.076c.082-.047.134-.141.134-.238V6.921c0-.099-.053-.193-.137-.242l-8.791-5.072c-.081-.047-.189-.047-.271 0L3.075 6.68c-.085.049-.139.143-.139.242v10.15c0 .097.054.189.139.235l2.409 1.392c1.307.654 2.108-.116 2.108-.891V7.787c0-.142.114-.253.256-.253h1.115c.139 0 .255.111.255.253v10.021c0 1.745-.95 2.745-2.604 2.745-.509 0-.909 0-2.026-.551l-2.304-1.327C1.469 18.052 1 17.272 1 16.431V6.28c0-.842.469-1.622 1.231-2.041L11.027.163c.748-.422 1.74-.422 2.483 0l8.795 5.076c.762.419 1.232 1.199 1.232 2.041v10.15c0 .842-.471 1.621-1.232 2.042l-8.795 5.076c-.28.162-.601.247-.919.247zm2.715-6.997c-3.857 0-4.664-1.771-4.664-3.257 0-.142.114-.253.256-.253h1.138c.126 0 .232.091.251.215.171 1.157.68 1.741 3.019 1.741 1.856 0 2.646-.42 2.646-1.404 0-.567-.224-.988-3.11-1.271-2.411-.239-3.903-.771-3.903-2.7 0-1.778 1.499-2.837 4.012-2.837 2.823 0 4.218.979 4.394 3.082.007.075-.02.148-.068.204-.047.055-.115.089-.188.089h-1.143c-.117 0-.221-.082-.246-.196-.274-1.212-.937-1.599-2.749-1.599-2.024 0-2.261.705-2.261 1.233 0 .641.278.827 3.014 1.189 2.708.357 3.988.863 3.988 2.765 0 1.919-1.599 3.018-4.386 3.018z" />
-              </svg>
-              Node.js
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.037 20.731c-4.82 0-8.731-3.911-8.731-8.731s3.911-8.731 8.731-8.731 8.731 3.911 8.731 8.731-3.911 8.731-8.731 8.731zm3.063-13.139H8.974a.474.474 0 0 0-.474.474v7.868c0 .262.212.474.474.474h6.052c.262 0 .474-.212.474-.474V8.066a.474.474 0 0 0-.474-.474zm-.948 7.394H9.922V9.014h4.156v5.972z" />
-              </svg>
-              Redis
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z" />
-              </svg>
-              MongoDB
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M5.793 3.774a.205.205 0 01.207.206v16.04a.205.205 0 01-.207.206H3.207A.206.206 0 013 20.02V3.98a.205.205 0 01.207-.206zm15 0a.205.205 0 01.207.206v16.04a.205.205 0 01-.207.206h-2.586a.206.206 0 01-.207-.206V3.98a.205.205 0 01.207-.206zM12 6.5a5.5 5.5 0 110 11 5.5 5.5 0 010-11z" />
-              </svg>
-              MySQL
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M23.557 8.295c-.145-.39-.458-.725-.799-.916-.387-.22-.847-.312-1.326-.312-.534 0-1.09.117-1.59.35-.592-.35-1.236-.552-1.934-.552-.757 0-1.47.237-2.1.682-.39.278-.736.625-1.025 1.028-.29-.403-.635-.75-1.026-1.028-.628-.445-1.343-.682-2.099-.682-.698 0-1.342.202-1.934.551-.5-.232-1.057-.35-1.59-.35-.48 0-.94.093-1.327.313-.34.19-.654.527-.799.916-.207.556-.172 1.144-.024 1.706.105.398.282.788.494 1.152-.462.663-.72 1.456-.72 2.304 0 .848.258 1.641.72 2.304-.212.364-.39.754-.494 1.152-.148.562-.183 1.15.024 1.706.145.39.458.725.799.916.387.22.847.312 1.326.312.534 0 1.09-.117 1.59-.35.592.35 1.236.551 1.934.551.756 0 1.471-.237 2.1-.682.39-.278.736-.625 1.025-1.028.29.403.635.75 1.026 1.028.628.445 1.343.682 2.099.682.698 0 1.342-.202 1.934-.551.5.232 1.056.35 1.59.35.48 0 .939-.093 1.326-.312.34-.191.654-.527.799-.916.207-.556.172-1.144.024-1.706-.104-.398-.282-.788-.494-1.152.462-.663.72-1.456.72-2.304 0-.848-.258-1.641-.72-2.304.212-.364.39-.754.494-1.152.148-.562.183-1.15-.024-1.706zM12 16.745a4.745 4.745 0 110-9.49 4.745 4.745 0 010 9.49z" />
-              </svg>
-              PostgreSQL
-            </span>
+      <div class="overview-grid">
+        <article class="overview-card backend-card fade-in">
+          <div class="overview-icon">⚙️</div>
+          <h3>Backend Engineering</h3>
+          <p>Scalable APIs, Microservices, Database Optimization</p>
+          <div class="overview-tags">
+            <span>Go</span>
+            <span>Node.js</span>
+            <span>PHP</span>
+            <span>Laravel</span>
+            <span>Java Spring Boot</span>
           </div>
+          <a href="backend.html" class="overview-link">View Backend Skills →</a>
         </article>
-
-        <!-- Frontend Card -->
-        <article class="skill-card fade-in delay-2">
-          <div class="skill-icon">🎨</div>
-          <h3 class="skill-card-title">Frontend Development</h3>
-          <p class="skill-card-subtitle">Reactivity · Minimal Bundle</p>
-          <p class="skill-card-desc">
-            Creating lightning-fast UIs with Svelte's compile-time approach.
-            No virtual DOM overhead — just highly optimized vanilla JavaScript
-            that delivers exceptional performance and smooth user experiences.
-          </p>
-          <div class="skill-tags">
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0L1.75 3.65L3.4 18.25L12 23.5L20.6 18.25L22.25 3.65L12 0ZM18.3 16.8L12 20.6L5.7 16.8L4.35 4.85L12 2.15L19.65 4.85L18.3 16.8Z" />
-                <path d="M12 6L8.4 14H10.5L11.25 12.1H12.75L13.5 14H15.6L12 6ZM11.65 10.75L12 9.8L12.35 10.75H11.65Z" />
-              </svg>
-              AngularJS
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.2c1.956 0 3.824.526 5.438 1.446L12 8.5 6.562 3.646C8.176 2.726 10.044 2.2 12 2.2zm-6.68 2.654L10.385 9.5 5.32 18.336C3.218 16.593 2.2 14.364 2.2 12c0-2.636 1.134-5.018 3.12-7.146zm13.36 0C20.866 6.982 22 9.364 22 12c0 2.364-1.018 4.593-3.12 6.336l-5.065-8.836 5.065-4.646zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5zm-5.438 6.346L12 15.5l5.438 6.346C15.824 22.766 13.956 23.292 12 23.292c-1.956 0-3.824-.526-5.438-1.446z" />
-              </svg>
-              ReactJS
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 011.306.34v2.458a3.95 3.95 0 00-.643-.361 5.093 5.093 0 00-.717-.26 5.453 5.453 0 00-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 00-.623.242c-.17.104-.3.229-.393.374a.888.888 0 00-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 01-1.012 1.085 4.38 4.38 0 01-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 01-1.84-.164 5.544 5.544 0 01-1.512-.493v-2.63a5.033 5.033 0 003.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 00-.074-1.089 2.12 2.12 0 00-.537-.5 5.597 5.597 0 00-.807-.444 27.72 27.72 0 00-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 011.47-.629 7.536 7.536 0 011.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z" />
-              </svg>
-              TypeScript
-            </span>
-            <span class="skill-tag">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
-              </svg>
-              TailwindCSS
-            </span>
+        
+        <article class="overview-card frontend-card fade-in delay-1">
+          <div class="overview-icon">🎨</div>
+          <h3>Frontend Development</h3>
+          <p>Reactive UIs, Modern Frameworks, Responsive Design</p>
+          <div class="overview-tags">
+            <span>ReactJS</span>
+            <span>AngularJS</span>
+            <span>Next.js</span>
+            <span>TailwindCSS</span>
+            <span>TypeScript</span>
           </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Section -->
-  <section class="portfolio" id="portfolio">
-    <div class="container">
-      <header class="section-header fade-in">
-        <span class="section-label">// Selected Work</span>
-        <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
-        <p class="section-subtitle">
-          Real-world applications showcasing Go backend and Svelte frontend integration
-        </p>
-      </header>
-
-      <div class="portfolio-grid">
-        <!-- Project 1: MyTens Partnership -->
-        <article class="project-card fade-in delay-1">
-          <div class="project-image">
-            <div class="project-preview">🏢</div>
-          </div>
-          <div class="project-content">
-            <span class="project-category">Enterprise Platform</span>
-            <h3 class="project-title">MyTens Partnership</h3>
-            <p class="project-desc">
-              Telkom Enterprise Solution platform for B2B partnership management.
-              High-performance backend handling enterprise-scale transactions with modern reactive UI.
-            </p>
-            <div class="project-stack">
-              <span class="stack-tag backend">NodeJS</span>
-              <span class="stack-tag backend">MongoDB</span>
-              <span class="stack-tag backend">Redis</span>
-              <span class="stack-tag frontend">ReactJs</span>
-              <span class="stack-tag frontend">REST API</span>
-            </div>
-            <div class="project-links">
-              <a href="https://mytenspartnership.telkom.co.id/" target="_blank" rel="noopener noreferrer"
-                class="project-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                  <polyline points="15,3 21,3 21,9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                Live Site
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2: SKCK Online -->
-        <article class="project-card fade-in delay-2">
-          <div class="project-image">
-            <div class="project-preview">�️</div>
-          </div>
-          <div class="project-content">
-            <span class="project-category">Government System</span>
-            <h3 class="project-title">SKCK Online - Polri</h3>
-            <p class="project-desc">
-              National-scale police clearance certificate application system.
-              Secure authentication, document management, and real-time status tracking for millions of citizens.
-            </p>
-            <div class="project-stack">
-              <span class="stack-tag backend">Go (Gin)</span>
-              <span class="stack-tag backend">PostgreSQL</span>
-              <span class="stack-tag backend">Redis</span>
-              <span class="stack-tag frontend">ReactJs</span>
-              <span class="stack-tag backend">RabbitMQ</span>
-            </div>
-            <div class="project-links">
-              <a href="https://app-skck.polri.go.id/" target="_blank" rel="noopener noreferrer" class="project-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                  <polyline points="15,3 21,3 21,9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                Live Site
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3: SD-WAN Portal -->
-        <article class="project-card fade-in delay-3">
-          <div class="project-image">
-            <div class="project-preview">🌐</div>
-          </div>
-          <div class="project-content">
-            <span class="project-category">Network Management</span>
-            <h3 class="project-title">Telkom SD-WAN Portal</h3>
-            <p class="project-desc">
-              Enterprise SD-WAN management portal for network configuration and monitoring.
-              Real-time network analytics with high-performance Go microservices backend.
-            </p>
-            <div class="project-stack">
-              <span class="stack-tag backend">NodeJS</span>
-              <span class="stack-tag backend">MongoDB</span>
-              <span class="stack-tag backend">Redis</span>
-              <span class="stack-tag frontend">ReactJs</span>
-            </div>
-            <div class="project-links">
-              <a href="https://telkomsdwan.telkom.co.id/" target="_blank" rel="noopener noreferrer"
-                class="project-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-                  <polyline points="15,3 21,3 21,9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-                Live Site
-              </a>
-            </div>
-          </div>
+          <a href="frontend.html" class="overview-link">View Frontend Skills →</a>
         </article>
       </div>
     </div>
