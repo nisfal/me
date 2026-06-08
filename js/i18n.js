@@ -17,9 +17,25 @@ I18N_DICTIONARY.en = {
 };
 
 function getInitialLanguage() {
+  const params = new URLSearchParams(window.location.search);
+  const langFromUrl = params.get('lang');
+  if (langFromUrl && I18N_DICTIONARY[langFromUrl]) return langFromUrl;
+
   const saved = localStorage.getItem('portfolio_language');
   if (saved && I18N_DICTIONARY[saved]) return saved;
-  return document.documentElement.lang === 'id' ? 'id' : 'en';
+
+  const browserLanguage = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+  return browserLanguage.startsWith('id') ? 'id' : 'en';
+}
+
+function updateLanguageLinks(lang) {
+  document.querySelectorAll('a[href$=".html"], a[href*=".html#"]').forEach((link) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('http')) return;
+    const [pathWithQuery, hash = ''] = href.split('#');
+    const [path] = pathWithQuery.split('?');
+    link.setAttribute('href', `${path}?lang=${lang}${hash ? `#${hash}` : ''}`);
+  });
 }
 
 function setLanguage(lang) {
@@ -35,11 +51,18 @@ function setLanguage(lang) {
     button.classList.toggle('active', isActive);
     button.setAttribute('aria-pressed', String(isActive));
   });
+  updateLanguageLinks(lang);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-lang-option]').forEach((button) => {
-    button.addEventListener('click', () => setLanguage(button.getAttribute('data-lang-option')));
+    button.addEventListener('click', () => {
+      const lang = button.getAttribute('data-lang-option');
+      setLanguage(lang);
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', url);
+    });
   });
   setLanguage(getInitialLanguage());
 });
