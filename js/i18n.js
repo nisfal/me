@@ -277,6 +277,7 @@ function setLanguage(lang) {
   });
   updateLanguageLinks(lang);
   updateSeo(lang, dictionary);
+  window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

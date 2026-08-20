@@ -1,6 +1,6 @@
 /* ==========================================================================
    DESIGN SYSTEM - Nisfal Filsa (Fullstack & Systems Engineer Portfolio)
-   BDSN.club Kinetic Motion & Emil Kowalski Design Engineering
+   BDSN.club Kinetic Motion, Custom Fluid Cursor & Emil Kowalski Principles
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -117,6 +117,151 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+/* ==========================================================================
+   BDSN-STYLE CUSTOM FLUID CURSOR (Desktop / Fine Pointer Only)
+   ========================================================================== */
+.custom-cursor-dot,
+.custom-cursor-trailer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 250ms var(--ease-out);
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button, input, textarea, select, .btn, .nav-link, .split-word, * {
+    cursor: none !important;
+  }
+
+  .custom-cursor-dot,
+  .custom-cursor-trailer {
+    display: block;
+  }
+
+  .custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-red);
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.8);
+    transition: opacity 250ms var(--ease-out), transform 150ms var(--ease-out), background-color 150ms var(--ease-out);
+  }
+
+  .custom-cursor-trailer {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(220, 38, 38, 0.45);
+    background: rgba(220, 38, 38, 0.03);
+    backdrop-filter: blur(0.5px);
+    transition: opacity 250ms var(--ease-out),
+                width 250ms var(--ease-bdsn),
+                height 250ms var(--ease-bdsn),
+                border-color 250ms var(--ease-bdsn),
+                background-color 250ms var(--ease-bdsn),
+                transform 150ms var(--ease-out);
+  }
+
+  body.cursor-active .custom-cursor-dot,
+  body.cursor-active .custom-cursor-trailer {
+    opacity: 1;
+  }
+
+  /* Hover State over interactive targets */
+  body.cursor-hover .custom-cursor-dot {
+    transform: translate(-50%, -50%) scale(1.5);
+    background: #ffffff;
+  }
+
+  body.cursor-hover .custom-cursor-trailer {
+    width: 52px;
+    height: 52px;
+    border-color: rgba(255, 255, 255, 0.65);
+    background: rgba(220, 38, 38, 0.08);
+  }
+
+  /* Hover State over header typography (split-word) — filled red ring */
+  body.cursor-text .custom-cursor-dot {
+    transform: translate(-50%, -50%) scale(2);
+    background: #ffffff;
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+  }
+
+  body.cursor-text .custom-cursor-trailer {
+    width: 56px;
+    height: 56px;
+    border-color: rgba(220, 38, 38, 0.9);
+    background: rgba(220, 38, 38, 0.35);
+    backdrop-filter: blur(6px);
+  }
+
+  body.cursor-down .custom-cursor-trailer {
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+
+  body.cursor-down .custom-cursor-dot {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+/* ==========================================================================
+   BDSN-STYLE KINETIC TYPOGRAPHY (Split Mask Reveals & Interactive Hover)
+   ========================================================================== */
+.split-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
+.split-word {
+  display: inline-block;
+  transform: translateY(115%) rotate(2.5deg);
+  opacity: 0;
+  filter: blur(4px);
+  transition: transform 650ms var(--ease-bdsn),
+              opacity 650ms var(--ease-bdsn),
+              filter 650ms var(--ease-bdsn),
+              color 220ms var(--ease-bdsn);
+  transition-delay: calc(var(--word-idx, 0) * 45ms);
+  will-change: transform, opacity, filter;
+}
+
+.split-word.animated {
+  transform: translateY(0) rotate(0);
+  opacity: 1;
+  filter: blur(0);
+}
+
+.split-word.gradient-text,
+.gradient-text .split-word {
+  background: var(--gradient-metallic);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .split-word:hover {
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .split-word.gradient-text:hover,
+  .gradient-text .split-word:hover {
+    background: linear-gradient(180deg, #ffffff 10%, #ef4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateY(-2px) scale(1.02);
+  }
 }
 
 /* Shared Utilities */
@@ -480,8 +625,8 @@ section {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.04em;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   margin-bottom: 1.25rem;
   text-wrap: balance;
 }
@@ -692,7 +837,7 @@ section {
 }
 
 /* ==========================================================================
-   BUTTONS (Tactile & Spring Physics)
+   BUTTONS
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -1272,12 +1417,16 @@ section {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .fade-in {
+  .fade-in, .split-word {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
   }
   .marquee-track {
     animation: none !important;
+  }
+  .custom-cursor-dot, .custom-cursor-trailer {
+    display: none !important;
   }
 }
 

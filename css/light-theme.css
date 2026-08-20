@@ -30,6 +30,50 @@
   --border-highlight: rgba(0, 0, 0, 0.18);
 }
 
+.light-mode .custom-cursor-trailer {
+  border-color: rgba(220, 38, 38, 0.35);
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.light-mode.cursor-hover .custom-cursor-trailer,
+.light-mode body.cursor-hover .custom-cursor-trailer {
+  border-color: rgba(9, 9, 11, 0.7);
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.light-mode.cursor-hover .custom-cursor-dot,
+.light-mode body.cursor-hover .custom-cursor-dot {
+  background: #09090b;
+}
+
+/* Header typography filled ring for light mode */
+.light-mode.cursor-text .custom-cursor-dot,
+.light-mode body.cursor-text .custom-cursor-dot {
+  background: #09090b;
+  box-shadow: 0 0 14px rgba(9, 9, 11, 0.4);
+}
+
+.light-mode.cursor-text .custom-cursor-trailer,
+.light-mode body.cursor-text .custom-cursor-trailer {
+  border-color: rgba(220, 38, 38, 0.85);
+  background: rgba(220, 38, 38, 0.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .light-mode .split-word:hover {
+    color: #dc2626;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  .light-mode .split-word.gradient-text:hover,
+  .light-mode .gradient-text .split-word:hover {
+    background: linear-gradient(180deg, #dc2626 0%, #09090b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
 .light-mode .hero-bg {
   background: radial-gradient(circle at 50% 10%, rgba(220, 38, 38, 0.02), transparent 65%),
               var(--bg-primary);
