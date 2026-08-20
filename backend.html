@@ -1,21 +1,369 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Keahlian backend Nisfal Filsa dalam Go, Node.js, PHP, Laravel, Java Spring Boot, database optimization, API, dan microservices.">
-  <meta name="keywords" content="Nisfal Filsa, Backend Engineer, Backend Developer, Go, Node.js, PHP, Laravel, Java Spring Boot, PostgreSQL, MongoDB, Redis, Microservices">
-  <meta name="author" content="Nisfal Filsa"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0a0a0f"><title>Nisfal Filsa | Backend Engineer</title>
-  <link rel="canonical" href="https://nisfal.vercel.app/backend.html"><link rel="alternate" hreflang="id" href="https://nisfal.vercel.app/backend.html?lang=id"><link rel="alternate" hreflang="en" href="https://nisfal.vercel.app/backend.html?lang=en"><link rel="alternate" hreflang="x-default" href="https://nisfal.vercel.app/backend.html">
-  <meta property="og:type" content="website"><meta property="og:site_name" content="Nisfal Filsa Portfolio"><meta property="og:title" content="Nisfal Filsa | Backend Engineer"><meta property="og:description" content="Backend expertise by Nisfal Filsa in Go, Node.js, PHP, Laravel, Java Spring Boot, APIs, databases, and microservices."><meta property="og:url" content="https://nisfal.vercel.app/backend.html"><meta property="og:image" content="https://nisfal.vercel.app/og-image.png">
-  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Nisfal Filsa | Backend Engineer"><meta name="twitter:description" content="Backend expertise in scalable APIs, microservices, and database optimization."><meta name="twitter:image" content="https://nisfal.vercel.app/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Nisfal Filsa","url":"https://nisfal.vercel.app/backend.html","email":"mailto:nisfalfilsa12@gmail.com","jobTitle":"Backend Engineer","sameAs":["https://github.com/nisfal","https://www.linkedin.com/in/nisfal/"]}</script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚙️%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Keahlian backend Nisfal Filsa dalam Go, Node.js (Express v5), Prisma v6 Dual-DB, RabbitMQ, Redis, CASL RBAC/ABAC, dan pipeline mediasi transaksi skala enterprise.">
+  <meta name="keywords" content="Nisfal Filsa, Backend Architect, Systems Engineer, Go, Gin, Node.js, Express v5, TypeScript, Prisma v6, RabbitMQ, BullMQ, PostgreSQL, MySQL, Redis, MinIO, CASL RBAC, Microservices, Mediation Engine">
+  <meta name="author" content="Nisfal Filsa">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#09090b">
+  <title>Nisfal Filsa | Backend Architect & Systems Engineer</title>
+  
+  <link rel="canonical" href="https://nisfal.vercel.app/backend.html">
+  <link rel="alternate" hreflang="id" href="https://nisfal.vercel.app/backend.html?lang=id">
+  <link rel="alternate" hreflang="en" href="https://nisfal.vercel.app/backend.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://nisfal.vercel.app/backend.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nisfal Filsa Portfolio">
+  <meta property="og:title" content="Nisfal Filsa | Backend Architect & Systems Engineer">
+  <meta property="og:description" content="Backend systems expertise in Go, Express v5, Prisma v6 Dual-DB, RabbitMQ, Redis, and high-throughput transaction engines.">
+  <meta property="og:url" content="https://nisfal.vercel.app/backend.html">
+  <meta property="og:image" content="https://nisfal.vercel.app/og-image.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nisfal Filsa | Backend Architect & Systems Engineer">
+  <meta name="twitter:description" content="Scalable backend architectures, event queues, dual-database mediation, and enterprise security.">
+  <meta name="twitter:image" content="https://nisfal.vercel.app/og-image.png">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nisfal Filsa",
+    "url": "https://nisfal.vercel.app/backend.html",
+    "email": "mailto:nisfalfilsa12@gmail.com",
+    "jobTitle": "Backend Architect & Systems Engineer",
+    "sameAs": [
+      "https://github.com/nisfal",
+      "https://www.linkedin.com/in/nisfal/"
+    ]
+  }
+  </script>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="backend-theme">
-  <nav class="navbar" id="navbar"><div class="container"><a href="index.html" class="nav-logo"><span class="gradient-text">&lt;NF/&gt;</span></a><ul class="nav-links" id="navLinks"><li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li><li><a href="#skills" class="nav-link" data-i18n="nav_skills">Skills</a></li><li><a href="#portfolio" class="nav-link" data-i18n="nav_projects">Projects</a></li><li><a href="frontend.html" class="nav-link btn-switch" data-i18n="switch_frontend">Switch to Frontend 🎨</a></li><li class="lang-switcher"><button class="lang-btn" data-lang-option="id" type="button">🇮🇩 ID</button><button class="lang-btn" data-lang-option="en" type="button">🇺🇸 EN</button></li></ul><button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button></div></nav>
-  <section class="hero" id="home"><div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-glow hero-glow-1"></div><div class="hero-glow hero-glow-2"></div><div class="hero-content"><div class="hero-badge backend-badge"><span class="dot"></span><span data-i18n="backend_badge">System_Status: ONLINE</span></div><h1 class="hero-title" data-i18n="backend_title"><span class="highlight gradient-text">Backend</span> Architect</h1><p class="hero-subtitle" data-i18n="backend_subtitle">Building robust, scalable systems with high-performance APIs,<br>microservices architecture, and optimized database solutions.</p><div class="hero-tech"><span>Go</span><span class="divider"></span><span>Node.js</span><span class="divider"></span><span>PHP</span><span class="divider"></span><span>Laravel</span><span class="divider"></span><span>Java Spring Boot</span></div><div class="hero-cta"><a href="#portfolio" class="btn btn-primary"><span data-i18n="backend_cta_projects">View Projects</span></a><a href="#contact" class="btn btn-secondary" data-i18n="backend_cta_contact">Get In Touch</a></div></div></section>
-  <section class="skills" id="skills"><div class="container"><header class="section-header fade-in"><span class="section-label" data-i18n="backend_section_label">// Technical Expertise</span><h2 class="section-title" data-i18n="backend_section_title">Backend <span class="gradient-text">Engineering</span></h2><p class="section-subtitle" data-i18n="backend_section_subtitle">High-performance systems, scalable architectures, and robust APIs</p></header><div class="skills-grid"><article class="skill-card fade-in delay-1"><div class="skill-icon">💻</div><h3 class="skill-card-title" data-i18n="backend_skill1_title">Languages & Frameworks</h3><p class="skill-card-subtitle" data-i18n="backend_skill1_subtitle">Server-Side Development</p><p class="skill-card-desc" data-i18n="backend_skill1_desc">Building efficient backend services with modern languages and frameworks designed for high concurrency and performance.</p><div class="skill-tags"><span class="skill-tag">Go (Gin, Echo)</span><span class="skill-tag">Node.js (Express)</span><span class="skill-tag">PHP</span><span class="skill-tag">Laravel</span><span class="skill-tag">CodeIgniter</span><span class="skill-tag">Java Spring Boot</span></div></article><article class="skill-card fade-in delay-2"><div class="skill-icon">🗄️</div><h3 class="skill-card-title" data-i18n="backend_skill2_title">Databases & Caching</h3><p class="skill-card-subtitle" data-i18n="backend_skill2_subtitle">Data Management · Optimization</p><p class="skill-card-desc" data-i18n="backend_skill2_desc">Designing optimized database schemas, implementing caching strategies, and ensuring data integrity at scale.</p><div class="skill-tags"><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Redis</span><span class="skill-tag">Elasticsearch</span></div></article><article class="skill-card fade-in delay-3"><div class="skill-icon">🏗️</div><h3 class="skill-card-title" data-i18n="backend_skill3_title">Architecture & DevOps</h3><p class="skill-card-subtitle" data-i18n="backend_skill3_subtitle">Microservices · CI/CD</p><p class="skill-card-desc" data-i18n="backend_skill3_desc">Designing microservices architectures, implementing message queues, and setting up containerized deployment pipelines.</p><div class="skill-tags"><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">RabbitMQ</span><span class="skill-tag">gRPC</span><span class="skill-tag">REST API</span><span class="skill-tag">GraphQL</span></div></article></div></div></section>
-  <section class="portfolio" id="portfolio"><div class="container"><header class="section-header fade-in"><span class="section-label" data-i18n="backend_portfolio_label">// Selected Work</span><h2 class="section-title" data-i18n="backend_portfolio_title">Featured <span class="gradient-text">Projects</span></h2><p class="section-subtitle" data-i18n="backend_portfolio_subtitle">Backend-focused projects showcasing API design and system architecture</p></header><div class="portfolio-grid"><article class="project-card fade-in delay-1"><div class="project-image"><div class="project-preview">🛡️</div></div><div class="project-content"><span class="project-category" data-i18n="project_government">Government System</span><h3 class="project-title">SKCK Online - Polri</h3><p class="project-desc" data-i18n="project_skck_backend_desc">National-scale police clearance certificate application system. Handling millions of requests with secure authentication, document management, and real-time status tracking.</p><div class="project-stack"><span class="stack-tag backend">Go (Gin)</span><span class="stack-tag backend">PostgreSQL</span><span class="stack-tag backend">Redis</span><span class="stack-tag backend">RabbitMQ</span></div><div class="project-links"><a href="https://app-skck.polri.go.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Live Site</a></div></div></article><article class="project-card fade-in delay-2"><div class="project-image"><div class="project-preview">🌐</div></div><div class="project-content"><span class="project-category" data-i18n="project_network">Network Management</span><h3 class="project-title">Telkom SD-WAN Portal</h3><p class="project-desc" data-i18n="project_sdwan_backend_desc">Enterprise SD-WAN management portal for network configuration and monitoring. Real-time network analytics with high-performance microservices backend.</p><div class="project-stack"><span class="stack-tag backend">Node.js</span><span class="stack-tag backend">MongoDB</span><span class="stack-tag backend">Redis</span><span class="stack-tag backend">WebSocket</span></div><div class="project-links"><a href="https://telkomsdwan.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Live Site</a></div></div></article><article class="project-card fade-in delay-3"><div class="project-image"><div class="project-preview">🏢</div></div><div class="project-content"><span class="project-category" data-i18n="project_enterprise">Enterprise Platform</span><h3 class="project-title">MyTens Partnership</h3><p class="project-desc" data-i18n="project_mytens_backend_desc">Telkom Enterprise Solution platform for B2B partnership management. High-performance backend handling enterprise-scale transactions.</p><div class="project-stack"><span class="stack-tag backend">Node.js</span><span class="stack-tag backend">MongoDB</span><span class="stack-tag backend">Redis</span><span class="stack-tag backend">REST API</span></div><div class="project-links"><a href="https://mytenspartnership.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Live Site</a></div></div></article></div></div></section>
-  <section class="contact" id="contact"><div class="container"><div class="contact-content fade-in"><span class="section-label" data-i18n="home_contact_label">// Get In Touch</span><h2 class="contact-title" data-i18n="backend_contact_title">Let's Build <span class="gradient-text">Scalable Systems</span></h2><p class="contact-desc" data-i18n="backend_contact_desc">Need a backend engineer for high-performance APIs, microservices, or database optimization? Let's talk.</p><a href="mailto:nisfalfilsa12@gmail.com" class="contact-email">nisfalfilsa12@gmail.com</a></div></div></section><footer class="footer"><div class="container"><p class="footer-text" data-i18n="backend_footer">© 2025 <span>Nisfal Filsa</span> — Backend Engineer</p></div></footer><script src="js/i18n.js"></script><script src="js/main.js"></script>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Nisfal Filsa Home">
+        <span class="logo-flag" aria-hidden="true">
+          <span class="flag-red"></span>
+          <span class="flag-white"></span>
+        </span>
+        <span>&lt;NF/&gt;</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="#skills" class="nav-link" data-i18n="nav_skills">Skills</a></li>
+        <li><a href="#portfolio" class="nav-link" data-i18n="nav_projects">Projects</a></li>
+        <li>
+          <a href="frontend.html" class="btn-switch">
+            <svg class="switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span data-i18n="switch_frontend">Keahlian Frontend</span>
+          </a>
+        </li>
+        <li class="lang-switcher">
+          <button class="lang-btn" data-lang-option="id" type="button" aria-label="Switch to Indonesian">ID</button>
+          <button class="lang-btn" data-lang-option="en" type="button" aria-label="Switch to English">EN</button>
+        </li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge fade-in">
+          <span class="dot"></span>
+          <span data-i18n="backend_badge">System_Status: HIGH CONCURRENCY READY</span>
+        </div>
+        <h1 class="hero-title fade-in delay-1" data-i18n="backend_title">
+          <span class="highlight gradient-text">Backend</span> Architect
+        </h1>
+        <p class="hero-subtitle fade-in delay-2" data-i18n="backend_subtitle">
+          Membangun sistem terdistribusi skala enterprise, pipeline mediasi dual-database, streaming pesan RabbitMQ, dan kontrol akses CASL yang aman.
+        </p>
+
+        <div class="hero-cta fade-in delay-3">
+          <a href="#portfolio" class="btn btn-primary">
+            <span data-i18n="backend_cta_projects">Lihat Proyek</span>
+          </a>
+          <a href="#contact" class="btn btn-secondary" data-i18n="backend_cta_contact">
+            Hubungi Saya
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BDSN-Style Infinite Continuous Marquee Ribbon -->
+  <aside class="marquee-ribbon" aria-label="Backend architecture ticker">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="item-dot"></span> Go (Gin Engine)</span>
+      <span class="marquee-item"><span class="item-dot"></span> Express v5 TypeScript</span>
+      <span class="marquee-item"><span class="item-dot"></span> Prisma v6 Dual-Client</span>
+      <span class="marquee-item"><span class="item-dot"></span> RabbitMQ Topics & DLQ</span>
+      <span class="marquee-item"><span class="item-dot"></span> BullMQ Task Queues</span>
+      <span class="marquee-item"><span class="item-dot"></span> CASL Granular RBAC/ABAC</span>
+      <span class="marquee-item"><span class="item-dot"></span> Redis In-Memory Cache</span>
+      <span class="marquee-item"><span class="item-dot"></span> MinIO S3 Storage</span>
+      <span class="marquee-item"><span class="item-dot"></span> PostgreSQL & MySQL</span>
+      <span class="marquee-item"><span class="item-dot"></span> CDR / LBA Batch Mediation</span>
+
+      <!-- Duplicate for infinite loop -->
+      <span class="marquee-item"><span class="item-dot"></span> Go (Gin Engine)</span>
+      <span class="marquee-item"><span class="item-dot"></span> Express v5 TypeScript</span>
+      <span class="marquee-item"><span class="item-dot"></span> Prisma v6 Dual-Client</span>
+      <span class="marquee-item"><span class="item-dot"></span> RabbitMQ Topics & DLQ</span>
+      <span class="marquee-item"><span class="item-dot"></span> BullMQ Task Queues</span>
+      <span class="marquee-item"><span class="item-dot"></span> CASL Granular RBAC/ABAC</span>
+      <span class="marquee-item"><span class="item-dot"></span> Redis In-Memory Cache</span>
+      <span class="marquee-item"><span class="item-dot"></span> MinIO S3 Storage</span>
+      <span class="marquee-item"><span class="item-dot"></span> PostgreSQL & MySQL</span>
+      <span class="marquee-item"><span class="item-dot"></span> CDR / LBA Batch Mediation</span>
+    </div>
+  </aside>
+
+  <!-- Technical Expertise -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <header class="section-header fade-in">
+        <span class="section-label">
+          <span class="label-dot"></span>
+          <span data-i18n="backend_section_label">// Keahlian Teknis Backend</span>
+        </span>
+        <h2 class="section-title" data-i18n="backend_section_title">Sistem & <span class="gradient-text">Arsitektur Backend</span></h2>
+        <p class="section-subtitle" data-i18n="backend_section_subtitle">Throughput tinggi, arsitektur event-driven terdistribusi, dan keandalan data</p>
+      </header>
+
+      <div class="skills-grid">
+        <!-- Skill 1: Concurrency & Microservices -->
+        <article class="skill-card fade-in delay-1">
+          <div class="skill-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h3 class="skill-card-title" data-i18n="backend_skill1_title">High-Concurrency & Microservices</h3>
+          <p class="skill-card-subtitle" data-i18n="backend_skill1_subtitle">Event-Driven · Antrean Asynchronous</p>
+          <p class="skill-card-desc" data-i18n="backend_skill1_desc">
+            Membangun layanan backend efisien dengan Go (Gin) dan Express v5 / TypeScript, mengorkestrasi pipeline event terdesentralisasi via RabbitMQ dan BullMQ.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Go (Gin / Echo)</span>
+            <span class="skill-tag">Express v5 (TypeScript)</span>
+            <span class="skill-tag">RabbitMQ (Topic / DLQ)</span>
+            <span class="skill-tag">BullMQ</span>
+            <span class="skill-tag">REST & WebSocket</span>
+            <span class="skill-tag">Layered Architecture</span>
+          </div>
+        </article>
+
+        <!-- Skill 2: Database & Mediation -->
+        <article class="skill-card fade-in delay-2">
+          <div class="skill-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title" data-i18n="backend_skill2_title">Arsitektur Data & Mediasi</h3>
+          <p class="skill-card-subtitle" data-i18n="backend_skill2_subtitle">Dual Prisma v6 · High-Throughput DB</p>
+          <p class="skill-card-desc" data-i18n="backend_skill2_desc">
+            Spesialisasi arsitektur dual-database (Main OLTP + Mediation DB), optimasi skema database kompleks di PostgreSQL, MySQL, Redis caching, dan MinIO S3 object storage.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Prisma v6 (Dual Client)</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Redis Caching & PubSub</span>
+            <span class="skill-tag">MinIO S3 Object Storage</span>
+          </div>
+        </article>
+
+        <!-- Skill 3: Security & Pipelines -->
+        <article class="skill-card fade-in delay-3">
+          <div class="skill-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <rect x="9" y="11" width="6" height="5" rx="1"></rect>
+            </svg>
+          </div>
+          <h3 class="skill-card-title" data-i18n="backend_skill3_title">Keamanan, Autentikasi & Pipeline Transaksi</h3>
+          <p class="skill-card-subtitle" data-i18n="backend_skill3_subtitle">CASL RBAC/ABAC · E2EE · Transaction Engine</p>
+          <p class="skill-card-desc" data-i18n="backend_skill3_desc">
+            Menerapkan otorisasi granular berbasis atribut (CASL), pipeline autentikasi JWT, alur kunci enkripsi E2EE, dan engine transaksi batch (CDR, CDP, IPDR, LBA/Location Analytics).
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">CASL (RBAC & ABAC)</span>
+            <span class="skill-tag">JWT Security Pipeline</span>
+            <span class="skill-tag">E2EE Key Flow</span>
+            <span class="skill-tag">Transaction Engine (CDR/LBA)</span>
+            <span class="skill-tag">Batch Workers</span>
+            <span class="skill-tag">Docker Containerization</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <header class="section-header fade-in">
+        <span class="section-label">
+          <span class="label-dot"></span>
+          <span data-i18n="backend_portfolio_label">// Rekam Jejak Arsitektur</span>
+        </span>
+        <h2 class="section-title" data-i18n="backend_portfolio_title">Proyek <span class="gradient-text">Backend Unggulan</span></h2>
+        <p class="section-subtitle" data-i18n="backend_portfolio_subtitle">Sistem backend nyata dengan arsitektur microservices, antrean event, dan skalabilitas tinggi</p>
+      </header>
+
+      <div class="portfolio-grid">
+        <!-- 1. Allina Intelligence Platform -->
+        <article class="project-card fade-in delay-1">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_enterprise">Platform Enterprise</span>
+            <h3 class="project-title" data-i18n="project_allina_title">Allina Intelligence & Mediation Platform</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_allina_backend_desc">
+            Platform mediasi dan analitik enterprise dengan arsitektur dual-client Prisma v6, event streaming via RabbitMQ & Redis, MinIO S3 storage, dan otorisasi granular CASL RBAC/ABAC.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Express v5</span>
+            <span class="stack-tag">Prisma v6 Dual-Client</span>
+            <span class="stack-tag">RabbitMQ</span>
+            <span class="stack-tag">Redis</span>
+            <span class="stack-tag">CASL Security</span>
+            <span class="stack-tag">MinIO</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link" data-i18n="project_allina_backend_link">Arsitektur Produksi</span>
+          </div>
+        </article>
+
+        <!-- 2. SKCK Online Polri -->
+        <article class="project-card fade-in delay-2">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_government">Sistem Pemerintahan Nasional</span>
+            <h3 class="project-title" data-i18n="project_skck_title">SKCK Online - POLRI</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_skck_backend_desc">
+            Sistem permohonan SKCK berskala nasional. Menangani jutaan request dengan arsitektur Go (Gin), PostgreSQL, caching Redis, dan pemrosesan asynchronous RabbitMQ.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Go (Gin)</span>
+            <span class="stack-tag">PostgreSQL</span>
+            <span class="stack-tag">Redis</span>
+            <span class="stack-tag">RabbitMQ</span>
+          </div>
+          <div class="project-links">
+            <a href="https://app-skck.polri.go.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Kunjungi Website ↗</a>
+          </div>
+        </article>
+
+        <!-- 3. Telkom SD-WAN Portal -->
+        <article class="project-card fade-in delay-3">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_network">Manajemen Jaringan Enterprise</span>
+            <h3 class="project-title" data-i18n="project_sdwan_title">Telkom SD-WAN Portal</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_sdwan_backend_desc">
+            Portal manajemen dan telemetri jaringan SD-WAN enterprise. Streaming metrik real-time via WebSocket, MongoDB, Redis, dan microservices backend.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Node.js</span>
+            <span class="stack-tag">MongoDB</span>
+            <span class="stack-tag">Redis</span>
+            <span class="stack-tag">WebSocket</span>
+          </div>
+          <div class="project-links">
+            <a href="https://telkomsdwan.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Kunjungi Website ↗</a>
+          </div>
+        </article>
+
+        <!-- 4. MyTens Partnership -->
+        <article class="project-card fade-in delay-1">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_enterprise">Platform Enterprise</span>
+            <h3 class="project-title" data-i18n="project_mytens_title">MyTens Partnership</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_mytens_backend_desc">
+            Platform B2B Telkom Enterprise Solution untuk manajemen kemitraan strategis, mengelola alur kerja kontrak dan transaksi skala besar dengan Node.js, MongoDB, dan Redis.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Node.js</span>
+            <span class="stack-tag">MongoDB</span>
+            <span class="stack-tag">Redis</span>
+            <span class="stack-tag">REST API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://mytenspartnership.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Kunjungi Website ↗</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-content fade-in">
+        <span class="section-label">
+          <span class="label-dot"></span>
+          <span data-i18n="home_contact_label">// Mari Berkolaborasi</span>
+        </span>
+        <h2 class="contact-title" data-i18n="backend_contact_title">Mari Bangun <span class="gradient-text">Arsitektur Tangguh</span></h2>
+        <p class="contact-desc" data-i18n="backend_contact_desc">
+          Butuh backend architect untuk pipeline transaksi berkecepatan tinggi, sistem event-driven, atau optimasi database? Mari berdiskusi.
+        </p>
+        <div class="contact-actions">
+          <a href="mailto:nisfalfilsa12@gmail.com" class="contact-email-btn">
+            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>nisfalfilsa12@gmail.com</span>
+          </a>
+          <a href="https://github.com/nisfal" target="_blank" rel="noopener noreferrer" class="contact-social-btn">
+            <span>GitHub ↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/nisfal/" target="_blank" rel="noopener noreferrer" class="contact-social-btn">
+            <span>LinkedIn ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text" data-i18n="backend_footer">
+        © 2026 <span>Nisfal Filsa</span> — Backend Architect & Systems Engineer
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

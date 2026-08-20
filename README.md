@@ -1,68 +1,72 @@
-# Nisfal Filsa - Fullstack Developer Portfolio
+# Nisfal Filsa - Fullstack & Systems Engineer Portfolio
 
-Hi, I'm **Nisfal Filsa**, a Fullstack Developer specializing in building high-performance backend systems and modern, reactive user interfaces. This repository contains the source code for my personal portfolio website.
+Hi, I'm **Nisfal Filsa**, a Fullstack & Systems Engineer specializing in architecting high-throughput backend systems, event-driven microservices, and resilient, modern frontend web applications.
 
-## 🚀 About Me
+---
 
-I craft high-performance backends and efficiently reactive frontends. My expertise lies in designing robust concurrent systems and creating minimal bundle, lightning-fast UIs.
+## ⚡ Technical Core Matrix
 
-- **Backend:** Go (Golang), Node.js, PostgreSQL, Redis, MongoDB, MySQL.
-- **Frontend:** ReactJS, AngularJS, TailwindCSS, HTML5/CSS3.
-- **Focus:** Scalability, Performance, and Clean Architecture.
+### Backend Architecture & Distributed Systems
+- **Languages & Frameworks:** Go (Gin, Echo), Node.js (Express v5) / TypeScript
+- **ORM & Data Pipeline:** Prisma v6 with **Dual-Client Architecture** (Main DB + Mediation Engine)
+- **Message Queues & Event Streaming:** RabbitMQ (Durable Queues, Topic Exchanges, DLQ), BullMQ
+- **Caching & In-Memory:** Redis (Caching, Pub/Sub, Rate Limiting)
+- **Databases & Storage:** PostgreSQL, MySQL, MongoDB, MinIO S3 Object Storage
+- **Security & Authorization:** CASL (Granular RBAC/ABAC Permissions), JWT Auth Pipelines, E2EE Key Exchange
+- **High-Throughput Engines:** Transaction Mediation Engines (CDR, CDP, IPDR, LBA/Location Analytics, MSS, DRS, Batch Workers)
 
-## 🛠 Tech Stack
+### Modern Frontend Engineering & UX
+- **Frameworks & Core:** Next.js 15 (App Router, Server & Client Components), React 19, TypeScript
+- **State Hydration & Data Fetching:** Zustand v5, TanStack React Query v5, Axios Interceptors & API Proxy Middleware
+- **Geospatial & Mapping:** Leaflet / OpenStreetMap interactive GIS visualization
+- **Styling & Design Systems:** Tailwind CSS v4, shadcn/ui, Radix UI Primitives, CSS Variables & Bento Grids
+- **Telemetry & Visualizations:** Chart.js, D3.js real-time topology and metric streams
 
-The portfolio showcases various projects utilizing a diverse stack:
-
-- **Languages:** Go, JavaScript, TypeScript
-- **Frontend Frameworks:** ReactJS, AngularJS
-- **Databases:** PostgreSQL, MongoDB, Redis, MySQL
-- **Tools:** Git, Docker (implied)
+---
 
 ## 📂 Featured Projects
 
-### 1. MyTens Partnership
-*Enterprise Platform for B2B partnership management.*
-- **Stack:** NodeJS, MongoDB, Redis, ReactJs, REST API.
-- **Link:** [Live Site](https://mytenspartnership.telkom.co.id/)
+### 1. Allina Intelligence & Mediation Platform
+*Enterprise-scale mediation and intelligence platform.*
+- **Backend:** Express v5, TypeScript, Prisma v6 Dual-Client (Main + Mediation DB), RabbitMQ, Redis, MinIO S3, CASL RBAC/ABAC.
+- **Frontend:** Next.js 15 App Router, React 19, TypeScript, Tailwind CSS v4, Zustand v5, TanStack Query, Leaflet GIS, E2EE Session Security.
 
-### 2. SKCK Online - Polri
+### 2. SKCK Online - POLRI
 *National-scale police clearance certificate application system.*
-- **Stack:** Go (Gin), PostgreSQL, Redis, ReactJs, RabbitMQ.
+- **Stack:** Go (Gin), PostgreSQL, Redis, RabbitMQ, ReactJS, Redux.
 - **Link:** [Live Site](https://app-skck.polri.go.id/)
 
 ### 3. Telkom SD-WAN Portal
-*Enterprise SD-WAN management portal.*
-- **Stack:** NodeJS, MongoDB, Redis, ReactJs.
+*Enterprise SD-WAN network management and telemetry portal.*
+- **Stack:** Node.js, MongoDB, Redis, WebSocket, ReactJS, D3.js Topology.
 - **Link:** [Live Site](https://telkomsdwan.telkom.co.id/)
 
-## 🏃‍♂️ Running the Project locally
+### 4. MyTens Partnership
+*Telkom Enterprise Solution platform for B2B strategic partnership management.*
+- **Stack:** Node.js, MongoDB, Redis, ReactJS, TailwindCSS, Chart.js.
+- **Link:** [Live Site](https://mytenspartnership.telkom.co.id/)
 
-> **Note:** The project currently consists of static files (`index.html`, `css/`, `js/`). 
-> To run it as a modern web app (React/Node), initialization is required.
+---
 
-### Static Version (Current)
-You can simply open `index.html` in your browser.
-Or use a simple static server:
+## 🏃‍♂️ Running Locally
+
+You can preview the portfolio using any static file server:
+
 ```bash
+# Using npx serve
 npx serve .
+
+# Or using Python 3
+python -m http.server 3000
 ```
 
-### Fullstack Development (Planned)
-To initialize the full development environment (once migrated):
-```bash
-# Install dependencies
-npm install
+---
 
-# Start development server
-npm run dev
-```
+## 📫 Contact & Links
 
-## 📫 Contact
-
-- **Email:** nisfalfilsa12@gmail.com
+- **Email:** [nisfalfilsa12@gmail.com](mailto:nisfalfilsa12@gmail.com)
 - **LinkedIn:** [Nisfal Filsa](https://www.linkedin.com/in/nisfal/)
 - **GitHub:** [nisfal](https://github.com/nisfal)
 
 ---
-© 2025 Nisfal Filsa
+© 2026 Nisfal Filsa — Fullstack & Systems Engineer

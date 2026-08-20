@@ -1,21 +1,370 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Keahlian frontend Nisfal Filsa dalam ReactJS, AngularJS, Next.js, TailwindCSS, TypeScript, UI responsif, dan pengalaman pengguna modern.">
-  <meta name="keywords" content="Nisfal Filsa, Frontend Developer, ReactJS, AngularJS, Next.js, TailwindCSS, TypeScript, UI UX, Responsive Design">
-  <meta name="author" content="Nisfal Filsa"><meta name="robots" content="index, follow"><meta name="theme-color" content="#ffffff"><title>Nisfal Filsa | Frontend Developer</title>
-  <link rel="canonical" href="https://nisfal.vercel.app/frontend.html"><link rel="alternate" hreflang="id" href="https://nisfal.vercel.app/frontend.html?lang=id"><link rel="alternate" hreflang="en" href="https://nisfal.vercel.app/frontend.html?lang=en"><link rel="alternate" hreflang="x-default" href="https://nisfal.vercel.app/frontend.html">
-  <meta property="og:type" content="website"><meta property="og:site_name" content="Nisfal Filsa Portfolio"><meta property="og:title" content="Nisfal Filsa | Frontend Developer"><meta property="og:description" content="Frontend expertise by Nisfal Filsa in ReactJS, AngularJS, Next.js, TailwindCSS, TypeScript, responsive UI, and modern user experiences."><meta property="og:url" content="https://nisfal.vercel.app/frontend.html"><meta property="og:image" content="https://nisfal.vercel.app/og-image.png">
-  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Nisfal Filsa | Frontend Developer"><meta name="twitter:description" content="Frontend expertise in responsive UI, modern frameworks, and user-focused web experiences."><meta name="twitter:image" content="https://nisfal.vercel.app/og-image.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Nisfal Filsa","url":"https://nisfal.vercel.app/frontend.html","email":"mailto:nisfalfilsa12@gmail.com","jobTitle":"Frontend Developer","sameAs":["https://github.com/nisfal","https://www.linkedin.com/in/nisfal/"]}</script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎨%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/light-theme.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Keahlian frontend Nisfal Filsa dalam Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zustand v5, TanStack Query, Leaflet GIS, dan arsitektur UI/UX modern.">
+  <meta name="keywords" content="Nisfal Filsa, Modern Frontend Engineer, Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zustand v5, TanStack Query, Leaflet GIS, shadcn/ui, Radix UI, UI/UX Design, E2EE Security, Geospatial Mapping">
+  <meta name="author" content="Nisfal Filsa">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+  <title>Nisfal Filsa | Modern Frontend Engineer</title>
+  
+  <link rel="canonical" href="https://nisfal.vercel.app/frontend.html">
+  <link rel="alternate" hreflang="id" href="https://nisfal.vercel.app/frontend.html?lang=id">
+  <link rel="alternate" hreflang="en" href="https://nisfal.vercel.app/frontend.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://nisfal.vercel.app/frontend.html">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nisfal Filsa Portfolio">
+  <meta property="og:title" content="Nisfal Filsa | Modern Frontend Engineer">
+  <meta property="og:description" content="Frontend engineering expertise in Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zustand v5, and Leaflet GIS mapping.">
+  <meta property="og:url" content="https://nisfal.vercel.app/frontend.html">
+  <meta property="og:image" content="https://nisfal.vercel.app/og-image.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nisfal Filsa | Modern Frontend Engineer">
+  <meta name="twitter:description" content="Reactive, accessible, and high-performance user interfaces with Next.js 15, TypeScript, and geospatial visualizations.">
+  <meta name="twitter:image" content="https://nisfal.vercel.app/og-image.png">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nisfal Filsa",
+    "url": "https://nisfal.vercel.app/frontend.html",
+    "email": "mailto:nisfalfilsa12@gmail.com",
+    "jobTitle": "Modern Frontend Engineer",
+    "sameAs": [
+      "https://github.com/nisfal",
+      "https://www.linkedin.com/in/nisfal/"
+    ]
+  }
+  </script>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/light-theme.css">
 </head>
 <body class="frontend-theme light-mode">
-  <nav class="navbar" id="navbar"><div class="container"><a href="index.html" class="nav-logo"><span class="gradient-text-light">&lt;NF/&gt;</span></a><ul class="nav-links" id="navLinks"><li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li><li><a href="#skills" class="nav-link" data-i18n="nav_skills">Skills</a></li><li><a href="#portfolio" class="nav-link" data-i18n="nav_projects">Projects</a></li><li><a href="backend.html" class="nav-link btn-switch-dark" data-i18n="switch_backend">Switch to Backend ⚙️</a></li><li class="lang-switcher"><button class="lang-btn" data-lang-option="id" type="button">🇮🇩 ID</button><button class="lang-btn" data-lang-option="en" type="button">🇺🇸 EN</button></li></ul><button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button></div></nav>
-  <section class="hero hero-light" id="home"><div class="hero-bg-light"></div><div class="hero-content"><div class="hero-badge frontend-badge"><span class="dot dot-purple"></span><span data-i18n="frontend_badge">User Experience: OPTIMIZED</span></div><h1 class="hero-title" data-i18n="frontend_title"><span class="highlight gradient-text-light">Frontend</span> Developer</h1><p class="hero-subtitle" data-i18n="frontend_subtitle">Building beautiful, responsive, and intuitive user interfaces<br>with modern frameworks and pixel-perfect attention to detail.</p><div class="hero-tech"><span>ReactJS</span><span class="divider divider-purple"></span><span>AngularJS</span><span class="divider divider-purple"></span><span>Next.js</span><span class="divider divider-purple"></span><span>TailwindCSS</span><span class="divider divider-purple"></span><span>TypeScript</span></div><div class="hero-cta"><a href="#portfolio" class="btn btn-primary-light"><span data-i18n="backend_cta_projects">View Projects</span></a><a href="#contact" class="btn btn-secondary-light" data-i18n="backend_cta_contact">Get In Touch</a></div></div></section>
-  <section class="skills skills-light" id="skills"><div class="container"><header class="section-header fade-in"><span class="section-label section-label-light" data-i18n="frontend_section_label">// Technical Expertise</span><h2 class="section-title" data-i18n="frontend_section_title">Frontend <span class="gradient-text-light">Development</span></h2><p class="section-subtitle" data-i18n="frontend_section_subtitle">Modern frameworks, responsive design, and exceptional user experiences</p></header><div class="skills-grid"><article class="skill-card skill-card-light fade-in delay-1"><div class="skill-icon">⚛️</div><h3 class="skill-card-title" data-i18n="frontend_skill1_title">Frameworks & Libraries</h3><p class="skill-card-subtitle" data-i18n="frontend_skill1_subtitle">Component-Based Architecture</p><p class="skill-card-desc" data-i18n="frontend_skill1_desc">Building dynamic, reactive user interfaces with modern JavaScript frameworks that deliver exceptional performance and maintainability.</p><div class="skill-tags"><span class="skill-tag skill-tag-light">ReactJS</span><span class="skill-tag skill-tag-light">AngularJS</span><span class="skill-tag skill-tag-light">Next.js</span><span class="skill-tag skill-tag-light">Vue.js</span></div></article><article class="skill-card skill-card-light fade-in delay-2"><div class="skill-icon">🎨</div><h3 class="skill-card-title" data-i18n="frontend_skill2_title">Styling & Design</h3><p class="skill-card-subtitle" data-i18n="frontend_skill2_subtitle">UI/UX · Responsive Design</p><p class="skill-card-desc" data-i18n="frontend_skill2_desc">Creating visually stunning interfaces with modern CSS frameworks, animations, and responsive design principles.</p><div class="skill-tags"><span class="skill-tag skill-tag-light">TailwindCSS</span><span class="skill-tag skill-tag-light">CSS3</span><span class="skill-tag skill-tag-light">SASS/SCSS</span><span class="skill-tag skill-tag-light">Framer Motion</span></div></article><article class="skill-card skill-card-light fade-in delay-3"><div class="skill-icon">📦</div><h3 class="skill-card-title" data-i18n="frontend_skill3_title">Languages & Tools</h3><p class="skill-card-subtitle" data-i18n="frontend_skill3_subtitle">Type Safety · Build Tools</p><p class="skill-card-desc" data-i18n="frontend_skill3_desc">Leveraging TypeScript for type safety and modern build tools for optimized, production-ready applications.</p><div class="skill-tags"><span class="skill-tag skill-tag-light">TypeScript</span><span class="skill-tag skill-tag-light">JavaScript ES6+</span><span class="skill-tag skill-tag-light">Vite</span><span class="skill-tag skill-tag-light">Webpack</span></div></article></div></div></section>
-  <section class="portfolio portfolio-light" id="portfolio"><div class="container"><header class="section-header fade-in"><span class="section-label section-label-light" data-i18n="frontend_portfolio_label">// Selected Work</span><h2 class="section-title" data-i18n="frontend_portfolio_title">Featured <span class="gradient-text-light">Projects</span></h2><p class="section-subtitle" data-i18n="frontend_portfolio_subtitle">Frontend-focused projects showcasing UI/UX design and modern frameworks</p></header><div class="portfolio-grid"><article class="project-card project-card-light fade-in delay-1"><div class="project-image project-image-light"><div class="project-preview">🏢</div></div><div class="project-content"><span class="project-category project-category-light" data-i18n="project_enterprise">Enterprise Platform</span><h3 class="project-title">MyTens Partnership</h3><p class="project-desc" data-i18n="project_mytens_frontend_desc">Modern reactive UI for Telkom's B2B partnership management platform. Complex dashboard with real-time data visualization and intuitive UX.</p><div class="project-stack"><span class="stack-tag frontend">ReactJS</span><span class="stack-tag frontend">TailwindCSS</span><span class="stack-tag frontend">Chart.js</span><span class="stack-tag frontend">REST API</span></div><div class="project-links"><a href="https://mytenspartnership.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link project-link-light" data-i18n="project_live">Live Site</a></div></div></article><article class="project-card project-card-light fade-in delay-2"><div class="project-image project-image-light"><div class="project-preview">🛡️</div></div><div class="project-content"><span class="project-category project-category-light" data-i18n="project_government">Government System</span><h3 class="project-title">SKCK Online - Polri</h3><p class="project-desc" data-i18n="project_skck_frontend_desc">User-friendly interface for national police clearance applications. Accessible design with step-by-step forms and real-time status tracking.</p><div class="project-stack"><span class="stack-tag frontend">ReactJS</span><span class="stack-tag frontend">TypeScript</span><span class="stack-tag frontend">Ant Design</span><span class="stack-tag frontend">Redux</span></div><div class="project-links"><a href="https://app-skck.polri.go.id/" target="_blank" rel="noopener noreferrer" class="project-link project-link-light" data-i18n="project_live">Live Site</a></div></div></article><article class="project-card project-card-light fade-in delay-3"><div class="project-image project-image-light"><div class="project-preview">🌐</div></div><div class="project-content"><span class="project-category project-category-light" data-i18n="project_network">Network Management</span><h3 class="project-title">Telkom SD-WAN Portal</h3><p class="project-desc" data-i18n="project_sdwan_frontend_desc">Interactive dashboard for network monitoring and configuration. Real-time charts, topology visualization, and responsive design.</p><div class="project-stack"><span class="stack-tag frontend">ReactJS</span><span class="stack-tag frontend">D3.js</span><span class="stack-tag frontend">WebSocket</span><span class="stack-tag frontend">Material UI</span></div><div class="project-links"><a href="https://telkomsdwan.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link project-link-light" data-i18n="project_live">Live Site</a></div></div></article></div></div></section>
-  <section class="contact contact-light" id="contact"><div class="container"><div class="contact-content fade-in"><span class="section-label section-label-light" data-i18n="home_contact_label">// Get In Touch</span><h2 class="contact-title" data-i18n="frontend_contact_title">Let's Build <span class="gradient-text-light">Beautiful UIs</span></h2><p class="contact-desc contact-desc-light" data-i18n="frontend_contact_desc">Looking for a frontend developer to create stunning, responsive interfaces? Let's talk.</p><a href="mailto:nisfalfilsa12@gmail.com" class="contact-email contact-email-light">nisfalfilsa12@gmail.com</a></div></div></section><footer class="footer footer-light"><div class="container"><p class="footer-text" data-i18n="frontend_footer">© 2025 <span>Nisfal Filsa</span> — Frontend Developer</p></div></footer><script src="js/i18n.js"></script><script src="js/main.js"></script>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="Nisfal Filsa Home">
+        <span class="logo-flag" aria-hidden="true">
+          <span class="flag-red"></span>
+          <span class="flag-white"></span>
+        </span>
+        <span>&lt;NF/&gt;</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link" data-i18n="nav_home">Home</a></li>
+        <li><a href="#skills" class="nav-link" data-i18n="nav_skills">Skills</a></li>
+        <li><a href="#portfolio" class="nav-link" data-i18n="nav_projects">Projects</a></li>
+        <li>
+          <a href="backend.html" class="btn-switch">
+            <svg class="switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+              <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+              <line x1="6" y1="6" x2="6.01" y2="6"></line>
+              <line x1="6" y1="18" x2="6.01" y2="18"></line>
+            </svg>
+            <span data-i18n="switch_backend">Keahlian Backend</span>
+          </a>
+        </li>
+        <li class="lang-switcher">
+          <button class="lang-btn" data-lang-option="id" type="button" aria-label="Switch to Indonesian">ID</button>
+          <button class="lang-btn" data-lang-option="en" type="button" aria-label="Switch to English">EN</button>
+        </li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge fade-in">
+          <span class="dot"></span>
+          <span data-i18n="frontend_badge">Client Stack: NEXT.JS 15 & REACT 19</span>
+        </div>
+        <h1 class="hero-title fade-in delay-1" data-i18n="frontend_title">
+          Modern <span class="highlight gradient-text">Frontend</span> Engineer
+        </h1>
+        <p class="hero-subtitle fade-in delay-2" data-i18n="frontend_subtitle">
+          Membangun aplikasi web reaktif dan elegan dengan Next.js 15 App Router, TypeScript, hidrasi state Zustand v5, dan visualisasi spasial interaktif.
+        </p>
+
+        <div class="hero-cta fade-in delay-3">
+          <a href="#portfolio" class="btn btn-primary">
+            <span data-i18n="backend_cta_projects">Lihat Proyek</span>
+          </a>
+          <a href="#contact" class="btn btn-secondary" data-i18n="backend_cta_contact">
+            Hubungi Saya
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BDSN-Style Infinite Continuous Marquee Ribbon -->
+  <aside class="marquee-ribbon" aria-label="Frontend stack ticker">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="item-dot"></span> Next.js 15 App Router</span>
+      <span class="marquee-item"><span class="item-dot"></span> React 19 Ecosystem</span>
+      <span class="marquee-item"><span class="item-dot"></span> TypeScript Strict Typing</span>
+      <span class="marquee-item"><span class="item-dot"></span> Tailwind CSS v4</span>
+      <span class="marquee-item"><span class="item-dot"></span> Zustand v5 Store</span>
+      <span class="marquee-item"><span class="item-dot"></span> TanStack Query v5</span>
+      <span class="marquee-item"><span class="item-dot"></span> Leaflet GIS Interactive</span>
+      <span class="marquee-item"><span class="item-dot"></span> shadcn/ui & Radix UI</span>
+      <span class="marquee-item"><span class="item-dot"></span> E2EE Key Session Security</span>
+      <span class="marquee-item"><span class="item-dot"></span> D3.js & Chart.js Visuals</span>
+
+      <!-- Duplicate for infinite loop -->
+      <span class="marquee-item"><span class="item-dot"></span> Next.js 15 App Router</span>
+      <span class="marquee-item"><span class="item-dot"></span> React 19 Ecosystem</span>
+      <span class="marquee-item"><span class="item-dot"></span> TypeScript Strict Typing</span>
+      <span class="marquee-item"><span class="item-dot"></span> Tailwind CSS v4</span>
+      <span class="marquee-item"><span class="item-dot"></span> Zustand v5 Store</span>
+      <span class="marquee-item"><span class="item-dot"></span> TanStack Query v5</span>
+      <span class="marquee-item"><span class="item-dot"></span> Leaflet GIS Interactive</span>
+      <span class="marquee-item"><span class="item-dot"></span> shadcn/ui & Radix UI</span>
+      <span class="marquee-item"><span class="item-dot"></span> E2EE Key Session Security</span>
+      <span class="marquee-item"><span class="item-dot"></span> D3.js & Chart.js Visuals</span>
+    </div>
+  </aside>
+
+  <!-- Technical Expertise -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <header class="section-header fade-in">
+        <span class="section-label">
+          <span class="label-dot"></span>
+          <span data-i18n="frontend_section_label">// Keahlian Teknis Frontend</span>
+        </span>
+        <h2 class="section-title" data-i18n="frontend_section_title">Frontend <span class="gradient-text">Engineering & UI/UX</span></h2>
+        <p class="section-subtitle" data-i18n="frontend_section_subtitle">Ekosistem Next.js modern, visualisasi data spasial, dan antarmuka berperforma tinggi</p>
+      </header>
+
+      <div class="skills-grid">
+        <!-- Skill 1: Next.js Ecosystem -->
+        <article class="skill-card fade-in delay-1">
+          <div class="skill-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title" data-i18n="frontend_skill1_title">Ekosistem Next.js & Modern React</h3>
+          <p class="skill-card-subtitle" data-i18n="frontend_skill1_subtitle">App Router · Server & Client Architecture</p>
+          <p class="skill-card-desc" data-i18n="frontend_skill1_desc">
+            Membangun aplikasi web berskala besar dengan Next.js 15 App Router, React 19, TypeScript, dan pemisahan Server/Client Component yang optimal.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Next.js 15 (App Router)</span>
+            <span class="skill-tag">React 19</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Server Components (RSC)</span>
+            <span class="skill-tag">Vite & Webpack</span>
+          </div>
+        </article>
+
+        <!-- Skill 2: State Hydration & Data -->
+        <article class="skill-card fade-in delay-2">
+          <div class="skill-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+          </div>
+          <h3 class="skill-card-title" data-i18n="frontend_skill2_title">Hidrasi State & Manajemen Data</h3>
+          <p class="skill-card-subtitle" data-i18n="frontend_skill2_subtitle">Zustand v5 · TanStack Query · Secure Proxy</p>
+          <p class="skill-card-desc" data-i18n="frontend_skill2_desc">
+            Merancang arsitektur state klien yang bersih dengan Zustand v5, sinkronisasi server-state via TanStack Query v5, dan layer middleware API proxy terenkripsi.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Zustand v5</span>
+            <span class="skill-tag">TanStack React Query v5</span>
+            <span class="skill-tag">Axios Interceptors</span>
+            <span class="skill-tag">E2EE Key Exchange Flow</span>
+            <span class="skill-tag">Optimistic Updates</span>
+          </div>
+        </article>
+
+        <!-- Skill 3: Geospatial, Design Systems & Telemetry -->
+        <article class="skill-card fade-in delay-3">
+          <div class="skill-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+              <line x1="8" y1="2" x2="8" y2="18"></line>
+              <line x1="16" y1="6" x2="16" y2="22"></line>
+            </svg>
+          </div>
+          <h3 class="skill-card-title" data-i18n="frontend_skill3_title">Geospatial, Desain Sistem & Telemetri</h3>
+          <p class="skill-card-subtitle" data-i18n="frontend_skill3_subtitle">Leaflet GIS · Tailwind v4 · shadcn/ui</p>
+          <p class="skill-card-desc" data-i18n="frontend_skill3_desc">
+            Mengembangkan visualisasi peta geospatial interaktif dengan Leaflet, sistem antarmuka terstruktur berbasis Tailwind CSS v4 dan shadcn/ui, serta grafik telemetri real-time.
+          </p>
+          <div class="skill-tags">
+            <span class="skill-tag">Leaflet / OpenStreetMap</span>
+            <span class="skill-tag">Tailwind CSS v4</span>
+            <span class="skill-tag">shadcn/ui & Radix UI</span>
+            <span class="skill-tag">Chart.js & D3.js</span>
+            <span class="skill-tag">Responsive & A11y</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <header class="section-header fade-in">
+        <span class="section-label">
+          <span class="label-dot"></span>
+          <span data-i18n="frontend_portfolio_label">// Pilihan Karya Frontend</span>
+        </span>
+        <h2 class="section-title" data-i18n="frontend_portfolio_title">Proyek <span class="gradient-text">Frontend Unggulan</span></h2>
+        <p class="section-subtitle" data-i18n="frontend_portfolio_subtitle">Aplikasi web modern dengan integrasi telemetri real-time, visualisasi GIS, dan UX intuitif</p>
+      </header>
+
+      <div class="portfolio-grid">
+        <!-- 1. Allina Intelligence Platform -->
+        <article class="project-card fade-in delay-1">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_enterprise">Platform Enterprise</span>
+            <h3 class="project-title" data-i18n="project_allina_title">Allina Intelligence & Mediation Platform</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_allina_frontend_desc">
+            Aplikasi Next.js 15 App Router dengan pelacakan geospatial Leaflet interaktif, manajemen state Zustand v5, TanStack Query, dan keamanan sesi E2EE.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">Next.js 15</span>
+            <span class="stack-tag">React 19</span>
+            <span class="stack-tag">Tailwind v4</span>
+            <span class="stack-tag">Zustand v5</span>
+            <span class="stack-tag">Leaflet GIS</span>
+            <span class="stack-tag">shadcn/ui</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link" data-i18n="project_allina_frontend_link">Frontend Produksi</span>
+          </div>
+        </article>
+
+        <!-- 2. MyTens Partnership -->
+        <article class="project-card fade-in delay-2">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_enterprise">Platform Enterprise</span>
+            <h3 class="project-title" data-i18n="project_mytens_title">MyTens Partnership</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_mytens_frontend_desc">
+            Portal mitra enterprise dengan dashboard analitik interaktif (Chart.js), visualisasi SLA kemitraan, dan alur kolaborasi B2B yang responsif.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">ReactJS</span>
+            <span class="stack-tag">TailwindCSS</span>
+            <span class="stack-tag">Chart.js</span>
+            <span class="stack-tag">REST API</span>
+          </div>
+          <div class="project-links">
+            <a href="https://mytenspartnership.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Kunjungi Website ↗</a>
+          </div>
+        </article>
+
+        <!-- 3. SKCK Online Polri -->
+        <article class="project-card fade-in delay-3">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_government">Sistem Pemerintahan Nasional</span>
+            <h3 class="project-title" data-i18n="project_skck_title">SKCK Online - POLRI</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_skck_frontend_desc">
+            Portal publik nasional yang aman dan mudah diakses dengan alur formulir bertahap, pelacakan status permohonan real-time, dan integrasi pembayaran multi-channel.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">ReactJS</span>
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">Redux</span>
+            <span class="stack-tag">Responsive Form UI</span>
+          </div>
+          <div class="project-links">
+            <a href="https://app-skck.polri.go.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Kunjungi Website ↗</a>
+          </div>
+        </article>
+
+        <!-- 4. Telkom SD-WAN Portal -->
+        <article class="project-card fade-in delay-1">
+          <div class="project-header">
+            <span class="project-category" data-i18n="project_network">Manajemen Jaringan Enterprise</span>
+            <h3 class="project-title" data-i18n="project_sdwan_title">Telkom SD-WAN Portal</h3>
+          </div>
+          <p class="project-desc" data-i18n="project_sdwan_frontend_desc">
+            Dashboard monitoring jaringan interaktif dengan visualisasi topologi dinamis (D3.js), grafik performa real-time, dan antarmuka konfigurasi perangkat jaringan.
+          </p>
+          <div class="project-stack">
+            <span class="stack-tag">ReactJS</span>
+            <span class="stack-tag">D3.js Topology</span>
+            <span class="stack-tag">WebSocket</span>
+            <span class="stack-tag">Real-time Telemetry</span>
+          </div>
+          <div class="project-links">
+            <a href="https://telkomsdwan.telkom.co.id/" target="_blank" rel="noopener noreferrer" class="project-link" data-i18n="project_live">Kunjungi Website ↗</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-content fade-in">
+        <span class="section-label">
+          <span class="label-dot"></span>
+          <span data-i18n="home_contact_label">// Mari Berkolaborasi</span>
+        </span>
+        <h2 class="contact-title" data-i18n="frontend_contact_title">Mari Bangun <span class="gradient-text">Antarmuka Modern</span></h2>
+        <p class="contact-desc" data-i18n="frontend_contact_desc">
+          Mencari frontend engineer untuk membangun web app responsif, aman (E2EE), dan interaktif dengan Next.js 15? Mari berdiskusi.
+        </p>
+        <div class="contact-actions">
+          <a href="mailto:nisfalfilsa12@gmail.com" class="contact-email-btn">
+            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>nisfalfilsa12@gmail.com</span>
+          </a>
+          <a href="https://github.com/nisfal" target="_blank" rel="noopener noreferrer" class="contact-social-btn">
+            <span>GitHub ↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/nisfal/" target="_blank" rel="noopener noreferrer" class="contact-social-btn">
+            <span>LinkedIn ↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text" data-i18n="frontend_footer">
+        © 2026 <span>Nisfal Filsa</span> — Modern Frontend Engineer
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
