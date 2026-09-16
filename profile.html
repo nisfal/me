@@ -46,7 +46,8 @@
           <span class="rm-logo-dim">C-137</span>
         </a>
 
-        <div class="rm-nav-links">
+        <!-- Navigation Links (Desktop bar & Mobile Drawer) -->
+        <div class="rm-nav-links" id="rmNavLinks">
           <a href="#citadel" class="rm-nav-link active" data-section="citadel">
             <span class="nav-num">01</span>
             <span class="nav-label">ID CARD</span>
@@ -71,7 +72,10 @@
             <span class="nav-num">06</span>
             <span class="nav-label">SANTAI</span>
           </a>
+        </div>
 
+        <!-- Action Buttons + Sci-Fi Mobile Toggle -->
+        <div class="rm-nav-actions">
           <button id="btnAudioToggle" class="btn-audio-toggle" type="button" aria-label="Toggle sound effects">
             <span class="audio-status-led"></span>
             <svg class="nav-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
@@ -83,6 +87,12 @@
             <span>REALITY RECALL</span>
             <svg class="nav-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           </a>
+
+          <button class="rm-nav-toggle" id="rmNavToggle" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
+            <span class="portal-bar bar-1"></span>
+            <span class="portal-bar bar-2"></span>
+            <span class="portal-bar bar-3"></span>
+          </button>
         </div>
       </div>
     </div>
@@ -471,7 +481,41 @@
 
         <div class="meeseeks-display-card" id="meeseeksDisplayCard">
           <div class="meeseeks-avatar-pill">
-            <span class="meeseeks-status-orb" id="meeseeksFace"></span>
+            <div class="meeseeks-avatar-icon" id="meeseeksFace">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%" class="meeseeks-svg-icon" aria-hidden="true">
+                <!-- Kepala Meeseeks -->
+                <circle cx="50" cy="45" r="30" fill="#8BE1FF" stroke="#1A3B5C" stroke-width="3"/>
+                
+                <!-- Rambut Oranye Kecil di Atas Kepala -->
+                <path d="M46 15 C46 10, 54 10, 54 15 Z" fill="#FF823A" stroke="#1A3B5C" stroke-width="1.5"/>
+                <path d="M42 16 C43 13, 47 13, 48 16 Z" fill="#FF823A" stroke="#1A3B5C" stroke-width="1.5"/>
+                <path d="M52 16 C53 13, 57 13, 58 16 Z" fill="#FF823A" stroke="#1A3B5C" stroke-width="1.5"/>
+
+                <!-- Mata Kiri -->
+                <circle cx="38" cy="40" r="5" fill="#FFFFFF" stroke="#1A3B5C" stroke-width="2.5"/>
+                <circle cx="38" cy="40" r="1.5" fill="#000000"/>
+
+                <!-- Mata Kanan -->
+                <circle cx="62" cy="40" r="5" fill="#FFFFFF" stroke="#1A3B5C" stroke-width="2.5"/>
+                <circle cx="62" cy="40" r="1.5" fill="#000000"/>
+
+                <!-- Alis Tipis Khas Meeseeks -->
+                <path d="M33 33 Q38 31 43 34" fill="none" stroke="#1A3B5C" stroke-width="2" stroke-linecap="round"/>
+                <path d="M57 34 Q62 31 67 33" fill="none" stroke="#1A3B5C" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- Mulut Lebar Ceria -->
+                <path d="M32 50 Q50 68 68 50" fill="#FFFFFF" stroke="#1A3B5C" stroke-width="3" stroke-linecap="round"/>
+                <!-- Lidah Merah / Oranye -->
+                <path d="M40 57 Q50 66 60 57 Q50 54 40 57" fill="#FF6584"/>
+                
+                <!-- Garis Pipi Ceria -->
+                <path d="M30 48 Q32 51 34 50" fill="none" stroke="#1A3B5C" stroke-width="2"/>
+                <path d="M70 48 Q68 51 66 50" fill="none" stroke="#1A3B5C" stroke-width="2"/>
+
+                <!-- Badan/Bahu Minimalis untuk Ikon -->
+                <path d="M25 72 C35 68, 65 68, 75 72 L70 90 L30 90 Z" fill="#8BE1FF" stroke="#1A3B5C" stroke-width="3" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <span id="meeseeksAction" class="meeseeks-name-tag">I'm Mr. Meeseeks, look at me!</span>
           </div>
           <blockquote id="meeseeksQuote" class="meeseeks-quote-text">
@@ -544,6 +588,7 @@
   <!-- THE BUTTER ROBOT FLOATING EASTER EGG (Fixed Bottom-Right) -->
   <aside class="butter-robot-widget" id="butterRobot" aria-label="The Butter Robot Easter Egg">
     <div class="butter-balloon" id="butterBalloon">
+      <button type="button" class="butter-close-btn" id="btnButterClose" aria-label="Tutup pesan robot" title="Sembunyikan pesan">&times;</button>
       <div class="butter-quote" id="butterQuote">"What is my purpose?"</div>
       <span class="butter-tip-click">(Klik robotnya!)</span>
     </div>

@@ -66,28 +66,34 @@ body.dim-citadel {
   --portal-cyan: #3b82f6;
 }
 
-/* Base Resets & Custom Rick and Morty Sci-Fi Cursors */
+/* Base Resets */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%2339ff14'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%2397ce4c' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
 }
 
-a, button, [role="button"], input, select, textarea, .btn-dimension, .btn-tv-knob, .btn-meeseeks, .btn-flip-card, .butter-robot-btn, .footer-portal-button, .btn-channel-inspect {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%2339ff14'/%3E%3Cpath d='M6 11V6H11' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M21 6H26V11' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M6 21V26H11' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M21 26H26V21' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%2339ff14' stroke-width='1' opacity='0.6'/%3E%3C/svg%3E") 16 16, pointer !important;
-}
+/* Custom Rick and Morty Sci-Fi Cursors (Only for devices with mouse/pointer) */
+@media (hover: hover) and (pointer: fine) {
+  *, *::before, *::after {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%2339ff14'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%2397ce4c' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%2397ce4c' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
+  }
 
-body.dim-cronenberg *, body.dim-cronenberg *::before, body.dim-cronenberg *::after {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%23fbbf24'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%23f59e0b' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
-}
+  a, button, [role="button"], input, select, textarea, .btn-dimension, .btn-tv-knob, .btn-meeseeks, .btn-flip-card, .butter-robot-btn, .footer-portal-button, .btn-channel-inspect {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%2339ff14'/%3E%3Cpath d='M6 11V6H11' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M21 6H26V11' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M6 21V26H11' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M21 26H26V21' fill='none' stroke='%2322d3ee' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%2339ff14' stroke-width='1' opacity='0.6'/%3E%3C/svg%3E") 16 16, pointer !important;
+  }
 
-body.dim-purge *, body.dim-purge *::before, body.dim-purge *::after {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%23ef4444'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%23ef4444' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
-}
+  body.dim-cronenberg *, body.dim-cronenberg *::before, body.dim-cronenberg *::after {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%23fbbf24'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%23f59e0b' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%23f59e0b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
+  }
 
-body.dim-citadel *, body.dim-citadel *::before, body.dim-citadel *::after {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%2322d3ee'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%2306b6d4' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
+  body.dim-purge *, body.dim-purge *::before, body.dim-purge *::after {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%23ef4444'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%23ef4444' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
+  }
+
+  body.dim-citadel *, body.dim-citadel *::before, body.dim-citadel *::after {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='2.5' fill='%2322d3ee'/%3E%3Ccircle cx='14' cy='14' r='7.5' fill='none' stroke='%2306b6d4' stroke-width='1.2' stroke-dasharray='3 2' opacity='0.8'/%3E%3Cline x1='14' y1='1' x2='14' y2='6' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='14' y1='22' x2='14' y2='27' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='1' y1='14' x2='6' y2='14' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3Cline x1='22' y1='14' x2='27' y2='14' stroke='%2306b6d4' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") 14 14, crosshair;
+  }
 }
 
 html {
@@ -392,6 +398,58 @@ body.portal-transition-glitch {
 
 .btn-back-reality:active {
   transform: translateY(1px);
+}
+
+.rm-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Sci-Fi Portal Hamburger Toggle Button */
+.rm-nav-toggle {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--portal-border);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5px;
+  padding: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--portal-subtle);
+  transition: all 0.25s ease;
+}
+
+.rm-nav-toggle:hover {
+  background: var(--portal-subtle);
+  border-color: var(--portal-green);
+  box-shadow: 0 0 14px var(--portal-glow);
+}
+
+.portal-bar {
+  width: 18px;
+  height: 2px;
+  background: var(--portal-bright);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--portal-bright);
+  transition: transform 0.3s ease, opacity 0.25s ease, background-color 0.3s ease;
+}
+
+.rm-nav-toggle.open .bar-1 {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.rm-nav-toggle.open .bar-2 {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.rm-nav-toggle.open .bar-3 {
+  transform: translateY(-6.5px) rotate(-45deg);
 }
 
 /* --- Fullscreen Reality Collapse VFX (Reverse Portal Out) --- */
@@ -1961,6 +2019,28 @@ body.portal-arrived {
   margin-bottom: 1rem;
 }
 
+.meeseeks-avatar-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(139, 225, 255, 0.16);
+  border: 1.5px solid var(--portal-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  box-shadow: 0 0 12px rgba(139, 225, 255, 0.45);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.meeseeks-svg-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .meeseeks-face {
   width: 28px;
   height: 28px;
@@ -2023,6 +2103,18 @@ body.portal-arrived {
 .meeseeks-display-card.meeseeks-angry .meeseeks-face {
   background: #ef4444;
   box-shadow: 0 0 16px #ef4444;
+}
+
+.meeseeks-display-card.meeseeks-angry .meeseeks-avatar-icon {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.85);
+  animation: meeseeksIconRage 0.2s infinite alternate;
+}
+
+@keyframes meeseeksIconRage {
+  from { transform: scale(0.96) rotate(-3deg); filter: hue-rotate(130deg); }
+  to { transform: scale(1.08) rotate(3deg); filter: hue-rotate(150deg); }
 }
 
 .meeseeks-display-card.meeseeks-angry .meeseeks-name-tag {
@@ -2189,6 +2281,39 @@ body.portal-arrived {
   font-weight: 700;
   color: #f8fafc;
   line-height: 1.4;
+  padding-right: 14px;
+}
+
+.butter-close-btn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 5;
+}
+
+.butter-close-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.butter-balloon.dismissed {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: scale(0.8) !important;
 }
 
 .butter-tip-click {
@@ -2279,37 +2404,160 @@ body.portal-arrived {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (Mobile < 900px & < 640px)
+   RESPONSIVE DESIGN (iPad / Tablets 768px-1024px & Mobile < 768px / < 480px)
    ========================================================================== */
+
+/* --- Tablet / iPad Landscape & Portrait (<= 1024px) --- */
+@media (max-width: 1024px) {
+  .citadel-card {
+    padding: 2rem 1.8rem;
+  }
+
+  .citadel-body-grid,
+  .wanted-body-grid {
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+  }
+
+  .avatar-portal-wrapper,
+  .wanted-mugshot-wrapper {
+    max-width: 240px;
+  }
+
+  .bio-stats-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .wanted-crimes-list li {
+    font-size: 0.9rem;
+  }
+
+  .tv-housing {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+  .tv-control-panel {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .tv-rotary-wrapper {
+    margin: 0;
+  }
+
+  .tv-channel-select-group {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .tv-speaker-grille {
+    display: none;
+  }
+
+  .meeseeks-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.2rem;
+  }
+
+  .arsenal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .real-talk-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* --- Mobile & Tablet Portrait Breakpoint (<= 900px) --- */
 @media (max-width: 900px) {
+  /* Sci-Fi Hamburger Toggle activates */
+  .rm-nav-toggle {
+    display: flex;
+  }
+
+  .rm-nav-inner {
+    position: relative;
+    padding: 0.65rem 1.1rem;
+  }
+
+  /* Collapsible Navigation Drawer */
+  .rm-nav-links {
+    position: absolute;
+    top: calc(100% + 0.65rem);
+    left: 0;
+    right: 0;
+    background: rgba(12, 16, 26, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--portal-border);
+    border-radius: 20px;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 25px var(--portal-subtle);
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.3s ease;
+    z-index: 200;
+  }
+
+  .rm-nav-links.open {
+    max-height: 380px;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 1rem;
+  }
+
+  .rm-nav-link {
+    justify-content: center;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .rm-nav-link.active {
+    background: var(--portal-subtle);
+  }
+
   .citadel-body-grid,
   .wanted-body-grid {
     grid-template-columns: 1fr;
-    text-align: center;
     gap: 2rem;
   }
 
   .avatar-portal-wrapper,
   .wanted-mugshot-wrapper {
     margin: 0 auto;
-    max-width: 260px;
+    max-width: 250px;
+  }
+
+  .citadel-bio,
+  .wanted-dossier {
+    text-align: left;
   }
 
   .bio-stats-strip {
-    grid-template-columns: 1fr;
-  }
-
-  .tv-housing {
-    grid-template-columns: 1fr;
-  }
-
-  .meeseeks-container {
-    grid-template-columns: 1fr;
-    text-align: center;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .meeseeks-control {
     align-items: center;
+    text-align: center;
+  }
+
+  .meeseeks-actions-group {
+    justify-content: center;
   }
 
   .arsenal-grid {
@@ -2325,47 +2573,99 @@ body.portal-arrived {
   }
 }
 
+/* --- Smartphones (<= 640px) --- */
 @media (max-width: 640px) {
+  .rm-container {
+    padding: 0 1rem;
+  }
+
+  .rm-navbar {
+    top: 0.6rem;
+    margin-bottom: 2rem;
+  }
+
   .rm-nav-inner {
-    flex-direction: column;
-    gap: 0.8rem;
-    border-radius: 20px;
-    padding: 0.75rem 1rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 9999px;
   }
 
-  .rm-nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
+  .rm-brand .rm-logo-dim {
+    display: none;
   }
 
-  .rm-nav-link {
-    font-size: 0.78rem;
-    padding: 0.3rem 0.6rem;
+  .rm-brand .rm-logo-text {
+    font-size: 1.05rem;
+  }
+
+  .btn-audio-toggle {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.68rem;
+  }
+
+  .btn-audio-toggle #audioToggleLabel {
+    display: none;
   }
 
   .btn-back-reality {
-    font-size: 0.76rem;
-    padding: 0.35rem 0.8rem;
+    font-size: 0.72rem;
+    padding: 0.35rem 0.75rem;
+    gap: 5px;
   }
 
   .citadel-card {
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
+    border-radius: 20px;
   }
 
   .citadel-header-badge,
   .wanted-header-badge {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .citadel-meta-left,
+  .wanted-meta-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .citadel-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 8px;
+    width: 100%;
+  }
+
+  .citadel-threat-badge {
+    font-size: 0.64rem;
+    padding: 3px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 175px;
+  }
+
+  .btn-citadel-toggle {
+    padding: 6px 10px;
+    font-size: 0.68rem;
+    flex-shrink: 0;
   }
 
   .bio-name {
-    font-size: 1.85rem !important;
+    font-size: clamp(1.8rem, 6.5vw, 2.2rem) !important;
   }
 
   .bio-role {
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     word-break: normal;
   }
 
@@ -2374,22 +2674,241 @@ body.portal-arrived {
     padding: 0.75rem 0.9rem !important;
   }
 
+  .bio-desc {
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  .bio-stats-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .bio-stat-item {
+    padding: 0.6rem 0.4rem;
+    text-align: center;
+  }
+
+  .bio-stat-label {
+    font-size: 0.6rem;
+  }
+
+  .bio-stat-value {
+    font-size: 0.92rem;
+  }
+
+  .wanted-alias {
+    font-size: clamp(1.4rem, 5.5vw, 1.85rem);
+  }
+
   .wanted-stamp {
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     padding: 2px 8px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .wanted-crimes-list li {
+    font-size: 0.86rem;
+    padding-left: 1.2rem;
+  }
+
+  .wanted-warning-alert {
+    font-size: 0.82rem;
+    padding: 0.75rem 0.85rem;
   }
 
   .shifter-box {
+    padding: 1.25rem 1rem;
+    border-radius: 16px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .shifter-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .btn-dimension {
+    justify-content: center;
+    padding: 8px 10px;
+  }
+
+  .arsenal-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .arsenal-card {
+    padding: 1.25rem 1.1rem;
+    border-radius: 16px;
+  }
+
+  .tv-housing {
+    padding: 0.9rem;
+    border-radius: 20px;
+    border-width: 2px;
+    gap: 1rem;
+  }
+
+  .tv-screen-wrapper {
+    min-height: auto;
+    border-radius: 14px;
+    border-width: 2px;
+  }
+
+  .crt-glass {
+    padding: 1rem;
+  }
+
+  .channel-broadcast-title {
+    font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+    line-height: 1.3;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+
+  .channel-broadcast-desc {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .channel-tag-line {
+    font-size: 0.65rem;
+  }
+
+  .btn-channel-inspect {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.78rem;
+  }
+
+  .tv-control-panel {
+    padding: 1rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tv-channel-select-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .meeseeks-container {
+    padding: 1.4rem 1.1rem;
+    border-radius: 18px;
+    gap: 1.5rem;
+  }
+
+  .meeseeks-title {
+    font-size: 1.6rem;
+  }
+
+  .meeseeks-desc {
+    font-size: 0.88rem;
+  }
+
+  .btn-meeseeks-dome {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-calm-meeseeks {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .meeseeks-display-card {
+    padding: 1.25rem 1rem;
+    min-height: 170px;
+  }
+
+  .meeseeks-quote-text {
+    font-size: 1.05rem;
+  }
+
+  .real-talk-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .real-talk-card {
+    padding: 1.25rem 1.1rem;
+    border-radius: 16px;
+  }
+
+  .footer-portal-button {
+    padding: 0.75rem 1.4rem;
+    font-size: 0.95rem;
+    width: 100%;
+    justify-content: center;
+    max-width: 340px;
+  }
+
+  .footer-socials {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-social-link {
+    word-break: break-all;
+    font-size: 0.82rem;
+  }
+
+  .rm-copyright {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    word-break: break-word;
+    padding: 0 0.5rem;
   }
 
   .butter-robot-widget {
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    transform: scale(0.85);
+    transform-origin: bottom right;
   }
 
   .butter-balloon {
-    max-width: 200px;
+    max-width: 220px;
+  }
+}
+
+/* --- Small Phones (<= 400px) --- */
+@media (max-width: 400px) {
+  .citadel-threat-badge {
+    max-width: 130px;
+  }
+
+  .rm-brand .rm-logo-text {
+    font-size: 0.98rem;
+  }
+
+  .btn-back-reality span {
+    display: none;
+  }
+
+  .btn-back-reality {
+    padding: 0.35rem 0.55rem;
+  }
+
+  .bio-stats-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+
+  .bio-stat-item {
+    padding: 0.5rem 0.25rem;
+  }
+
+  .bio-stat-value {
+    font-size: 0.85rem;
   }
 }

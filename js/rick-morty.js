@@ -757,25 +757,44 @@
     const balloon = document.getElementById('butterBalloon');
     const quoteElem = document.getElementById('butterQuote');
     const eye = document.getElementById('robotEye');
+    const closeBtn = document.getElementById('btnButterClose');
 
     if (!btn || !balloon || !quoteElem) return;
 
-    // Track mouse to move robot eye
-    window.addEventListener('mousemove', (e) => {
-      if (!eye) return;
-      const rect = eye.getBoundingClientRect();
-      const eyeX = rect.left + rect.width / 2;
-      const eyeY = rect.top + rect.height / 2;
-      const deltaX = e.clientX - eyeX;
-      const deltaY = e.clientY - eyeY;
-      const angle = Math.atan2(deltaY, deltaX);
-      const moveX = Math.cos(angle) * 2;
-      const moveY = Math.sin(angle) * 2;
-      eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
+    // Dismiss balloon handler
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        balloon.classList.add('dismissed');
+      });
+    }
+
+    // Auto-dismiss balloon on small mobile after 7s so it doesn't block reading
+    if (window.innerWidth <= 640) {
+      setTimeout(() => {
+        balloon.classList.add('dismissed');
+      }, 7000);
+    }
+
+    // Track mouse to move robot eye (only for mouse pointer devices)
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      window.addEventListener('mousemove', (e) => {
+        if (!eye) return;
+        const rect = eye.getBoundingClientRect();
+        const eyeX = rect.left + rect.width / 2;
+        const eyeY = rect.top + rect.height / 2;
+        const deltaX = e.clientX - eyeX;
+        const deltaY = e.clientY - eyeY;
+        const angle = Math.atan2(deltaY, deltaX);
+        const moveX = Math.cos(angle) * 2;
+        const moveY = Math.sin(angle) * 2;
+        eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+    }
 
     btn.addEventListener('click', () => {
       playRobotBeep();
+      balloon.classList.remove('dismissed');
       const cur = BUTTER_DIALOGUES[butterIndex];
       butterIndex = (butterIndex + 1) % BUTTER_DIALOGUES.length;
 
@@ -790,7 +809,51 @@
     });
   }
 
-  // --- 8. Audio Toggle Control ---
+  // --- 8. Mobile Navigation Drawer Handler ---
+  function setupMobileNav() {
+    const navToggle = document.getElementById('rmNavToggle');
+    const navLinks = document.getElementById('rmNavLinks');
+
+    if (!navToggle || !navLinks) return;
+
+    function toggleMenu(forceClose = false) {
+      const isOpen = forceClose ? false : !navLinks.classList.contains('open');
+      navLinks.classList.toggle('open', isOpen);
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (isOpen) {
+        playGlitchSound();
+      }
+    }
+
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Close when a link is clicked
+    navLinks.querySelectorAll('.rm-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMenu(true);
+      });
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        toggleMenu(true);
+      }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleMenu(true);
+      }
+    });
+  }
+
+  // --- 9. Audio Toggle Control ---
   function setupAudioToggle() {
     const audioBtn = document.getElementById('btnAudioToggle');
     const label = document.getElementById('audioToggleLabel');
@@ -808,7 +871,7 @@
     });
   }
 
-  // --- 9. Initializer ---
+  // --- 10. Initializer ---
   document.addEventListener('DOMContentLoaded', () => {
     initCanvas();
     setup3DCardFlip();
@@ -816,6 +879,7 @@
     setupCableTv();
     setupMeeseeksBox();
     setupButterRobot();
+    setupMobileNav();
     setupAudioToggle();
     setupRealityReturnTransitions();
     setupNavbarScrollSpy();
