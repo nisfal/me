@@ -1499,3 +1499,35 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   RICK & MORTY PORTAL NAV EASTER EGG
+   ========================================================================== */
+.nav-link-portal {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 4px;
+  color: #97ce4c !important;
+  background: rgba(151, 206, 76, 0.1);
+  border: 1px solid rgba(151, 206, 76, 0.3);
+  padding: 0.22rem 0.65rem !important;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem !important;
+  font-weight: 700;
+  transition: all 0.25s var(--ease-bdsn) !important;
+  text-decoration: none;
+}
+
+.nav-link-portal:hover {
+  background: rgba(151, 206, 76, 0.22) !important;
+  border-color: #39ff14 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(151, 206, 76, 0.5) !important;
+  transform: translateY(-1px) !important;
+}
+
+.nav-link-portal::after {
+  display: none !important;
+}
+

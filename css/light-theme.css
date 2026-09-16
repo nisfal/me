@@ -297,3 +297,17 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
 }
+
+.light-mode .nav-link-portal {
+  color: #15803d !important;
+  background: rgba(22, 163, 74, 0.1) !important;
+  border-color: rgba(22, 163, 74, 0.3) !important;
+}
+
+.light-mode .nav-link-portal:hover {
+  background: rgba(22, 163, 74, 0.18) !important;
+  border-color: #16a34a !important;
+  color: #14532d !important;
+  box-shadow: 0 0 12px rgba(22, 163, 74, 0.3) !important;
+}
+

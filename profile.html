@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Profil santai Nisfal Filsa bertema Rick and Morty (Dimension C-137). Eksplorasi sisi personal, filosofi koding, gadget tech stack, dan interaksi portal interdimensional.">
+  <meta name="author" content="Nisfal Filsa">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#07080c">
+  <title>Nisfal Filsa | Dimension C-137 (Casual Profile)</title>
+
+  <!-- Canonical & Open Graph -->
+  <link rel="canonical" href="https://nisfal.vercel.app/profile.html">
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Nisfal Filsa Portfolio">
+  <meta property="og:title" content="Nisfal Filsa | Dimension C-137 (Rick & Morty Profile)">
+  <meta property="og:description" content="Profil santai Nisfal Filsa bertema Rick and Morty. Tech stack interdimensional, Portal Gun dimension shifter, Interdimensional Cable TV, dan Mr. Meeseeks interactive box.">
+  <meta property="og:url" content="https://nisfal.vercel.app/profile.html">
+  <meta property="og:image" content="https://nisfal.vercel.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nisfal Filsa | Dimension C-137 (Rick & Morty Profile)">
+  <meta name="twitter:description" content="Profil santai Nisfal Filsa bertema Rick and Morty dengan interaksi sci-fi interdimensional.">
+  <meta name="twitter:image" content="https://nisfal.vercel.app/og-image.png">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/rick-morty.css">
+</head>
+<body class="dim-c137">
+
+  <!-- Background Animated Canvas, Cosmic Grid, and Scanlines -->
+  <canvas id="portalCanvas"></canvas>
+  <div class="cosmic-grid"></div>
+  <div class="scanlines"></div>
+  <div id="glitchOverlay" class="glitch-overlay"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="rm-navbar">
+    <div class="rm-container">
+      <div class="rm-nav-inner">
+        <a href="profile.html" class="rm-brand" aria-label="Nisfal Filsa Dimension C-137">
+          <span class="rm-portal-icon"></span>
+          <span class="rm-logo-text">&lt;NF/&gt;</span>
+          <span class="rm-logo-dim">C-137</span>
+        </a>
+
+        <div class="rm-nav-links">
+          <a href="#citadel" class="rm-nav-link">ID Card</a>
+          <a href="#dimension-shifter" class="rm-nav-link">Portal Gun</a>
+          <a href="#arsenal" class="rm-nav-link">Arsenal</a>
+          <a href="#cable-tv" class="rm-nav-link">Cable TV</a>
+          <a href="#meeseeks" class="rm-nav-link">Meeseeks Box</a>
+          <a href="#santai" class="rm-nav-link">Sisi Santai</a>
+          <button id="btnAudioToggle" class="btn-audio-toggle" type="button" aria-label="Toggle sound effects">
+            <svg class="nav-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+            <span id="audioToggleLabel">AUDIO FX: ON</span>
+          </button>
+          <a href="index.html" class="btn-back-reality" aria-label="Return to serious portfolio">
+            <svg class="nav-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>PORTOFOLIO UTAMA</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="rm-container">
+
+    <!-- HERO: CITADEL INTERDIMENSIONAL ID CARD (3D FLIPPABLE WITH WANTED POSTER) -->
+    <section class="rm-hero" id="citadel">
+      <div class="citadel-flip-container" id="citadelCardContainer">
+        <div class="citadel-flipper" id="citadelFlipper">
+
+          <!-- FRONT: CITADEL CITIZEN ID CARD -->
+          <div class="citadel-card citadel-card-front">
+            <div class="citadel-header-badge">
+              <div class="citadel-meta-left">
+                <span class="citadel-seal">CITADEL RECON // C-137</span>
+                <span class="citadel-id-num">SPECIMEN #NF-137-JKT</span>
+              </div>
+              <div class="citadel-header-actions">
+                <div class="citadel-threat-badge">
+                  <span class="threat-dot"></span>
+                  <span>THREAT: DANGEROUS TO MONOLITHS</span>
+                </div>
+                <button type="button" class="btn-citadel-toggle" id="btnFlipToWanted" aria-label="Flip to Galactic Federation Wanted Dossier">
+                  <span class="toggle-led red"></span>
+                  <span class="toggle-text">WANTED DOSSIER</span>
+                  <svg class="toggle-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="citadel-body-grid">
+              <!-- Avatar with Swirling Portal Frame -->
+              <div class="avatar-portal-wrapper">
+                <div class="avatar-portal-glow"></div>
+                <img src="img/nisfal-rick.jpg" alt="Nisfal Filsa Rick and Morty Cartoon Avatar" class="avatar-img" width="320" height="320">
+                <span class="avatar-label">NISFAL C-137</span>
+              </div>
+
+              <!-- Bio Content -->
+              <div class="citadel-bio">
+                <div class="bio-title-group">
+                  <span class="bio-eyebrow">// CITIZEN OF DIMENSION C-137</span>
+                  <h1 class="bio-name">Nisfal Filsa</h1>
+                  <div class="bio-role">Fullstack & Systems Mad Scientist</div>
+                </div>
+
+                <div class="bio-quote-box">
+                  "Gue Nisfal. Kalau sistem lu down di production pas jam 3 pagi, santai... jangan panggil dukun interdimensional, panggil gue."
+                </div>
+
+                <p class="bio-desc">
+                  Di kehidupan sehari-hari, gue merancang arsitektur backend berkapasitas tinggi (100k+ ops/s), event-driven streaming via RabbitMQ, dan antarmuka web modern yang kencang tanpa bikin pengguna emosi. Di multiverse ini, pantang ada kata <em>"nanti kita refactor"</em>, kita bangun arsitektur yang bener dan tangguh dari hari pertama!
+                </p>
+
+                <div class="bio-stats-strip">
+                  <div class="bio-stat-item">
+                    <span class="bio-stat-label">Pipeline Speed</span>
+                    <span class="bio-stat-value">100k+ ops/s</span>
+                  </div>
+                  <div class="bio-stat-item">
+                    <span class="bio-stat-label">Query Latency</span>
+                    <span class="bio-stat-value">&lt; 2.4ms</span>
+                  </div>
+                  <div class="bio-stat-item">
+                    <span class="bio-stat-label">Brain Fuel</span>
+                    <span class="bio-stat-value">100% Arabica</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BACK: GALACTIC FEDERATION WANTED POSTER -->
+          <div class="citadel-card citadel-card-back">
+            <div class="wanted-header-badge">
+              <div class="wanted-meta-left">
+                <span class="wanted-seal">FEDERATION APPREHENSION ORDER</span>
+                <span class="wanted-warrant">WARRANT #GF-99420-X // SECURITY LVL-9</span>
+              </div>
+              <button type="button" class="btn-citadel-toggle btn-toggle-id" id="btnFlipToId" aria-label="Return to Citadel Identity Profile">
+                <span class="toggle-led green"></span>
+                <span class="toggle-text">CITADEL ID PASS</span>
+                <svg class="toggle-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+              </button>
+            </div>
+
+            <div class="wanted-body-grid">
+              <!-- Mugshot with wanted scan lines and red tint -->
+              <div class="wanted-mugshot-wrapper">
+                <div class="wanted-stamp">CLASS: SSS</div>
+                <div class="mugshot-scan-overlay"></div>
+                <img src="img/nisfal-wanted-user.png" alt="Wanted Criminal Silhouette Nisfal Filsa" class="wanted-img" width="320" height="320">
+                <div class="wanted-bounty-box">
+                  <span class="bounty-currency">BOUNTY REWARD:</span>
+                  <span class="bounty-number">50,000,000 FLURBOS</span>
+                  <span class="bounty-dead-alive">DEAD OR REFACTORED</span>
+                </div>
+              </div>
+
+              <!-- Criminal Record / Charges -->
+              <div class="wanted-dossier">
+                <div class="wanted-title-group">
+                  <span class="wanted-eyebrow">// GALACTIC FEDERATION MOST WANTED</span>
+                  <h2 class="wanted-alias">BURONAN: NISFAL "THE OPTIMIZER"</h2>
+                  <div class="wanted-crimes-label">DAFTAR KEJAHATAN ARSITEKTUR TINGKAT TINGGI:</div>
+                </div>
+
+                <ul class="wanted-crimes-list">
+                  <li>
+                    <strong>Illegal In-Memory Acceleration:</strong> Memaksa transaksi jutaan baris data lewat Redis & Prisma dual-client tanpa membayar pajak CPU overhead ke Galactic Federation.
+                  </li>
+                  <li>
+                    <strong>Teleportasi Data Tanpa Izin:</strong> Mengoperasikan RabbitMQ event-driven streaming dengan Dead-Letter Queue yang kebal sabotase alien birokrasi.
+                  </li>
+                  <li>
+                    <strong>Pembongkaran Monolith Kuno:</strong> Terbukti membongkar sistem monolith kaku menjadi microservices modular berlatensi &lt;2.4ms dalam satu siklus rotasi planet.
+                  </li>
+                  <li>
+                    <strong>Pelanggaran Gravitasi Frontend:</strong> Membangun antarmuka Next.js 15 & Tailwind dengan hidrasi sub-detik yang mempermalukan terminal resmi federasi.
+                  </li>
+                </ul>
+
+                <div class="wanted-warning-alert">
+                  <svg class="alert-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <strong>PERINGATAN PETUGAS FEDERASI:</strong> Tersangka sangat bersenjata dengan terminal Neovim, keyboard mekanikal custom, dan kopi tubruk pekat. Jangan didekati kecuali Anda siap sistem Anda dipercepat 10x lipat.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTAL GUN DIMENSION SHIFTER -->
+    <section class="dimension-shifter-section" id="dimension-shifter">
+      <div class="shifter-box">
+        <div class="shifter-info">
+          <h2 class="shifter-heading">
+            <svg class="shifter-title-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>Portal Gun Coordinate Matrix</span>
+          </h2>
+          <p class="shifter-sub" id="currentDimText">
+            Aktif di: Earth C-137 // Fluida portal terkalibrasi warna neon hijau
+          </p>
+        </div>
+
+        <div class="shifter-buttons">
+          <button class="btn-dimension active" data-dim="c137" type="button">
+            <span class="dim-coord">C-137</span>
+            <span class="dim-label">Earth Prime</span>
+          </button>
+          <button class="btn-dimension" data-dim="cronenberg" type="button">
+            <span class="dim-coord">CRON-8</span>
+            <span class="dim-label">Cronenberg</span>
+          </button>
+          <button class="btn-dimension" data-dim="purge" type="button">
+            <span class="dim-coord">PURG-09</span>
+            <span class="dim-label">Purge Planet</span>
+          </button>
+          <button class="btn-dimension" data-dim="citadel" type="button">
+            <span class="dim-coord">CIT-Ω</span>
+            <span class="dim-label">Citadel of Ricks</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RICK'S TECH ARSENAL (Bento Grid) -->
+    <section class="arsenal-section" id="arsenal">
+      <header class="section-head">
+        <span class="section-tag">// INTERDIMENSIONAL WEAPONRY</span>
+        <h2 class="section-main-title">Arsenal Senjata Koding</h2>
+      </header>
+
+      <div class="arsenal-grid">
+        <!-- Card 1: Portal Gun Pipeline -->
+        <article class="arsenal-card">
+          <div>
+            <div class="card-gadget-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <span class="card-gadget-name">Gadget #01 · High-Throughput Engine</span>
+            <h3 class="card-title">Portal Gun Data Pipeline</h3>
+            <p class="card-desc">
+              Teleportasi jutaan paket data per detik tanpa jeda. Menangani lonjakan beban ekstrem dengan routing pesan asinkron yang kebal crash.
+            </p>
+          </div>
+          <div class="card-real-stack">
+            <span class="stack-tag glow">Go (Gin Engine)</span>
+            <span class="stack-tag glow">RabbitMQ</span>
+            <span class="stack-tag">Dead-Letter Queues</span>
+            <span class="stack-tag">Microservices</span>
+          </div>
+        </article>
+
+        <!-- Card 2: Microverse Battery -->
+        <article class="arsenal-card">
+          <div>
+            <div class="card-gadget-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line><line x1="7" y1="10" x2="7" y2="14"></line><line x1="11" y1="10" x2="11" y2="14"></line></svg>
+            </div>
+            <span class="card-gadget-name">Gadget #02 · Persistence Matrix</span>
+            <h3 class="card-title">Microverse Database Battery</h3>
+            <p class="card-desc">
+              Menampung seluruh riwayat transaksi semesta. Mengombinasikan mediasi dual-database untuk throughput tinggi dan caching in-memory secepat kilat.
+            </p>
+          </div>
+          <div class="card-real-stack">
+            <span class="stack-tag glow">Prisma v6 Dual-Client</span>
+            <span class="stack-tag glow">PostgreSQL</span>
+            <span class="stack-tag">Redis In-Memory</span>
+            <span class="stack-tag">MinIO S3</span>
+          </div>
+        </article>
+
+        <!-- Card 3: Meeseeks Hydration -->
+        <article class="arsenal-card">
+          <div>
+            <div class="card-gadget-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9Z"></path><path d="M19 12a7 7 0 0 0-7-7"></path></svg>
+            </div>
+            <span class="card-gadget-name">Gadget #03 · Reactive Interface</span>
+            <h3 class="card-title">Meeseeks State Hydration</h3>
+            <p class="card-desc">
+              Komponen antarmuka yang lahir instan di server, menyelesaikan rendering ke browser dengan mulus, lalu beres tanpa kebocoran memori.
+            </p>
+          </div>
+          <div class="card-real-stack">
+            <span class="stack-tag glow">Next.js 15 App Router</span>
+            <span class="stack-tag glow">React 19</span>
+            <span class="stack-tag">Zustand v5</span>
+            <span class="stack-tag">Tailwind CSS v4</span>
+          </div>
+        </article>
+
+        <!-- Card 4: Anti-Matter Defense -->
+        <article class="arsenal-card">
+          <div>
+            <div class="card-gadget-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <span class="card-gadget-name">Gadget #04 · Security & Encryption</span>
+            <h3 class="card-title">Anti-Matter Security Grid</h3>
+            <p class="card-desc">
+              Benteng pertahanan berlapis. Alien atau hacker nakal yang mencoba bypass otorisasi bakal langsung terpental oleh rule RBAC/ABAC yang super ketat.
+            </p>
+          </div>
+          <div class="card-real-stack">
+            <span class="stack-tag glow">CASL Granular RBAC/ABAC</span>
+            <span class="stack-tag glow">E2EE Key Exchange</span>
+            <span class="stack-tag">JWT Token Rotation</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- INTERDIMENSIONAL CABLE TV SECTION (PROJECT SHOWCASE) -->
+    <section class="cable-tv-section" id="cable-tv">
+      <header class="section-head">
+        <span class="section-tag">// MULTIVERSE BROADCAST</span>
+        <h2 class="section-main-title">Interdimensional Cable TV</h2>
+        <p class="section-sub">
+          Putar kenop saluran buat nonton siaran proyek nyata Nisfal Filsa di gelombang televisi antardimensi C-137.
+        </p>
+      </header>
+
+      <div class="tv-retro-console">
+        <!-- Antennas -->
+        <div class="tv-antennas">
+          <div class="antenna antenna-left"></div>
+          <div class="antenna antenna-right"></div>
+        </div>
+
+        <!-- Main TV Box -->
+        <div class="tv-housing">
+          <!-- TV Bezel and CRT Screen -->
+          <div class="tv-screen-wrapper">
+            <div class="crt-glass">
+              <div class="crt-scanline"></div>
+              <div class="crt-noise" id="crtNoise"></div>
+              
+              <!-- Channel Content Display -->
+              <div class="tv-channel-screen" id="tvChannelScreen">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Control Panel -->
+          <div class="tv-control-panel">
+            <div class="tv-dial-group">
+              <span class="dial-label">TUNER CONTROLS</span>
+              <div class="channel-indicator" id="channelIndicator">CH-01</div>
+              
+              <!-- Tactile Rotary Dial -->
+              <div class="tv-rotary-wrapper">
+                <button type="button" class="tv-rotary-dial" id="tvRotaryKnob" aria-label="Rotate Channel Knob" title="Putar Kenop Saluran">
+                  <span class="dial-marker"></span>
+                </button>
+                <span class="dial-sub-label">ROTARY TUNER</span>
+              </div>
+
+              <!-- Channel Push Selectors -->
+              <div class="tv-channel-select-group">
+                <button type="button" class="btn-channel-select active" data-ch="0" id="btnCh0">
+                  <span class="ch-indicator-dot"></span>
+                  <span class="ch-text">CH-01: BACKEND</span>
+                </button>
+                <button type="button" class="btn-channel-select" data-ch="1" id="btnCh1">
+                  <span class="ch-indicator-dot"></span>
+                  <span class="ch-text">CH-02: FRONTEND</span>
+                </button>
+              </div>
+
+              <button type="button" class="btn-tv-cycle" id="btnNextChannel" aria-label="Cycle next channel">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                <span>ROTATE FREQ</span>
+              </button>
+            </div>
+
+            <div class="tv-telemetry">
+              <div class="telemetry-row">
+                <span>FREQ:</span>
+                <span class="telemetry-val" id="tvFreq">137.42 GHz</span>
+              </div>
+              <div class="telemetry-row">
+                <span>SIGNAL:</span>
+                <span class="signal-ok" id="tvSignalStatus">99.9% TACHYON</span>
+              </div>
+              <div class="telemetry-row">
+                <span>DECODER:</span>
+                <span class="telemetry-val">CITADEL BROADCAST</span>
+              </div>
+            </div>
+
+            <div class="tv-speaker-grille">
+              <div class="grille-line"></div>
+              <div class="grille-line"></div>
+              <div class="grille-line"></div>
+              <div class="grille-line"></div>
+              <div class="grille-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MR. MEESEEKS INTERACTIVE TASK BOX (WITH RAGE ESCALATION) -->
+    <section class="meeseeks-section" id="meeseeks">
+      <div class="meeseeks-container">
+        <div class="meeseeks-control">
+          <span class="meeseeks-badge" id="meeseeksBadge">GADGET EXPERIMENTAL</span>
+          <h2 class="meeseeks-title">Mr. Meeseeks Task Box</h2>
+          <p class="meeseeks-desc" id="meeseeksDesc">
+            Pusing ngadepin sistem lelet atau bingung nentuin arsitektur? Tekan tombol Meeseeks Box buat dapetin wejangan santai atau roasting seputar dunia koding.
+            <span class="meeseeks-warning-note">
+              <svg class="warning-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Protokol Kritis: Meeseeks benci hidup terlalu lama. Jangan klik berlebihan!</span>
+            </span>
+          </p>
+          <div class="meeseeks-actions-group">
+            <!-- 3D Physical Meeseeks Activation Dome -->
+            <button id="btnMeeseeks" class="btn-meeseeks-dome" type="button" aria-label="Activate Mr. Meeseeks Box">
+              <div class="dome-bezel">
+                <div class="dome-core">
+                  <span class="dome-core-glow"></span>
+                </div>
+              </div>
+              <div class="dome-copy">
+                <span class="dome-headline">SPAWN MEESEEKS</span>
+                <span class="dome-subline">TACTILE ACTIVATION PROTOCOL</span>
+              </div>
+            </button>
+
+            <!-- Emergency Reset / Dissolve Button -->
+            <button id="btnCalmMeeseeks" class="btn-calm-meeseeks" type="button" style="display: none;" aria-label="Emergency Reset Meeseeks">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>EMERGENCY RESET // DISSOLVE</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="meeseeks-display-card" id="meeseeksDisplayCard">
+          <div class="meeseeks-avatar-pill">
+            <span class="meeseeks-status-orb" id="meeseeksFace"></span>
+            <span id="meeseeksAction" class="meeseeks-name-tag">I'm Mr. Meeseeks, look at me!</span>
+          </div>
+          <blockquote id="meeseeksQuote" class="meeseeks-quote-text">
+            "Mau sistem backend kamu nanganin 100k+ request tanpa down? Sini gue pasangin RabbitMQ queue ber-policy DLQ dan Go Gin microservices!"
+          </blockquote>
+          <div class="meeseeks-stress-meter" id="meeseeksStressMeter">
+            <div class="stress-bar" id="meeseeksStressBar" style="width: 15%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REAL TALK & BEHIND THE TERMINAL -->
+    <section class="real-talk-section" id="santai">
+      <header class="section-head">
+        <span class="section-tag">// BEHIND THE CODE</span>
+        <h2 class="section-main-title">Di Luar Layar Monitor</h2>
+      </header>
+
+      <div class="real-talk-grid">
+        <article class="real-talk-card">
+          <div class="talk-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+          </div>
+          <h3 class="talk-title">Bahan Bakar Kafein</h3>
+          <p class="talk-desc">
+            Kopi hitam tanpa gula adalah katalis utama. Menurut penelitian laboratorium C-137, rasio kafein berbanding lurus dengan kemampuan melacak deadlock di database.
+          </p>
+        </article>
+
+        <article class="real-talk-card">
+          <div class="talk-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+          </div>
+          <h3 class="talk-title">Frekuensi Audio Debugging</h3>
+          <p class="talk-desc">
+            Synthwave, dark ambient, atau lo-fi instrumental adalah teman setia pas nulis pipeline kompleks biar otak gak gampang terdistraksi notifikasi dunia nyata.
+          </p>
+        </article>
+
+        <article class="real-talk-card">
+          <div class="talk-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="2"></rect></svg>
+          </div>
+          <h3 class="talk-title">Recharging Interdimensional</h3>
+          <p class="talk-desc">
+            Main game open-world, ngoprek mikrokontroler/gadget unik, atau sekadar nonton kartun sci-fi absurd buat jaga imajinasi tetap liar dan gak kaku.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FOOTER & RETURN PORTAL -->
+    <footer class="rm-footer">
+      <a href="index.html" class="footer-portal-button" aria-label="Return to standard portfolio">
+        <svg class="footer-portal-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+        <span>Kembali ke Dimensi Nyata (Portofolio Utama)</span>
+      </a>
+
+      <div class="footer-socials">
+        <a href="mailto:nisfalfilsa12@gmail.com" class="footer-social-link">Email: nisfalfilsa12@gmail.com</a>
+        <a href="https://github.com/nisfal" target="_blank" rel="noopener noreferrer" class="footer-social-link">GitHub ↗</a>
+      </div>
+
+      <p class="rm-copyright">
+        © 2026 Nisfal Filsa - Terdaftar di Dimensi C-137 & Planet Bumi. Dibangun dengan rasa humor dan kode berkinerja tinggi.
+      </p>
+    </footer>
+
+  <!-- THE BUTTER ROBOT FLOATING EASTER EGG (Fixed Bottom-Right) -->
+  <aside class="butter-robot-widget" id="butterRobot" aria-label="The Butter Robot Easter Egg">
+    <div class="butter-balloon" id="butterBalloon">
+      <div class="butter-quote" id="butterQuote">"What is my purpose?"</div>
+      <span class="butter-tip-click">(Klik robotnya!)</span>
+    </div>
+    <button type="button" class="butter-robot-btn" id="btnButterRobot" aria-label="Interact with Butter Robot" title="Tanya tujuan Butter Robot">
+      <div class="robot-body">
+        <div class="robot-head">
+          <div class="robot-eye" id="robotEye"></div>
+        </div>
+        <div class="robot-chest">
+          <div class="butter-cube-block"></div>
+        </div>
+        <div class="robot-treads">
+          <span class="tread-l"></span>
+          <span class="tread-r"></span>
+        </div>
+      </div>
+    </button>
+  </aside>
+
+  <script src="js/rick-morty.js"></script>
+</body>
+</html>
