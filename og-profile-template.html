@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>OG Profile Generator - Nisfal Filsa Dimension C-137</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background-color: #030608;
+      font-family: 'Geist', 'Plus Jakarta Sans', sans-serif;
+      color: #fafafa;
+      position: relative;
+    }
+
+    /* Ambient Tachyon & Portal Glows */
+    .glow-portal-right {
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      width: 680px;
+      height: 640px;
+      background: radial-gradient(circle, rgba(57, 255, 20, 0.22) 0%, rgba(22, 163, 74, 0.1) 40%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .glow-cyan-bottom {
+      position: absolute;
+      bottom: -100px;
+      right: 250px;
+      width: 500px;
+      height: 440px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, rgba(2, 132, 199, 0.05) 45%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .glow-green-bottom-left {
+      position: absolute;
+      bottom: -120px;
+      left: -80px;
+      width: 540px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(57, 255, 20, 0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Precision Cosmic Grid & Scanlines */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(57, 255, 20, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(57, 255, 20, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 40%, transparent 95%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 40%, transparent 95%);
+      pointer-events: none;
+    }
+
+    .scanlines {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3));
+      background-size: 100% 4px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Outer Citadel Terminal Frame */
+    .canvas-frame {
+      position: absolute;
+      inset: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(57, 255, 20, 0.28);
+      background: rgba(6, 11, 14, 0.88);
+      box-shadow: 
+        inset 0 1px 1px rgba(57, 255, 20, 0.25),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.6),
+        0 24px 60px -10px rgba(0, 0, 0, 0.9),
+        0 0 35px rgba(57, 255, 20, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 42px;
+      overflow: hidden;
+    }
+
+    /* Terminal Header Bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(57, 255, 20, 0.2);
+      padding-bottom: 18px;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.4);
+      padding: 5px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+    }
+
+    .brand-logo-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #39ff14;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 12px rgba(57, 255, 20, 0.6);
+    }
+
+    .brand-logo-dim {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #07080c;
+      background: #39ff14;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .citadel-status-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    .citadel-status-tag strong {
+      color: #38bdf8;
+    }
+
+    .status-badges-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .threat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #f87171;
+      letter-spacing: 0.08em;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.2);
+    }
+
+    .threat-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+    }
+
+    .fluid-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      background: rgba(57, 255, 20, 0.1);
+      border: 1px solid rgba(57, 255, 20, 0.35);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #39ff14;
+      letter-spacing: 0.06em;
+    }
+
+    .fluid-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #39ff14;
+      box-shadow: 0 0 8px #39ff14;
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.94fr;
+      gap: 36px;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    /* Left Side: Profile Dossier */
+    .dossier-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #39ff14;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .eyebrow-line {
+      width: 20px;
+      height: 2px;
+      background: #39ff14;
+      border-radius: 2px;
+      box-shadow: 0 0 8px #39ff14;
+    }
+
+    .name-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.15rem;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+    }
+
+    .hero-name-glow {
+      background: linear-gradient(135deg, #ffffff 20%, #86efac 60%, #39ff14 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(57, 255, 20, 0.35);
+    }
+
+    .hero-role {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      background: linear-gradient(90deg, #38bdf8 0%, #4ade80 50%, #39ff14 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-bio {
+      font-size: 0.94rem;
+      line-height: 1.55;
+      color: #94a3b8;
+      max-width: 530px;
+    }
+
+    .hero-bio strong {
+      color: #f1f5f9;
+      font-weight: 600;
+    }
+
+    /* Arsenal Tech Tags */
+    .arsenal-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+    }
+
+    .chip.green-glow {
+      background: rgba(57, 255, 20, 0.1);
+      border-color: rgba(57, 255, 20, 0.4);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(57, 255, 20, 0.18);
+    }
+
+    .chip.cyan-glow {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.38);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.18);
+    }
+
+    .chip.amber-glow {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #ffffff;
+    }
+
+    /* Right Side: Visual Centerpiece (Citadel Card + Mini Wanted Stamp + Vortex) */
+    .visual-centerpiece {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Background Rotating Portal Spinner Ring */
+    .vortex-backdrop {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(57, 255, 20, 0.15) 0%, rgba(22, 163, 74, 0.08) 50%, transparent 75%);
+      box-shadow: 0 0 60px rgba(57, 255, 20, 0.25);
+      z-index: 1;
+    }
+
+    .portal-ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* The Citadel Holographic ID Card */
+    .citadel-showcase-card {
+      position: relative;
+      z-index: 2;
+      width: 440px;
+      background: linear-gradient(145deg, #0b1118 0%, #060a0f 100%);
+      border: 1px solid rgba(57, 255, 20, 0.45);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: 
+        0 20px 50px -10px rgba(0, 0, 0, 0.9),
+        0 0 35px rgba(57, 255, 20, 0.2),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 10px;
+    }
+
+    .card-seal-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #39ff14;
+      letter-spacing: 0.12em;
+    }
+
+    .card-id-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: #64748b;
+      letter-spacing: 0.08em;
+    }
+
+    .card-content-grid {
+      display: grid;
+      grid-template-columns: 135px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* Avatar with Neon Portal Halo */
+    .avatar-wrapper {
+      position: relative;
+      width: 135px;
+      height: 135px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid #39ff14;
+      box-shadow: 0 0 25px rgba(57, 255, 20, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.6);
+      background: #020403;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-badge-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      border-top: 1px solid rgba(57, 255, 20, 0.6);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #39ff14;
+      text-align: center;
+      padding: 3px 0;
+      letter-spacing: 0.08em;
+    }
+
+    /* Card Details & Telemetry */
+    .card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .telemetry-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+    }
+
+    .tel-lbl {
+      color: #64748b;
+      letter-spacing: 0.05em;
+    }
+
+    .tel-val {
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .tel-val.green {
+      color: #39ff14;
+      text-shadow: 0 0 6px rgba(57, 255, 20, 0.6);
+    }
+
+    .tel-val.amber {
+      color: #fbbf24;
+    }
+
+    /* Floating Wanted Bounty Stamp */
+    .wanted-mini-stamp {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(153, 27, 27, 0.25));
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      border-radius: 8px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .wanted-mini-lbl {
+      font-size: 0.62rem;
+      color: #f87171;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .wanted-mini-bounty {
+      font-size: 0.72rem;
+      color: #ffffff;
+      font-weight: 800;
+      text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+    }
+
+    /* Bottom Bar */
+    .bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px dashed rgba(57, 255, 20, 0.2);
+      padding-top: 14px;
+    }
+
+    .barcode-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .barcode-svg {
+      height: 20px;
+      opacity: 0.7;
+    }
+
+    .citadel-stamp {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #475569;
+      letter-spacing: 0.08em;
+    }
+
+    .domain-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #39ff14;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Effects -->
+  <div class="glow-portal-right"></div>
+  <div class="glow-cyan-bottom"></div>
+  <div class="glow-green-bottom-left"></div>
+
+  <!-- Cosmic Grid & Scanlines -->
+  <div class="bg-grid"></div>
+  <div class="scanlines"></div>
+
+  <!-- Outer Frame -->
+  <div class="canvas-frame">
+
+    <!-- Header / Status Bar -->
+    <header class="top-bar">
+      <div class="brand-cluster">
+        <div class="brand-logo-box">
+          <span class="brand-logo-text">&lt;NF/&gt;</span>
+          <span class="brand-logo-dim">C-137</span>
+        </div>
+        <div class="brand-divider"></div>
+        <span class="citadel-status-tag">CITADEL RECON // <strong>SPECIMEN #NF-137-JKT</strong></span>
+      </div>
+
+      <div class="status-badges-group">
+        <div class="threat-badge">
+          <span class="threat-dot"></span>
+          <span>THREAT: ROGUE SSS</span>
+        </div>
+        <div class="fluid-badge">
+          <span class="fluid-dot"></span>
+          <span>TACHYON: 100% OPTIMAL</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="main-grid">
+
+      <!-- Left Side: Editorial Dossier -->
+      <section class="dossier-left">
+        <div class="eyebrow-pill">
+          <span class="eyebrow-line"></span>
+          <span>// INTERDIMENSIONAL CASUAL PROFILE</span>
+        </div>
+
+        <div class="name-title-group">
+          <h1 class="hero-name">
+            <span class="hero-name-glow">NISFAL FILSA</span>
+          </h1>
+          <div class="hero-role">Fullstack & Systems Mad Scientist</div>
+        </div>
+
+        <p class="hero-bio">
+          Merancang arsitektur backend berkapasitas tinggi <strong>(100k+ ops/s)</strong>, event-driven streaming, dan web interdimensional. Sisi personal, eksperimen arsitektur liar, <strong>Cable TV</strong>, & <strong>Mr. Meeseeks Box</strong>.
+        </p>
+
+        <!-- Arsenal Tags -->
+        <div class="arsenal-chips">
+          <span class="chip green-glow">🟢 Portal Gun Shifter</span>
+          <span class="chip cyan-glow">⚡ 100k+ ops/s Pipeline</span>
+          <span class="chip green-glow">📺 Interdimensional Cable</span>
+          <span class="chip cyan-glow">🤖 Mr. Meeseeks AI Box</span>
+          <span class="chip amber-glow">☕ 100% Arabica Fuel</span>
+        </div>
+      </section>
+
+      <!-- Right Side: Visual Centerpiece (Citadel Holographic Card) -->
+      <section class="visual-centerpiece">
+        <!-- SVG Singularity Spinner Rings Behind Card -->
+        <div class="vortex-backdrop">
+          <svg class="portal-ring-svg" viewBox="0 0 360 360" fill="none">
+            <!-- 6 Outer Swept Spiral Blades -->
+            <g opacity="0.65">
+              <path d="M 180 130 C 215 120, 270 90, 305 60 C 260 125, 220 160, 180 160 Z" fill="#39ff14" opacity="0.8" />
+              <path d="M 180 130 C 215 120, 270 90, 305 60 C 260 125, 220 160, 180 160 Z" fill="#39ff14" opacity="0.8" transform="rotate(60 180 180)" />
+              <path d="M 180 130 C 215 120, 270 90, 305 60 C 260 125, 220 160, 180 160 Z" fill="#39ff14" opacity="0.8" transform="rotate(120 180 180)" />
+              <path d="M 180 130 C 215 120, 270 90, 305 60 C 260 125, 220 160, 180 160 Z" fill="#39ff14" opacity="0.8" transform="rotate(180 180 180)" />
+              <path d="M 180 130 C 215 120, 270 90, 305 60 C 260 125, 220 160, 180 160 Z" fill="#39ff14" opacity="0.8" transform="rotate(240 180 180)" />
+              <path d="M 180 130 C 215 120, 270 90, 305 60 C 260 125, 220 160, 180 160 Z" fill="#39ff14" opacity="0.8" transform="rotate(300 180 180)" />
+            </g>
+            <!-- Orbit rings -->
+            <circle cx="180" cy="180" r="148" stroke="#39ff14" stroke-width="2.5" stroke-dasharray="20 12" opacity="0.75" />
+            <circle cx="180" cy="180" r="162" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="8 16" opacity="0.5" />
+          </svg>
+        </div>
+
+        <!-- The Floating Showcase Card -->
+        <div class="citadel-showcase-card">
+          <div class="card-top-row">
+            <span class="card-seal-text">CITADEL PASSPORT // C-137</span>
+            <span class="card-id-code">SECTOR 8G • CITIZEN PASS</span>
+          </div>
+
+          <div class="card-content-grid">
+            <!-- Avatar -->
+            <div class="avatar-wrapper">
+              <img src="img/nisfal-rick.jpg" alt="Nisfal Avatar" class="avatar-img">
+              <div class="avatar-badge-text">NISFAL C-137</div>
+            </div>
+
+            <!-- Telemetry Details -->
+            <div class="card-details">
+              <div class="telemetry-row">
+                <span class="tel-lbl">PIPELINE:</span>
+                <span class="tel-val green">100k+ ops/s</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="tel-lbl">QUERY LATENCY:</span>
+                <span class="tel-val">&lt; 2.4ms</span>
+              </div>
+              <div class="telemetry-row">
+                <span class="tel-lbl">BRAIN FUEL:</span>
+                <span class="tel-val amber">100% Arabica</span>
+              </div>
+
+              <!-- Wanted Bounty Stamp -->
+              <div class="wanted-mini-stamp">
+                <span class="wanted-mini-lbl">WARRANT BOUNTY:</span>
+                <span class="wanted-mini-bounty">50,000,000 FLURBOS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="bottom-bar">
+      <div class="barcode-group">
+        <svg class="barcode-svg" viewBox="0 0 160 20" fill="#39ff14">
+          <rect x="0" y="0" width="3" height="20"/>
+          <rect x="5" y="0" width="1" height="20"/>
+          <rect x="8" y="0" width="4" height="20"/>
+          <rect x="15" y="0" width="2" height="20"/>
+          <rect x="19" y="0" width="5" height="20"/>
+          <rect x="27" y="0" width="1" height="20"/>
+          <rect x="30" y="0" width="3" height="20"/>
+          <rect x="36" y="0" width="2" height="20"/>
+          <rect x="41" y="0" width="6" height="20"/>
+          <rect x="50" y="0" width="2" height="20"/>
+          <rect x="54" y="0" width="4" height="20"/>
+          <rect x="61" y="0" width="1" height="20"/>
+          <rect x="65" y="0" width="3" height="20"/>
+          <rect x="71" y="0" width="5" height="20"/>
+          <rect x="79" y="0" width="2" height="20"/>
+          <rect x="84" y="0" width="4" height="20"/>
+          <rect x="91" y="0" width="1" height="20"/>
+          <rect x="95" y="0" width="3" height="20"/>
+          <rect x="101" y="0" width="5" height="20"/>
+          <rect x="109" y="0" width="2" height="20"/>
+          <rect x="114" y="0" width="4" height="20"/>
+          <rect x="121" y="0" width="2" height="20"/>
+          <rect x="126" y="0" width="5" height="20"/>
+          <rect x="134" y="0" width="1" height="20"/>
+          <rect x="138" y="0" width="3" height="20"/>
+          <rect x="144" y="0" width="4" height="20"/>
+          <rect x="151" y="0" width="2" height="20"/>
+          <rect x="156" y="0" width="4" height="20"/>
+        </svg>
+        <span class="citadel-stamp">AUTHORIZED BY CITADEL COUNCIL // PROTOCOL C-137</span>
+      </div>
+
+      <span class="domain-url">nisfal.vercel.app/profile.html</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
