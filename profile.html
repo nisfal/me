@@ -52,18 +52,18 @@
           <div class="nav-group" data-group="dossier">
             <a href="#citadel" class="rm-nav-link active" data-section="citadel">
               <span class="nav-num">01</span>
-              <span class="nav-label">DOSSIER</span>
+              <span class="nav-label" data-i18n="profile_nav_dossier">DOSSIER</span>
               <span class="nav-chevron" aria-hidden="true">▾</span>
             </a>
             <div class="nav-flyout">
-              <div class="nav-flyout-header">// CITADEL DOSSIER</div>
+              <div class="nav-flyout-header" data-i18n="profile_nav_dossier_header">// CITADEL DOSSIER</div>
               <a href="#citadel" class="nav-flyout-item" data-target="citadel">
                 <span class="flyout-num">01.1</span>
-                <span class="flyout-text">Citizen ID &amp; Wanted</span>
+                <span class="flyout-text" data-i18n="profile_nav_id_card">Citizen ID &amp; Wanted</span>
               </a>
               <a href="#arsenal" class="nav-flyout-item" data-target="arsenal">
                 <span class="flyout-num">01.2</span>
-                <span class="flyout-text">Arsenal &amp; Tech Stack</span>
+                <span class="flyout-text" data-i18n="profile_nav_arsenal">Arsenal &amp; Tech Stack</span>
               </a>
             </div>
           </div>
@@ -72,18 +72,18 @@
           <div class="nav-group" data-group="projects">
             <a href="#dimension-shifter" class="rm-nav-link" data-section="dimension-shifter">
               <span class="nav-num">02</span>
-              <span class="nav-label">PROJECTS</span>
+              <span class="nav-label" data-i18n="profile_nav_projects">PROJECTS</span>
               <span class="nav-chevron" aria-hidden="true">▾</span>
             </a>
             <div class="nav-flyout">
-              <div class="nav-flyout-header">// DIMENSION LAB</div>
+              <div class="nav-flyout-header" data-i18n="profile_nav_projects_header">// DIMENSION LAB</div>
               <a href="#dimension-shifter" class="nav-flyout-item" data-target="dimension-shifter">
                 <span class="flyout-num">02.1</span>
-                <span class="flyout-text">Portal Gun Projects</span>
+                <span class="flyout-text" data-i18n="profile_nav_portal_gun">Portal Gun Projects</span>
               </a>
               <a href="#cable-tv" class="nav-flyout-item" data-target="cable-tv">
                 <span class="flyout-num">02.2</span>
-                <span class="flyout-text">Interdimensional Cable TV</span>
+                <span class="flyout-text" data-i18n="profile_nav_cable_tv">Interdimensional Cable TV</span>
               </a>
             </div>
           </div>
@@ -92,18 +92,18 @@
           <div class="nav-group" data-group="lab">
             <a href="#meeseeks" class="rm-nav-link" data-section="meeseeks">
               <span class="nav-num">03</span>
-              <span class="nav-label">LAB &amp; FUN</span>
+              <span class="nav-label" data-i18n="profile_nav_lab">LAB &amp; FUN</span>
               <span class="nav-chevron" aria-hidden="true">▾</span>
             </a>
             <div class="nav-flyout">
-              <div class="nav-flyout-header">// EXPERIMENTAL REALMS</div>
+              <div class="nav-flyout-header" data-i18n="profile_nav_lab_header">// EXPERIMENTAL REALMS</div>
               <a href="#meeseeks" class="nav-flyout-item" data-target="meeseeks">
                 <span class="flyout-num">03.1</span>
-                <span class="flyout-text">Mr. Meeseeks Task Box</span>
+                <span class="flyout-text" data-i18n="profile_nav_meeseeks">Mr. Meeseeks Task Box</span>
               </a>
               <a href="#santai" class="nav-flyout-item" data-target="santai">
                 <span class="flyout-num">03.2</span>
-                <span class="flyout-text">Santai &amp; Multiverse Lore</span>
+                <span class="flyout-text" data-i18n="profile_nav_santai">Santai &amp; Multiverse Lore</span>
               </a>
             </div>
           </div>
@@ -112,18 +112,18 @@
           <div class="nav-group" data-group="transmissions">
             <a href="#contact" class="rm-nav-link" data-section="contact">
               <span class="nav-num">04</span>
-              <span class="nav-label">COMMS</span>
+              <span class="nav-label" data-i18n="profile_nav_comms">COMMS</span>
               <span class="nav-chevron" aria-hidden="true">▾</span>
             </a>
             <div class="nav-flyout">
-              <div class="nav-flyout-header">// SUBSPACE CHANNELS</div>
+              <div class="nav-flyout-header" data-i18n="profile_nav_comms_header">// SUBSPACE CHANNELS</div>
               <a href="#microverse" class="nav-flyout-item" data-target="microverse">
                 <span class="flyout-num">04.1</span>
-                <span class="flyout-text">Microverse Testimonials</span>
+                <span class="flyout-text" data-i18n="profile_nav_microverse">Microverse Testimonials</span>
               </a>
               <a href="#contact" class="nav-flyout-item" data-target="contact">
                 <span class="flyout-num">04.2</span>
-                <span class="flyout-text">Subspace Terminal CLI</span>
+                <span class="flyout-text" data-i18n="profile_nav_terminal">Subspace Terminal CLI</span>
               </a>
             </div>
           </div>
@@ -131,9 +131,16 @@
 
         <!-- Action Buttons + Sci-Fi Mobile Toggle -->
         <div class="rm-nav-actions">
+          <!-- Multiverse Subspace Language Switcher -->
+          <div class="rm-lang-switcher" role="group" aria-label="Language Selector">
+            <button class="rm-lang-btn" data-lang-option="id" type="button" aria-label="Bahasa Indonesia">ID</button>
+            <span class="rm-lang-divider">/</span>
+            <button class="rm-lang-btn" data-lang-option="en" type="button" aria-label="English">EN</button>
+          </div>
+
           <a href="#contact" class="btn-nav-terminal" aria-label="Jump to Subspace Terminal CLI">
             <span class="nav-cli-dot"></span>
-            <span>&gt;_ TRANSMIT</span>
+            <span data-i18n="profile_nav_transmit">&gt;_ TRANSMIT</span>
           </a>
 
           <button class="rm-nav-toggle" id="rmNavToggle" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
@@ -158,17 +165,17 @@
           <div class="citadel-card citadel-card-front">
             <div class="citadel-header-badge">
               <div class="citadel-meta-left">
-                <span class="citadel-seal">CITADEL RECON // C-137</span>
-                <span class="citadel-id-num">SPECIMEN #NF-137-JKT</span>
+                <span class="citadel-seal" data-i18n="profile_hero_badge_recon">CITADEL RECON // C-137</span>
+                <span class="citadel-id-num" data-i18n="profile_hero_badge_specimen">SPECIMEN #NF-137-JKT</span>
               </div>
               <div class="citadel-header-actions">
                 <div class="citadel-threat-badge">
                   <span class="threat-dot"></span>
-                  <span>THREAT: DANGEROUS TO MONOLITHS</span>
+                  <span data-i18n="profile_hero_badge_threat">THREAT: DANGEROUS TO MONOLITHS</span>
                 </div>
                 <button type="button" class="btn-citadel-toggle" id="btnFlipToWanted" aria-label="Flip to Galactic Federation Wanted Dossier">
                   <span class="toggle-led red"></span>
-                  <span class="toggle-text">WANTED DOSSIER</span>
+                  <span class="toggle-text" data-i18n="profile_hero_btn_flip_wanted">WANTED DOSSIER</span>
                   <svg class="toggle-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
                 </button>
               </div>
@@ -187,29 +194,29 @@
                 <div class="bio-title-group">
                   <span class="bio-eyebrow">// CITIZEN OF DIMENSION C-137</span>
                   <h1 class="bio-name">Nisfal Filsa</h1>
-                  <div class="bio-role">Fullstack & Systems Mad Scientist</div>
+                  <div class="bio-role" data-i18n="profile_hero_role">Fullstack & Systems Mad Scientist</div>
                 </div>
 
-                <div class="bio-quote-box">
+                <div class="bio-quote-box" data-i18n="profile_hero_bio_quote">
                   "Gue Nisfal. Kalau sistem lu down di production pas jam 3 pagi, santai... jangan panggil dukun interdimensional, panggil gue."
                 </div>
 
-                <p class="bio-desc">
+                <p class="bio-desc" data-i18n="profile_hero_bio">
                   Di kehidupan sehari-hari, gue merancang arsitektur backend berkapasitas tinggi (100k+ ops/s), event-driven streaming via RabbitMQ, dan antarmuka web modern yang kencang tanpa bikin pengguna emosi. Di multiverse ini, pantang ada kata <em>"nanti kita refactor"</em>, kita bangun arsitektur yang bener dan tangguh dari hari pertama!
                 </p>
 
                 <div class="bio-stats-strip">
                   <div class="bio-stat-item">
-                    <span class="bio-stat-label">Pipeline Speed</span>
-                    <span class="bio-stat-value">100k+ ops/s</span>
+                    <span class="bio-stat-label" data-i18n="profile_hero_stat_spec">Spesialisasi</span>
+                    <span class="bio-stat-value" data-i18n="profile_hero_stat_spec_val">High-Concurrency &amp; E2EE Systems</span>
                   </div>
                   <div class="bio-stat-item">
-                    <span class="bio-stat-label">Query Latency</span>
-                    <span class="bio-stat-value">&lt; 2.4ms</span>
+                    <span class="bio-stat-label" data-i18n="profile_hero_stat_home">Asal Dimensi</span>
+                    <span class="bio-stat-value" data-i18n="profile_hero_stat_home_val">Earth (Dimension C-137)</span>
                   </div>
                   <div class="bio-stat-item">
-                    <span class="bio-stat-label">Brain Fuel</span>
-                    <span class="bio-stat-value">100% Arabica</span>
+                    <span class="bio-stat-label" data-i18n="profile_hero_stat_threat">Tingkat Bahaya</span>
+                    <span class="bio-stat-value" data-i18n="profile_hero_stat_threat_val">High (Galactic Menace)</span>
                   </div>
                 </div>
               </div>
@@ -220,12 +227,12 @@
           <div class="citadel-card citadel-card-back">
             <div class="wanted-header-badge">
               <div class="wanted-meta-left">
-                <span class="wanted-seal">FEDERATION APPREHENSION ORDER</span>
-                <span class="wanted-warrant">WARRANT #GF-99420-X // SECURITY LVL-9</span>
+                <span class="wanted-seal" data-i18n="profile_wanted_badge_fed">FEDERATION APPREHENSION ORDER</span>
+                <span class="wanted-warrant" data-i18n="profile_wanted_badge_code">WARRANT #GF-99420-X // SECURITY LVL-9</span>
               </div>
               <button type="button" class="btn-citadel-toggle btn-toggle-id" id="btnFlipToId" aria-label="Return to Citadel Identity Profile">
                 <span class="toggle-led green"></span>
-                <span class="toggle-text">CITADEL ID PASS</span>
+                <span class="toggle-text" data-i18n="profile_hero_btn_flip_id">CITADEL ID PASS</span>
                 <svg class="toggle-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
               </button>
             </div>
@@ -247,28 +254,28 @@
               <div class="wanted-dossier">
                 <div class="wanted-title-group">
                   <span class="wanted-eyebrow">// GALACTIC FEDERATION MOST WANTED</span>
-                  <h2 class="wanted-alias">BURONAN: NISFAL "THE OPTIMIZER"</h2>
-                  <div class="wanted-crimes-label">DAFTAR KEJAHATAN ARSITEKTUR TINGKAT TINGGI:</div>
+                  <h2 class="wanted-alias" data-i18n="profile_wanted_title">BURONAN: NISFAL "THE OPTIMIZER"</h2>
+                  <div class="wanted-crimes-label" data-i18n="profile_wanted_crimes_label">DAFTAR KEJAHATAN ARSITEKTUR TINGKAT TINGGI:</div>
                 </div>
 
                 <ul class="wanted-crimes-list">
-                  <li>
-                    <strong>Illegal In-Memory Acceleration:</strong> Memaksa transaksi jutaan baris data lewat Redis & Prisma dual-client tanpa membayar pajak CPU overhead ke Galactic Federation.
+                  <li data-i18n="profile_wanted_crime1">
+                    <strong>Illegal In-Memory Acceleration:</strong> Memaksa transaksi jutaan baris data lewat Redis &amp; Prisma dual-client tanpa membayar pajak CPU overhead ke Galactic Federation.
                   </li>
-                  <li>
+                  <li data-i18n="profile_wanted_crime2">
                     <strong>Teleportasi Data Tanpa Izin:</strong> Mengoperasikan RabbitMQ event-driven streaming dengan Dead-Letter Queue yang kebal sabotase alien birokrasi.
                   </li>
-                  <li>
+                  <li data-i18n="profile_wanted_crime3">
                     <strong>Pembongkaran Monolith Kuno:</strong> Terbukti membongkar sistem monolith kaku menjadi microservices modular berlatensi &lt;2.4ms dalam satu siklus rotasi planet.
                   </li>
-                  <li>
-                    <strong>Pelanggaran Gravitasi Frontend:</strong> Membangun antarmuka Next.js 15 & Tailwind dengan hidrasi sub-detik yang mempermalukan terminal resmi federasi.
+                  <li data-i18n="profile_wanted_crime4">
+                    <strong>Pelanggaran Gravitasi Frontend:</strong> Membangun antarmuka Next.js 15 &amp; Tailwind dengan hidrasi sub-detik yang mempermalukan terminal resmi federasi.
                   </li>
                 </ul>
 
                 <div class="wanted-warning-alert">
                   <svg class="alert-icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                  <strong>PERINGATAN PETUGAS FEDERASI:</strong> Tersangka sangat bersenjata dengan terminal Neovim, keyboard mekanikal custom, dan kopi tubruk pekat. Jangan didekati kecuali Anda siap sistem Anda dipercepat 10x lipat.
+                  <span data-i18n="profile_wanted_warning"><strong>PERINGATAN PETUGAS FEDERASI:</strong> Tersangka sangat bersenjata dengan terminal Neovim, keyboard mekanikal custom, dan kopi tubruk pekat. Jangan didekati kecuali Anda siap sistem Anda dipercepat 10x lipat.</span>
                 </div>
               </div>
             </div>
@@ -284,9 +291,9 @@
         <div class="shifter-info">
           <h2 class="shifter-heading">
             <svg class="shifter-title-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            <span>Portal Gun Coordinate Matrix</span>
+            <span data-i18n="profile_portal_title">Portal Gun Coordinate Matrix</span>
           </h2>
-          <p class="shifter-sub" id="currentDimText">
+          <p class="shifter-sub" id="currentDimText" data-i18n="profile_portal_active">
             Aktif di: Earth C-137 // Fluida portal terkalibrasi warna neon hijau
           </p>
         </div>
@@ -315,8 +322,9 @@
     <!-- RICK'S TECH ARSENAL (Bento Grid) -->
     <section class="arsenal-section" id="arsenal">
       <header class="section-head">
-        <span class="section-tag">// INTERDIMENSIONAL WEAPONRY</span>
-        <h2 class="section-main-title">Arsenal Senjata Koding</h2>
+        <span class="section-tag" data-i18n="profile_arsenal_tag">// WEAPONRY &amp; TOOLS</span>
+        <h2 class="section-main-title" data-i18n="profile_arsenal_title">Citadel Arsenal &amp; Tech Stack</h2>
+        <p class="section-sub" data-i18n="profile_arsenal_desc">Alat-alat tempur yang selalu ada di dalam jas lab gue buat menaklukkan bug membandel, lonjakan traffic ekstrem, dan deadline mepet.</p>
       </header>
 
       <div class="arsenal-grid">
@@ -327,8 +335,8 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             </div>
             <span class="card-gadget-name">Gadget #01 · High-Throughput Engine</span>
-            <h3 class="card-title">Portal Gun Data Pipeline</h3>
-            <p class="card-desc">
+            <h3 class="card-title" data-i18n="profile_arsenal_crate1_title">Portal Gun Data Pipeline</h3>
+            <p class="card-desc" data-i18n="profile_arsenal_crate1_desc">
               Teleportasi jutaan paket data per detik tanpa jeda. Menangani lonjakan beban ekstrem dengan routing pesan asinkron yang kebal crash.
             </p>
           </div>
@@ -347,8 +355,8 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line><line x1="7" y1="10" x2="7" y2="14"></line><line x1="11" y1="10" x2="11" y2="14"></line></svg>
             </div>
             <span class="card-gadget-name">Gadget #02 · Persistence Matrix</span>
-            <h3 class="card-title">Microverse Database Battery</h3>
-            <p class="card-desc">
+            <h3 class="card-title" data-i18n="profile_arsenal_crate2_title">Microverse Database Battery</h3>
+            <p class="card-desc" data-i18n="profile_arsenal_crate2_desc">
               Menampung seluruh riwayat transaksi semesta. Mengombinasikan mediasi dual-database untuk throughput tinggi dan caching in-memory secepat kilat.
             </p>
           </div>
@@ -367,8 +375,8 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9Z"></path><path d="M19 12a7 7 0 0 0-7-7"></path></svg>
             </div>
             <span class="card-gadget-name">Gadget #03 · Reactive Interface</span>
-            <h3 class="card-title">Meeseeks State Hydration</h3>
-            <p class="card-desc">
+            <h3 class="card-title" data-i18n="profile_arsenal_crate3_title">Meeseeks State Hydration</h3>
+            <p class="card-desc" data-i18n="profile_arsenal_crate3_desc">
               Komponen antarmuka yang lahir instan di server, menyelesaikan rendering ke browser dengan mulus, lalu beres tanpa kebocoran memori.
             </p>
           </div>
@@ -387,8 +395,8 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
             <span class="card-gadget-name">Gadget #04 · Security & Encryption</span>
-            <h3 class="card-title">Anti-Matter Security Grid</h3>
-            <p class="card-desc">
+            <h3 class="card-title" data-i18n="profile_arsenal_crate4_title">Anti-Matter Security Grid</h3>
+            <p class="card-desc" data-i18n="profile_arsenal_crate4_desc">
               Benteng pertahanan berlapis. Alien atau hacker nakal yang mencoba bypass otorisasi bakal langsung terpental oleh rule RBAC/ABAC yang super ketat.
             </p>
           </div>
@@ -404,9 +412,9 @@
     <!-- INTERDIMENSIONAL CABLE TV SECTION (PROJECT SHOWCASE) -->
     <section class="cable-tv-section" id="cable-tv">
       <header class="section-head">
-        <span class="section-tag">// MULTIVERSE BROADCAST</span>
-        <h2 class="section-main-title">Interdimensional Cable TV</h2>
-        <p class="section-sub">
+        <span class="section-tag" data-i18n="profile_cable_tag">// INTERDIMENSIONAL BROADCAST</span>
+        <h2 class="section-main-title" data-i18n="profile_cable_title">Interdimensional Cable TV</h2>
+        <p class="section-sub" data-i18n="profile_cable_desc">
           Putar kenop saluran buat nonton siaran proyek nyata Nisfal Filsa di gelombang televisi antardimensi C-137.
         </p>
       </header>
@@ -496,14 +504,10 @@
     <section class="meeseeks-section" id="meeseeks">
       <div class="meeseeks-container">
         <div class="meeseeks-control">
-          <span class="meeseeks-badge" id="meeseeksBadge">GADGET EXPERIMENTAL</span>
-          <h2 class="meeseeks-title">Mr. Meeseeks Task Box</h2>
-          <p class="meeseeks-desc" id="meeseeksDesc">
-            Pusing ngadepin sistem lelet atau bingung nentuin arsitektur? Tekan tombol Meeseeks Box buat dapetin wejangan santai atau roasting seputar dunia koding.
-            <span class="meeseeks-warning-note">
-              <svg class="warning-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              <span>Protokol Kritis: Meeseeks benci hidup terlalu lama. Jangan klik berlebihan!</span>
-            </span>
+          <span class="meeseeks-badge" id="meeseeksBadge" data-i18n="profile_meeseeks_tag">// EXISTENCE IS PAIN // PROTOCOL C-137</span>
+          <h2 class="meeseeks-title" data-i18n="profile_meeseeks_title">Mr. Meeseeks Task Box</h2>
+          <p class="meeseeks-desc" id="meeseeksDesc" data-i18n="profile_meeseeks_desc">
+            Pusing ngadepin sistem lelet atau bingung nentuin arsitektur? Tekan tombol Meeseeks Box buat dapetin wejangan santai atau roasting seputar dunia koding. Protokol Kritis: Meeseeks benci hidup terlalu lama. Jangan klik berlebihan!
           </p>
           <div class="meeseeks-actions-group">
             <!-- 3D Physical Meeseeks Activation Dome -->
@@ -514,7 +518,7 @@
                 </div>
               </div>
               <div class="dome-copy">
-                <span class="dome-headline">SPAWN MEESEEKS</span>
+                <span class="dome-headline" data-i18n="profile_meeseeks_btn">SPAWN MEESEEKS</span>
                 <span class="dome-subline">TACTILE ACTIVATION PROTOCOL</span>
               </div>
             </button>
@@ -579,8 +583,9 @@
     <!-- REAL TALK & BEHIND THE TERMINAL -->
     <section class="real-talk-section" id="santai">
       <header class="section-head">
-        <span class="section-tag">// BEHIND THE CODE</span>
-        <h2 class="section-main-title">Di Luar Layar Monitor</h2>
+        <span class="section-tag" data-i18n="profile_santai_tag">// ZONA SANTAI // FILOSOFI DIMENSI C-137</span>
+        <h2 class="section-main-title" data-i18n="profile_santai_title">Santai Sejenak di Luar Angkasa</h2>
+        <p class="section-sub" data-i18n="profile_santai_desc">Di sela-sela mengutak-atik kode dan memantau pipeline, ini cara gue menjaga kewarasan sebelum portal dimensi berikutnya terbuka.</p>
       </header>
 
       <div class="real-talk-grid">
@@ -588,8 +593,8 @@
           <div class="talk-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
           </div>
-          <h3 class="talk-title">Bahan Bakar Kafein</h3>
-          <p class="talk-desc">
+          <h3 class="talk-title" data-i18n="profile_santai_card1_title">Bahan Bakar Kafein</h3>
+          <p class="talk-desc" data-i18n="profile_santai_card1_desc">
             Kopi hitam tanpa gula adalah katalis utama. Menurut penelitian laboratorium C-137, rasio kafein berbanding lurus dengan kemampuan melacak deadlock di database.
           </p>
         </article>
@@ -598,8 +603,8 @@
           <div class="talk-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
           </div>
-          <h3 class="talk-title">Frekuensi Audio Debugging</h3>
-          <p class="talk-desc">
+          <h3 class="talk-title" data-i18n="profile_santai_card2_title">Frekuensi Audio Debugging</h3>
+          <p class="talk-desc" data-i18n="profile_santai_card2_desc">
             Synthwave, dark ambient, atau lo-fi instrumental adalah teman setia pas nulis pipeline kompleks biar otak gak gampang terdistraksi notifikasi dunia nyata.
           </p>
         </article>
@@ -608,8 +613,8 @@
           <div class="talk-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="2"></rect></svg>
           </div>
-          <h3 class="talk-title">Recharging Interdimensional</h3>
-          <p class="talk-desc">
+          <h3 class="talk-title" data-i18n="profile_santai_card3_title">Recharging Interdimensional</h3>
+          <p class="talk-desc" data-i18n="profile_santai_card3_desc">
             Main game open-world, ngoprek mikrokontroler/gadget unik, atau sekadar nonton kartun sci-fi absurd buat jaga imajinasi tetap liar dan gak kaku.
           </p>
         </article>
@@ -619,9 +624,9 @@
     <!-- MICROVERSE BATTERY: TESTIMONIALS / WITNESS RECORDS -->
     <section class="microverse-section" id="microverse">
       <header class="section-head">
-        <span class="section-tag">// MICROVERSE POWER CORE — WITNESS TESTIMONIALS</span>
-        <h2 class="section-main-title">Microverse Battery Testimonials</h2>
-        <p class="section-sub">
+        <span class="section-tag" data-i18n="profile_microverse_tag">// MICROVERSE POWER CORE — WITNESS TESTIMONIALS</span>
+        <h2 class="section-main-title" data-i18n="profile_microverse_title">Microverse Battery Testimonials</h2>
+        <p class="section-sub" data-i18n="profile_microverse_desc">
           Setiap baterai mikro-semesta ini menyimpan energi rekaman autentik dari para saksi lintas dimensi yang pernah berkolaborasi atau mengamati kinerja Nisfal di lapangan.
         </p>
       </header>
@@ -694,7 +699,7 @@
 
           <div class="cell-quote-zone">
             <span class="cell-quote-mark">"</span>
-            <blockquote class="cell-quote">
+            <blockquote class="cell-quote" data-i18n="profile_battery_q1">
               Nisfal? Oh <em>bu-burp</em>-rp, yeah dia itu kayak Portal Gun versi backend, Morty! Dia bisa teleportasi jutaan event dari RabbitMQ ke Redis tanpa jeda. Gue sendiri yang kasih akses ke Citadel Dev Server karena gak ada programmer lain yang sanggup debug race condition di 4 dimensi sekaligus. Ini bukan pujian biasa — ini FAKTA ILMIAH!
             </blockquote>
             <div class="cell-quote-tags">
@@ -758,7 +763,7 @@
 
           <div class="cell-quote-zone">
             <span class="cell-quote-mark">"</span>
-            <blockquote class="cell-quote">
+            <blockquote class="cell-quote" data-i18n="profile_battery_q2">
               Oh man, oh jeez — jadi waktu itu kita lagi di-attack sama Galactic Federation dan semua server backend kita down gara-gara alien hacker. Nisfal, dalam 30 menit, dia udah rebuild seluruh pipeline event-driven dari nol! Gue sendiri yang lihat dia debug tiga microservices secara paralel sambil minum kopi. Itu — itu gila banget!
             </blockquote>
             <div class="cell-quote-tags">
@@ -820,7 +825,7 @@
 
           <div class="cell-quote-zone">
             <span class="cell-quote-mark">"</span>
-            <blockquote class="cell-quote">
+            <blockquote class="cell-quote" data-i18n="profile_battery_q3">
               I'M MR. MEESEEKS, LOOK AT ME! Gue ditugaskan buat ngecek kualitas kode Nisfal — dan gue SELESAIKAN tugasnya dalam WAKTU REKOR! Arsitektur backend-nya CLEAN, TESTABLE, dan SCALABLE. Gue udah bisa berakhir dengan tenang karena tugas review kode ini TUNTAS SEMPURNA. Existence-nya sangat membahagiakan!
             </blockquote>
             <div class="cell-quote-tags">
@@ -886,7 +891,7 @@
 
           <div class="cell-quote-zone">
             <span class="cell-quote-mark">"</span>
-            <blockquote class="cell-quote">
+            <blockquote class="cell-quote" data-i18n="profile_battery_q4">
               Saya mengamati ribuan Morty di multiverse — kebanyakan tidak berguna. Tapi Nisfal berbeda. Dia merancang sistem security dengan CASL RBAC/ABAC yang bahkan saya tidak bisa tembus. E2EE key exchange-nya adalah legitimate threat. Saya yang biasanya mengeksploitasi celah sistem, terpaksa mengakui bahwa tidak ada celah di sistem buatannya. Ini bukan pujian — ini threat assessment yang jujur.
             </blockquote>
             <div class="cell-quote-tags">
@@ -910,12 +915,12 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
           </div>
           <div class="submit-cta-text">
-            <span class="submit-cta-title">Punya Energi untuk Ditambahkan?</span>
-            <p class="submit-cta-desc">Jika kamu pernah berkolaborasi dengan Nisfal dan ingin memberikan testimoni nyata, kirim langsung melalui email — selot baterai berikutnya bisa jadi milikmu.</p>
+            <span class="submit-cta-title" data-i18n="profile_microverse_cta_title">Punya Energi untuk Ditambahkan?</span>
+            <p class="submit-cta-desc" data-i18n="profile_microverse_cta_desc">Jika kamu pernah berkolaborasi dengan Nisfal dan ingin memberikan testimoni nyata, kirim langsung melalui email — selot baterai berikutnya bisa jadi milikmu.</p>
           </div>
           <a href="mailto:nisfalfilsa12@gmail.com?subject=Microverse%20Testimonial" class="submit-cta-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            CHARGE A CELL
+            <span data-i18n="profile_microverse_cta_btn">CHARGE A CELL</span>
           </a>
         </div>
       </div>
@@ -924,9 +929,9 @@
     <!-- CITADEL SUBSPACE TERMINAL (CONTACT CLI SECTION) -->
     <section class="citadel-terminal-section" id="contact">
       <div class="terminal-section-header">
-        <span class="section-tag">// CITADEL QUANTUM MAINFRAME // SECURE SUBSPACE COMMS</span>
-        <h2 class="section-main-title">Citadel Subspace Terminal</h2>
-        <p class="citadel-terminal-desc">
+        <span class="section-tag" data-i18n="profile_term_tag">// CITADEL QUANTUM MAINFRAME // SECURE SUBSPACE COMMS</span>
+        <h2 class="section-main-title" data-i18n="profile_term_title">Citadel Subspace Terminal</h2>
+        <p class="citadel-terminal-desc" data-i18n="profile_term_desc">
           Saluran frekuensi langsung ke Nisfal Filsa (Dimension C-137). Kirim paket transmisi terenkripsi untuk proyek web berkinerja tinggi, tawaran misi frontend/fullstack, atau sekadar bertukar formula teknologi antar-dimensi.
         </p>
       </div>
@@ -978,16 +983,16 @@
             <!-- Dynamic Terminal Console Output -->
             <div class="terminal-log-output" id="terminalLogOutput" aria-live="polite">
               <div class="t-log-entry t-log-sys">
-                <span class="t-ts">[00:00:01]</span> <span class="t-tag-init">[INIT]</span> Subspace carrier wave locked to Dimension C-137. Microverse power fed: 100%.
+                <span class="t-ts">[00:00:01]</span> <span class="t-tag-init">[INIT]</span> <span data-i18n="profile_term_log_init">Subspace carrier wave locked to Dimension C-137. Microverse power fed: 100%.</span>
               </div>
               <div class="t-log-entry t-log-auth">
-                <span class="t-ts">[00:00:02]</span> <span class="t-tag-auth">[AUTH]</span> Rick's proxy ring active. Quantum tunnel established to target inbox.
+                <span class="t-ts">[00:00:02]</span> <span class="t-tag-auth">[AUTH]</span> <span data-i18n="profile_term_log_auth">Rick's proxy ring active. Quantum tunnel established to target inbox.</span>
               </div>
               <div class="t-log-entry t-log-info">
-                <span class="t-ts">[00:00:03]</span> <span class="t-tag-target">[TARGET]</span> Recipient: <strong class="t-bold-name">Nisfal Filsa</strong> (Fullstack & Creative Frontend Engineer).
+                <span class="t-ts">[00:00:03]</span> <span class="t-tag-target">[TARGET]</span> <span data-i18n="profile_term_log_target">Recipient: <strong class="t-bold-name">Nisfal Filsa</strong> (Fullstack &amp; Creative Frontend Engineer).</span>
               </div>
               <div class="t-log-entry t-log-ready">
-                <span class="t-ts">[00:00:04]</span> <span class="t-tag-ready">[READY]</span> Console buffer unlocked. Siap menerima transmisi atau jalankan quick command di bawah:
+                <span class="t-ts">[00:00:04]</span> <span class="t-tag-ready">[READY]</span> <span data-i18n="profile_term_log_ready">Console buffer unlocked. Siap menerima transmisi atau jalankan quick command di bawah:</span>
               </div>
             </div>
 
@@ -995,19 +1000,19 @@
             <div class="terminal-quick-bar">
               <span class="quick-bar-heading">QUICK CMDS:</span>
               <div class="quick-bar-buttons">
-                <button type="button" class="t-cmd-btn" data-cmd="help" title="Daftar perintah yang tersedia">
+                <button type="button" class="t-cmd-btn" data-cmd="help" title="Daftar perintah yang tersedia" data-i18n-title="profile_term_cmd_help_title">
                   <code>--help</code>
                 </button>
-                <button type="button" class="t-cmd-btn" data-cmd="whoami" title="Cek identitas pengirim">
+                <button type="button" class="t-cmd-btn" data-cmd="whoami" title="Cek identitas pengirim" data-i18n-title="profile_term_cmd_whoami_title">
                   <code>--whoami</code>
                 </button>
-                <button type="button" class="t-cmd-btn" data-cmd="status" title="Status ketersediaan Nisfal">
+                <button type="button" class="t-cmd-btn" data-cmd="status" title="Status ketersediaan Nisfal" data-i18n-title="profile_term_cmd_status_title">
                   <code>--status</code>
                 </button>
-                <button type="button" class="t-cmd-btn" data-cmd="rick-quote" title="Saran motivasi/sarkas dari Rick Sanchez">
+                <button type="button" class="t-cmd-btn" data-cmd="rick-quote" title="Saran motivasi/sarkas dari Rick Sanchez" data-i18n-title="profile_term_cmd_rick_title">
                   <code>--rick-quote</code>
                 </button>
-                <button type="button" class="t-cmd-btn t-cmd-clear" data-cmd="clear" title="Bersihkan log terminal">
+                <button type="button" class="t-cmd-btn t-cmd-clear" data-cmd="clear" title="Bersihkan log terminal" data-i18n-title="profile_term_cmd_clear_title">
                   <code>--clear</code>
                 </button>
               </div>
@@ -1018,10 +1023,10 @@
               <div class="t-form-row">
                 <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
                 <div class="t-field-group">
-                  <label for="termSender" class="t-field-flag">--sender-name=</label>
+                  <label for="termSender" class="t-field-flag" data-i18n="profile_term_label_sender">--sender-name=</label>
                   <div class="t-input-cage">
                     <span class="t-quote">"</span>
-                    <input type="text" id="termSender" class="t-cli-input" placeholder="Nama / Codename Anda..." required autocomplete="off" spellcheck="false">
+                    <input type="text" id="termSender" class="t-cli-input" placeholder="Nama / Codename Anda..." data-i18n-placeholder="profile_term_ph_sender" required autocomplete="off" spellcheck="false">
                     <span class="t-quote">"</span>
                   </div>
                 </div>
@@ -1030,10 +1035,10 @@
               <div class="t-form-row">
                 <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
                 <div class="t-field-group">
-                  <label for="termEmail" class="t-field-flag">--freq-channel=</label>
+                  <label for="termEmail" class="t-field-flag" data-i18n="profile_term_label_freq">--freq-channel=</label>
                   <div class="t-input-cage">
                     <span class="t-quote">"</span>
-                    <input type="email" id="termEmail" class="t-cli-input" placeholder="email.anda@domain.galaxy..." required autocomplete="off" spellcheck="false">
+                    <input type="email" id="termEmail" class="t-cli-input" placeholder="email.anda@domain.galaxy..." data-i18n-placeholder="profile_term_ph_freq" required autocomplete="off" spellcheck="false">
                     <span class="t-quote">"</span>
                   </div>
                 </div>
@@ -1042,7 +1047,7 @@
               <div class="t-form-row">
                 <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
                 <div class="t-field-group">
-                  <label for="termMission" class="t-field-flag">--mission-type=</label>
+                  <label for="termMission" class="t-field-flag" data-i18n="profile_term_label_mission">--mission-type=</label>
                   <div class="t-input-cage t-select-cage">
                     <span class="t-quote">"</span>
                     <select id="termMission" class="t-cli-select">
@@ -1060,10 +1065,10 @@
               <div class="t-form-row t-form-row-multiline">
                 <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
                 <div class="t-field-group t-field-group-area">
-                  <label for="termMessage" class="t-field-flag">--payload-message=</label>
+                  <label for="termMessage" class="t-field-flag" data-i18n="profile_term_label_payload">--payload-message=</label>
                   <div class="t-input-cage t-area-cage">
                     <span class="t-quote">"</span>
-                    <textarea id="termMessage" class="t-cli-textarea" rows="4" placeholder="Tuliskan detail transmisi, tawaran proyek, atau pesan Anda di sini... Pesan Anda akan langsung dikirimkan ke kotak masuk Nisfal tanpa dicegat agen Federasi Galaksi." required spellcheck="false"></textarea>
+                    <textarea id="termMessage" class="t-cli-textarea" rows="4" placeholder="Tuliskan detail transmisi, tawaran proyek, atau pesan Anda di sini... Pesan Anda akan langsung dikirimkan ke kotak masuk Nisfal tanpa dicegat agen Federasi Galaksi." data-i18n-placeholder="profile_term_ph_payload" required spellcheck="false"></textarea>
                     <span class="t-quote">"</span>
                   </div>
                 </div>
@@ -1073,18 +1078,18 @@
               <div class="t-form-actions">
                 <button type="submit" class="t-submit-btn" id="btnTerminalSubmit">
                   <span class="t-btn-run">&gt;</span>
-                  <span class="t-btn-text">EXECUTE_TRANSMISSION.sh</span>
+                  <span class="t-btn-text" data-i18n="profile_term_btn_execute">EXECUTE_TRANSMISSION.sh</span>
                   <span class="t-btn-blink">_</span>
                 </button>
 
                 <button type="button" class="t-action-btn t-copy-btn" id="btnCopyEmail" title="Salin alamat email nisfalfilsa12@gmail.com">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span id="copyEmailLabel">COPY_FREQ [EMAIL]</span>
+                  <span id="copyEmailLabel" data-i18n="profile_term_btn_copy">COPY_FREQ [EMAIL]</span>
                 </button>
 
                 <button type="button" class="t-action-btn t-reset-btn" id="btnResetBuffer" title="Kosongkan formulir">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
-                  <span>RESET_BUFFER</span>
+                  <span data-i18n="profile_term_btn_reset">RESET_BUFFER</span>
                 </button>
               </div>
             </form>
@@ -1095,8 +1100,8 @@
         <!-- Terminal Bottom Status Bar -->
         <div class="terminal-bottom-bar">
           <div class="t-bottom-left">
-            <span class="t-kbd-hint"><kbd>Tab</kbd> untuk navigasi field</span>
-            <span class="t-kbd-hint"><kbd>Enter</kbd> atau klik tombol untuk eksekusi</span>
+            <span class="t-kbd-hint" data-i18n="profile_term_hint_tab"><kbd>Tab</kbd> untuk navigasi field</span>
+            <span class="t-kbd-hint" data-i18n="profile_term_hint_enter"><kbd>Enter</kbd> atau klik tombol untuk eksekusi</span>
           </div>
           <div class="t-bottom-right">
             <span class="t-stat-pill"><span class="t-stat-dot"></span> BUFFER: READY</span>
@@ -1115,9 +1120,9 @@
           <div class="freq-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-          <div class="freq-title">Direct Subspace Mail</div>
+          <div class="freq-title" data-i18n="profile_term_direct_mail_title">Direct Subspace Mail</div>
           <div class="freq-val">nisfalfilsa12@gmail.com</div>
-          <div class="freq-action">KLIK UNTUK KIRIM EMAIL LANGSUNG ↗</div>
+          <div class="freq-action" data-i18n="profile_term_direct_mail_action">KLIK UNTUK KIRIM EMAIL LANGSUNG ↗</div>
         </a>
 
         <a href="https://github.com/nisfal" target="_blank" rel="noopener noreferrer" class="direct-freq-card freq-github">
@@ -1128,9 +1133,9 @@
           <div class="freq-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
           </div>
-          <div class="freq-title">Citadel Git Archives</div>
+          <div class="freq-title" data-i18n="profile_term_direct_git_title">Citadel Git Archives</div>
           <div class="freq-val">github.com/nisfal</div>
-          <div class="freq-action">INSPEKSI REPOSITORI &amp; SOURCE CODE ↗</div>
+          <div class="freq-action" data-i18n="profile_term_direct_git_action">INSPEKSI REPOSITORI &amp; SOURCE CODE ↗</div>
         </a>
 
         <a href="https://www.linkedin.com/in/nisfal-filsa" target="_blank" rel="noopener noreferrer" class="direct-freq-card freq-linkedin">
@@ -1141,9 +1146,9 @@
           <div class="freq-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           </div>
-          <div class="freq-title">Professional Frequency</div>
+          <div class="freq-title" data-i18n="profile_term_direct_li_title">Professional Frequency</div>
           <div class="freq-val">linkedin.com/in/nisfal-filsa</div>
-          <div class="freq-action">HUBUNGKAN JARINGAN PROFESIONAL ↗</div>
+          <div class="freq-action" data-i18n="profile_term_direct_li_action">HUBUNGKAN JARINGAN PROFESIONAL ↗</div>
         </a>
       </div>
     </section>
@@ -1152,7 +1157,7 @@
     <footer class="rm-footer">
       <a href="index.html" class="footer-portal-button" aria-label="Return to standard portfolio">
         <svg class="footer-portal-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="m16 12-4-4-4 4M12 16V8"/></svg>
-        <span>Kembali ke Dimensi Nyata (Portofolio Utama)</span>
+        <span data-i18n="profile_footer_return">Kembali ke Dimensi Nyata (Portofolio Utama)</span>
       </a>
 
       <div class="footer-socials">
@@ -1160,8 +1165,8 @@
         <a href="https://github.com/nisfal" target="_blank" rel="noopener noreferrer" class="footer-social-link">GitHub ↗</a>
       </div>
 
-      <p class="rm-copyright">
-        © 2026 Nisfal Filsa - Terdaftar di Dimensi C-137 & Planet Bumi. Dibangun dengan rasa humor dan kode berkinerja tinggi.
+      <p class="rm-copyright" data-i18n="profile_footer_copyright">
+        © 2026 Nisfal Filsa - Terdaftar di Dimensi C-137 &amp; Planet Bumi. Dibangun dengan rasa humor dan kode berkinerja tinggi.
       </p>
     </footer>
   </main>
@@ -1180,7 +1185,7 @@
 
       <a href="index.html" class="btn-back-reality hud-btn" id="btnBackReality" aria-label="Return to earth portfolio" title="Kembali ke portofolio utama (Dimensi Nyata)">
         <span class="reality-pulse-dot"></span>
-        <span>REALITY RECALL</span>
+        <span data-i18n="profile_dock_recall">REALITY RECALL</span>
         <svg class="nav-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       </a>
     </div>
@@ -1209,6 +1214,7 @@
     </div>
   </aside>
 
+  <script src="js/i18n.js"></script>
   <script src="js/rick-morty.js"></script>
 </body>
 </html>

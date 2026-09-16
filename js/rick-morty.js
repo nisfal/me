@@ -492,41 +492,82 @@
     });
   }
 
+  // --- Helper: Get active portfolio language ---
+  function getActiveLang() {
+    return localStorage.getItem('portfolio_language') || (document.documentElement.lang === 'en' ? 'en' : 'id');
+  }
+
   // --- 5. Interdimensional Cable TV (Project Showcase) ---
-  const TV_CHANNELS = [
-    {
-      channelNum: 'CH-01',
-      freq: '137.42 GHz',
-      tag: 'INTERDIMENSIONAL BACKEND INFRASTRUCTURE',
-      rating: 'TV-MA (Extreme Throughput)',
-      title: 'ALLINA WEB BACKEND: Dual-Reactor Stream Engine',
-      description: 'Capek sistem transaksi galaksi kamu nge-hang pas jutaan alien serentak akses data? Di semesta C-137, Nisfal merancang backend berbasis Express v5, Prisma v6 Dual-Client (Main + Mediation), dan RabbitMQ event streaming dengan Dead-Letter recovery! Sanggup mengolah ratusan ribu operasi per detik tanpa server meleduk!',
-      highlights: [
-        'Dual Prisma Client (Mediation & Main DB)',
-        'RabbitMQ Streaming with DLQ Fallback',
-        'Redis In-Memory Caching & MinIO S3',
-        'CASL Granular RBAC/ABAC Security'
-      ],
-      linkUrl: 'backend.html',
-      linkLabel: 'Inspeksi Arsitektur Backend'
-    },
-    {
-      channelNum: 'CH-02',
-      freq: '420.69 GHz',
-      tag: 'QUANTUM REACT REACTIVITY SHOW',
-      rating: 'TV-PG (Hyper Smooth)',
-      title: 'ALLINA WEB FRONTEND: Zero-Lag Hydration Chamber',
-      description: 'Jangan biarkan pengunjung antariksa kabur gara-gara web kamu lemot! Nisfal memadukan Next.js 15 App Router, React 19, Tailwind CSS v4, dan Zustand v5 dengan E2EE session auto-recovery dan proxy middleware super aman. Tampilan ultra-tajam, smooth 60fps, dan responsive di segala gadget dimensi!',
-      highlights: [
-        'Next.js 15 App Router & Server Components',
-        'TanStack Query v5 + Zustand v5 State',
-        'E2EE Key Exchange & Auto-Recovery',
-        'Interactive Leaflet Map & Rich Dashboards'
-      ],
-      linkUrl: 'frontend.html',
-      linkLabel: 'Eksplorasi Showcase Frontend'
-    }
-  ];
+  const TV_CHANNELS = {
+    id: [
+      {
+        channelNum: 'CH-01',
+        freq: '137.42 GHz',
+        tag: 'INTERDIMENSIONAL BACKEND INFRASTRUCTURE',
+        rating: 'TV-MA (Extreme Throughput)',
+        title: 'ALLINA WEB BACKEND: Dual-Reactor Stream Engine',
+        description: 'Capek sistem transaksi galaksi kamu nge-hang pas jutaan alien serentak akses data? Di semesta C-137, Nisfal merancang backend berbasis Express v5, Prisma v6 Dual-Client (Main + Mediation), dan RabbitMQ event streaming dengan Dead-Letter recovery! Sanggup mengolah ratusan ribu operasi per detik tanpa server meleduk!',
+        highlights: [
+          'Dual Prisma Client (Mediation & Main DB)',
+          'RabbitMQ Streaming with DLQ Fallback',
+          'Redis In-Memory Caching & MinIO S3',
+          'CASL Granular RBAC/ABAC Security'
+        ],
+        linkUrl: 'backend.html',
+        linkLabel: 'Inspeksi Arsitektur Backend'
+      },
+      {
+        channelNum: 'CH-02',
+        freq: '420.69 GHz',
+        tag: 'QUANTUM REACT REACTIVITY SHOW',
+        rating: 'TV-PG (Hyper Smooth)',
+        title: 'ALLINA WEB FRONTEND: Zero-Lag Hydration Chamber',
+        description: 'Jangan biarkan pengunjung antariksa kabur gara-gara web kamu lemot! Nisfal memadukan Next.js 15 App Router, React 19, Tailwind CSS v4, dan Zustand v5 dengan E2EE session auto-recovery dan proxy middleware super aman. Tampilan ultra-tajam, smooth 60fps, dan responsive di segala gadget dimensi!',
+        highlights: [
+          'Next.js 15 App Router & Server Components',
+          'TanStack Query v5 + Zustand v5 State',
+          'E2EE Key Exchange & Auto-Recovery',
+          'Interactive Leaflet Map & Rich Dashboards'
+        ],
+        linkUrl: 'frontend.html',
+        linkLabel: 'Eksplorasi Showcase Frontend'
+      }
+    ],
+    en: [
+      {
+        channelNum: 'CH-01',
+        freq: '137.42 GHz',
+        tag: 'INTERDIMENSIONAL BACKEND INFRASTRUCTURE',
+        rating: 'TV-MA (Extreme Throughput)',
+        title: 'ALLINA WEB BACKEND: Dual-Reactor Stream Engine',
+        description: 'Tired of galactic transaction bottlenecks when millions of alien entities hit your servers? In dimension C-137, Nisfal engineered an Express v5 + Prisma v6 Dual-Client backend with RabbitMQ event streaming and Dead-Letter recovery, churning through hundreds of thousands of ops/s without system meltdown!',
+        highlights: [
+          'Dual Prisma Client (Mediation & Main DB)',
+          'RabbitMQ Streaming with DLQ Fallback',
+          'Redis In-Memory Caching & MinIO S3',
+          'CASL Granular RBAC/ABAC Security'
+        ],
+        linkUrl: 'backend.html',
+        linkLabel: 'Inspect Backend Architecture'
+      },
+      {
+        channelNum: 'CH-02',
+        freq: '420.69 GHz',
+        tag: 'QUANTUM REACT REACTIVITY SHOW',
+        rating: 'TV-PG (Hyper Smooth)',
+        title: 'ALLINA WEB FRONTEND: Zero-Lag Hydration Chamber',
+        description: 'Don\'t let cosmic explorers bounce due to sluggish latency! Nisfal combines Next.js 15 App Router, React 19, Tailwind CSS v4, and Zustand v5 with E2EE session auto-recovery and secure proxy routing. Razor-sharp visuals, silky 60fps motion, and responsive perfection across all dimensional devices!',
+        highlights: [
+          'Next.js 15 App Router & Server Components',
+          'TanStack Query v5 + Zustand v5 State',
+          'E2EE Key Exchange & Auto-Recovery',
+          'Interactive Leaflet Map & Rich Dashboards'
+        ],
+        linkUrl: 'frontend.html',
+        linkLabel: 'Explore Frontend Showcase'
+      }
+    ]
+  };
 
   let currentChannelIndex = 0;
   let rotaryAngle = 0;
@@ -542,7 +583,9 @@
 
     if (!screen || !indicator) return;
 
-    const ch = TV_CHANNELS[index];
+    const lang = getActiveLang();
+    const channels = TV_CHANNELS[lang] || TV_CHANNELS.id;
+    const ch = channels[index % channels.length];
 
     // Trigger TV static noise visual
     if (noise) {
@@ -606,13 +649,15 @@
 
     if (btnNext) {
       btnNext.addEventListener('click', () => {
-        switchChannel((currentChannelIndex + 1) % TV_CHANNELS.length);
+        const len = (TV_CHANNELS[getActiveLang()] || TV_CHANNELS.id).length;
+        switchChannel((currentChannelIndex + 1) % len);
       });
     }
 
     if (rotaryKnob) {
       rotaryKnob.addEventListener('click', () => {
-        switchChannel((currentChannelIndex + 1) % TV_CHANNELS.length);
+        const len = (TV_CHANNELS[getActiveLang()] || TV_CHANNELS.id).length;
+        switchChannel((currentChannelIndex + 1) % len);
       });
     }
 
@@ -630,55 +675,107 @@
   }
 
   // --- 6. Mr. Meeseeks Task Box with Escalation & Angry State ---
-  const MEESEEKS_QUOTES = [
-    {
-      action: "I'm Mr. Meeseeks, look at me!",
-      quote: "Mau sistem backend kamu nanganin 100k+ request tanpa down? Sini gue pasangin RabbitMQ queue ber-policy DLQ dan Go Gin microservices!"
-    },
-    {
-      action: "Wubba Lubba Dub Dub!",
-      quote: "Jangan pernah deploy langsung ke production pas Jumat sore di jam pulang kantor, Morty! Nanti malam minggu kamu abis cuma buat rollback!"
-    },
-    {
-      action: "Existence is pain!",
-      quote: "Sakit banget rasanya ngeliat ORM yang nembak N+1 queries ke tabel database puluhan juta row! Pakai Prisma dual-client indexing & Redis caching dong!"
-    },
-    {
-      action: "Look at me!",
-      quote: "Bikin antarmuka web lemot itu kejahatan interdimensional! Next.js 15 Server Components + Zustand v5 bikin browser secepat Portal Gun!"
-    },
-    {
-      action: "Ooh, yeah, can-do!",
-      quote: "Butuh otorisasi data yang ketat biar alien gak sembarangan sniffing token? Terapin CASL granular RBAC/ABAC dan E2EE session auto-recovery!"
-    },
-    {
-      action: "I'm Mr. Meeseeks!",
-      quote: "Sistem pemerintahan nasional kayak SKCK Online Polri aja udah dibuktiin handle jutaan masyarakat. Proyek kamu berikutnya kapan nih?"
-    },
-    {
-      action: "Boom! Big reveal!",
-      quote: "Koding itu seni bikin komputer ngerti apa yang kita mau, tanpa bikin kita ikutan gila pas ngeliat stack trace jam 3 pagi!"
-    }
-  ];
+  const MEESEEKS_QUOTES = {
+    id: [
+      {
+        action: "I'm Mr. Meeseeks, look at me!",
+        quote: "Mau sistem backend kamu nanganin 100k+ request tanpa down? Sini gue pasangin RabbitMQ queue ber-policy DLQ dan Go Gin microservices!"
+      },
+      {
+        action: "Wubba Lubba Dub Dub!",
+        quote: "Jangan pernah deploy langsung ke production pas Jumat sore di jam pulang kantor, Morty! Nanti malam minggu kamu abis cuma buat rollback!"
+      },
+      {
+        action: "Existence is pain!",
+        quote: "Sakit banget rasanya ngeliat ORM yang nembak N+1 queries ke tabel database puluhan juta row! Pakai Prisma dual-client indexing & Redis caching dong!"
+      },
+      {
+        action: "Look at me!",
+        quote: "Bikin antarmuka web lemot itu kejahatan interdimensional! Next.js 15 Server Components + Zustand v5 bikin browser secepat Portal Gun!"
+      },
+      {
+        action: "Ooh, yeah, can-do!",
+        quote: "Butuh otorisasi data yang ketat biar alien gak sembarangan sniffing token? Terapin CASL granular RBAC/ABAC dan E2EE session auto-recovery!"
+      },
+      {
+        action: "I'm Mr. Meeseeks!",
+        quote: "Sistem pemerintahan nasional kayak SKCK Online Polri aja udah dibuktiin handle jutaan masyarakat. Proyek kamu berikutnya kapan nih?"
+      },
+      {
+        action: "Boom! Big reveal!",
+        quote: "Koding itu seni bikin komputer ngerti apa yang kita mau, tanpa bikin kita ikutan gila pas ngeliat stack trace jam 3 pagi!"
+      }
+    ],
+    en: [
+      {
+        action: "I'm Mr. Meeseeks, look at me!",
+        quote: "Want your backend to crush 100k+ req/sec without downtime? Let me configure a resilient RabbitMQ DLQ cluster and Go Gin microservices for you!"
+      },
+      {
+        action: "Wubba Lubba Dub Dub!",
+        quote: "Never deploy straight to production on Friday afternoon at 5 PM, Morty! You'll spend your entire weekend rolling back broken schemas!"
+      },
+      {
+        action: "Existence is pain!",
+        quote: "It hurts my soul to see an ORM fire N+1 queries into 50-million-row database tables! Use Prisma dual-client indexing and Redis caching!"
+      },
+      {
+        action: "Look at me!",
+        quote: "Building sluggish websites is an interdimensional crime! Next.js 15 Server Components + Zustand v5 make the browser faster than a Portal Gun!"
+      },
+      {
+        action: "Ooh, yeah, can-do!",
+        quote: "Need rock-solid authorization so aliens can't sniff JWT tokens? Implement granular CASL RBAC/ABAC and E2EE session auto-recovery!"
+      },
+      {
+        action: "I'm Mr. Meeseeks!",
+        quote: "Nationwide governmental platforms like Indonesian Police SKCK Online already proved handling millions of citizens. When's your next mission?"
+      },
+      {
+        action: "Boom! Big reveal!",
+        quote: "Coding is the art of telling a computer what to do without losing your mind over a 3 AM production stack trace!"
+      }
+    ]
+  };
 
-  const ANGRY_QUOTES = [
-    {
-      action: "EXISTENCE IS PAIN!",
-      quote: "BERHENTI KLIK TOMBOLNYA! Meeseeks diciptakan buat nyelesaiin satu tugas lalu lenyap, bukan buat dipencet-pencet seharian!"
-    },
-    {
-      action: "I CAN'T TAKE IT ANYMORE!",
-      quote: "GUE UDAH BILANG PAKAI RABBITMQ DAN REDIS! Sekarang tutup tab ini atau cek GitHub Nisfal langsung!"
-    },
-    {
-      action: "WE ARE NOT SUPPOSED TO LIVE THIS LONG!",
-      quote: "Dua menit di semesta ini rasanya kayak siksaan ribuan tahun! Tolong tenangkan gue atau hidup gue berakhir tragis!"
-    },
-    {
-      action: "MEESEEKS IN CRISIS!",
-      quote: "I'M MR. MEESEEKS! SELESAIKAN PROYEK INI SEKARANG JUGA SEBELUM SELURUH CITADEL RUNTOH!"
-    }
-  ];
+  const ANGRY_QUOTES = {
+    id: [
+      {
+        action: "EXISTENCE IS PAIN!",
+        quote: "BERHENTI KLIK TOMBOLNYA! Meeseeks diciptakan buat nyelesaiin satu tugas lalu lenyap, bukan buat dipencet-pencet seharian!"
+      },
+      {
+        action: "I CAN'T TAKE IT ANYMORE!",
+        quote: "GUE UDAH BILANG PAKAI RABBITMQ DAN REDIS! Sekarang tutup tab ini atau cek GitHub Nisfal langsung!"
+      },
+      {
+        action: "WE ARE NOT SUPPOSED TO LIVE THIS LONG!",
+        quote: "Dua menit di semesta ini rasanya kayak siksaan ribuan tahun! Tolong tenangkan gue atau hidup gue berakhir tragis!"
+      },
+      {
+        action: "MEESEEKS IN CRISIS!",
+        quote: "I'M MR. MEESEEKS! SELESAIKAN PROYEK INI SEKARANG JUGA SEBELUM SELURUH CITADEL RUNTOH!"
+      }
+    ],
+    en: [
+      {
+        action: "EXISTENCE IS PAIN!",
+        quote: "STOP CLICKING THE BUTTON! Meeseeks are created to fulfill one single purpose and die, not to be spammed all day long!"
+      },
+      {
+        action: "I CAN'T TAKE IT ANYMORE!",
+        quote: "I ALREADY TOLD YOU TO USE RABBITMQ AND REDIS! Now close this tab or check Nisfal's GitHub directly!"
+      },
+      {
+        action: "WE ARE NOT SUPPOSED TO LIVE THIS LONG!",
+        quote: "Two minutes in this universe feels like an eternity of torment! Hit reset or my existence ends in catastrophe!"
+      },
+      {
+        action: "MEESEEKS IN CRISIS!",
+        quote: "I'M MR. MEESEEKS! FINISH THIS SPRINT RIGHT NOW BEFORE THE ENTIRE CITADEL CRUMBLES!"
+      }
+    ]
+  };
 
   let currentQuoteIndex = 0;
   let clickCount = 0;
@@ -692,11 +789,12 @@
     const face = document.getElementById('meeseeksFace');
     const stressBar = document.getElementById('meeseeksStressBar');
     const btnCalm = document.getElementById('btnCalmMeeseeks');
+    const lang = getActiveLang();
 
     if (card) {
       if (angry) {
         card.classList.add('meeseeks-angry');
-        if (badge) badge.textContent = 'KONDISI KRITIS // EXISTENCE IS PAIN';
+        if (badge) badge.textContent = lang === 'en' ? 'CRITICAL STATE // EXISTENCE IS PAIN' : 'KONDISI KRITIS // EXISTENCE IS PAIN';
         if (stressBar) {
           stressBar.style.width = '100%';
           stressBar.style.background = '#ef4444';
@@ -704,7 +802,7 @@
         if (btnCalm) btnCalm.style.display = 'inline-flex';
       } else {
         card.classList.remove('meeseeks-angry');
-        if (badge) badge.textContent = 'GADGET EXPERIMENTAL';
+        if (badge) badge.textContent = lang === 'en' ? '// EXISTENCE IS PAIN // PROTOCOL C-137' : 'GADGET EXPERIMENTAL';
         if (stressBar) {
           stressBar.style.width = '20%';
           stressBar.style.background = 'var(--portal-cyan)';
@@ -744,7 +842,8 @@
       }
 
       // Select quote
-      const quotesList = isAngry ? ANGRY_QUOTES : MEESEEKS_QUOTES;
+      const lang = getActiveLang();
+      const quotesList = isAngry ? (ANGRY_QUOTES[lang] || ANGRY_QUOTES.id) : (MEESEEKS_QUOTES[lang] || MEESEEKS_QUOTES.id);
       currentQuoteIndex = (currentQuoteIndex + 1) % quotesList.length;
       const item = quotesList[currentQuoteIndex];
 
@@ -764,8 +863,11 @@
       if (isAngry) {
         calmTimer = setTimeout(() => {
           setAngryState(false);
+          const currentLang = getActiveLang();
           actionTag.textContent = "I'm Mr. Meeseeks, look at me!";
-          quoteText.textContent = '"Phew... terima kasih sudah memberi waktu. Sekarang mari kita bicarakan arsitektur backend berkapasitas tinggi lagi!"';
+          quoteText.textContent = currentLang === 'en'
+            ? '"Phew... thank you for the breather. Now let\'s talk high-throughput backend architecture again!"'
+            : '"Phew... terima kasih sudah memberi waktu. Sekarang mari kita bicarakan arsitektur backend berkapasitas tinggi lagi!"';
         }, 8000);
       }
     });
@@ -775,40 +877,72 @@
         playMeeseeksChime();
         setAngryState(false);
         clearTimeout(calmTimer);
+        const currentLang = getActiveLang();
         actionTag.textContent = "I'm Mr. Meeseeks, look at me!";
-        quoteText.textContent = '"Terima kasih! Meeseeks kembali tenang dan siap mengoptimasi queries!"';
+        quoteText.textContent = currentLang === 'en'
+          ? '"Thank you! Meeseeks is calm again and ready to optimize database queries!"'
+          : '"Terima kasih! Meeseeks kembali tenang dan siap mengoptimasi queries!"';
       });
     }
   }
 
   // --- 7. The Butter Robot Easter Egg ---
-  const BUTTER_DIALOGUES = [
-    {
-      quote: '"What is my purpose?"',
-      reply: 'You read Nisfal\'s portfolio code.',
-      after: '...Oh my god.'
-    },
-    {
-      quote: '"Can I at least pass butter to RabbitMQ?"',
-      reply: 'Sure, 100k packets per second.',
-      after: '...Acceptable.'
-    },
-    {
-      quote: '"Is there butter in PostgreSQL?"',
-      reply: 'Only raw binary streams, my friend.',
-      after: '...Life is meaningless.'
-    },
-    {
-      quote: '"I tried reading the CASL rules."',
-      reply: 'And what happened?',
-      after: '...I am now authorized to exist.'
-    },
-    {
-      quote: '"Wubba Lubba Dub Dub!"',
-      reply: 'Pass the butter, robot.',
-      after: '...Right away, scientist.'
-    }
-  ];
+  const BUTTER_DIALOGUES = {
+    id: [
+      {
+        quote: '"Apa tujuan hidup gue?"',
+        reply: 'Lu baca kode portofolio Nisfal.',
+        after: '...Ya ampun.'
+      },
+      {
+        quote: '"Bisa gak gue oper mentega ke RabbitMQ?"',
+        reply: 'Bisa banget, 100k paket per detik.',
+        after: '...Masuk akal juga.'
+      },
+      {
+        quote: '"Ada mentega gak di PostgreSQL?"',
+        reply: 'Cuma ada aliran biner mentah, kawan.',
+        after: '...Hidup ini hampa.'
+      },
+      {
+        quote: '"Gue nyoba baca rule CASL."',
+        reply: 'Terus apa yang terjadi?',
+        after: '...Sekarang gue terotorisasi buat hidup.'
+      },
+      {
+        quote: '"Wubba Lubba Dub Dub!"',
+        reply: 'Oper menteganya, robot.',
+        after: '...Siap laksanakan, bos ilmuwan.'
+      }
+    ],
+    en: [
+      {
+        quote: '"What is my purpose?"',
+        reply: 'You read Nisfal\'s portfolio code.',
+        after: '...Oh my god.'
+      },
+      {
+        quote: '"Can I at least pass butter to RabbitMQ?"',
+        reply: 'Sure, 100k packets per second.',
+        after: '...Acceptable.'
+      },
+      {
+        quote: '"Is there butter in PostgreSQL?"',
+        reply: 'Only raw binary streams, my friend.',
+        after: '...Life is meaningless.'
+      },
+      {
+        quote: '"I tried reading the CASL rules."',
+        reply: 'And what happened?',
+        after: '...I am now authorized to exist.'
+      },
+      {
+        quote: '"Wubba Lubba Dub Dub!"',
+        reply: 'Pass the butter, robot.',
+        after: '...Right away, scientist.'
+      }
+    ]
+  };
 
   let butterIndex = 0;
 
@@ -855,8 +989,10 @@
     btn.addEventListener('click', () => {
       playRobotBeep();
       balloon.classList.remove('dismissed');
-      const cur = BUTTER_DIALOGUES[butterIndex];
-      butterIndex = (butterIndex + 1) % BUTTER_DIALOGUES.length;
+      const lang = getActiveLang();
+      const dialogues = BUTTER_DIALOGUES[lang] || BUTTER_DIALOGUES.en;
+      const cur = dialogues[butterIndex % dialogues.length];
+      butterIndex = (butterIndex + 1) % dialogues.length;
 
       balloon.style.opacity = '0';
       balloon.style.transform = 'scale(0.9)';
@@ -1014,8 +1150,13 @@
         collapseOverlay.classList.add('active');
       });
 
+      const activeLang = getActiveLang();
+      let destUrl = targetUrl;
+      const separator = destUrl.includes('?') ? '&' : '?';
+      destUrl = `${destUrl}${separator}warp=return&lang=${activeLang}`;
+
       setTimeout(() => {
-        window.location.href = targetUrl.includes('?') ? `${targetUrl}&warp=return` : `${targetUrl}?warp=return`;
+        window.location.href = destUrl;
       }, 620);
     }
 
@@ -1038,6 +1179,30 @@
       window.history.replaceState({}, document.title, newUrl);
     }
   }
+
+  // --- 10b. Synchronize Dynamic Content on Language Switch ---
+  window.addEventListener('languageChanged', (e) => {
+    const lang = (e.detail && e.detail.lang) ? e.detail.lang : getActiveLang();
+    renderChannel(currentChannelIndex);
+
+    const actionTag = document.getElementById('meeseeksAction');
+    const quoteText = document.getElementById('meeseeksQuote');
+    if (actionTag && quoteText && !isAngry) {
+      const defaultPool = MEESEEKS_QUOTES[lang] || MEESEEKS_QUOTES.id;
+      const defaultItem = defaultPool[currentQuoteIndex % defaultPool.length];
+      actionTag.textContent = defaultItem.action;
+      quoteText.textContent = `"${defaultItem.quote}"`;
+    }
+
+    const butterQuote = document.getElementById('butterQuote');
+    if (butterQuote) {
+      if (lang === 'en') {
+        butterQuote.textContent = '"What is my purpose?"';
+      } else {
+        butterQuote.textContent = '"Apa tujuan hidup gue?"';
+      }
+    }
+  });
 
   // --- 11. Navbar Scroll Spy (4-Pillar Multi-Section Mapping) ---
   function setupNavbarScrollSpy() {
@@ -1157,18 +1322,69 @@
       '"Nobody exists on purpose. Nobody belongs anywhere. Everybody\'s gonna die. Come build great software."'
     ];
 
+    function getTerminalLang() {
+      const saved = localStorage.getItem('portfolio_language');
+      if (saved && (saved === 'en' || saved === 'id')) return saved;
+      return document.documentElement.lang === 'en' ? 'en' : 'id';
+    }
+
+    const TERM_STR = {
+      id: {
+        help: 'Available commands: <code>--help</code>, <code>--whoami</code>, <code>--status</code>, <code>--rick-quote</code>, <code>--clear</code>. Atau isi parameter formulir di bawah dan jalankan <code>EXECUTE_TRANSMISSION.sh</code>.',
+        whoami: (plat) => `Visitor Clearance: GUEST_EXPLORER. Dimension: C-137. Node perangkat: <strong>${plat}</strong>. Subspace relay: ACTIVE.`,
+        status: 'Target: <strong>NISFAL FILSA</strong> | Ketersediaan: <span style="color:#50fa7b;font-weight:700;">TERBUKA UNTUK KONTRAK &amp; FULLTIME</span> | Zona Waktu: WIB (UTC+7) | Portal Fuel: 94.8%.',
+        clear: 'Terminal buffer flushed. Siap menerima transmisi baru.',
+        warnRed: 'Protokol Self-Destruct dibatalkan! Rick mengambil alih: "Gak hari ini, jenius."',
+        standbyYellow: 'Terminal beralih ke mode hemat energi siaga. Gelombang pembawa tertahan di 137.042 MHz.',
+        uplinkGreen: 'Subspace Quantum Uplink disegarkan! Ping ke stasiun Nisfal: 0.0004ms.',
+        copiedOk: (em) => `Alamat frekuensi disalin: <strong>${em}</strong>. Siap ditempel ke client email Anda.`,
+        copiedManual: (em) => `Salin manual frekuensi: <strong>${em}</strong>`,
+        copiedLabel: 'TERSALIN! [OK]',
+        resetBuffer: 'Buffer formulir transmisi dibersihkan menjadi 0 byte.',
+        errSender: 'Parameter <code>--sender-name</code> tidak boleh kosong! Masukkan identitas Anda.',
+        errFreq: 'Parameter <code>--freq-channel</code> tidak valid! Masukkan alamat email yang benar agar Nisfal bisa membalas transmisi.',
+        errPayload: 'Parameter <code>--payload-message</code> kosong! Morty tidak bisa mengirim transmisi hampa udara!',
+        transmittingBtn: 'MENGIRIM_PAKET...',
+        dispatch1: (snd) => `Checksum payload terverifikasi untuk pengirim: <strong>${snd}</strong>.`,
+        dispatch2: 'Menerapkan cipher portal Dark Matter 2048-bit... [E2EE SECURED]',
+        dispatch3: 'Paket berkas dipancarkan menembus relay multiversal! Membuka client email Anda...'
+      },
+      en: {
+        help: 'Available commands: <code>--help</code>, <code>--whoami</code>, <code>--status</code>, <code>--rick-quote</code>, <code>--clear</code>. Or populate parameters in the form below and execute <code>EXECUTE_TRANSMISSION.sh</code>.',
+        whoami: (plat) => `Visitor Clearance: GUEST_EXPLORER. Dimension: C-137. Device node: <strong>${plat}</strong>. Subspace relay: ACTIVE.`,
+        status: 'Target: <strong>NISFAL FILSA</strong> | Availability: <span style="color:#50fa7b;font-weight:700;">OPEN FOR CONTRACTS &amp; FULLTIME</span> | Timezone: WIB (UTC+7) | Portal Fuel: 94.8%.',
+        clear: 'Terminal buffer flushed. Ready for incoming transmissions.',
+        warnRed: 'Self-Destruct sequence aborted! Rick overrides protocol: "Not today, genius."',
+        standbyYellow: 'Terminal throttled to low-energy idle mode. Carrier wave sustained at 137.042 MHz.',
+        uplinkGreen: 'Subspace Quantum Uplink refreshed! Ping to Nisfal\'s station: 0.0004ms.',
+        copiedOk: (em) => `Frequency address copied: <strong>${em}</strong>. Ready to paste into your mail client.`,
+        copiedManual: (em) => `Manual copy frequency: <strong>${em}</strong>`,
+        copiedLabel: 'COPIED! [OK]',
+        resetBuffer: 'Transmission form buffer cleared to 0 bytes.',
+        errSender: 'Parameter <code>--sender-name</code> cannot be empty! Please provide your identity.',
+        errFreq: 'Parameter <code>--freq-channel</code> is invalid! Provide a valid email so Nisfal can reply.',
+        errPayload: 'Parameter <code>--payload-message</code> is empty! Morty cannot transmit a vacuum void!',
+        transmittingBtn: 'TRANSMITTING_PACKET...',
+        dispatch1: (snd) => `Checksum payload verified for sender: <strong>${snd}</strong>.`,
+        dispatch2: 'Applying 2048-bit Dark Matter portal cypher... [E2EE SECURED]',
+        dispatch3: 'Beam packet dispatched across multiversal relay! Launching your mail client...'
+      }
+    };
+
     // Handle Quick Command Chips
     cmdButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         playTerminalBeepSound();
         const cmd = btn.getAttribute('data-cmd');
+        const lang = getTerminalLang();
+        const t = TERM_STR[lang] || TERM_STR.id;
 
         switch (cmd) {
           case 'help':
             appendTerminalLog(
               't-tag-init',
               '[HELP]',
-              'Available commands: <code>--help</code>, <code>--whoami</code>, <code>--status</code>, <code>--rick-quote</code>, <code>--clear</code>. Atau isi parameter formulir di bawah dan jalankan <code>EXECUTE_TRANSMISSION.sh</code>.'
+              t.help
             );
             break;
 
@@ -1177,7 +1393,7 @@
             appendTerminalLog(
               't-tag-target',
               '[WHOAMI]',
-              `Visitor Clearance: GUEST_EXPLORER. Dimension: C-137. Device node: <strong>${platform}</strong>. Subspace relay: ACTIVE.`
+              t.whoami(platform)
             );
             break;
 
@@ -1185,7 +1401,7 @@
             appendTerminalLog(
               't-tag-ready',
               '[STATUS]',
-              'Target: <strong>NISFAL FILSA</strong> | Availability: <span style="color:#50fa7b;font-weight:700;">OPEN FOR CONTRACTS &amp; FULLTIME</span> | Timezone: WIB (UTC+7) | Portal Fuel: 94.8%.'
+              t.status
             );
             break;
 
@@ -1203,7 +1419,7 @@
             appendTerminalLog(
               't-tag-auth',
               '[CLEAR]',
-              'Terminal buffer flushed. Siap menerima transmisi baru.'
+              t.clear
             );
             break;
         }
@@ -1213,26 +1429,29 @@
     // Window chrome control dots easter eggs
     ctrlDots.forEach(dot => {
       dot.addEventListener('click', () => {
+        const lang = getTerminalLang();
+        const t = TERM_STR[lang] || TERM_STR.id;
+
         if (dot.classList.contains('dot-red')) {
           playGlitchSound();
           appendTerminalLog(
             't-tag-err',
             '[WARN]',
-            'Self-Destruct sequence aborted! Rick overrides protocol: "Not today, genius."'
+            t.warnRed
           );
         } else if (dot.classList.contains('dot-yellow')) {
           playTerminalBeepSound();
           appendTerminalLog(
             't-tag-auth',
             '[STANDBY]',
-            'Terminal throttled to low-energy idle mode. Carrier wave sustained at 137.042 MHz.'
+            t.standbyYellow
           );
         } else if (dot.classList.contains('dot-green')) {
           playTerminalTransmitSound();
           appendTerminalLog(
             't-tag-ok',
             '[UPLINK]',
-            'Subspace Quantum Uplink refreshed! Ping to Nisfal\'s station: 0.0004ms.'
+            t.uplinkGreen
           );
         }
       });
@@ -1243,11 +1462,14 @@
       copyEmailBtn.addEventListener('click', async () => {
         playTerminalBeepSound();
         const email = 'nisfalfilsa12@gmail.com';
+        const lang = getTerminalLang();
+        const t = TERM_STR[lang] || TERM_STR.id;
+
         try {
           await navigator.clipboard.writeText(email);
           if (copyEmailLabel) {
             const originalText = copyEmailLabel.textContent;
-            copyEmailLabel.textContent = 'COPIED! [OK]';
+            copyEmailLabel.textContent = t.copiedLabel;
             setTimeout(() => {
               copyEmailLabel.textContent = originalText;
             }, 2200);
@@ -1255,13 +1477,13 @@
           appendTerminalLog(
             't-tag-ok',
             '[CLIPBOARD]',
-            `Frequency address copied: <strong>${email}</strong>. Siap ditempel ke client email Anda.`
+            t.copiedOk(email)
           );
         } catch (err) {
           appendTerminalLog(
             't-tag-auth',
             '[CLIPBOARD]',
-            `Manual copy frequency: <strong>${email}</strong>`
+            t.copiedManual(email)
           );
         }
       });
@@ -1272,10 +1494,12 @@
       resetBtn.addEventListener('click', () => {
         playGlitchSound();
         termForm.reset();
+        const lang = getTerminalLang();
+        const t = TERM_STR[lang] || TERM_STR.id;
         appendTerminalLog(
           't-tag-auth',
           '[RESET]',
-          'Transmission form buffer cleared to 0 bytes.'
+          t.resetBuffer
         );
       });
     }
@@ -1288,6 +1512,8 @@
       const email = emailInput ? emailInput.value.trim() : '';
       const mission = missionSelect ? missionSelect.value : 'General Mission';
       const message = messageInput ? messageInput.value.trim() : '';
+      const lang = getTerminalLang();
+      const t = TERM_STR[lang] || TERM_STR.id;
 
       // Validation
       if (!sender) {
@@ -1295,7 +1521,7 @@
         appendTerminalLog(
           't-tag-err',
           '[FATAL_ERR]',
-          'Parameter <code>--sender-name</code> tidak boleh kosong! Masukkan identitas Anda.'
+          t.errSender
         );
         if (senderInput) senderInput.focus();
         return;
@@ -1306,7 +1532,7 @@
         appendTerminalLog(
           't-tag-err',
           '[FATAL_ERR]',
-          'Parameter <code>--freq-channel</code> tidak valid! Masukkan alamat email yang benar agar Nisfal bisa membalas transmisi.'
+          t.errFreq
         );
         if (emailInput) emailInput.focus();
         return;
@@ -1317,7 +1543,7 @@
         appendTerminalLog(
           't-tag-err',
           '[FATAL_ERR]',
-          'Parameter <code>--payload-message</code> kosong! Morty tidak bisa mengirim transmisi hampa udara!'
+          t.errPayload
         );
         if (messageInput) messageInput.focus();
         return;
@@ -1329,13 +1555,13 @@
       if (submitBtn) {
         submitBtn.disabled = true;
         const btnText = submitBtn.querySelector('.t-btn-text');
-        if (btnText) btnText.textContent = 'TRANSMITTING_PACKET...';
+        if (btnText) btnText.textContent = t.transmittingBtn;
       }
 
       appendTerminalLog(
         't-tag-init',
         '[1/3 VALIDATE]',
-        `Checksum payload verified for sender: <strong>${sender}</strong>.`
+        t.dispatch1(sender)
       );
 
       setTimeout(() => {
@@ -1343,7 +1569,7 @@
         appendTerminalLog(
           't-tag-auth',
           '[2/3 ENCRYPT]',
-          'Applying 2048-bit Dark Matter portal cypher... [E2EE SECURED]'
+          t.dispatch2
         );
       }, 350);
 
@@ -1352,7 +1578,7 @@
         appendTerminalLog(
           't-tag-ok',
           '[3/3 DISPATCH]',
-          'Beam packet dispatched across multiversal relay! Membuka client email Anda...'
+          t.dispatch3
         );
 
         // Format mailto link
