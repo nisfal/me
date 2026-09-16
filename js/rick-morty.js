@@ -275,6 +275,66 @@
     }
   }
 
+  function playTerminalBeepSound() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1400, now);
+      osc.frequency.exponentialRampToValueAtTime(700, now + 0.035);
+
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.042);
+    } catch (e) {
+      console.debug('Audio error:', e);
+    }
+  }
+
+  function playTerminalTransmitSound() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const notes = [440, 660, 880, 1320, 1760];
+
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.055);
+
+        gain.gain.setValueAtTime(0.01, now + idx * 0.055);
+        gain.gain.linearRampToValueAtTime(0.09, now + idx * 0.055 + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.055 + 0.16);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now + idx * 0.055);
+        osc.stop(now + idx * 0.055 + 0.17);
+      });
+    } catch (e) {
+      console.debug('Audio error:', e);
+    }
+  }
+
   // --- 2. Interactive Portal Swirl Canvas with Mouse Tracking ---
   const canvas = document.getElementById('portalCanvas');
   let ctx = null;
@@ -831,8 +891,8 @@
       toggleMenu();
     });
 
-    // Close when a link is clicked
-    navLinks.querySelectorAll('.rm-nav-link').forEach(link => {
+    // Close when a link or flyout item is clicked
+    navLinks.querySelectorAll('.rm-nav-link, .nav-flyout-item').forEach(link => {
       link.addEventListener('click', () => {
         toggleMenu(true);
       });
@@ -849,6 +909,47 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         toggleMenu(true);
+      }
+    });
+  }
+
+  // --- 8b. 4-Pillar Nav Group Dropdowns (Hover Bridge & Focus Handler) ---
+  function setupNavGroupDropdowns() {
+    const navGroups = document.querySelectorAll('.nav-group');
+
+    navGroups.forEach(group => {
+      let timeoutId = null;
+
+      // Desktop hover handlers
+      group.addEventListener('mouseenter', () => {
+        clearTimeout(timeoutId);
+        navGroups.forEach(g => { if (g !== group) g.classList.remove('is-open'); });
+        group.classList.add('is-open');
+      });
+
+      group.addEventListener('mouseleave', () => {
+        timeoutId = setTimeout(() => {
+          group.classList.remove('is-open');
+        }, 180);
+      });
+
+      // Accessible focus handlers
+      group.addEventListener('focusin', () => {
+        clearTimeout(timeoutId);
+        group.classList.add('is-open');
+      });
+
+      group.addEventListener('focusout', (e) => {
+        if (!group.contains(e.relatedTarget)) {
+          group.classList.remove('is-open');
+        }
+      });
+    });
+
+    // Close all flyouts when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-group')) {
+        navGroups.forEach(g => g.classList.remove('is-open'));
       }
     });
   }
@@ -880,9 +981,11 @@
     setupMeeseeksBox();
     setupButterRobot();
     setupMobileNav();
+    setupNavGroupDropdowns();
     setupAudioToggle();
     setupRealityReturnTransitions();
     setupNavbarScrollSpy();
+    setupCitadelTerminal();
 
     // User gesture unlock for Web Audio
     document.body.addEventListener('click', () => {
@@ -890,7 +993,7 @@
     }, { once: true });
   });
 
-  // --- 10. Reality Return & Entry Transition VFX ---
+  // --- 9. Reality Return & Entry Transition VFX ---
   function setupRealityReturnTransitions() {
     const returnButtons = document.querySelectorAll('#btnBackReality, .footer-portal-button, a[href="index.html"]');
 
@@ -936,32 +1039,350 @@
     }
   }
 
-  // --- 11. Navbar Scroll Spy ---
+  // --- 11. Navbar Scroll Spy (4-Pillar Multi-Section Mapping) ---
   function setupNavbarScrollSpy() {
-    const navLinks = document.querySelectorAll('.rm-nav-link');
+    const navGroups = document.querySelectorAll('.nav-group');
+    const flyoutItems = document.querySelectorAll('.nav-flyout-item');
     const sections = document.querySelectorAll('section[id]');
 
+    const SECTION_GROUP_MAP = {
+      'citadel': 'dossier',
+      'arsenal': 'dossier',
+      'dimension-shifter': 'projects',
+      'cable-tv': 'projects',
+      'meeseeks': 'lab',
+      'santai': 'lab',
+      'microverse': 'transmissions',
+      'contact': 'transmissions'
+    };
+
     function onScroll() {
-      const scrollPos = window.scrollY + 160;
+      const scrollPos = window.scrollY + 180;
+      let activeSectionId = null;
+
       sections.forEach(sec => {
         const top = sec.offsetTop;
         const height = sec.offsetHeight;
         const id = sec.getAttribute('id');
         if (scrollPos >= top && scrollPos < top + height) {
-          navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
+          activeSectionId = id;
         }
       });
+
+      if (activeSectionId) {
+        const activeGroup = SECTION_GROUP_MAP[activeSectionId];
+
+        // Highlight parent pillar link
+        navGroups.forEach(grp => {
+          const grpName = grp.getAttribute('data-group');
+          const grpLink = grp.querySelector('.rm-nav-link');
+          if (grpLink) {
+            if (grpName === activeGroup) {
+              grpLink.classList.add('active');
+            } else {
+              grpLink.classList.remove('active');
+            }
+          }
+        });
+
+        // Highlight specific sub-item in flyout
+        flyoutItems.forEach(item => {
+          const target = item.getAttribute('data-target');
+          if (target === activeSectionId) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  }
+
+  // --- 12. Citadel Subspace Terminal Engine ---
+  function setupCitadelTerminal() {
+    const termForm = document.getElementById('citadelContactForm');
+    const logOutput = document.getElementById('terminalLogOutput');
+    const senderInput = document.getElementById('termSender');
+    const emailInput = document.getElementById('termEmail');
+    const missionSelect = document.getElementById('termMission');
+    const messageInput = document.getElementById('termMessage');
+    const submitBtn = document.getElementById('btnTerminalSubmit');
+    const copyEmailBtn = document.getElementById('btnCopyEmail');
+    const copyEmailLabel = document.getElementById('copyEmailLabel');
+    const resetBtn = document.getElementById('btnResetBuffer');
+    const cmdButtons = document.querySelectorAll('.t-cmd-btn');
+    const ctrlDots = document.querySelectorAll('.t-ctrl-dot');
+
+    if (!termForm || !logOutput) return;
+
+    // Helper: append a timestamped log to terminal output
+    function appendTerminalLog(typeClass, tagText, msgHtml) {
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, '0');
+      const timeStr = `[${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}]`;
+
+      const entry = document.createElement('div');
+      entry.className = `t-log-entry ${typeClass}`;
+      entry.innerHTML = `<span class="t-ts">${timeStr}</span> <span class="${typeClass}">${tagText}</span> ${msgHtml}`;
+      logOutput.appendChild(entry);
+      logOutput.scrollTop = logOutput.scrollHeight;
+    }
+
+    // Interactive Key Typing SFX (throttled)
+    let lastKeySoundTime = 0;
+    function onInputTyping() {
+      const now = Date.now();
+      if (now - lastKeySoundTime > 75) {
+        lastKeySoundTime = now;
+        playTerminalBeepSound();
+      }
+    }
+
+    [senderInput, emailInput, messageInput].forEach(input => {
+      if (input) {
+        input.addEventListener('input', onInputTyping);
+      }
+    });
+
+    // Rick & Morty Quotes Pool
+    const rickQuotes = [
+      '"Listen, Morty, in nine out of ten universes, you\'re the one holding the keyboard. Make it count!"',
+      '"Wubba Lubba Dub Dub! Just transmit the project details, Morty, we don\'t have all eternity!"',
+      '"Sometimes science is more art than science, Morty. A lot of people don\'t get that."',
+      '"To live is to risk it all; otherwise you\'re just an inert chunk of randomly assembled molecules drifting wherever the universe blows you."',
+      '"I turned myself into a terminal, Morty! I\'m Terminal Riiiiick! Look at my CSS layout!"',
+      '"Nobody exists on purpose. Nobody belongs anywhere. Everybody\'s gonna die. Come build great software."'
+    ];
+
+    // Handle Quick Command Chips
+    cmdButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        playTerminalBeepSound();
+        const cmd = btn.getAttribute('data-cmd');
+
+        switch (cmd) {
+          case 'help':
+            appendTerminalLog(
+              't-tag-init',
+              '[HELP]',
+              'Available commands: <code>--help</code>, <code>--whoami</code>, <code>--status</code>, <code>--rick-quote</code>, <code>--clear</code>. Atau isi parameter formulir di bawah dan jalankan <code>EXECUTE_TRANSMISSION.sh</code>.'
+            );
+            break;
+
+          case 'whoami':
+            const platform = navigator.platform || 'Terra';
+            appendTerminalLog(
+              't-tag-target',
+              '[WHOAMI]',
+              `Visitor Clearance: GUEST_EXPLORER. Dimension: C-137. Device node: <strong>${platform}</strong>. Subspace relay: ACTIVE.`
+            );
+            break;
+
+          case 'status':
+            appendTerminalLog(
+              't-tag-ready',
+              '[STATUS]',
+              'Target: <strong>NISFAL FILSA</strong> | Availability: <span style="color:#50fa7b;font-weight:700;">OPEN FOR CONTRACTS &amp; FULLTIME</span> | Timezone: WIB (UTC+7) | Portal Fuel: 94.8%.'
+            );
+            break;
+
+          case 'rick-quote':
+            const randomQuote = rickQuotes[Math.floor(Math.random() * rickQuotes.length)];
+            appendTerminalLog(
+              't-tag-rick',
+              '[RICK_C137]',
+              `<em>${randomQuote}</em>`
+            );
+            break;
+
+          case 'clear':
+            logOutput.innerHTML = '';
+            appendTerminalLog(
+              't-tag-auth',
+              '[CLEAR]',
+              'Terminal buffer flushed. Siap menerima transmisi baru.'
+            );
+            break;
+        }
+      });
+    });
+
+    // Window chrome control dots easter eggs
+    ctrlDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        if (dot.classList.contains('dot-red')) {
+          playGlitchSound();
+          appendTerminalLog(
+            't-tag-err',
+            '[WARN]',
+            'Self-Destruct sequence aborted! Rick overrides protocol: "Not today, genius."'
+          );
+        } else if (dot.classList.contains('dot-yellow')) {
+          playTerminalBeepSound();
+          appendTerminalLog(
+            't-tag-auth',
+            '[STANDBY]',
+            'Terminal throttled to low-energy idle mode. Carrier wave sustained at 137.042 MHz.'
+          );
+        } else if (dot.classList.contains('dot-green')) {
+          playTerminalTransmitSound();
+          appendTerminalLog(
+            't-tag-ok',
+            '[UPLINK]',
+            'Subspace Quantum Uplink refreshed! Ping to Nisfal\'s station: 0.0004ms.'
+          );
+        }
+      });
+    });
+
+    // Copy Email Action
+    if (copyEmailBtn) {
+      copyEmailBtn.addEventListener('click', async () => {
+        playTerminalBeepSound();
+        const email = 'nisfalfilsa12@gmail.com';
+        try {
+          await navigator.clipboard.writeText(email);
+          if (copyEmailLabel) {
+            const originalText = copyEmailLabel.textContent;
+            copyEmailLabel.textContent = 'COPIED! [OK]';
+            setTimeout(() => {
+              copyEmailLabel.textContent = originalText;
+            }, 2200);
+          }
+          appendTerminalLog(
+            't-tag-ok',
+            '[CLIPBOARD]',
+            `Frequency address copied: <strong>${email}</strong>. Siap ditempel ke client email Anda.`
+          );
+        } catch (err) {
+          appendTerminalLog(
+            't-tag-auth',
+            '[CLIPBOARD]',
+            `Manual copy frequency: <strong>${email}</strong>`
+          );
+        }
+      });
+    }
+
+    // Reset Buffer Action
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        playGlitchSound();
+        termForm.reset();
+        appendTerminalLog(
+          't-tag-auth',
+          '[RESET]',
+          'Transmission form buffer cleared to 0 bytes.'
+        );
+      });
+    }
+
+    // Form Submission & Transmission Dispatch
+    termForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const sender = senderInput ? senderInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const mission = missionSelect ? missionSelect.value : 'General Mission';
+      const message = messageInput ? messageInput.value.trim() : '';
+
+      // Validation
+      if (!sender) {
+        playGlitchSound();
+        appendTerminalLog(
+          't-tag-err',
+          '[FATAL_ERR]',
+          'Parameter <code>--sender-name</code> tidak boleh kosong! Masukkan identitas Anda.'
+        );
+        if (senderInput) senderInput.focus();
+        return;
+      }
+
+      if (!email || !email.includes('@')) {
+        playGlitchSound();
+        appendTerminalLog(
+          't-tag-err',
+          '[FATAL_ERR]',
+          'Parameter <code>--freq-channel</code> tidak valid! Masukkan alamat email yang benar agar Nisfal bisa membalas transmisi.'
+        );
+        if (emailInput) emailInput.focus();
+        return;
+      }
+
+      if (!message) {
+        playGlitchSound();
+        appendTerminalLog(
+          't-tag-err',
+          '[FATAL_ERR]',
+          'Parameter <code>--payload-message</code> kosong! Morty tidak bisa mengirim transmisi hampa udara!'
+        );
+        if (messageInput) messageInput.focus();
+        return;
+      }
+
+      // Valid: Start Cyber Transmission Sequence
+      playTerminalTransmitSound();
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        const btnText = submitBtn.querySelector('.t-btn-text');
+        if (btnText) btnText.textContent = 'TRANSMITTING_PACKET...';
+      }
+
+      appendTerminalLog(
+        't-tag-init',
+        '[1/3 VALIDATE]',
+        `Checksum payload verified for sender: <strong>${sender}</strong>.`
+      );
+
+      setTimeout(() => {
+        playTerminalBeepSound();
+        appendTerminalLog(
+          't-tag-auth',
+          '[2/3 ENCRYPT]',
+          'Applying 2048-bit Dark Matter portal cypher... [E2EE SECURED]'
+        );
+      }, 350);
+
+      setTimeout(() => {
+        playTerminalTransmitSound();
+        appendTerminalLog(
+          't-tag-ok',
+          '[3/3 DISPATCH]',
+          'Beam packet dispatched across multiversal relay! Membuka client email Anda...'
+        );
+
+        // Format mailto link
+        const subject = encodeURIComponent(`[CITADEL TRANSMISSION] ${mission} - from ${sender}`);
+        const body = encodeURIComponent(
+          `=== CITADEL SUBSPACE TRANSMISSION PACKET ===\n` +
+          `Dimension     : Earth / C-137\n` +
+          `Sender Name   : ${sender}\n` +
+          `Return Freq   : ${email}\n` +
+          `Mission Type  : ${mission}\n` +
+          `Timestamp     : ${new Date().toLocaleString()}\n\n` +
+          `=== TRANSMISSION PAYLOAD ===\n` +
+          `${message}\n\n` +
+          `============================================\n` +
+          `Dispatched via Citadel Subspace Terminal CLI\n`
+        );
+
+        const mailtoUrl = `mailto:nisfalfilsa12@gmail.com?subject=${subject}&body=${body}`;
+
+        window.location.href = mailtoUrl;
+
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            const btnText = submitBtn.querySelector('.t-btn-text');
+            if (btnText) btnText.textContent = 'EXECUTE_TRANSMISSION.sh';
+          }
+        }, 1200);
+      }, 750);
+    });
   }
 
 })();

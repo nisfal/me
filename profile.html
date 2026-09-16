@@ -46,50 +46,94 @@
           <span class="rm-logo-dim">C-137</span>
         </a>
 
-        <!-- Navigation Links (Desktop bar & Mobile Drawer) -->
+        <!-- Navigation Links (Desktop 4-Pillar Bar & Mobile Categorized Drawer) -->
         <div class="rm-nav-links" id="rmNavLinks">
-          <a href="#citadel" class="rm-nav-link active" data-section="citadel">
-            <span class="nav-num">01</span>
-            <span class="nav-label">ID CARD</span>
-          </a>
-          <a href="#dimension-shifter" class="rm-nav-link" data-section="dimension-shifter">
-            <span class="nav-num">02</span>
-            <span class="nav-label">PORTAL GUN</span>
-          </a>
-          <a href="#arsenal" class="rm-nav-link" data-section="arsenal">
-            <span class="nav-num">03</span>
-            <span class="nav-label">ARSENAL</span>
-          </a>
-          <a href="#cable-tv" class="rm-nav-link" data-section="cable-tv">
-            <span class="nav-num">04</span>
-            <span class="nav-label">CABLE TV</span>
-          </a>
-          <a href="#meeseeks" class="rm-nav-link" data-section="meeseeks">
-            <span class="nav-num">05</span>
-            <span class="nav-label">MEESEEKS</span>
-          </a>
-          <a href="#santai" class="rm-nav-link" data-section="santai">
-            <span class="nav-num">06</span>
-            <span class="nav-label">SANTAI</span>
-          </a>
-          <a href="#microverse" class="rm-nav-link" data-section="microverse">
-            <span class="nav-num">07</span>
-            <span class="nav-label">MICROVERSE</span>
-          </a>
+          <!-- Pillar 1: DOSSIER -->
+          <div class="nav-group" data-group="dossier">
+            <a href="#citadel" class="rm-nav-link active" data-section="citadel">
+              <span class="nav-num">01</span>
+              <span class="nav-label">DOSSIER</span>
+              <span class="nav-chevron" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-flyout">
+              <div class="nav-flyout-header">// CITADEL DOSSIER</div>
+              <a href="#citadel" class="nav-flyout-item" data-target="citadel">
+                <span class="flyout-num">01.1</span>
+                <span class="flyout-text">Citizen ID &amp; Wanted</span>
+              </a>
+              <a href="#arsenal" class="nav-flyout-item" data-target="arsenal">
+                <span class="flyout-num">01.2</span>
+                <span class="flyout-text">Arsenal &amp; Tech Stack</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Pillar 2: PROJECTS -->
+          <div class="nav-group" data-group="projects">
+            <a href="#dimension-shifter" class="rm-nav-link" data-section="dimension-shifter">
+              <span class="nav-num">02</span>
+              <span class="nav-label">PROJECTS</span>
+              <span class="nav-chevron" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-flyout">
+              <div class="nav-flyout-header">// DIMENSION LAB</div>
+              <a href="#dimension-shifter" class="nav-flyout-item" data-target="dimension-shifter">
+                <span class="flyout-num">02.1</span>
+                <span class="flyout-text">Portal Gun Projects</span>
+              </a>
+              <a href="#cable-tv" class="nav-flyout-item" data-target="cable-tv">
+                <span class="flyout-num">02.2</span>
+                <span class="flyout-text">Interdimensional Cable TV</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Pillar 3: LAB & FUN -->
+          <div class="nav-group" data-group="lab">
+            <a href="#meeseeks" class="rm-nav-link" data-section="meeseeks">
+              <span class="nav-num">03</span>
+              <span class="nav-label">LAB &amp; FUN</span>
+              <span class="nav-chevron" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-flyout">
+              <div class="nav-flyout-header">// EXPERIMENTAL REALMS</div>
+              <a href="#meeseeks" class="nav-flyout-item" data-target="meeseeks">
+                <span class="flyout-num">03.1</span>
+                <span class="flyout-text">Mr. Meeseeks Task Box</span>
+              </a>
+              <a href="#santai" class="nav-flyout-item" data-target="santai">
+                <span class="flyout-num">03.2</span>
+                <span class="flyout-text">Santai &amp; Multiverse Lore</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Pillar 4: TRANSMISSIONS -->
+          <div class="nav-group" data-group="transmissions">
+            <a href="#contact" class="rm-nav-link" data-section="contact">
+              <span class="nav-num">04</span>
+              <span class="nav-label">COMMS</span>
+              <span class="nav-chevron" aria-hidden="true">▾</span>
+            </a>
+            <div class="nav-flyout">
+              <div class="nav-flyout-header">// SUBSPACE CHANNELS</div>
+              <a href="#microverse" class="nav-flyout-item" data-target="microverse">
+                <span class="flyout-num">04.1</span>
+                <span class="flyout-text">Microverse Testimonials</span>
+              </a>
+              <a href="#contact" class="nav-flyout-item" data-target="contact">
+                <span class="flyout-num">04.2</span>
+                <span class="flyout-text">Subspace Terminal CLI</span>
+              </a>
+            </div>
+          </div>
         </div>
 
         <!-- Action Buttons + Sci-Fi Mobile Toggle -->
         <div class="rm-nav-actions">
-          <button id="btnAudioToggle" class="btn-audio-toggle" type="button" aria-label="Toggle sound effects">
-            <span class="audio-status-led"></span>
-            <svg class="nav-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-            <span id="audioToggleLabel">SFX ON</span>
-          </button>
-
-          <a href="index.html" class="btn-back-reality" id="btnBackReality" aria-label="Return to earth portfolio">
-            <span class="reality-pulse-dot"></span>
-            <span>REALITY RECALL</span>
-            <svg class="nav-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <a href="#contact" class="btn-nav-terminal" aria-label="Jump to Subspace Terminal CLI">
+            <span class="nav-cli-dot"></span>
+            <span>&gt;_ TRANSMIT</span>
           </a>
 
           <button class="rm-nav-toggle" id="rmNavToggle" type="button" aria-label="Toggle navigation drawer" aria-expanded="false">
@@ -877,6 +921,233 @@
       </div>
     </section>
 
+    <!-- CITADEL SUBSPACE TERMINAL (CONTACT CLI SECTION) -->
+    <section class="citadel-terminal-section" id="contact">
+      <div class="terminal-section-header">
+        <span class="section-tag">// CITADEL QUANTUM MAINFRAME // SECURE SUBSPACE COMMS</span>
+        <h2 class="section-main-title">Citadel Subspace Terminal</h2>
+        <p class="citadel-terminal-desc">
+          Saluran frekuensi langsung ke Nisfal Filsa (Dimension C-137). Kirim paket transmisi terenkripsi untuk proyek web berkinerja tinggi, tawaran misi frontend/fullstack, atau sekadar bertukar formula teknologi antar-dimensi.
+        </p>
+      </div>
+
+      <!-- Main Terminal Console Window -->
+      <div class="terminal-window" id="citadelTerminalWindow">
+        <!-- Terminal Top Bar / Window Chrome -->
+        <div class="terminal-topbar">
+          <div class="terminal-controls">
+            <span class="t-ctrl-dot dot-red" title="Emergency Self-Destruct [DISABLED BY RICK]"></span>
+            <span class="t-ctrl-dot dot-yellow" title="Standby / Buffer Throttle"></span>
+            <span class="t-ctrl-dot dot-green" title="Subspace Quantum Uplink Active"></span>
+          </div>
+          <div class="terminal-shell-title">
+            <svg class="t-title-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            <span>bash - root@citadel-c137: ~/comms/transmit-packet.sh</span>
+          </div>
+          <div class="terminal-status-indicator">
+            <span class="t-beacon-pulse"></span>
+            <span class="t-status-text">UPLINK ONLINE</span>
+          </div>
+        </div>
+
+        <!-- Telemetry Metadata Strip -->
+        <div class="terminal-meta-bar">
+          <div class="meta-item"><span class="meta-key">CARRIER:</span> <span class="meta-val">137.042 MHz (Earth Relayed)</span></div>
+          <div class="meta-item"><span class="meta-key">PROTOCOL:</span> <span class="meta-val">QUANTUM-SSH / E2EE</span></div>
+          <div class="meta-item"><span class="meta-key">TARGET:</span> <span class="meta-val highlight-green">NISFAL FILSA</span></div>
+          <div class="meta-item"><span class="meta-key">FIREWALL:</span> <span class="meta-val highlight-cyan">FEDERATION-BYPASS v4</span></div>
+        </div>
+
+        <!-- Terminal Screen Area (CRT scanlines & phosphor glow) -->
+        <div class="terminal-screen" id="terminalScreen">
+          <div class="terminal-scanlines" aria-hidden="true"></div>
+          <div class="terminal-screen-inner">
+
+            <!-- ASCII Graphic Header -->
+            <pre class="terminal-ascii-art" aria-hidden="true">
+ ██████╗██╗████████╗ █████╗ ██████╗ ███████╗██╗     
+██╔════╝██║╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║     
+██║     ██║   ██║   ███████║██║  ██║█████╗  ██║     
+██║     ██║   ██║   ██╔══██║██║  ██║██╔══╝  ██║     
+╚██████╗██║   ██║   ██║  ██║██████╔╝███████╗███████╗
+            </pre>
+            <div class="terminal-system-banner">
+              <span>[CITADEL SUBSPACE RELAY // KERNEL v4.13.0-c137 // ALL FEDERATION SURVEILLANCE NEUTRALIZED]</span>
+            </div>
+
+            <!-- Dynamic Terminal Console Output -->
+            <div class="terminal-log-output" id="terminalLogOutput" aria-live="polite">
+              <div class="t-log-entry t-log-sys">
+                <span class="t-ts">[00:00:01]</span> <span class="t-tag-init">[INIT]</span> Subspace carrier wave locked to Dimension C-137. Microverse power fed: 100%.
+              </div>
+              <div class="t-log-entry t-log-auth">
+                <span class="t-ts">[00:00:02]</span> <span class="t-tag-auth">[AUTH]</span> Rick's proxy ring active. Quantum tunnel established to target inbox.
+              </div>
+              <div class="t-log-entry t-log-info">
+                <span class="t-ts">[00:00:03]</span> <span class="t-tag-target">[TARGET]</span> Recipient: <strong class="t-bold-name">Nisfal Filsa</strong> (Fullstack & Creative Frontend Engineer).
+              </div>
+              <div class="t-log-entry t-log-ready">
+                <span class="t-ts">[00:00:04]</span> <span class="t-tag-ready">[READY]</span> Console buffer unlocked. Siap menerima transmisi atau jalankan quick command di bawah:
+              </div>
+            </div>
+
+            <!-- Quick Command Presets Toolbar -->
+            <div class="terminal-quick-bar">
+              <span class="quick-bar-heading">QUICK CMDS:</span>
+              <div class="quick-bar-buttons">
+                <button type="button" class="t-cmd-btn" data-cmd="help" title="Daftar perintah yang tersedia">
+                  <code>--help</code>
+                </button>
+                <button type="button" class="t-cmd-btn" data-cmd="whoami" title="Cek identitas pengirim">
+                  <code>--whoami</code>
+                </button>
+                <button type="button" class="t-cmd-btn" data-cmd="status" title="Status ketersediaan Nisfal">
+                  <code>--status</code>
+                </button>
+                <button type="button" class="t-cmd-btn" data-cmd="rick-quote" title="Saran motivasi/sarkas dari Rick Sanchez">
+                  <code>--rick-quote</code>
+                </button>
+                <button type="button" class="t-cmd-btn t-cmd-clear" data-cmd="clear" title="Bersihkan log terminal">
+                  <code>--clear</code>
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive CLI Form -->
+            <form class="terminal-form" id="citadelContactForm" novalidate>
+              <div class="t-form-row">
+                <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
+                <div class="t-field-group">
+                  <label for="termSender" class="t-field-flag">--sender-name=</label>
+                  <div class="t-input-cage">
+                    <span class="t-quote">"</span>
+                    <input type="text" id="termSender" class="t-cli-input" placeholder="Nama / Codename Anda..." required autocomplete="off" spellcheck="false">
+                    <span class="t-quote">"</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="t-form-row">
+                <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
+                <div class="t-field-group">
+                  <label for="termEmail" class="t-field-flag">--freq-channel=</label>
+                  <div class="t-input-cage">
+                    <span class="t-quote">"</span>
+                    <input type="email" id="termEmail" class="t-cli-input" placeholder="email.anda@domain.galaxy..." required autocomplete="off" spellcheck="false">
+                    <span class="t-quote">"</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="t-form-row">
+                <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
+                <div class="t-field-group">
+                  <label for="termMission" class="t-field-flag">--mission-type=</label>
+                  <div class="t-input-cage t-select-cage">
+                    <span class="t-quote">"</span>
+                    <select id="termMission" class="t-cli-select">
+                      <option value="Freelance Web Project">FREELANCE_PROJECT (Web App / Frontend Redesign)</option>
+                      <option value="Full-Time Engineering Quest">FULLTIME_QUEST (Engineering Role / Citadel Opportunity)</option>
+                      <option value="Technical Consultation">TECH_CONSULTATION (Architecture, Performance, Motion)</option>
+                      <option value="Interdimensional Collaboration">COLLABORATION (Open Source / Eksplorasi Kreatif)</option>
+                      <option value="Casual Transmission">CASUAL_TRANSMISSION (Diskusi Santai / Tanya Teknologi)</option>
+                    </select>
+                    <span class="t-quote">"</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="t-form-row t-form-row-multiline">
+                <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
+                <div class="t-field-group t-field-group-area">
+                  <label for="termMessage" class="t-field-flag">--payload-message=</label>
+                  <div class="t-input-cage t-area-cage">
+                    <span class="t-quote">"</span>
+                    <textarea id="termMessage" class="t-cli-textarea" rows="4" placeholder="Tuliskan detail transmisi, tawaran proyek, atau pesan Anda di sini... Pesan Anda akan langsung dikirimkan ke kotak masuk Nisfal tanpa dicegat agen Federasi Galaksi." required spellcheck="false"></textarea>
+                    <span class="t-quote">"</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Terminal Command Buttons -->
+              <div class="t-form-actions">
+                <button type="submit" class="t-submit-btn" id="btnTerminalSubmit">
+                  <span class="t-btn-run">&gt;</span>
+                  <span class="t-btn-text">EXECUTE_TRANSMISSION.sh</span>
+                  <span class="t-btn-blink">_</span>
+                </button>
+
+                <button type="button" class="t-action-btn t-copy-btn" id="btnCopyEmail" title="Salin alamat email nisfalfilsa12@gmail.com">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span id="copyEmailLabel">COPY_FREQ [EMAIL]</span>
+                </button>
+
+                <button type="button" class="t-action-btn t-reset-btn" id="btnResetBuffer" title="Kosongkan formulir">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                  <span>RESET_BUFFER</span>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+        <!-- Terminal Bottom Status Bar -->
+        <div class="terminal-bottom-bar">
+          <div class="t-bottom-left">
+            <span class="t-kbd-hint"><kbd>Tab</kbd> untuk navigasi field</span>
+            <span class="t-kbd-hint"><kbd>Enter</kbd> atau klik tombol untuk eksekusi</span>
+          </div>
+          <div class="t-bottom-right">
+            <span class="t-stat-pill"><span class="t-stat-dot"></span> BUFFER: READY</span>
+            <span class="t-stat-pill">ENCRYPTION: 2048-BIT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alternative Direct Frequencies (Card Uplinks) -->
+      <div class="terminal-direct-grid">
+        <a href="mailto:nisfalfilsa12@gmail.com" class="direct-freq-card freq-email" id="directEmailCard">
+          <div class="freq-card-header">
+            <div class="freq-badge">PRIMARY COMMS</div>
+            <div class="freq-ping">● LIVE</div>
+          </div>
+          <div class="freq-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="freq-title">Direct Subspace Mail</div>
+          <div class="freq-val">nisfalfilsa12@gmail.com</div>
+          <div class="freq-action">KLIK UNTUK KIRIM EMAIL LANGSUNG ↗</div>
+        </a>
+
+        <a href="https://github.com/nisfal" target="_blank" rel="noopener noreferrer" class="direct-freq-card freq-github">
+          <div class="freq-card-header">
+            <div class="freq-badge">CODE MULTIVERSE</div>
+            <div class="freq-ping">● PUBLIC</div>
+          </div>
+          <div class="freq-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          </div>
+          <div class="freq-title">Citadel Git Archives</div>
+          <div class="freq-val">github.com/nisfal</div>
+          <div class="freq-action">INSPEKSI REPOSITORI &amp; SOURCE CODE ↗</div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/nisfal-filsa" target="_blank" rel="noopener noreferrer" class="direct-freq-card freq-linkedin">
+          <div class="freq-card-header">
+            <div class="freq-badge">COUNCIL NETWORK</div>
+            <div class="freq-ping">● CONNECTED</div>
+          </div>
+          <div class="freq-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </div>
+          <div class="freq-title">Professional Frequency</div>
+          <div class="freq-val">linkedin.com/in/nisfal-filsa</div>
+          <div class="freq-action">HUBUNGKAN JARINGAN PROFESIONAL ↗</div>
+        </a>
+      </div>
+    </section>
+
     <!-- FOOTER & RETURN PORTAL -->
     <footer class="rm-footer">
       <a href="index.html" class="footer-portal-button" aria-label="Return to standard portfolio">
@@ -893,28 +1164,49 @@
         © 2026 Nisfal Filsa - Terdaftar di Dimensi C-137 & Planet Bumi. Dibangun dengan rasa humor dan kode berkinerja tinggi.
       </p>
     </footer>
+  </main>
 
-  <!-- THE BUTTER ROBOT FLOATING EASTER EGG (Fixed Bottom-Right) -->
-  <aside class="butter-robot-widget" id="butterRobot" aria-label="The Butter Robot Easter Egg">
-    <div class="butter-balloon" id="butterBalloon">
-      <button type="button" class="butter-close-btn" id="btnButterClose" aria-label="Tutup pesan robot" title="Sembunyikan pesan">&times;</button>
-      <div class="butter-quote" id="butterQuote">"What is my purpose?"</div>
-      <span class="butter-tip-click">(Klik robotnya!)</span>
+  <!-- CITADEL UTILITY DOCK (FLOATING BOTTOM-RIGHT HUD: SFX + REALITY RECALL + BUTTER ROBOT) -->
+  <aside class="citadel-hud-dock" id="citadelHudDock" aria-label="Citadel Utility Dock">
+    <!-- Quick Actions Capsule: SFX & Reality Recall -->
+    <div class="hud-capsule" id="hudCapsule">
+      <button id="btnAudioToggle" class="btn-audio-toggle hud-btn" type="button" aria-label="Toggle sound effects" title="Aktifkan/Bisukan Efek Suara Web Audio">
+        <span class="audio-status-led"></span>
+        <svg class="nav-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+        <span id="audioToggleLabel">SFX ON</span>
+      </button>
+
+      <span class="hud-divider" aria-hidden="true"></span>
+
+      <a href="index.html" class="btn-back-reality hud-btn" id="btnBackReality" aria-label="Return to earth portfolio" title="Kembali ke portofolio utama (Dimensi Nyata)">
+        <span class="reality-pulse-dot"></span>
+        <span>REALITY RECALL</span>
+        <svg class="nav-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </a>
     </div>
-    <button type="button" class="butter-robot-btn" id="btnButterRobot" aria-label="Interact with Butter Robot" title="Tanya tujuan Butter Robot">
-      <div class="robot-body">
-        <div class="robot-head">
-          <div class="robot-eye" id="robotEye"></div>
-        </div>
-        <div class="robot-chest">
-          <div class="butter-cube-block"></div>
-        </div>
-        <div class="robot-treads">
-          <span class="tread-l"></span>
-          <span class="tread-r"></span>
-        </div>
+
+    <!-- The Butter Robot Easter Egg -->
+    <div class="butter-robot-widget" id="butterRobot" aria-label="The Butter Robot Easter Egg">
+      <div class="butter-balloon" id="butterBalloon">
+        <button type="button" class="butter-close-btn" id="btnButterClose" aria-label="Tutup pesan robot" title="Sembunyikan pesan">&times;</button>
+        <div class="butter-quote" id="butterQuote">"What is my purpose?"</div>
+        <span class="butter-tip-click">(Klik robotnya!)</span>
       </div>
-    </button>
+      <button type="button" class="butter-robot-btn" id="btnButterRobot" aria-label="Interact with Butter Robot" title="Tanya tujuan Butter Robot">
+        <div class="robot-body">
+          <div class="robot-head">
+            <div class="robot-eye" id="robotEye"></div>
+          </div>
+          <div class="robot-chest">
+            <div class="butter-cube-block"></div>
+          </div>
+          <div class="robot-treads">
+            <span class="tread-l"></span>
+            <span class="tread-r"></span>
+          </div>
+        </div>
+      </button>
+    </div>
   </aside>
 
   <script src="js/rick-morty.js"></script>
