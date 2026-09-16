@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>OG Image Generator - Nisfal Filsa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background-color: #09090b;
+      font-family: 'Geist', 'Plus Jakarta Sans', sans-serif;
+      color: #fafafa;
+      position: relative;
+    }
+
+    /* Ambient Lighting */
+    .glow-red-top {
+      position: absolute;
+      top: -100px;
+      right: 40px;
+      width: 620px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.22) 0%, rgba(220, 38, 38, 0.06) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .glow-silver-bottom {
+      position: absolute;
+      bottom: -120px;
+      left: -80px;
+      width: 550px;
+      height: 460px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .glow-red-accent {
+      position: absolute;
+      top: 50%;
+      right: 15%;
+      transform: translateY(-50%);
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Precision Dot Grid */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 40%, transparent 95%);
+      -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 40%, transparent 95%);
+      pointer-events: none;
+    }
+
+    /* Canvas Frame (Outer Double-Bezel) */
+    .canvas-frame {
+      position: absolute;
+      inset: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(14, 14, 18, 0.78);
+      backdrop-filter: blur(24px);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.15),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.4),
+        0 24px 50px -10px rgba(0, 0, 0, 0.75);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px 44px;
+      overflow: hidden;
+    }
+
+    /* Top Brand Bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .flag-badge {
+      display: inline-flex;
+      flex-direction: column;
+      width: 22px;
+      height: 14px;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .flag-top {
+      height: 50%;
+      background: #dc2626;
+    }
+
+    .flag-bottom {
+      height: 50%;
+      background: #ffffff;
+    }
+
+    .brand-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .brand-pipe {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .site-domain {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      color: #a1a1aa;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #34d399;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.12);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981, 0 0 16px rgba(16, 185, 129, 0.8);
+    }
+
+    /* Core Hero Grid */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.98fr;
+      gap: 36px;
+      align-items: center;
+      margin: 12px 0 8px;
+    }
+
+    /* Left Side: Editorial Typography & Stack */
+    .hero-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #ef4444;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .hero-label-bar {
+      width: 18px;
+      height: 2px;
+      background: #ef4444;
+      border-radius: 2px;
+      box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+    }
+
+    .hero-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .hero-name-row {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #fafafa;
+    }
+
+    .hero-name-highlight {
+      background: linear-gradient(180deg, #ffffff 30%, #e2e8f0 70%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-role-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      background: linear-gradient(90deg, #ffffff 0%, #fca5a5 35%, #ef4444 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-summary {
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: #a1a1aa;
+      max-width: 530px;
+    }
+
+    .hero-summary strong {
+      color: #e4e4e7;
+      font-weight: 600;
+    }
+
+    /* Stack Pills */
+    .stack-shelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 6px;
+    }
+
+    .stack-chip {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #d4d4d8;
+    }
+
+    .stack-chip.red-highlight {
+      background: rgba(220, 38, 38, 0.12);
+      border-color: rgba(220, 38, 38, 0.35);
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(220, 38, 38, 0.15);
+    }
+
+    .stack-chip.white-highlight {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+    }
+
+    /* Right Side: Double-Bezel Architecture Telemetry Window */
+    .telemetry-window {
+      background: #101014;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 
+        0 24px 44px -10px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .window-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.025);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .window-traffic-lights {
+      display: flex;
+      gap: 6px;
+    }
+
+    .traffic-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .traffic-dot.red { background: #ef4444; }
+    .traffic-dot.yellow { background: #eab308; }
+    .traffic-dot.green { background: #22c55e; }
+
+    .window-tabs {
+      display: flex;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 4px;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .window-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      color: #71717a;
+    }
+
+    .window-tab.active {
+      background: #ffffff;
+      color: #09090b;
+      font-weight: 700;
+    }
+
+    .window-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #22c55e;
+      background: rgba(34, 197, 94, 0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    .live-indicator-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 6px #22c55e;
+    }
+
+    /* Window Telemetry Cards */
+    .window-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .metric-card {
+      padding: 11px 14px;
+      background: rgba(255, 255, 255, 0.022);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .metric-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.64rem;
+      font-weight: 600;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .metric-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fafafa;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .metric-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #ef4444;
+    }
+
+    .window-footer {
+      padding: 10px 16px;
+      background: rgba(0, 0, 0, 0.28);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.71rem;
+      color: #71717a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-white {
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    /* Bottom Anchor Row */
+    .bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .production-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #a1a1aa;
+    }
+
+    .seal-sparkle {
+      color: #ef4444;
+      font-size: 0.9rem;
+      text-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+    }
+
+    .social-cluster {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #71717a;
+    }
+
+    .social-link-item {
+      color: #a1a1aa;
+      font-weight: 500;
+    }
+
+    .social-bullet {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Ambient Atmospheric Backdrops -->
+  <div class="glow-red-top"></div>
+  <div class="glow-silver-bottom"></div>
+  <div class="glow-red-accent"></div>
+  <div class="bg-grid"></div>
+
+  <!-- Outer Double-Bezel Frame Container -->
+  <div class="canvas-frame">
+    
+    <!-- Top Brand Row -->
+    <header class="top-bar">
+      <div class="brand-cluster">
+        <div class="flag-badge">
+          <div class="flag-top"></div>
+          <div class="flag-bottom"></div>
+        </div>
+        <span class="brand-logo">&lt;NF/&gt;</span>
+        <div class="brand-pipe"></div>
+        <span class="site-domain">nisfal.vercel.app</span>
+      </div>
+
+      <div class="status-badge">
+        <span class="pulse-dot"></span>
+        <span>Terbuka untuk proyek strategis</span>
+      </div>
+    </header>
+
+    <!-- Main Content Architecture Grid -->
+    <main class="hero-grid">
+      
+      <!-- Left Column: Identity & Stack -->
+      <div class="hero-text-block">
+        <div class="hero-label">
+          <span class="hero-label-bar"></span>
+          <span>Fullstack & Systems Architecture</span>
+        </div>
+
+        <div class="hero-title-group">
+          <h1 class="hero-name-row">
+            Hai, saya <span class="hero-name-highlight">Nisfal Filsa</span>
+          </h1>
+          <h2 class="hero-role-title">Fullstack & Systems Engineer</h2>
+        </div>
+
+        <p class="hero-summary">
+          Merancang arsitektur backend berkapasitas tinggi dan antarmuka web modern yang tangguh dengan <strong>Next.js 15</strong>, <strong>Go</strong>, <strong>TypeScript</strong>, dan sistem <strong>Event-Driven</strong>.
+        </p>
+
+        <div class="stack-shelf">
+          <span class="stack-chip red-highlight">Go (Gin)</span>
+          <span class="stack-chip white-highlight">Next.js 15</span>
+          <span class="stack-chip">TypeScript</span>
+          <span class="stack-chip">Express v5</span>
+          <span class="stack-chip red-highlight">RabbitMQ</span>
+          <span class="stack-chip">Prisma v6 Dual-DB</span>
+          <span class="stack-chip">Redis</span>
+          <span class="stack-chip">PostgreSQL</span>
+          <span class="stack-chip">Tailwind CSS v4</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Telemetry Card (Site Mirror) -->
+      <div class="telemetry-window">
+        <div class="window-header">
+          <div class="window-traffic-lights">
+            <span class="traffic-dot red"></span>
+            <span class="traffic-dot yellow"></span>
+            <span class="traffic-dot green"></span>
+          </div>
+
+          <div class="window-tabs">
+            <span class="window-tab active">Arsitektur</span>
+            <span class="window-tab">Telemetri</span>
+            <span class="window-tab">Keamanan</span>
+          </div>
+
+          <div class="window-live-pill">
+            <span class="live-indicator-dot"></span>
+            <span>LIVE</span>
+          </div>
+        </div>
+
+        <div class="window-body">
+          <div class="metric-card">
+            <span class="metric-label">Pipeline Throughput</span>
+            <div class="metric-row">
+              <span class="metric-number">100k+ ops/s</span>
+              <span class="metric-sub">Go Gin + RabbitMQ</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">DB Query Latency</span>
+            <div class="metric-row">
+              <span class="metric-number">&lt; 2.4ms</span>
+              <span class="metric-sub">Prisma v6 + Redis</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Queue Reliability</span>
+            <div class="metric-row">
+              <span class="metric-number">99.99%</span>
+              <span class="metric-sub">Durable + DLQ Policy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-footer">
+          <span>// Rekam Jejak Produksi:</span>
+          <span class="footer-white">SKCK Polri · Allina Platform · Telkom SD-WAN</span>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Bottom Verification Row -->
+    <footer class="bottom-bar">
+      <div class="production-seal">
+        <span class="seal-sparkle">✦</span>
+        <span>Sistem Skala Nasional & Enterprise · Desain Frontend Berstandar Tinggi</span>
+      </div>
+
+      <div class="social-cluster">
+        <span class="social-link-item">github.com/nisfal</span>
+        <span class="social-bullet"></span>
+        <span class="social-link-item">linkedin.com/in/nisfal</span>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
