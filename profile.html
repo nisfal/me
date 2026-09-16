@@ -37,7 +37,7 @@
   <div id="glitchOverlay" class="glitch-overlay"></div>
 
   <!-- Navigation Bar -->
-  <nav class="rm-navbar">
+  <nav class="rm-navbar" id="rmNavbar">
     <div class="rm-container">
       <div class="rm-nav-inner">
         <a href="profile.html" class="rm-brand" aria-label="Nisfal Filsa Dimension C-137">
@@ -47,19 +47,41 @@
         </a>
 
         <div class="rm-nav-links">
-          <a href="#citadel" class="rm-nav-link">ID Card</a>
-          <a href="#dimension-shifter" class="rm-nav-link">Portal Gun</a>
-          <a href="#arsenal" class="rm-nav-link">Arsenal</a>
-          <a href="#cable-tv" class="rm-nav-link">Cable TV</a>
-          <a href="#meeseeks" class="rm-nav-link">Meeseeks Box</a>
-          <a href="#santai" class="rm-nav-link">Sisi Santai</a>
+          <a href="#citadel" class="rm-nav-link active" data-section="citadel">
+            <span class="nav-num">01</span>
+            <span class="nav-label">ID CARD</span>
+          </a>
+          <a href="#dimension-shifter" class="rm-nav-link" data-section="dimension-shifter">
+            <span class="nav-num">02</span>
+            <span class="nav-label">PORTAL GUN</span>
+          </a>
+          <a href="#arsenal" class="rm-nav-link" data-section="arsenal">
+            <span class="nav-num">03</span>
+            <span class="nav-label">ARSENAL</span>
+          </a>
+          <a href="#cable-tv" class="rm-nav-link" data-section="cable-tv">
+            <span class="nav-num">04</span>
+            <span class="nav-label">CABLE TV</span>
+          </a>
+          <a href="#meeseeks" class="rm-nav-link" data-section="meeseeks">
+            <span class="nav-num">05</span>
+            <span class="nav-label">MEESEEKS</span>
+          </a>
+          <a href="#santai" class="rm-nav-link" data-section="santai">
+            <span class="nav-num">06</span>
+            <span class="nav-label">SANTAI</span>
+          </a>
+
           <button id="btnAudioToggle" class="btn-audio-toggle" type="button" aria-label="Toggle sound effects">
-            <svg class="nav-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
-            <span id="audioToggleLabel">AUDIO FX: ON</span>
+            <span class="audio-status-led"></span>
+            <svg class="nav-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+            <span id="audioToggleLabel">SFX ON</span>
           </button>
-          <a href="index.html" class="btn-back-reality" aria-label="Return to serious portfolio">
-            <svg class="nav-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span>PORTOFOLIO UTAMA</span>
+
+          <a href="index.html" class="btn-back-reality" id="btnBackReality" aria-label="Return to earth portfolio">
+            <span class="reality-pulse-dot"></span>
+            <span>REALITY RECALL</span>
+            <svg class="nav-btn-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           </a>
         </div>
       </div>

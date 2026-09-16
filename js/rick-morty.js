@@ -241,6 +241,40 @@
     }
   }
 
+  function playRealityCollapseSound() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(60, now + 0.55);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(2800, now);
+      filter.frequency.exponentialRampToValueAtTime(100, now + 0.55);
+
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.58);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.6);
+    } catch (e) {
+      console.debug('Audio error:', e);
+    }
+  }
+
   // --- 2. Interactive Portal Swirl Canvas with Mouse Tracking ---
   const canvas = document.getElementById('portalCanvas');
   let ctx = null;
@@ -783,11 +817,87 @@
     setupMeeseeksBox();
     setupButterRobot();
     setupAudioToggle();
+    setupRealityReturnTransitions();
+    setupNavbarScrollSpy();
 
     // User gesture unlock for Web Audio
     document.body.addEventListener('click', () => {
       initAudio();
     }, { once: true });
   });
+
+  // --- 10. Reality Return & Entry Transition VFX ---
+  function setupRealityReturnTransitions() {
+    const returnButtons = document.querySelectorAll('#btnBackReality, .footer-portal-button, a[href="index.html"]');
+
+    function triggerRealityCollapse(targetUrl) {
+      playRealityCollapseSound();
+      document.body.classList.add('reality-collapsing');
+
+      let collapseOverlay = document.getElementById('realityCollapseFullscreen');
+      if (!collapseOverlay) {
+        collapseOverlay = document.createElement('div');
+        collapseOverlay.id = 'realityCollapseFullscreen';
+        collapseOverlay.className = 'reality-collapse-fullscreen';
+        collapseOverlay.innerHTML = '<div class="collapse-line"></div>';
+        document.body.appendChild(collapseOverlay);
+      }
+
+      requestAnimationFrame(() => {
+        collapseOverlay.classList.add('active');
+      });
+
+      setTimeout(() => {
+        window.location.href = targetUrl.includes('?') ? `${targetUrl}&warp=return` : `${targetUrl}?warp=return`;
+      }, 620);
+    }
+
+    returnButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = btn.getAttribute('href') || 'index.html';
+        triggerRealityCollapse(url);
+      });
+    });
+
+    // Check if arrived from portal warp in
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('warp') === 'in') {
+      document.body.classList.add('portal-arrived');
+      playPortalSound();
+      params.delete('warp');
+      const newQuery = params.toString();
+      const newUrl = window.location.pathname + (newQuery ? `?${newQuery}` : '') + window.location.hash;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  }
+
+  // --- 11. Navbar Scroll Spy ---
+  function setupNavbarScrollSpy() {
+    const navLinks = document.querySelectorAll('.rm-nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    function onScroll() {
+      const scrollPos = window.scrollY + 160;
+      sections.forEach(sec => {
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+        if (scrollPos >= top && scrollPos < top + height) {
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
 })();
