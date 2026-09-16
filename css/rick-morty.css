@@ -2912,3 +2912,589 @@ body.portal-arrived {
     font-size: 0.85rem;
   }
 }
+
+
+/* ==========================================================================
+   MICROVERSE BATTERY — TESTIMONIALS SECTION
+   Power Core, Battery Cells, Witness Cards, Energy Bars
+   ========================================================================== */
+
+/* ── Section Container ── */
+.microverse-section {
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(151, 206, 76, 0.07) 0%, transparent 60%),
+              radial-gradient(ellipse 80% 40% at 80% 100%, rgba(66, 180, 202, 0.06) 0%, transparent 50%),
+              var(--void-bg);
+}
+
+.microverse-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(151, 206, 76, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(151, 206, 76, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.section-sub {
+  max-width: 680px;
+  margin: 0.6rem auto 0;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+/* ── Power Core Plant Header ── */
+.microverse-plant-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 3rem auto 3.5rem;
+}
+
+.power-core-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--portal-green);
+  box-shadow:
+    0 0 20px var(--portal-glow),
+    0 0 60px rgba(151, 206, 76, 0.2),
+    inset 0 0 20px rgba(151, 206, 76, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: coreRotate 8s linear infinite;
+  position: relative;
+}
+
+.power-core-ring::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(151, 206, 76, 0.4);
+  animation: coreRotate 4s linear infinite reverse;
+}
+
+@keyframes coreRotate {
+  to { transform: rotate(360deg); }
+}
+
+.power-core-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: coreRotate 8s linear infinite reverse; /* counter-rotate text */
+}
+
+.power-core-label {
+  font-family: var(--font-code);
+  font-size: 0.5rem;
+  color: var(--portal-green);
+  letter-spacing: 0.12em;
+  opacity: 0.8;
+}
+
+.power-core-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--portal-green);
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 0 12px var(--portal-glow);
+}
+
+.power-plant-pipes {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.pipe {
+  display: block;
+  width: 8px;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to top, var(--portal-green), rgba(151, 206, 76, 0.3));
+  box-shadow: 0 0 6px var(--portal-glow);
+  animation: pipePulse 2s ease-in-out infinite;
+}
+.pipe-1 { height: 32px; animation-delay: 0s; }
+.pipe-2 { height: 52px; animation-delay: 0.3s; }
+.pipe-3 { height: 42px; animation-delay: 0.6s; }
+.pipe-4 { height: 36px; animation-delay: 0.9s; }
+
+@keyframes pipePulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; box-shadow: 0 0 14px var(--portal-glow); }
+}
+
+/* ── Battery Cell Grid ── */
+.microverse-battery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Individual Battery Cell ── */
+.battery-cell {
+  --cell-accent: var(--portal-green);
+  --cell-glow: var(--portal-glow);
+
+  background: linear-gradient(145deg, rgba(15, 20, 32, 0.95) 0%, rgba(10, 14, 24, 0.9) 100%);
+  border: 1px solid rgba(151, 206, 76, 0.2);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth), border-color 0.35s;
+  position: relative;
+}
+
+.battery-cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cell-accent), transparent);
+  opacity: 0.7;
+}
+
+.battery-cell:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 24px var(--cell-glow);
+  border-color: var(--cell-accent);
+}
+
+/* Per-character color accent variants */
+.cell-morty {
+  --cell-accent: #FCD34D;
+  --cell-glow: rgba(252, 211, 77, 0.35);
+  border-color: rgba(252, 211, 77, 0.2);
+}
+.cell-morty::before { background: linear-gradient(90deg, transparent, #FCD34D, transparent); }
+
+.cell-meeseeks {
+  --cell-accent: #8BE1FF;
+  --cell-glow: rgba(139, 225, 255, 0.35);
+  border-color: rgba(139, 225, 255, 0.2);
+}
+.cell-meeseeks::before { background: linear-gradient(90deg, transparent, #8BE1FF, transparent); }
+
+.cell-evil {
+  --cell-accent: #ef4444;
+  --cell-glow: rgba(239, 68, 68, 0.35);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+.cell-evil::before { background: linear-gradient(90deg, transparent, #ef4444, transparent); }
+
+/* ── Cell Top Terminal (charge header) ── */
+.cell-top-terminal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-wrap: wrap;
+}
+
+.cell-id-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cell-id {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: var(--cell-accent);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.cell-type {
+  font-family: var(--font-code);
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cell-charge-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.charge-label {
+  font-family: var(--font-code);
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.charge-track {
+  width: 80px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.charge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cell-accent), rgba(255, 255, 255, 0.6));
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--cell-glow);
+  transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.charge-pct {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  color: var(--cell-accent);
+  font-weight: 700;
+}
+
+/* ── Cell Body: Avatar + Witness Info ── */
+.cell-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.2rem 0.6rem;
+}
+
+.cell-avatar {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(151, 206, 76, 0.08);
+  border: 2px solid rgba(151, 206, 76, 0.25);
+  overflow: hidden;
+  padding: 4px;
+  box-shadow: 0 0 12px var(--cell-glow);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.battery-cell:hover .cell-avatar {
+  box-shadow: 0 0 22px var(--cell-glow);
+  border-color: var(--cell-accent);
+}
+
+.cell-avatar-morty {
+  background: rgba(252, 211, 77, 0.08);
+  border-color: rgba(252, 211, 77, 0.25);
+}
+.cell-avatar-meeseeks {
+  background: rgba(139, 225, 255, 0.08);
+  border-color: rgba(139, 225, 255, 0.25);
+}
+.cell-avatar-evil {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.cell-witness-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.witness-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.witness-role {
+  font-family: var(--font-code);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+
+.witness-stars {
+  display: flex;
+  gap: 2px;
+  margin-top: 3px;
+}
+
+.star {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.15);
+  line-height: 1;
+}
+.star.filled { color: var(--cell-accent); text-shadow: 0 0 6px var(--cell-glow); }
+.star.half {
+  color: transparent;
+  background: linear-gradient(90deg, var(--cell-accent) 50%, rgba(255,255,255,0.15) 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ── Quote Zone ── */
+.cell-quote-zone {
+  padding: 1rem 1.2rem;
+  flex: 1;
+  position: relative;
+}
+
+.cell-quote-mark {
+  font-family: Georgia, serif;
+  font-size: 3.5rem;
+  color: var(--cell-accent);
+  opacity: 0.2;
+  line-height: 0;
+  vertical-align: -0.5rem;
+  margin-right: 4px;
+  display: inline-block;
+}
+
+.cell-quote {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #c8d6e5;
+  font-style: italic;
+  margin: 0 0 0.75rem;
+  border: none;
+  padding: 0;
+}
+
+.cell-quote em {
+  color: var(--cell-accent);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.cell-quote-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.q-tag {
+  font-family: var(--font-code);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--cell-accent);
+  color: var(--cell-accent);
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+.battery-cell:hover .q-tag { opacity: 1; }
+
+/* ── Cell Bottom Energy Bar ── */
+.cell-energy-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.energy-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cell-accent) 0%, rgba(255, 255, 255, 0.5) 100%);
+  box-shadow: 0 0 10px var(--cell-glow);
+  animation: energyFlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes energyFlow {
+  from { opacity: 0.65; }
+  to { opacity: 1; }
+}
+
+.cell-energy-morty .energy-fill { background: linear-gradient(90deg, #FCD34D, #fef3c7); }
+.cell-energy-meeseeks .energy-fill { background: linear-gradient(90deg, #8BE1FF, #e0f9ff); }
+.cell-energy-evil .energy-fill { background: linear-gradient(90deg, #ef4444, #fca5a5); }
+
+/* ── CTA Submit Block ── */
+.microverse-submit-cta {
+  max-width: 1200px;
+  margin: 2.5rem auto 0;
+}
+
+.submit-cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  background: linear-gradient(135deg, rgba(151, 206, 76, 0.06) 0%, rgba(66, 180, 202, 0.04) 100%);
+  border: 1px dashed rgba(151, 206, 76, 0.3);
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  flex-wrap: wrap;
+}
+
+.submit-cta-icon {
+  color: var(--portal-green);
+  opacity: 0.7;
+  flex-shrink: 0;
+  animation: coreRotate 12s linear infinite;
+}
+
+.submit-cta-text {
+  flex: 1;
+  min-width: 220px;
+}
+
+.submit-cta-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 0.25rem;
+}
+
+.submit-cta-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.submit-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.65rem 1.4rem;
+  border: 1px solid var(--portal-green);
+  border-radius: 8px;
+  background: rgba(151, 206, 76, 0.1);
+  color: var(--portal-green);
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.submit-cta-btn:hover {
+  background: rgba(151, 206, 76, 0.2);
+  box-shadow: 0 0 18px var(--portal-glow);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive: Tablet ── */
+@media (max-width: 1024px) {
+  .microverse-battery-grid {
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .microverse-section {
+    padding: 4.5rem 1.5rem;
+  }
+
+  .microverse-battery-grid {
+    grid-template-columns: 1fr;
+    max-width: 640px;
+  }
+
+  .submit-cta-inner {
+    gap: 1rem;
+    padding: 1.2rem 1.4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .microverse-section {
+    padding: 3.5rem 1rem;
+  }
+
+  .power-core-ring {
+    width: 76px;
+    height: 76px;
+  }
+
+  .power-core-value {
+    font-size: 1.2rem;
+  }
+
+  .cell-top-terminal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .charge-track {
+    width: 120px;
+  }
+
+  .cell-body {
+    gap: 0.75rem;
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  .cell-avatar {
+    width: 56px;
+    height: 56px;
+  }
+
+  .witness-name {
+    font-size: 0.9rem;
+  }
+
+  .cell-quote-zone {
+    padding: 0.85rem 1rem;
+  }
+
+  .cell-quote {
+    font-size: 0.82rem;
+  }
+
+  .submit-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 1rem 1.2rem;
+  }
+
+  .submit-cta-icon {
+    display: none;
+  }
+
+  .submit-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .microverse-battery-grid {
+    gap: 1rem;
+  }
+
+  .cell-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cell-avatar {
+    width: 50px;
+    height: 50px;
+  }
+}
+
