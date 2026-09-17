@@ -1160,8 +1160,9 @@ body.portal-arrived {
 
 .wanted-stamp {
   position: absolute;
-  bottom: 60px;
+  top: 12px;
   right: 12px;
+  bottom: auto;
   z-index: 5;
   font-family: var(--font-code);
   font-size: 0.78rem;
@@ -1176,6 +1177,7 @@ body.portal-arrived {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 16px rgba(239, 68, 68, 0.7);
   pointer-events: none;
+  white-space: nowrap;
 }
 
 .mugshot-scan-overlay {
@@ -2852,6 +2854,14 @@ body.portal-arrived {
     max-width: 250px;
   }
 
+  .wanted-stamp {
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+  }
+
   .citadel-bio,
   .wanted-dossier {
     text-align: left;
@@ -3027,10 +3037,11 @@ body.portal-arrived {
   }
 
   .wanted-stamp {
-    font-size: 1.35rem;
-    padding: 2px 8px;
+    font-size: 0.72rem;
+    padding: 2px 7px;
     top: 10px;
     right: 10px;
+    bottom: auto;
   }
 
   .wanted-crimes-list li {

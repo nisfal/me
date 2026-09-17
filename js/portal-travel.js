@@ -110,8 +110,8 @@
         <div class="portal-modal-body">
           <div class="portal-vortex-preview"></div>
           <span class="portal-modal-eyebrow">// INTERDIMENSIONAL JUMP WARNING</span>
-          <h2 class="portal-modal-title" id="portalModalTitle">Lompat ke Dimensi C-137?</h2>
-          <p class="portal-modal-desc">
+          <h2 class="portal-modal-title" id="portalModalTitle" data-i18n="portal_modal_title">Lompat ke Dimensi C-137?</h2>
+          <p class="portal-modal-desc" data-i18n="portal_modal_desc">
             Anda akan meninggalkan realitas portofolio formal dan melintasi fluida portal menuju <strong>Dimensi C-137</strong> (profil santai, sisi personal, eksperimen arsitektur liar, Cable TV, & Mr. Meeseeks).
           </p>
 

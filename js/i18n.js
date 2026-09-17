@@ -246,7 +246,11 @@ const I18N_DICTIONARY = {
 
     profile_footer_return: 'Kembali ke Dimensi Nyata (Portofolio Utama)',
     profile_footer_copyright: '© 2026 Nisfal Filsa - Terdaftar di Dimensi C-137 &amp; Planet Bumi. Dibangun dengan rasa humor dan kode berkinerja tinggi.',
-    profile_dock_recall: 'REALITY RECALL'
+    profile_dock_recall: 'REALITY RECALL',
+    profile_dock_butter_click: '(Klik robotnya!)',
+    
+    portal_modal_title: 'Lompat ke Dimensi C-137?',
+    portal_modal_desc: 'Anda akan meninggalkan realitas portofolio formal dan melintasi fluida portal menuju <strong>Dimensi C-137</strong> (profil santai, sisi personal, eksperimen arsitektur liar, Cable TV, & Mr. Meeseeks).',
   },
   en: {
     meta_title_home: 'Nisfal Filsa | Fullstack & Systems Engineer',
@@ -495,7 +499,11 @@ const I18N_DICTIONARY = {
 
     profile_footer_return: 'Return to Real Dimension (Main Portfolio)',
     profile_footer_copyright: '© 2026 Nisfal Filsa - Registered in Dimension C-137 &amp; Planet Earth. Built with humor and high-performance code.',
-    profile_dock_recall: 'REALITY RECALL'
+    profile_dock_recall: 'REALITY RECALL',
+    profile_dock_butter_click: '(Click the robot!)',
+
+    portal_modal_title: 'Jump to Dimension C-137?',
+    portal_modal_desc: 'You will leave the formal portfolio reality and cross the portal fluid into <strong>Dimension C-137</strong> (casual profile, personal side, wild architectural experiments, Cable TV, & Mr. Meeseeks).',
   }
 };
 
@@ -578,6 +586,6 @@ document.addEventListener('DOMContentLoaded', () => {
       url.searchParams.set('lang', lang);
       window.history.replaceState({}, '', url);
     });
-  });
+  }); 
   setLanguage(getInitialLanguage());
 });
