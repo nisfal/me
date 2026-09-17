@@ -15,6 +15,9 @@ const I18N_DICTIONARY = {
     nav_projects: 'Proyek',
     switch_frontend: 'Keahlian Frontend',
     switch_backend: 'Keahlian Backend',
+    floating_portal_badge: 'WARP PORTAL',
+    floating_portal_title: 'Dimensi C-137',
+    floating_portal_hint: 'Lompat ke Dimensi C-137 (Rick & Morty)',
     
     home_badge: 'Terbuka untuk proyek strategis',
     home_title: 'Hai, saya <span class="highlight gradient-text">Nisfal Filsa</span><br>Fullstack & Systems Engineer',
@@ -289,6 +292,9 @@ const I18N_DICTIONARY = {
     nav_projects: 'Projects',
     switch_frontend: 'Frontend Skills',
     switch_backend: 'Backend Skills',
+    floating_portal_badge: 'WARP PORTAL',
+    floating_portal_title: 'Dimension C-137',
+    floating_portal_hint: 'Jump to Dimension C-137 (Rick & Morty)',
     
     home_badge: 'Available for strategic engineering roles',
     home_title: 'Hi, I\'m <span class="highlight gradient-text">Nisfal Filsa</span><br>Fullstack & Systems Engineer',

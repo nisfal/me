@@ -81,6 +81,33 @@
     }
   }
 
+  function playPortalHoverSound() {
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(640, now + 0.08);
+
+      gain.gain.setValueAtTime(0.02, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.13);
+    } catch (e) {
+      // Ignore if user hasn't interacted yet
+    }
+  }
+
   // --- 2. Dynamic Modal Creation & Attachment ---
   let modalBackdrop = null;
   let targetUrl = 'profile.html';
@@ -230,7 +257,7 @@
 
   // --- 4. Intercept All Links to profile.html ---
   function bindPortalLinks() {
-    const links = document.querySelectorAll('a[href*="profile.html"], .nav-link-portal');
+    const links = document.querySelectorAll('a[href*="profile.html"], .nav-link-portal, .floating-portal-btn');
     links.forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -239,6 +266,10 @@
         playModalOpenSound();
 
         openPortalModal();
+      });
+
+      link.addEventListener('mouseenter', () => {
+        playPortalHoverSound();
       });
     });
   }
