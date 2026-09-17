@@ -4634,13 +4634,174 @@ body.meeseeks-cataclysmic-failure {
   box-shadow: 0 0 8px #00d2ff;
 }
 
-/* ── Battery Cell Grid ── */
-.microverse-battery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+/* ── Microverse HUD Controls & Telemetry Bar ── */
+.microverse-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(10, 15, 26, 0.85);
+  border: 1px solid rgba(151, 206, 76, 0.22);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 0 15px rgba(151, 206, 76, 0.04);
+  position: relative;
+  z-index: 10;
+}
+
+.hud-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--portal-green);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 8px var(--portal-glow);
+}
+
+.hud-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--portal-green);
+  box-shadow: 0 0 10px var(--portal-green);
+  animation: hudPulse 1.8s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+
+.hud-pulse-dot.is-paused {
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b;
+  animation: none;
+}
+
+@keyframes hudPulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 16px var(--portal-green); }
+}
+
+.hud-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hud-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(151, 206, 76, 0.25);
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  user-select: none;
+}
+
+.hud-ctrl-btn:hover {
+  border-color: var(--portal-green);
+  color: var(--portal-green);
+  box-shadow: 0 0 12px rgba(151, 206, 76, 0.35);
+  transform: translateY(-1px);
+}
+
+.hud-ctrl-btn:active {
+  transform: translateY(1px);
+}
+
+.hud-ctrl-btn.active {
+  background: rgba(151, 206, 76, 0.15);
+  border-color: var(--portal-green);
+  color: var(--portal-green);
+  box-shadow: 0 0 10px rgba(151, 206, 76, 0.25);
+}
+
+.hud-btn-reverse.active {
+  background: rgba(0, 210, 255, 0.15);
+  border-color: #00d2ff;
+  color: #00d2ff;
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+}
+
+.hud-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-code);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  opacity: 0.85;
+}
+
+/* ── Horizontal Marquee Viewport ── */
+.microverse-marquee-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0 2rem;
+  margin: 0 0 1.5rem;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.microverse-marquee-viewport:active {
+  cursor: grabbing;
+}
+
+.microverse-marquee-viewport:focus-visible {
+  outline: 2px solid var(--portal-green);
+  outline-offset: 4px;
+}
+
+/* ── Battery Track (Continuous Infinite Drift) ── */
+.microverse-battery-track {
+  --microverse-gap: 1.75rem;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: var(--microverse-gap) !important;
+  align-items: stretch;
+  width: max-content;
+  will-change: transform;
+  animation: microverseInfiniteScroll 60s linear infinite;
+  animation-play-state: running;
+}
+
+@keyframes microverseInfiniteScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(calc(-50% - (var(--microverse-gap) / 2)), 0, 0);
+  }
+}
+
+/* Pause when hover or user paused */
+.microverse-battery-track.is-paused,
+.microverse-marquee-viewport:hover .microverse-battery-track,
+.microverse-battery-track:hover {
+  animation-play-state: paused;
+}
+
+/* Reverse direction */
+.microverse-battery-track.is-reverse {
+  animation-direction: reverse;
 }
 
 /* ── Individual Battery Cell ── */
@@ -4648,14 +4809,21 @@ body.meeseeks-cataclysmic-failure {
   --cell-accent: var(--portal-green);
   --cell-glow: var(--portal-glow);
 
+  width: clamp(340px, 34vw, 480px);
+  min-width: clamp(340px, 34vw, 480px);
+  max-width: clamp(340px, 34vw, 480px);
+  flex: 0 0 clamp(340px, 34vw, 480px);
+
   background: linear-gradient(145deg, rgba(15, 20, 32, 0.95) 0%, rgba(10, 14, 24, 0.9) 100%);
   border: 1px solid rgba(151, 206, 76, 0.2);
   border-radius: 14px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth), border-color 0.35s;
+  justify-content: space-between;
+  transition: transform 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth), border-color 0.35s, opacity 0.35s ease;
   position: relative;
+  user-select: text;
 }
 
 .battery-cell::before {
@@ -4949,6 +5117,9 @@ body.meeseeks-cataclysmic-failure {
 .cell-quote-zone {
   padding: 1rem 1.2rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
 }
 
@@ -5097,8 +5268,8 @@ body.meeseeks-cataclysmic-failure {
 
 /* ── Responsive: Tablet ── */
 @media (max-width: 1024px) {
-  .microverse-battery-grid {
-    gap: 1.2rem;
+  .microverse-battery-track {
+    --microverse-gap: 1.25rem;
   }
 }
 
@@ -5107,9 +5278,17 @@ body.meeseeks-cataclysmic-failure {
     padding: 4.5rem 1.5rem;
   }
 
-  .microverse-battery-grid {
-    grid-template-columns: 1fr;
-    max-width: 640px;
+  .microverse-battery-track .battery-cell {
+    width: clamp(310px, 70vw, 420px);
+    min-width: clamp(310px, 70vw, 420px);
+    max-width: clamp(310px, 70vw, 420px);
+    flex: 0 0 clamp(310px, 70vw, 420px);
+  }
+
+  .microverse-hud-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
   }
 
   .submit-cta-inner {
@@ -5130,6 +5309,28 @@ body.meeseeks-cataclysmic-failure {
 
   .power-core-value {
     font-size: 1.2rem;
+  }
+
+  .microverse-hud-bar {
+    padding: 0.75rem 1rem;
+  }
+
+  .hud-controls-group {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.4rem;
+  }
+
+  .hud-ctrl-btn {
+    padding: 6px 10px;
+    font-size: 0.65rem;
+  }
+
+  .microverse-battery-track .battery-cell {
+    width: clamp(285px, 86vw, 360px);
+    min-width: clamp(285px, 86vw, 360px);
+    max-width: clamp(285px, 86vw, 360px);
+    flex: 0 0 clamp(285px, 86vw, 360px);
   }
 
   .cell-top-terminal {
@@ -5182,8 +5383,8 @@ body.meeseeks-cataclysmic-failure {
 }
 
 @media (max-width: 400px) {
-  .microverse-battery-grid {
-    gap: 1rem;
+  .microverse-battery-track {
+    --microverse-gap: 1rem;
   }
 
   .cell-body {
@@ -5194,6 +5395,23 @@ body.meeseeks-cataclysmic-failure {
   .cell-avatar {
     width: 50px;
     height: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .microverse-battery-track {
+    animation: none !important;
+  }
+
+  .microverse-marquee-viewport {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hud-pulse-dot {
+    animation: none !important;
   }
 }
 

@@ -2333,33 +2333,176 @@
     });
   }
 
-  /* ── 20. Microverse Battery Testimonials Filter ── */
+  /* ── 20. Microverse Battery Testimonials Horizontal Carousel & Filter ── */
   function setupMicroverseFilter() {
+    const track = document.getElementById('microverseTrack');
+    const viewport = document.getElementById('microverseViewport');
     const filterBtns = document.querySelectorAll('.battery-filter-btn');
-    const cells = document.querySelectorAll('.battery-cell');
-    if (!filterBtns.length || !cells.length) return;
+    if (!track) return;
 
+    // Save initial master template of original cards
+    const masterCells = Array.from(track.querySelectorAll('.battery-cell')).map(cell => cell.cloneNode(true));
+    if (!masterCells.length) return;
+
+    const pauseBtn = document.getElementById('microversePauseBtn');
+    const reverseBtn = document.getElementById('microverseReverseBtn');
+    const prevBtn = document.getElementById('microversePrevBtn');
+    const nextBtn = document.getElementById('microverseNextBtn');
+    const statusText = document.getElementById('microverseStatusText');
+    const pulseDot = document.querySelector('.hud-pulse-dot');
+
+    let isManuallyPaused = false;
+    let isReversed = false;
+    let currentFilter = 'all';
+    let warpTimeout = null;
+
+    // Helper to get localized string if i18n available
+    function getI18n(key, fallback) {
+      if (window.i18n && typeof window.i18n.t === 'function') {
+        return window.i18n.t(key) || fallback;
+      }
+      return fallback;
+    }
+
+    function updateStatusDisplay() {
+      if (!statusText) return;
+      if (isManuallyPaused) {
+        statusText.textContent = getI18n('profile_battery_flow_paused', 'STATUS ALIRAN: JEDA SEMENTARA // STANDBY');
+        if (pulseDot) pulseDot.classList.add('is-paused');
+      } else {
+        const dir = isReversed ? ' // REVERSE' : ' // 0.15c';
+        statusText.textContent = getI18n('profile_battery_flow_status', 'STATUS ALIRAN: ORBITAL CONTINUOUS') + dir;
+        if (pulseDot) pulseDot.classList.remove('is-paused');
+      }
+    }
+
+    // Rebuild track cards for seamless infinite horizontal loop based on active filter
+    function renderTrack(filter) {
+      currentFilter = filter;
+      const filtered = masterCells.filter(cell => {
+        const cat = cell.getAttribute('data-category');
+        return filter === 'all' || cat === filter;
+      });
+
+      track.innerHTML = '';
+      if (!filtered.length) return;
+
+      // Ensure enough items so track seamlessly wraps without empty gaps
+      let repeatCount = 2;
+      if (filtered.length <= 2) repeatCount = 6;
+      else if (filtered.length <= 4) repeatCount = 3;
+
+      for (let i = 0; i < repeatCount; i++) {
+        filtered.forEach((cell, idx) => {
+          const clone = cell.cloneNode(true);
+          if (i > 0) clone.setAttribute('aria-hidden', 'true');
+          track.appendChild(clone);
+        });
+      }
+
+      // If page is translated via i18n, sync text on rendered cards
+      if (window.i18n && typeof window.i18n.updatePage === 'function') {
+        window.i18n.updatePage();
+      }
+
+      // Reset animation smoothly
+      track.style.animation = 'none';
+      track.offsetHeight; // trigger reflow
+      track.style.animation = '';
+    }
+
+    // Filter Buttons Click Handling
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         playGlitchSound();
         const filter = btn.getAttribute('data-filter');
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        cells.forEach(cell => {
-          const category = cell.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
-            cell.style.display = '';
-            cell.style.animation = 'none';
-            requestAnimationFrame(() => {
-              cell.style.animation = 'portalEntry 0.35s ease-out forwards';
-            });
-          } else {
-            cell.style.display = 'none';
-          }
-        });
+        renderTrack(filter);
       });
     });
+
+    // Pause / Resume Toggle
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => {
+        playGlitchSound();
+        isManuallyPaused = !isManuallyPaused;
+        const iconPause = pauseBtn.querySelector('.icon-pause');
+        const iconPlay = pauseBtn.querySelector('.icon-play');
+        const btnText = pauseBtn.querySelector('.btn-text');
+
+        if (isManuallyPaused) {
+          track.classList.add('is-paused');
+          pauseBtn.classList.remove('active');
+          if (iconPause) iconPause.style.display = 'none';
+          if (iconPlay) iconPlay.style.display = 'inline-block';
+          if (btnText) btnText.textContent = getI18n('profile_battery_ctrl_resume', 'LANJUT');
+        } else {
+          track.classList.remove('is-paused');
+          pauseBtn.classList.add('active');
+          if (iconPause) iconPause.style.display = 'inline-block';
+          if (iconPlay) iconPlay.style.display = 'none';
+          if (btnText) btnText.textContent = getI18n('profile_battery_ctrl_pause', 'JEDA');
+        }
+        updateStatusDisplay();
+      });
+    }
+
+    // Reverse Direction Toggle
+    if (reverseBtn) {
+      reverseBtn.addEventListener('click', () => {
+        playGlitchSound();
+        isReversed = !isReversed;
+        track.classList.toggle('is-reverse', isReversed);
+        reverseBtn.classList.toggle('active', isReversed);
+        updateStatusDisplay();
+      });
+    }
+
+    // Prev / Next Burst Nudge
+    function triggerWarpBurst(forward) {
+      playGlitchSound();
+      clearTimeout(warpTimeout);
+      const originalDirection = isReversed;
+      const targetReverse = forward ? false : true;
+
+      track.classList.toggle('is-reverse', targetReverse);
+      track.style.animationDuration = '12s'; // temporarily faster speed
+      if (statusText) {
+        statusText.textContent = forward ? '>> WARP BURST: ACCELERATING >>' : '<< TIME WARP: REWINDING <<';
+      }
+
+      warpTimeout = setTimeout(() => {
+        track.style.animationDuration = '';
+        track.classList.toggle('is-reverse', originalDirection);
+        updateStatusDisplay();
+      }, 1200);
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => triggerWarpBurst(true));
+    }
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => triggerWarpBurst(false));
+    }
+
+    // Hover effect on viewport to update status text
+    if (viewport) {
+      viewport.addEventListener('mouseenter', () => {
+        if (!isManuallyPaused && statusText) {
+          statusText.textContent = getI18n('profile_battery_drag_hint', '● READING MODE // HOVER PAUSED');
+          if (pulseDot) pulseDot.classList.add('is-paused');
+        }
+      });
+      viewport.addEventListener('mouseleave', () => {
+        if (!isManuallyPaused) {
+          updateStatusDisplay();
+        }
+      });
+    }
+
+    // Initial render
+    renderTrack('all');
   }
 
 })();
