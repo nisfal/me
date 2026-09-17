@@ -1452,6 +1452,7 @@
     setupRealityReturnTransitions();
     setupNavbarScrollSpy();
     setupCitadelTerminal();
+    setupMicroverseFilter();
 
     // User gesture unlock for Web Audio
     document.body.addEventListener('click', () => {
@@ -1938,6 +1939,35 @@
           }
         }, 1200);
       }, 750);
+    });
+  }
+
+  /* ── 20. Microverse Battery Testimonials Filter ── */
+  function setupMicroverseFilter() {
+    const filterBtns = document.querySelectorAll('.battery-filter-btn');
+    const cells = document.querySelectorAll('.battery-cell');
+    if (!filterBtns.length || !cells.length) return;
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        playGlitchSound();
+        const filter = btn.getAttribute('data-filter');
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        cells.forEach(cell => {
+          const category = cell.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            cell.style.display = '';
+            cell.style.animation = 'none';
+            requestAnimationFrame(() => {
+              cell.style.animation = 'portalEntry 0.35s ease-out forwards';
+            });
+          } else {
+            cell.style.display = 'none';
+          }
+        });
+      });
     });
   }
 

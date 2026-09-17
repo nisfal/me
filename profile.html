@@ -647,11 +647,27 @@
         </div>
       </div>
 
+      <!-- Battery Filter Switcher -->
+      <div class="microverse-filter-bar">
+        <button class="battery-filter-btn active" data-filter="all">
+          <span class="filter-dot"></span>
+          <span data-i18n="profile_battery_filter_all">SEMUA BATERAI (6)</span>
+        </button>
+        <button class="battery-filter-btn filter-real" data-filter="real">
+          <span class="filter-dot"></span>
+          <span data-i18n="profile_battery_filter_real">TERVERIFIKASI LINKEDIN (2)</span>
+        </button>
+        <button class="battery-filter-btn filter-fictional" data-filter="fictional">
+          <span class="filter-dot"></span>
+          <span data-i18n="profile_battery_filter_fictional">MULTIVERSE SCI-FI (4)</span>
+        </button>
+      </div>
+
       <!-- Battery Cell Grid -->
       <div class="microverse-battery-grid">
 
         <!-- Cell 01: Rick Sanchez -->
-        <article class="battery-cell" data-charge="92">
+        <article class="battery-cell" data-charge="92" data-category="fictional">
           <div class="cell-top-terminal">
             <div class="cell-id-bar">
               <span class="cell-id">CELL-01 // α-PRIME</span>
@@ -715,7 +731,7 @@
         </article>
 
         <!-- Cell 02: Morty Smith -->
-        <article class="battery-cell cell-morty" data-charge="88">
+        <article class="battery-cell cell-morty" data-charge="88" data-category="fictional">
           <div class="cell-top-terminal">
             <div class="cell-id-bar">
               <span class="cell-id">CELL-02 // β-SIDEKICK</span>
@@ -779,7 +795,7 @@
         </article>
 
         <!-- Cell 03: Mr. Meeseeks -->
-        <article class="battery-cell cell-meeseeks" data-charge="100">
+        <article class="battery-cell cell-meeseeks" data-charge="100" data-category="fictional">
           <div class="cell-top-terminal">
             <div class="cell-id-bar">
               <span class="cell-id">CELL-03 // EXISTENCE-PAIN</span>
@@ -841,7 +857,7 @@
         </article>
 
         <!-- Cell 04: Evil Morty -->
-        <article class="battery-cell cell-evil" data-charge="97">
+        <article class="battery-cell cell-evil" data-charge="97" data-category="fictional">
           <div class="cell-top-terminal">
             <div class="cell-id-bar">
               <span class="cell-id">CELL-04 // THREAT-LEVEL-9</span>
@@ -903,6 +919,124 @@
 
           <div class="cell-energy-bar cell-energy-evil">
             <div class="energy-fill" style="width: 97%;"></div>
+          </div>
+        </article>
+
+        <!-- Cell 05: Lutfi Alfadani (Real LinkedIn Recommendation) -->
+        <article class="battery-cell cell-linkedin cell-lutfi" data-charge="99" data-category="real">
+          <div class="cell-top-terminal">
+            <div class="cell-id-bar">
+              <span class="cell-id">CELL-05 // EARTH-C137</span>
+              <span class="cell-type cell-type-verified">
+                <svg viewBox="0 0 24 24" class="verified-icon" width="12" height="12" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                LINKEDIN VERIFIED
+              </span>
+            </div>
+            <div class="cell-charge-indicator">
+              <span class="charge-label">CHARGE</span>
+              <div class="charge-track">
+                <div class="charge-fill" style="width: 99%;"></div>
+              </div>
+              <span class="charge-pct">99%</span>
+            </div>
+          </div>
+
+          <div class="cell-body">
+            <div class="cell-avatar cell-avatar-linkedin">
+              <img src="img/testimonial-lutfi.jpg" alt="Lutfi Alfadani" width="100" height="100" loading="lazy" />
+            </div>
+            <div class="cell-witness-info">
+              <div class="witness-name-row">
+                <span class="witness-name">Lutfi Alfadani</span>
+                <a href="https://www.linkedin.com/in/lutfi-alfa/" target="_blank" rel="noopener noreferrer" class="cell-linkedin-badge" title="View LinkedIn Profile">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 1 0 0 3.3 1.65 1.65 0 0 0 0-3.3Z"/></svg>
+                  <span>Profile ↗</span>
+                </a>
+              </div>
+              <span class="witness-role">Sr. Fullstack Developer | Node.js, Golang, React, Mobile | System Architecture</span>
+              <span class="witness-relation" data-i18n="profile_battery_rel5">Senior to Nisfal · 31 Juli 2025</span>
+              <div class="witness-stars">
+                <span class="star filled">★</span><span class="star filled">★</span>
+                <span class="star filled">★</span><span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cell-quote-zone">
+            <span class="cell-quote-mark">"</span>
+            <blockquote class="cell-quote" data-i18n="profile_battery_q5">
+              Saya berkesempatan bekerja sama dengan Nisfal Filsa, seorang Senior Developer yang sangat terampil dan dapat diandalkan. Dia secara konsisten menghadirkan solusi berkualitas tinggi dan menangani tugas-tugas kompleks dengan kejelasan serta presisi. Di luar keahlian teknisnya, Nisfal adalah mentor hebat yang selalu siap membimbing dan mendukung saya saat membutuhkan bantuan. Sikapnya yang tenang, etos kerja tinggi, dan pola pikir kolaboratif menjadikannya aset yang sangat berharga bagi tim mana pun.
+            </blockquote>
+            <div class="cell-quote-tags">
+              <span class="q-tag">Sr. Fullstack</span>
+              <span class="q-tag">System Architecture</span>
+              <span class="q-tag">Technical Mentorship</span>
+              <span class="q-tag">High-Quality Delivery</span>
+            </div>
+          </div>
+
+          <div class="cell-energy-bar cell-energy-lutfi">
+            <div class="energy-fill" style="width: 99%;"></div>
+          </div>
+        </article>
+
+        <!-- Cell 06: Nur Muhammad Nabil (Real LinkedIn Recommendation) -->
+        <article class="battery-cell cell-linkedin cell-nabil" data-charge="100" data-category="real">
+          <div class="cell-top-terminal">
+            <div class="cell-id-bar">
+              <span class="cell-id">CELL-06 // EARTH-C137</span>
+              <span class="cell-type cell-type-verified">
+                <svg viewBox="0 0 24 24" class="verified-icon" width="12" height="12" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                LINKEDIN VERIFIED
+              </span>
+            </div>
+            <div class="cell-charge-indicator">
+              <span class="charge-label">CHARGE</span>
+              <div class="charge-track">
+                <div class="charge-fill" style="width: 100%;"></div>
+              </div>
+              <span class="charge-pct">100%</span>
+            </div>
+          </div>
+
+          <div class="cell-body">
+            <div class="cell-avatar cell-avatar-linkedin">
+              <img src="img/testimonial-nabil.jpg" alt="Nur Muhammad Nabil" width="100" height="100" loading="lazy" />
+            </div>
+            <div class="cell-witness-info">
+              <div class="witness-name-row">
+                <span class="witness-name">Nur Muhammad Nabil</span>
+                <a href="https://www.linkedin.com/in/nur-muhammad-nabil-3bb642235/" target="_blank" rel="noopener noreferrer" class="cell-linkedin-badge" title="View LinkedIn Profile">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 1 0 0 3.3 1.65 1.65 0 0 0 0-3.3Z"/></svg>
+                  <span>Profile ↗</span>
+                </a>
+              </div>
+              <span class="witness-role">Sr. DevOps Engineer | Hybrid/Remote | Scalable Systems &amp; Reliability</span>
+              <span class="witness-relation" data-i18n="profile_battery_rel6">Kolaborasi Tim Satu Divisi · 31 Juli 2025</span>
+              <div class="witness-stars">
+                <span class="star filled">★</span><span class="star filled">★</span>
+                <span class="star filled">★</span><span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cell-quote-zone">
+            <span class="cell-quote-mark">"</span>
+            <blockquote class="cell-quote" data-i18n="profile_battery_q6">
+              Saya memiliki kesempatan untuk bekerja bersama Nisfal Filsa dalam waktu yang cukup lama, dan saya dapat dengan yakin mengatakan bahwa dia adalah seorang full-stack engineer yang luar biasa. Nisfal memadukan keahlian front-end dan back-end yang sangat kuat, secara konsisten menghadirkan solusi berkualitas tinggi dengan perhatian mendalam terhadap detail. Keahlian teknisnya top-notch, namun yang benar-benar membuatnya menonjol adalah rasa tanggung jawab dan dedikasinya pada tim. Dia handal, kolaboratif, dan selalu bersemangat untuk berkontribusi — bahkan di bawah tekanan atau tenggat waktu yang ketat. Bekerja dengannya selalu menyenangkan, dan saya banyak belajar dari pendekatannya dalam memecahkan masalah dan membangun sistem yang skalabel. Jika Anda mencari seseorang yang terampil, berdedikasi, dan menyenangkan untuk diajak bekerja sama, saya sangat merekomendasikan Nisfal.
+            </blockquote>
+            <div class="cell-quote-tags">
+              <span class="q-tag">Sr. DevOps Engineer</span>
+              <span class="q-tag">Scalable Systems</span>
+              <span class="q-tag">DevOps Collaboration</span>
+              <span class="q-tag">High Reliability</span>
+            </div>
+          </div>
+
+          <div class="cell-energy-bar cell-energy-nabil">
+            <div class="energy-fill" style="width: 100%;"></div>
           </div>
         </article>
 
