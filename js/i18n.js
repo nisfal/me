@@ -6,6 +6,8 @@ const I18N_DICTIONARY = {
     meta_desc_backend: 'Keahlian backend Nisfal Filsa dalam Go, Node.js (Express v5), Prisma v6 Dual-DB, RabbitMQ, Redis, CASL RBAC/ABAC, dan pipeline mediasi transaksi skala enterprise.',
     meta_title_frontend: 'Nisfal Filsa | Modern Frontend Engineer',
     meta_desc_frontend: 'Keahlian frontend Nisfal Filsa dalam Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zustand v5, TanStack Query, Leaflet GIS, dan arsitektur UI/UX modern.',
+    meta_title_not_found: '404 // Realitas Hilang di Multiverse | Nisfal Filsa',
+    meta_desc_not_found: 'Koordinat portal tidak ditemukan di lini masa mana pun. Halaman yang Anda cari lenyap dalam kehampaan dimensi Void-404.',
     
     nav_home: 'Beranda',
     nav_backend: 'Backend',
@@ -281,7 +283,19 @@ const I18N_DICTIONARY = {
     profile_robot_switch_title: 'Ganti model robot (Butter ➔ Morty ➔ Rick)',
     profile_robot_name_butter: 'BUTTER BOT',
     profile_robot_name_morty: 'MORTY BOT',
-    profile_robot_name_rick: 'RICK BOT'
+    profile_robot_name_rick: 'RICK BOT',
+
+    not_found_badge: 'ERROR 404 // DIMENSION COORDINATES CORRUPTED',
+    not_found_title: 'REALITAS TIDAK DITEMUKAN DI MULTIVERSE',
+    not_found_quote: '"Morty! *burp* Koordinat portal kamu rusak parah! Kamu memasukkan frekuensi dimensi sampah yang bahkan tidak ada dalam spektrum realitas! Kita terjebak di zona kehampaan Void-404!"',
+    not_found_rick_tag: '— Rick Sanchez (Dimension C-137)',
+    not_found_telemetry_timeline: 'LINI MASA: TIDAK TERDAFTAR',
+    not_found_telemetry_flux: 'FLUX TACHYON: 0.0% (ANOMALI)',
+    not_found_telemetry_void: 'SEKTOR: VOID-404 ABYSS',
+    not_found_btn_c137: 'LONCAT KE DIMENSI C-137',
+    not_found_btn_home: 'KEMBALI KE BUMI (HOME)',
+    not_found_btn_recalibrate: 'RE-KALIBRASI PORTAL GUN',
+    not_found_recalibrated_toast: '[SISTEM CITADEL] Portal Gun berhasil dikalibrasi ulang! Jalur dimensi stabil.'
   },
   en: {
     meta_title_home: 'Nisfal Filsa | Fullstack & Systems Engineer',
@@ -290,6 +304,8 @@ const I18N_DICTIONARY = {
     meta_desc_backend: 'Backend expertise by Nisfal Filsa in Go, Node.js (Express v5), Prisma v6 Dual-DB, RabbitMQ, Redis, CASL RBAC/ABAC, and high-throughput enterprise mediation pipelines.',
     meta_title_frontend: 'Nisfal Filsa | Modern Frontend Engineer',
     meta_desc_frontend: 'Frontend expertise by Nisfal Filsa in Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zustand v5, TanStack Query, Leaflet GIS, and responsive modern UI/UX design.',
+    meta_title_not_found: '404 // Reality Lost in the Multiverse | Nisfal Filsa',
+    meta_desc_not_found: 'Portal coordinates not found in any multiverse timeline. The requested page dissolved into the dimensional Void-404.',
     
     nav_home: 'Home',
     nav_backend: 'Backend',
@@ -565,7 +581,19 @@ const I18N_DICTIONARY = {
     profile_robot_switch_title: 'Switch robot model (Butter ➔ Morty ➔ Rick)',
     profile_robot_name_butter: 'BUTTER BOT',
     profile_robot_name_morty: 'MORTY BOT',
-    profile_robot_name_rick: 'RICK BOT'
+    profile_robot_name_rick: 'RICK BOT',
+
+    not_found_badge: 'ERROR 404 // DIMENSION COORDINATES CORRUPTED',
+    not_found_title: 'REALITY NOT FOUND IN THE MULTIVERSE',
+    not_found_quote: '"Morty! *burp* Your portal coordinates are completely fried! You dialed a garbage frequency that doesn\'t even exist in the reality spectrum! We\'re stranded in Void-404!"',
+    not_found_rick_tag: '— Rick Sanchez (Dimension C-137)',
+    not_found_telemetry_timeline: 'TIMELINE: UNREGISTERED',
+    not_found_telemetry_flux: 'TACHYON FLUX: 0.0% (ANOMALY)',
+    not_found_telemetry_void: 'SECTOR: VOID-404 ABYSS',
+    not_found_btn_c137: 'JUMP TO DIMENSION C-137',
+    not_found_btn_home: 'RETURN TO EARTH (HOME)',
+    not_found_btn_recalibrate: 'RE-CALIBRATE PORTAL GUN',
+    not_found_recalibrated_toast: '[CITADEL PROTOCOL] Portal Gun successfully re-calibrated! Dimensional pathway stabilized.'
   }
 };
 
@@ -573,7 +601,8 @@ function getCurrentPageKey() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
   if (page.includes('backend')) return 'backend';
   if (page.includes('frontend')) return 'frontend';
-  if (page.includes('profile')) return 'profile';
+  if (page.includes('profile') || page.includes('c-137')) return 'profile';
+  if (page.includes('404')) return 'not_found';
   return 'home';
 }
 
@@ -599,6 +628,7 @@ function updateLanguageLinks(lang) {
       href === 'backend' || href.startsWith('backend?') || href.startsWith('backend#') ||
       href === 'frontend' || href.startsWith('frontend?') || href.startsWith('frontend#') ||
       href === 'profile' || href.startsWith('profile?') || href.startsWith('profile#') ||
+      href === 'c-137' || href.startsWith('c-137?') || href.startsWith('c-137#') ||
       href === 'index' || href.startsWith('index?') || href.startsWith('index#');
 
     if (!isInternalPage) return;

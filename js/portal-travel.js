@@ -110,7 +110,7 @@
 
   // --- 2. Dynamic Modal Creation & Attachment ---
   let modalBackdrop = null;
-  let targetUrl = 'profile';
+  let targetUrl = 'c-137';
 
   function createPortalModal() {
     if (document.getElementById('portalTravelModal')) return;
@@ -255,13 +255,13 @@
     }, 780);
   }
 
-  // --- 4. Intercept All Links to profile (C-137) ---
+  // --- 4. Intercept All Links to C-137 / Profile ---
   function bindPortalLinks() {
-    const links = document.querySelectorAll('a[href*="profile.html"], a[href="profile"], a[href*="/profile"], .nav-link-portal, .floating-portal-btn');
+    const links = document.querySelectorAll('a[href*="c-137"], a[href="c-137"], a[href*="/c-137"], a[href*="profile.html"], a[href="profile"], a[href*="/profile"], .nav-link-portal, .floating-portal-btn');
     links.forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        targetUrl = link.getAttribute('href') || 'profile';
+        targetUrl = link.getAttribute('href') || 'c-137';
         initAudio();
         playModalOpenSound();
 
