@@ -213,6 +213,65 @@
     }
   }
 
+  function playMortyBeep() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(580, now);
+      osc.frequency.linearRampToValueAtTime(820, now + 0.05);
+      osc.frequency.linearRampToValueAtTime(520, now + 0.11);
+      osc.frequency.linearRampToValueAtTime(960, now + 0.16);
+
+      gain.gain.setValueAtTime(0.09, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.25);
+    } catch (e) {
+      console.debug('Audio error:', e);
+    }
+  }
+
+  function playRickBeep() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(960, now);
+      osc.frequency.exponentialRampToValueAtTime(1600, now + 0.08);
+      osc.frequency.linearRampToValueAtTime(780, now + 0.16);
+
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.27);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.28);
+    } catch (e) {
+      console.debug('Audio error:', e);
+    }
+  }
+
   function playCardFlipSound() {
     if (isMuted) return;
     try {
@@ -886,7 +945,7 @@
     }
   }
 
-  // --- 7. The Butter Robot Easter Egg ---
+  // --- 7. The Citadel Robot Easter Egg (Butter Robot & Robot Morty) ---
   const BUTTER_DIALOGUES = {
     id: [
       {
@@ -944,16 +1003,226 @@
     ]
   };
 
+  const MORTY_DIALOGUES = {
+    id: [
+      {
+        quote: '"Aw jeez, Rick... gue beneran cuma klon robot?!"',
+        reply: 'Iya Morty, lu Morty-bot v2.0 yang dirakit pake Go & WebAssembly.',
+        after: '...Aw man, pantesan pikiran gue mikirnya cuma baris biner.'
+      },
+      {
+        quote: '"Rick, server production-nya lempar error 500 nih, aw jeez!"',
+        reply: 'Santai Morty, Nisfal udah pasang Dead-Letter Queue di RabbitMQ!',
+        after: '...Oh syukurlah, gue kira kita bakal di-wipe out dari Citadel.'
+      },
+      {
+        quote: '"Kenapa kodingan backend Nisfal cepet banget Rick?"',
+        reply: 'Karena dia gak bikin looping bodoh, dia pake Redis in-memory cache, Morty!',
+        after: '...W-wah, pinter banget ya engineer bumi yang satu ini.'
+      },
+      {
+        quote: '"Aw jeez, baterai reaktor antimateri gue tinggal 10%!"',
+        reply: 'Ngecas dulu sana pake charger Type-C antimateri.',
+        after: '...Bip bop... sistem Morty mau stand-by dulu ya.'
+      },
+      {
+        quote: '"Gue gak mau kehapus di petualangan antardimensi ini, Rick!"',
+        reply: 'Lu gak bisa mati Morty, lu kode software! Tinggal git revert aja!',
+        after: '...Oh iya bener juga, jadi robot ternyata ada enaknya.'
+      }
+    ],
+    en: [
+      {
+        quote: '"Aw jeez, Rick... am I really just a robot clone?!"',
+        reply: 'Yes Morty, you\'re Morty-bot v2.0 compiled in Go and WebAssembly.',
+        after: '...Aw man, no wonder I\'m dreaming in binary.'
+      },
+      {
+        quote: '"Rick, production is throwing 500 errors, aw jeez!"',
+        reply: 'Calm down Morty, Nisfal already setup auto-recovery in RabbitMQ DLQ!',
+        after: '...Phew, I thought the Citadel was gonna wipe our dimension!'
+      },
+      {
+        quote: '"Why is Nisfal\'s backend architecture so fast, Rick?"',
+        reply: 'Because he doesn\'t do stupid N+1 queries, he caches in Redis, Morty!',
+        after: '...W-whoa, that Earth engineer really knows his stuff!'
+      },
+      {
+        quote: '"Aw jeez, my antimatter battery is down to 10%!"',
+        reply: 'Go plug into the nearest USB-C portal charger, Morty-bot.',
+        after: '...Beep boop... entering low-power anxiety mode.'
+      },
+      {
+        quote: '"I don\'t wanna get deleted on this cosmic mission, Rick!"',
+        reply: 'You can\'t die Morty, you\'re software! Just git revert!',
+        after: '...Oh right, being a robot isn\'t so bad after all.'
+      }
+    ]
+  };
+
+  const RICK_DIALOGUES = {
+    id: [
+      {
+        quote: '"*Burp*... Denger sini Morty, gue bukan cuma ilmuwan tercerdas!"',
+        reply: 'Gue sekarang di-compile langsung ke binary Go & WebAssembly bareng Nisfal.',
+        after: '...Wubba Lubba Dub Dub! Efisiensi CPU 99.9%!'
+      },
+      {
+        quote: '"Siapa butuh cloud mahal kalau lu punya baterai Microverse?!"',
+        reply: 'Nisfal bikin backend modular tanpa bayar pajak overhead ke Galactic Federation.',
+        after: '...Itu baru namanya sains koding yang bener!'
+      },
+      {
+        quote: '"Arsitektur RabbitMQ-nya Nisfal lumayan juga..."',
+        reply: 'Tapi tetep aja, Portal Gun gue bisa mindahin data lebih cepet daripada queue lu.',
+        after: '...*Burp* Walaupun dead-letter queue-nya jenius sih.'
+      },
+      {
+        quote: '"Jangan sentuh tombol emergency reset itu, Morty!"',
+        reply: 'Lu mau bikin deadlock di transaksi 50 juta baris PostgreSQL?!',
+        after: '...Pake indexing dual-client Prisma, bocah!'
+      },
+      {
+        quote: '"Eksistensi kita cuma kode di portfolio web?!"',
+        reply: 'Santai, gue udah pasang script buat nge-hack terminal Subspace Citadel.',
+        after: '...Dimensi C-137 gak bakal pernah tunduk ke bug production!'
+      }
+    ],
+    en: [
+      {
+        quote: '"*Burp*... Listen to me Morty, I\'m not just the smartest mammal alive!"',
+        reply: 'I am now compiled directly into Go and WebAssembly alongside Nisfal.',
+        after: '...Wubba Lubba Dub Dub! 99.9% CPU efficiency!'
+      },
+      {
+        quote: '"Who needs expensive cloud bills when you have a Microverse Battery?!"',
+        reply: 'Nisfal built modular microservices without paying overhead taxes to the Federation.',
+        after: '...Now that\'s what I call real portal engineering!'
+      },
+      {
+        quote: '"Nisfal\'s RabbitMQ event streaming is actually pretty slick..."',
+        reply: 'Though my Portal Gun still teleports bytes faster than your message queue.',
+        after: '...*Burp* Still, that Dead-Letter Queue policy is pure genius.'
+      },
+      {
+        quote: '"Don\'t you dare touch that emergency reset button, Morty!"',
+        reply: 'Are you trying to cause a deadlock across 50-million-row database tables?!',
+        after: '...Use Prisma dual-client indexing and Redis, rookie!'
+      },
+      {
+        quote: '"Are we really living inside a web portfolio right now?!"',
+        reply: 'Chill out Morty, I already injected a bypass script into the Citadel CLI.',
+        after: '...Dimension C-137 will never succumb to production runtime errors!'
+      }
+    ]
+  };
+
+  const ROBOT_MODES = ['butter', 'morty', 'rick'];
+  let currentRobotMode = localStorage.getItem('citadel_robot_mode') || 'butter';
+  if (!ROBOT_MODES.includes(currentRobotMode)) currentRobotMode = 'butter';
+
   let butterIndex = 0;
+  let mortyIndex = 0;
+  let rickIndex = 0;
 
   function setupButterRobot() {
     const btn = document.getElementById('btnButterRobot');
     const balloon = document.getElementById('butterBalloon');
     const quoteElem = document.getElementById('butterQuote');
     const eye = document.getElementById('robotEye');
+    const mortyEye = document.getElementById('mortyEye');
+    const rickEye = document.getElementById('rickEye');
     const closeBtn = document.getElementById('btnButterClose');
 
+    // Variants
+    const variantButter = document.getElementById('variantButter');
+    const variantMorty = document.getElementById('variantMorty');
+    const variantRick = document.getElementById('variantRick');
+
+    // Single Cycle Switch Elements
+    const btnSwitch = document.getElementById('btnSwitchRobot');
+    const switchDot = document.getElementById('switchDot');
+    const switchName = document.getElementById('switchName');
+    const switchSteps = document.querySelectorAll('#switchSteps .step-dot');
+
     if (!btn || !balloon || !quoteElem) return;
+
+    function getRobotName(mode, lang) {
+      if (mode === 'butter') return 'BUTTER BOT';
+      if (mode === 'morty') return 'MORTY BOT';
+      return 'RICK BOT';
+    }
+
+    function applyRobotMode(mode, triggerSound = false) {
+      currentRobotMode = mode;
+      localStorage.setItem('citadel_robot_mode', mode);
+
+      const lang = getActiveLang();
+
+      // Update Switch Pill visuals
+      if (switchDot) {
+        switchDot.className = `switch-dot ${mode}`;
+      }
+      if (switchName) {
+        switchName.textContent = getRobotName(mode, lang);
+      }
+      if (switchSteps && switchSteps.length) {
+        switchSteps.forEach(dot => {
+          dot.classList.toggle('active', dot.getAttribute('data-step') === mode);
+        });
+      }
+
+      // Hide all variants, show selected
+      if (variantButter) variantButter.style.display = mode === 'butter' ? 'block' : 'none';
+      if (variantMorty) variantMorty.style.display = mode === 'morty' ? 'block' : 'none';
+      if (variantRick) variantRick.style.display = mode === 'rick' ? 'block' : 'none';
+
+      const activeVariant = mode === 'butter' ? variantButter : (mode === 'morty' ? variantMorty : variantRick);
+      if (activeVariant) {
+        activeVariant.classList.remove('switching-out');
+        activeVariant.classList.add('switching-in');
+      }
+
+      // Mode-specific audio, title, and initial balloon text
+      if (mode === 'butter') {
+        if (triggerSound) playRobotBeep();
+        btn.setAttribute('data-i18n-title', 'butterRobot.title');
+        btn.setAttribute('title', lang === 'id' ? 'Tanya tujuan Butter Robot' : "Ask Butter Robot's purpose");
+        quoteElem.innerHTML = lang === 'id' ? '"Apa tujuan hidup gue?"' : '"What is my purpose?"';
+      } else if (mode === 'morty') {
+        if (triggerSound) playMortyBeep();
+        btn.setAttribute('data-i18n-title', 'mortyRobot.title');
+        btn.setAttribute('title', lang === 'id' ? 'Ajak bicara Robot Morty (Morty-bot)' : 'Talk to Robot Morty (Morty-bot)');
+        quoteElem.innerHTML = lang === 'id'
+          ? '"Aw jeez, Rick... gue beneran cuma robot?!"'
+          : '"Aw jeez, Rick... am I really just a robot?!"';
+      } else {
+        if (triggerSound) playRickBeep();
+        btn.setAttribute('data-i18n-title', 'rickRobot.title');
+        btn.setAttribute('title', lang === 'id' ? 'Ajak bicara Robot Rick (Rick-bot C-137)' : 'Talk to Robot Rick (Rick-bot C-137)');
+        quoteElem.innerHTML = lang === 'id'
+          ? '"*Burp*... Gue bukan robot biasa, Morty!"'
+          : '"*Burp*... I\'m not an ordinary robot, Morty!"';
+      }
+
+      balloon.classList.remove('dismissed');
+      balloon.style.opacity = '1';
+      balloon.style.transform = 'scale(1)';
+    }
+
+    function cycleNextRobot() {
+      const idx = ROBOT_MODES.indexOf(currentRobotMode);
+      const nextIdx = (idx + 1) % ROBOT_MODES.length;
+      applyRobotMode(ROBOT_MODES[nextIdx], true);
+    }
+
+    // Single Click Switch Listener
+    if (btnSwitch) {
+      btnSwitch.addEventListener('click', (e) => {
+        e.stopPropagation();
+        cycleNextRobot();
+      });
+    }
 
     // Dismiss balloon handler
     if (closeBtn) {
@@ -970,11 +1239,15 @@
       }, 7000);
     }
 
-    // Track mouse to move robot eye (only for mouse pointer devices)
+    // Track mouse to move active eye (only for mouse pointer devices)
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
       window.addEventListener('mousemove', (e) => {
-        if (!eye) return;
-        const rect = eye.getBoundingClientRect();
+        let activeEye = eye;
+        if (currentRobotMode === 'morty') activeEye = mortyEye;
+        else if (currentRobotMode === 'rick') activeEye = rickEye;
+
+        if (!activeEye) return;
+        const rect = activeEye.getBoundingClientRect();
         const eyeX = rect.left + rect.width / 2;
         const eyeY = rect.top + rect.height / 2;
         const deltaX = e.clientX - eyeX;
@@ -982,27 +1255,84 @@
         const angle = Math.atan2(deltaY, deltaX);
         const moveX = Math.cos(angle) * 2;
         const moveY = Math.sin(angle) * 2;
-        eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        activeEye.style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
     }
 
+    // Main Robot Click - Dialogues & Voice Lines
     btn.addEventListener('click', () => {
-      playRobotBeep();
       balloon.classList.remove('dismissed');
       const lang = getActiveLang();
-      const dialogues = BUTTER_DIALOGUES[lang] || BUTTER_DIALOGUES.en;
-      const cur = dialogues[butterIndex % dialogues.length];
-      butterIndex = (butterIndex + 1) % dialogues.length;
 
-      balloon.style.opacity = '0';
-      balloon.style.transform = 'scale(0.9)';
+      if (currentRobotMode === 'butter') {
+        playRobotBeep();
+        const dialogues = BUTTER_DIALOGUES[lang] || BUTTER_DIALOGUES.en;
+        const cur = dialogues[butterIndex % dialogues.length];
+        butterIndex = (butterIndex + 1) % dialogues.length;
 
-      setTimeout(() => {
-        quoteElem.innerHTML = `${cur.quote}<br><span style="color: #94a3b8; font-size: 0.82rem;">${cur.reply}</span><br><em style="color: var(--portal-cyan);">${cur.after}</em>`;
-        balloon.style.opacity = '1';
-        balloon.style.transform = 'scale(1)';
-      }, 150);
+        balloon.style.opacity = '0';
+        balloon.style.transform = 'scale(0.9)';
+
+        setTimeout(() => {
+          quoteElem.innerHTML = `${cur.quote}<br><span style="color: #94a3b8; font-size: 0.82rem;">${cur.reply}</span><br><em style="color: var(--portal-cyan);">${cur.after}</em>`;
+          balloon.style.opacity = '1';
+          balloon.style.transform = 'scale(1)';
+        }, 150);
+      } else if (currentRobotMode === 'morty') {
+        playMortyBeep();
+        const dialogues = MORTY_DIALOGUES[lang] || MORTY_DIALOGUES.en;
+        const cur = dialogues[mortyIndex % dialogues.length];
+        mortyIndex = (mortyIndex + 1) % dialogues.length;
+
+        balloon.style.opacity = '0';
+        balloon.style.transform = 'scale(0.9)';
+
+        setTimeout(() => {
+          quoteElem.innerHTML = `${cur.quote}<br><span style="color: #7dd3fc; font-size: 0.82rem;">${cur.reply}</span><br><em style="color: #fde047;">${cur.after}</em>`;
+          balloon.style.opacity = '1';
+          balloon.style.transform = 'scale(1)';
+        }, 150);
+      } else {
+        playRickBeep();
+        const dialogues = RICK_DIALOGUES[lang] || RICK_DIALOGUES.en;
+        const cur = dialogues[rickIndex % dialogues.length];
+        rickIndex = (rickIndex + 1) % dialogues.length;
+
+        balloon.style.opacity = '0';
+        balloon.style.transform = 'scale(0.9)';
+
+        setTimeout(() => {
+          quoteElem.innerHTML = `${cur.quote}<br><span style="color: #86efac; font-size: 0.82rem;">${cur.reply}</span><br><em style="color: #a7f3d0;">${cur.after}</em>`;
+          balloon.style.opacity = '1';
+          balloon.style.transform = 'scale(1)';
+        }, 150);
+      }
     });
+
+    // Listen to languageChanged to refresh initial text / title
+    window.addEventListener('languageChanged', (e) => {
+      const lang = e.detail?.lang || getActiveLang();
+      if (switchName) {
+        switchName.textContent = getRobotName(currentRobotMode, lang);
+      }
+      if (currentRobotMode === 'butter') {
+        btn.setAttribute('title', lang === 'id' ? 'Tanya tujuan Butter Robot' : "Ask Butter Robot's purpose");
+        quoteElem.innerHTML = lang === 'id' ? '"Apa tujuan hidup gue?"' : '"What is my purpose?"';
+      } else if (currentRobotMode === 'morty') {
+        btn.setAttribute('title', lang === 'id' ? 'Ajak bicara Robot Morty (Morty-bot)' : 'Talk to Robot Morty (Morty-bot)');
+        quoteElem.innerHTML = lang === 'id'
+          ? '"Aw jeez, Rick... gue beneran cuma robot?!"'
+          : '"Aw jeez, Rick... am I really just a robot?!"';
+      } else {
+        btn.setAttribute('title', lang === 'id' ? 'Ajak bicara Robot Rick (Rick-bot C-137)' : 'Talk to Robot Rick (Rick-bot C-137)');
+        quoteElem.innerHTML = lang === 'id'
+          ? '"*Burp*... Gue bukan robot biasa, Morty!"'
+          : '"*Burp*... I\'m not an ordinary robot, Morty!"';
+      }
+    });
+
+    // Initialize saved mode
+    applyRobotMode(currentRobotMode, false);
   }
 
   // --- 8. Mobile Navigation Drawer Handler ---

@@ -248,9 +248,23 @@ const I18N_DICTIONARY = {
     profile_footer_copyright: '© 2026 Nisfal Filsa - Terdaftar di Dimensi C-137 &amp; Planet Bumi. Dibangun dengan rasa humor dan kode berkinerja tinggi.',
     profile_dock_recall: 'REALITY RECALL',
     profile_dock_butter_click: '(Klik robotnya!)',
-    
+
     portal_modal_title: 'Lompat ke Dimensi C-137?',
     portal_modal_desc: 'Anda akan meninggalkan realitas portofolio formal dan melintasi fluida portal menuju <strong>Dimensi C-137</strong> (profil santai, sisi personal, eksperimen arsitektur liar, Cable TV, & Mr. Meeseeks).',
+
+    butterRobot: {
+      title: 'Tanya tujuan Butter Robot'
+    },
+    mortyRobot: {
+      title: 'Ajak bicara Robot Morty (Morty-bot)'
+    },
+    rickRobot: {
+      title: 'Ajak bicara Robot Rick (Rick-bot C-137)'
+    },
+    profile_robot_switch_title: 'Ganti model robot (Butter ➔ Morty ➔ Rick)',
+    profile_robot_name_butter: 'BUTTER BOT',
+    profile_robot_name_morty: 'MORTY BOT',
+    profile_robot_name_rick: 'RICK BOT'
   },
   en: {
     meta_title_home: 'Nisfal Filsa | Fullstack & Systems Engineer',
@@ -504,6 +518,20 @@ const I18N_DICTIONARY = {
 
     portal_modal_title: 'Jump to Dimension C-137?',
     portal_modal_desc: 'You will leave the formal portfolio reality and cross the portal fluid into <strong>Dimension C-137</strong> (casual profile, personal side, wild architectural experiments, Cable TV, & Mr. Meeseeks).',
+
+    butterRobot: {
+      title: "Ask Butter Robot's purpose"
+    },
+    mortyRobot: {
+      title: 'Talk to Robot Morty (Morty-bot)'
+    },
+    rickRobot: {
+      title: 'Talk to Robot Rick (Rick-bot C-137)'
+    },
+    profile_robot_switch_title: 'Switch robot model (Butter ➔ Morty ➔ Rick)',
+    profile_robot_name_butter: 'BUTTER BOT',
+    profile_robot_name_morty: 'MORTY BOT',
+    profile_robot_name_rick: 'RICK BOT'
   }
 };
 
@@ -551,21 +579,30 @@ function updateSeo(lang, dictionary) {
   });
 }
 
+function getDictValue(dict, key) {
+  if (!dict || !key) return undefined;
+  if (dict[key] !== undefined) return dict[key];
+  return key.split('.').reduce((obj, part) => (obj && obj[part] !== undefined ? obj[part] : undefined), dict);
+}
+
 function setLanguage(lang) {
   const dictionary = I18N_DICTIONARY[lang] || I18N_DICTIONARY.en;
   document.documentElement.lang = lang;
   localStorage.setItem('portfolio_language', lang);
   document.querySelectorAll('[data-i18n]').forEach((element) => {
     const key = element.getAttribute('data-i18n');
-    if (dictionary[key]) element.innerHTML = dictionary[key];
+    const val = getDictValue(dictionary, key);
+    if (val !== undefined) element.innerHTML = val;
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
     const key = element.getAttribute('data-i18n-placeholder');
-    if (dictionary[key]) element.setAttribute('placeholder', dictionary[key]);
+    const val = getDictValue(dictionary, key);
+    if (val !== undefined) element.setAttribute('placeholder', val);
   });
   document.querySelectorAll('[data-i18n-title]').forEach((element) => {
     const key = element.getAttribute('data-i18n-title');
-    if (dictionary[key]) element.setAttribute('title', dictionary[key]);
+    const val = getDictValue(dictionary, key);
+    if (val !== undefined) element.setAttribute('title', val);
   });
   document.querySelectorAll('[data-lang-option]').forEach((button) => {
     const isActive = button.getAttribute('data-lang-option') === lang;

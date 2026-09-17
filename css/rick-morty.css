@@ -2652,6 +2652,590 @@ body.portal-arrived {
   border: 1px solid #334155;
 }
 
+/* --- Sleek Single-Click Robot Cycle Switch Pill --- */
+.robot-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(12, 17, 28, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(151, 206, 76, 0.4);
+  border-radius: 9999px;
+  padding: 4px 11px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(151, 206, 76, 0.12);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s var(--ease-elastic);
+  user-select: none;
+  margin-bottom: -2px;
+}
+
+.robot-switch-btn:hover {
+  border-color: rgba(151, 206, 76, 0.8);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.75), 0 0 18px rgba(151, 206, 76, 0.25);
+  transform: translateY(-1px);
+}
+
+.robot-switch-btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.switch-cycle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--portal-green);
+  transition: transform 0.35s ease;
+}
+
+.robot-switch-btn:hover .switch-cycle-icon {
+  transform: rotate(180deg);
+}
+
+.switch-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.switch-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+.switch-dot.butter {
+  background: #facc15;
+  box-shadow: 0 0 8px #facc15;
+}
+
+.switch-dot.morty {
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.switch-dot.rick {
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.switch-name {
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #f8fafc;
+  line-height: 1;
+}
+
+.switch-steps {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding-left: 5px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  margin-left: 2px;
+}
+
+.step-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.step-dot.active {
+  background: var(--portal-green);
+  transform: scale(1.3);
+  box-shadow: 0 0 6px var(--portal-green);
+}
+
+/* --- Robot Variants & Transition --- */
+.robot-variant {
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-elastic);
+}
+
+.robot-variant.switching-out {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.robot-variant.switching-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- Robot Morty (Morty-bot) Styling --- */
+.morty-bot-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44px;
+  gap: 1px;
+  position: relative;
+}
+
+.morty-antenna {
+  width: 2px;
+  height: 6px;
+  background: #64748b;
+  position: relative;
+  margin-bottom: -1px;
+  z-index: 4;
+}
+
+.morty-antenna-tip {
+  position: absolute;
+  top: -4px;
+  left: -2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: mortyAntennaPulse 1.4s infinite alternate ease-in-out;
+}
+
+@keyframes mortyAntennaPulse {
+  0% { transform: scale(0.85); box-shadow: 0 0 4px #0284c7; }
+  100% { transform: scale(1.15); box-shadow: 0 0 10px #38bdf8, 0 0 16px #38bdf8; }
+}
+
+.morty-head {
+  width: 32px;
+  height: 29px;
+  background: #fed7aa;
+  border-radius: 16px 16px 14px 14px;
+  position: relative;
+  border: 1.5px solid #ea580c;
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  overflow: visible;
+}
+
+.morty-hair {
+  position: absolute;
+  top: -3px;
+  left: -2px;
+  right: -2px;
+  height: 14px;
+  background: #78350f;
+  border-radius: 16px 16px 4px 4px;
+  border: 1px solid #451a03;
+  z-index: 1;
+}
+
+.morty-face {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6px;
+}
+
+.morty-brows {
+  display: flex;
+  justify-content: space-between;
+  width: 20px;
+  margin-bottom: 1px;
+}
+
+.morty-brow {
+  width: 6px;
+  height: 1.5px;
+  background: #451a03;
+  border-radius: 1px;
+}
+
+.morty-brow.left {
+  transform: rotate(18deg);
+}
+
+.morty-brow.right {
+  transform: rotate(-18deg);
+}
+
+.morty-eyes {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.morty-eye-left {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.morty-pupil-left {
+  width: 2.5px;
+  height: 2.5px;
+  background: #0f172a;
+  border-radius: 50%;
+}
+
+.morty-eye-cyber {
+  width: 8px;
+  height: 8px;
+  background: #0f172a;
+  border-radius: 50%;
+  border: 1.5px solid #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-reticle {
+  position: absolute;
+  inset: 1px;
+  border: 0.5px dashed rgba(56, 189, 248, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cyber-lens {
+  width: 3.5px;
+  height: 3.5px;
+  background: #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffffff;
+  transition: transform 0.1s ease;
+}
+
+.morty-mouth-nervous {
+  width: 8px;
+  height: 3px;
+  border-bottom: 1.5px solid #9a3412;
+  border-radius: 50%;
+  margin-top: 1px;
+}
+
+.morty-cyber-plate {
+  position: absolute;
+  right: 1px;
+  bottom: 2px;
+  width: 6px;
+  height: 6px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid #38bdf8;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(56, 189, 248, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cyber-screw {
+  width: 2px;
+  height: 2px;
+  background: #94a3b8;
+  border-radius: 50%;
+}
+
+.morty-chest {
+  width: 38px;
+  height: 18px;
+  background: linear-gradient(180deg, #facc15 0%, #eab308 100%);
+  border-radius: 3px 3px 7px 7px;
+  border: 1px solid #ca8a04;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  margin-top: -1px;
+  z-index: 1;
+}
+
+.morty-shirt-collar {
+  width: 14px;
+  height: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
+
+.morty-power-core {
+  width: 12px;
+  height: 7px;
+  background: #09131d;
+  border: 1px solid #38bdf8;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+}
+
+.core-pulsar {
+  width: 4px;
+  height: 4px;
+  background: #38bdf8;
+  border-radius: 1px;
+  box-shadow: 0 0 4px #ffffff;
+  animation: mortyCorePulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes mortyCorePulse {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 8px #38bdf8; }
+}
+
+/* --- Robot Rick (Rick-bot C-137) Styling --- */
+.rick-bot-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44px;
+  position: relative;
+}
+
+/* Rick Spiky Blue Hair */
+.rick-spikes-group {
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  right: -4px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rick-spikes-group .spike {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 20px solid #93c5fd;
+  filter: drop-shadow(0 0 1px #38bdf8);
+}
+
+.spike-1 { top: 2px; left: 1px; transform: rotate(-50deg); }
+.spike-2 { top: -2px; left: 8px; transform: rotate(-25deg); }
+.spike-3 { top: -3px; left: 16px; transform: rotate(0deg); }
+.spike-4 { top: -3px; left: 24px; transform: rotate(10deg); }
+.spike-5 { top: -2px; right: 12px; transform: rotate(28deg); }
+.spike-6 { top: 2px; right: 5px; transform: rotate(52deg); }
+.spike-7 { top: 8px; right: 0px; transform: rotate(65deg); }
+
+.rick-head {
+  width: 31px;
+  height: 29px;
+  background: #f1f5f9;
+  border-radius: 13px 13px 15px 15px;
+  position: relative;
+  border: 1.5px solid #64748b;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+  margin-top: 2px;
+}
+
+.rick-face {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5px;
+}
+
+/* Rick's Unibrow */
+.rick-unibrow {
+  width: 21px;
+  height: 2.5px;
+  background: #7dd3fc;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(125, 211, 252, 0.6);
+  margin-bottom: 2px;
+}
+
+.rick-eyes {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.rick-eye-left {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  border: 1px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.rick-eye-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #cbd5e1;
+  border-bottom: 0.8px solid #64748b;
+}
+
+.rick-pupil-left {
+  width: 2.5px;
+  height: 2.5px;
+  background: #0f172a;
+  border-radius: 50%;
+}
+
+.rick-eye-cyber {
+  width: 8px;
+  height: 8px;
+  background: #052e16;
+  border-radius: 50%;
+  border: 1.5px solid #22c55e;
+  box-shadow: 0 0 7px #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-scanner-ring {
+  position: absolute;
+  inset: 1px;
+  border: 0.5px dashed rgba(74, 222, 128, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.portal-scanner-lens {
+  width: 3.5px;
+  height: 3.5px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffffff;
+  transition: transform 0.1s ease;
+}
+
+.rick-mouth-cynical {
+  width: 10px;
+  height: 2px;
+  background: #475569;
+  border-radius: 1px;
+  margin-top: 3px;
+  position: relative;
+}
+
+.rick-drool-drop {
+  position: absolute;
+  top: 2px;
+  right: -1px;
+  width: 3px;
+  height: 4px;
+  background: #4ade80;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 0 5px rgba(74, 222, 128, 0.8);
+}
+
+.rick-temple-plate {
+  position: absolute;
+  left: 1px;
+  top: 6px;
+  width: 4px;
+  height: 8px;
+  background: #334155;
+  border: 1px solid #22c55e;
+  border-radius: 1px;
+}
+
+.temple-circuit {
+  width: 2px;
+  height: 2px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #22c55e;
+}
+
+/* Rick Lab Coat & Undershirt */
+.rick-coat-body {
+  width: 38px;
+  height: 19px;
+  background: #ffffff;
+  border-radius: 3px 3px 7px 7px;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  position: relative;
+  margin-top: -1px;
+  z-index: 1;
+}
+
+.rick-undershirt {
+  position: absolute;
+  top: 0;
+  width: 12px;
+  height: 10px;
+  background: #0284c7;
+  border-radius: 0 0 3px 3px;
+}
+
+.rick-coat-lapels {
+  position: absolute;
+  inset: 0;
+  border-left: 2px solid #e2e8f0;
+  border-right: 2px solid #e2e8f0;
+  pointer-events: none;
+}
+
+.rick-microverse-battery {
+  position: relative;
+  z-index: 2;
+  width: 12px;
+  height: 7px;
+  background: #052e16;
+  border: 1px solid #22c55e;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 7px rgba(34, 197, 94, 0.6);
+  margin-top: 3px;
+}
+
+.battery-glow-core {
+  width: 4px;
+  height: 4px;
+  background: #4ade80;
+  border-radius: 1px;
+  box-shadow: 0 0 5px #ffffff;
+  animation: rickBatteryPulse 1.1s infinite alternate ease-in-out;
+}
+
+@keyframes rickBatteryPulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 9px #22c55e, 0 0 14px #4ade80; }
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (iPad / Tablets 768px-1024px & Mobile < 768px / < 480px)
    ========================================================================== */

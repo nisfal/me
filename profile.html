@@ -1190,24 +1190,126 @@
       </a>
     </div>
 
-    <!-- The Butter Robot Easter Egg -->
-    <div class="butter-robot-widget" id="butterRobot" aria-label="The Butter Robot Easter Egg">
+    <!-- The Citadel Robot Easter Egg (Switchable: Butter Robot & Robot Morty) -->
+    <div class="butter-robot-widget" id="butterRobot" aria-label="Citadel Robot Easter Egg">
+      <!-- Sleek Single-Click Robot Cycle Switch -->
+      <button type="button" class="robot-switch-btn" id="btnSwitchRobot" aria-label="Ganti Model Robot" data-i18n-title="profile_robot_switch_title" title="Ganti model robot (Butter ➔ Morty ➔ Rick)">
+        <span class="switch-cycle-icon" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+        </span>
+        <span class="switch-status-pill">
+          <span class="switch-dot butter" id="switchDot"></span>
+          <span class="switch-name" id="switchName" data-i18n="profile_robot_name_butter">BUTTER BOT</span>
+        </span>
+        <span class="switch-steps" id="switchSteps" aria-hidden="true">
+          <span class="step-dot active" data-step="butter"></span>
+          <span class="step-dot" data-step="morty"></span>
+          <span class="step-dot" data-step="rick"></span>
+        </span>
+      </button>
+
       <div class="butter-balloon" id="butterBalloon">
         <button type="button" class="butter-close-btn" id="btnButterClose" aria-label="Tutup pesan robot" title="Sembunyikan pesan">&times;</button>
         <div class="butter-quote" id="butterQuote">"What is my purpose?"</div>
-        <span data-i18n="profile_dock_butter_click"class="butter-tip-click">(Klik robotnya!)</span>
+        <span data-i18n="profile_dock_butter_click" class="butter-tip-click">(Klik robotnya!)</span>
       </div>
-      <button type="button" class="butter-robot-btn" id="btnButterRobot" aria-label="Interact with Butter Robot" title="Tanya tujuan Butter Robot">
-        <div class="robot-body">
-          <div class="robot-head">
-            <div class="robot-eye" id="robotEye"></div>
+
+      <button type="button" class="butter-robot-btn" id="btnButterRobot" aria-label="Interact with Robot" data-i18n-title="butterRobot.title" title="Tanya tujuan Butter Robot">
+        <!-- Variant 1: Butter Robot (Existing) -->
+        <div class="robot-variant robot-variant-butter active" id="variantButter">
+          <div class="robot-body">
+            <div class="robot-head">
+              <div class="robot-eye" id="robotEye"></div>
+            </div>
+            <div class="robot-chest">
+              <div class="butter-cube-block"></div>
+            </div>
+            <div class="robot-treads">
+              <span class="tread-l"></span>
+              <span class="tread-r"></span>
+            </div>
           </div>
-          <div class="robot-chest">
-            <div class="butter-cube-block"></div>
+        </div>
+
+        <!-- Variant 2: Robot Morty (Morty-bot) -->
+        <div class="robot-variant robot-variant-morty" id="variantMorty" style="display: none;">
+          <div class="morty-bot-body">
+            <div class="morty-antenna">
+              <span class="morty-antenna-tip"></span>
+            </div>
+            <div class="morty-head">
+              <div class="morty-hair"></div>
+              <div class="morty-face">
+                <div class="morty-brows">
+                  <span class="morty-brow left"></span>
+                  <span class="morty-brow right"></span>
+                </div>
+                <div class="morty-eyes">
+                  <div class="morty-eye-left">
+                    <span class="morty-pupil-left"></span>
+                  </div>
+                  <div class="morty-eye-cyber" id="mortyCyberEye">
+                    <span class="cyber-reticle"></span>
+                    <span class="cyber-lens" id="mortyEye"></span>
+                  </div>
+                </div>
+                <div class="morty-mouth-nervous"></div>
+                <div class="morty-cyber-plate">
+                  <span class="cyber-screw"></span>
+                  <span class="cyber-trace"></span>
+                </div>
+              </div>
+            </div>
+            <div class="morty-chest">
+              <div class="morty-shirt-collar"></div>
+              <div class="morty-shirt-front">
+                <div class="morty-power-core">
+                  <span class="core-pulsar"></span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="robot-treads">
-            <span class="tread-l"></span>
-            <span class="tread-r"></span>
+        </div>
+
+        <!-- Variant 3: Robot Rick (Rick-bot C-137) -->
+        <div class="robot-variant robot-variant-rick" id="variantRick" style="display: none;">
+          <div class="rick-bot-body">
+            <div class="rick-spikes-group">
+              <span class="spike spike-1"></span>
+              <span class="spike spike-2"></span>
+              <span class="spike spike-3"></span>
+              <span class="spike spike-4"></span>
+              <span class="spike spike-5"></span>
+              <span class="spike spike-6"></span>
+              <span class="spike spike-7"></span>
+            </div>
+            <div class="rick-head">
+              <div class="rick-face">
+                <div class="rick-unibrow"></div>
+                <div class="rick-eyes">
+                  <div class="rick-eye-left">
+                    <span class="rick-pupil-left"></span>
+                  </div>
+                  <div class="rick-eye-cyber" id="rickCyberEye">
+                    <span class="portal-scanner-ring"></span>
+                    <span class="portal-scanner-lens" id="rickEye"></span>
+                  </div>
+                </div>
+                <div class="rick-mouth-cynical">
+                  <span class="rick-drool-drop"></span>
+                </div>
+                <div class="rick-temple-plate">
+                  <span class="temple-circuit"></span>
+                </div>
+              </div>
+            </div>
+            <div class="rick-coat-body">
+              <div class="rick-undershirt"></div>
+              <div class="rick-coat-lapels"></div>
+              <div class="rick-microverse-battery">
+                <span class="battery-glow-core"></span>
+              </div>
+            </div>
           </div>
         </div>
       </button>
