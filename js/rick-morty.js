@@ -2338,7 +2338,7 @@
     const track = document.getElementById('microverseTrack');
     const viewport = document.getElementById('microverseViewport');
     const filterBtns = document.querySelectorAll('.battery-filter-btn');
-    if (!track) return;
+    if (!track || !viewport) return;
 
     // Save initial master template of original cards
     const masterCells = Array.from(track.querySelectorAll('.battery-cell')).map(cell => cell.cloneNode(true));
@@ -2351,9 +2351,20 @@
     const statusText = document.getElementById('microverseStatusText');
     const pulseDot = document.querySelector('.hud-pulse-dot');
 
+    let currentX = 0;
+    let momentum = 0;
+    let halfWidth = 0;
+    let baseSpeed = 0.55; // px per frame at 60fps (calm, smooth drift)
+    let direction = -1; // -1: moving left, +1: moving right
     let isManuallyPaused = false;
-    let isReversed = false;
-    let currentFilter = 'all';
+    let isHovered = false;
+    let isDragging = false;
+    let isPointerDown = false;
+    let startPointerX = 0;
+    let startCurrentX = 0;
+    let lastPointerX = 0;
+    let lastPointerTime = 0;
+    let hasDragged = false;
     let warpTimeout = null;
 
     // Helper to get localized string if i18n available
@@ -2370,15 +2381,32 @@
         statusText.textContent = getI18n('profile_battery_flow_paused', 'STATUS ALIRAN: JEDA SEMENTARA // STANDBY');
         if (pulseDot) pulseDot.classList.add('is-paused');
       } else {
-        const dir = isReversed ? ' // REVERSE' : ' // 0.15c';
+        const dir = direction > 0 ? ' // REVERSE' : ' // 0.15c';
         statusText.textContent = getI18n('profile_battery_flow_status', 'STATUS ALIRAN: ORBITAL CONTINUOUS') + dir;
         if (pulseDot) pulseDot.classList.remove('is-paused');
       }
     }
 
+    // Re-calculate halfWidth after rendering or resize
+    function measureHalfWidth() {
+      const totalCells = track.children.length;
+      if (totalCells === 0) return 0;
+      const halfCount = Math.floor(totalCells / 2);
+      if (halfCount > 0 && track.children[halfCount]) {
+        const firstCell = track.children[0];
+        const halfCell = track.children[halfCount];
+        const dist = halfCell.offsetLeft - firstCell.offsetLeft;
+        if (dist > 0) {
+          halfWidth = dist;
+          return halfWidth;
+        }
+      }
+      halfWidth = track.scrollWidth / 2;
+      return halfWidth;
+    }
+
     // Rebuild track cards for seamless infinite horizontal loop based on active filter
     function renderTrack(filter) {
-      currentFilter = filter;
       const filtered = masterCells.filter(cell => {
         const cat = cell.getAttribute('data-category');
         return filter === 'all' || cat === filter;
@@ -2390,7 +2418,7 @@
       // Ensure enough items so track seamlessly wraps without empty gaps
       let repeatCount = 2;
       if (filtered.length <= 2) repeatCount = 6;
-      else if (filtered.length <= 4) repeatCount = 3;
+      else if (filtered.length <= 4) repeatCount = 4;
 
       for (let i = 0; i < repeatCount; i++) {
         filtered.forEach((cell, idx) => {
@@ -2405,10 +2433,10 @@
         window.i18n.updatePage();
       }
 
-      // Reset animation smoothly
-      track.style.animation = 'none';
-      track.offsetHeight; // trigger reflow
-      track.style.animation = '';
+      // Re-measure wrap point
+      requestAnimationFrame(() => {
+        measureHalfWidth();
+      });
     }
 
     // Filter Buttons Click Handling
@@ -2427,18 +2455,17 @@
       pauseBtn.addEventListener('click', () => {
         playGlitchSound();
         isManuallyPaused = !isManuallyPaused;
+        momentum = 0;
         const iconPause = pauseBtn.querySelector('.icon-pause');
         const iconPlay = pauseBtn.querySelector('.icon-play');
         const btnText = pauseBtn.querySelector('.btn-text');
 
         if (isManuallyPaused) {
-          track.classList.add('is-paused');
           pauseBtn.classList.remove('active');
           if (iconPause) iconPause.style.display = 'none';
           if (iconPlay) iconPlay.style.display = 'inline-block';
           if (btnText) btnText.textContent = getI18n('profile_battery_ctrl_resume', 'LANJUT');
         } else {
-          track.classList.remove('is-paused');
           pauseBtn.classList.add('active');
           if (iconPause) iconPause.style.display = 'inline-block';
           if (iconPlay) iconPlay.style.display = 'none';
@@ -2452,57 +2479,164 @@
     if (reverseBtn) {
       reverseBtn.addEventListener('click', () => {
         playGlitchSound();
-        isReversed = !isReversed;
-        track.classList.toggle('is-reverse', isReversed);
-        reverseBtn.classList.toggle('active', isReversed);
+        direction = -direction;
+        reverseBtn.classList.toggle('active', direction > 0);
         updateStatusDisplay();
       });
     }
 
-    // Prev / Next Burst Nudge
-    function triggerWarpBurst(forward) {
+    // Prev / Next Smooth Glide Nudge
+    function triggerNudge(forward) {
       playGlitchSound();
       clearTimeout(warpTimeout);
-      const originalDirection = isReversed;
-      const targetReverse = forward ? false : true;
-
-      track.classList.toggle('is-reverse', targetReverse);
-      track.style.animationDuration = '12s'; // temporarily faster speed
+      // Nudge position by giving momentum burst
+      momentum = forward ? -18 : 18;
       if (statusText) {
         statusText.textContent = forward ? '>> WARP BURST: ACCELERATING >>' : '<< TIME WARP: REWINDING <<';
       }
-
       warpTimeout = setTimeout(() => {
-        track.style.animationDuration = '';
-        track.classList.toggle('is-reverse', originalDirection);
         updateStatusDisplay();
       }, 1200);
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => triggerWarpBurst(true));
+      nextBtn.addEventListener('click', () => triggerNudge(true));
     }
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => triggerWarpBurst(false));
+      prevBtn.addEventListener('click', () => triggerNudge(false));
     }
 
-    // Hover effect on viewport to update status text
-    if (viewport) {
-      viewport.addEventListener('mouseenter', () => {
-        if (!isManuallyPaused && statusText) {
-          statusText.textContent = getI18n('profile_battery_drag_hint', '● READING MODE // HOVER PAUSED');
-          if (pulseDot) pulseDot.classList.add('is-paused');
+    // ── Drag & Swipe Interaction (Touch + Mouse) ──
+    viewport.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0 && e.pointerType === 'mouse') return;
+      isPointerDown = true;
+      isDragging = false;
+      hasDragged = false;
+      startPointerX = e.clientX;
+      lastPointerX = e.clientX;
+      startCurrentX = currentX;
+      lastPointerTime = performance.now();
+      momentum = 0;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      const dx = e.clientX - startPointerX;
+      if (!isDragging && Math.abs(dx) > 6) {
+        isDragging = true;
+        hasDragged = true;
+        viewport.classList.add('is-dragging');
+        if (statusText && !isManuallyPaused) {
+          statusText.textContent = '● ORBITAL MANUAL NAVIGATION // DRAGGING';
         }
-      });
-      viewport.addEventListener('mouseleave', () => {
+      }
+      if (isDragging) {
+        currentX = startCurrentX + dx;
+        const now = performance.now();
+        const dt = now - lastPointerTime;
+        if (dt > 0) {
+          momentum = ((e.clientX - lastPointerX) / dt) * 16.67;
+          lastPointerX = e.clientX;
+          lastPointerTime = now;
+        }
+      }
+    });
+
+    function endPointerDrag() {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      if (isDragging) {
+        isDragging = false;
+        viewport.classList.remove('is-dragging');
+        momentum = Math.max(Math.min(momentum, 30), -30);
         if (!isManuallyPaused) {
-          updateStatusDisplay();
+          setTimeout(updateStatusDisplay, 800);
         }
-      });
+      }
     }
 
-    // Initial render
+    window.addEventListener('pointerup', endPointerDrag);
+    window.addEventListener('pointercancel', endPointerDrag);
+
+    // Prevent clicking on links inside cards if user was dragging
+    viewport.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasDragged = false;
+      }
+    }, true);
+
+    // Hover effect on viewport to pause auto-drift
+    viewport.addEventListener('mouseenter', () => {
+      isHovered = true;
+      if (!isManuallyPaused && !isDragging && statusText) {
+        statusText.textContent = getI18n('profile_battery_drag_hint', '● READING MODE // HOVER PAUSED');
+        if (pulseDot) pulseDot.classList.add('is-paused');
+      }
+    });
+    viewport.addEventListener('mouseleave', () => {
+      isHovered = false;
+      if (!isManuallyPaused && !isDragging) {
+        updateStatusDisplay();
+      }
+    });
+
+    // Mousewheel horizontal support
+    viewport.addEventListener('wheel', (e) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+      if (Math.abs(delta) > 2) {
+        e.preventDefault();
+        currentX -= delta * 0.7;
+        momentum = -delta * 0.15;
+      }
+    }, { passive: false });
+
+    // Window resize handler to re-measure halfWidth
+    window.addEventListener('resize', () => {
+      measureHalfWidth();
+    });
+
+    // ── Main Continuous Physics & Wrap Loop (requestAnimationFrame) ──
+    let lastTick = performance.now();
+
+    function loop(now) {
+      const dt = Math.min(now - lastTick, 50);
+      const dtRatio = dt / 16.67;
+      lastTick = now;
+
+      if (halfWidth > 0) {
+        if (isDragging) {
+          // currentX is directly controlled by pointer
+        } else if (Math.abs(momentum) > 0.05) {
+          currentX += momentum * dtRatio;
+          momentum *= Math.pow(0.92, dtRatio);
+        } else {
+          momentum = 0;
+          if (!isManuallyPaused && !isHovered) {
+            currentX += direction * baseSpeed * dtRatio;
+          }
+        }
+
+        // Seamless wrap around
+        while (currentX <= -halfWidth) {
+          currentX += halfWidth;
+          if (isDragging) startCurrentX += halfWidth;
+        }
+        while (currentX > 0) {
+          currentX -= halfWidth;
+          if (isDragging) startCurrentX -= halfWidth;
+        }
+
+        track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+      }
+
+      requestAnimationFrame(loop);
+    }
+
+    // Initial render & launch loop
     renderTrack('all');
+    requestAnimationFrame(loop);
   }
 
 })();

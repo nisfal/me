@@ -4756,12 +4756,18 @@ body.meeseeks-cataclysmic-failure {
   mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
   cursor: grab;
+  touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
 }
 
-.microverse-marquee-viewport:active {
+.microverse-marquee-viewport:active,
+.microverse-marquee-viewport.is-dragging {
   cursor: grabbing;
+}
+
+.microverse-marquee-viewport.is-dragging .battery-cell {
+  pointer-events: none;
 }
 
 .microverse-marquee-viewport:focus-visible {
@@ -4779,29 +4785,6 @@ body.meeseeks-cataclysmic-failure {
   align-items: stretch;
   width: max-content;
   will-change: transform;
-  animation: microverseInfiniteScroll 60s linear infinite;
-  animation-play-state: running;
-}
-
-@keyframes microverseInfiniteScroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(calc(-50% - (var(--microverse-gap) / 2)), 0, 0);
-  }
-}
-
-/* Pause when hover or user paused */
-.microverse-battery-track.is-paused,
-.microverse-marquee-viewport:hover .microverse-battery-track,
-.microverse-battery-track:hover {
-  animation-play-state: paused;
-}
-
-/* Reverse direction */
-.microverse-battery-track.is-reverse {
-  animation-direction: reverse;
 }
 
 /* ── Individual Battery Cell ── */
