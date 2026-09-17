@@ -1191,6 +1191,12 @@
 
             <!-- Interactive CLI Form -->
             <form class="terminal-form" id="citadelContactForm" novalidate>
+              <!-- Anti-Bot Honeypot Trap (Invisible to humans, traps automated scrapers/bots) -->
+              <div class="portal-honeypot" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;opacity:0;pointer-events:none;height:0;width:0;overflow:hidden;">
+                <label for="portalSecurityTrap">Galactic Protocol Clearance (Leave Blank)</label>
+                <input type="text" id="portalSecurityTrap" name="portal_trap" tabindex="-1" autocomplete="new-password">
+              </div>
+
               <div class="t-form-row">
                 <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
                 <div class="t-field-group">

@@ -1739,7 +1739,9 @@
         transmittingBtn: 'MENGIRIM_PAKET...',
         dispatch1: (snd) => `Checksum payload terverifikasi untuk pengirim: <strong>${snd}</strong>.`,
         dispatch2: 'Menerapkan cipher portal Dark Matter 2048-bit... [E2EE SECURED]',
-        dispatch3: 'Paket berkas dipancarkan menembus relay multiversal! Membuka client email Anda...'
+        dispatch3: 'Paket berkas dipancarkan menembus relay multiversal ke Google Sheets & Telegram...',
+        dispatchSuccess: '✅ <strong>TRANSMISI TERKIRIM & TERCATAT!</strong> Data telah disimpan di Google Sheets dan notifikasi instan masuk ke Telegram Nisfal. Rick: "Pesan tembus tanpa distorsi galaksi!"',
+        dispatchFallback: 'Subspace direct link dialihkan ke client email lokal Anda...'
       },
       en: {
         help: 'Available commands: <code>--help</code>, <code>--whoami</code>, <code>--status</code>, <code>--rick-quote</code>, <code>--clear</code>. Or populate parameters in the form below and execute <code>EXECUTE_TRANSMISSION.sh</code>.',
@@ -1759,7 +1761,9 @@
         transmittingBtn: 'TRANSMITTING_PACKET...',
         dispatch1: (snd) => `Checksum payload verified for sender: <strong>${snd}</strong>.`,
         dispatch2: 'Applying 2048-bit Dark Matter portal cypher... [E2EE SECURED]',
-        dispatch3: 'Beam packet dispatched across multiversal relay! Launching your mail client...'
+        dispatch3: 'Beam packet dispatched across multiversal relay to Google Sheets & Telegram...',
+        dispatchSuccess: '✅ <strong>TRANSMISSION LOGGED & DELIVERED!</strong> Data recorded in Google Sheets and alert beamed directly to Nisfal\'s Telegram. Rick: "Signal made it through clean, no Galactic Federation nonsense!"',
+        dispatchFallback: 'Rerouting subspace payload to your default local mail client...'
       }
     };
 
@@ -1896,19 +1900,49 @@
       });
     }
 
+    const trapInput = document.getElementById('portalSecurityTrap');
+    let formInitTime = Date.now();
+    let isSubmitting = false;
+    let cooldownTimer = null;
+    let cooldownSeconds = 0;
+
+    [senderInput, emailInput, messageInput].forEach(inp => {
+      if (inp) {
+        inp.addEventListener('focus', () => {
+          if (!formInitTime) formInitTime = Date.now();
+        }, { once: true });
+      }
+    });
+
     // Form Submission & Transmission Dispatch
     termForm.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      if (isSubmitting) return;
+
+      const lang = getTerminalLang();
+      const t = TERM_STR[lang] || TERM_STR.id;
+
+      if (cooldownSeconds > 0) {
+        playGlitchSound();
+        appendTerminalLog(
+          't-tag-err',
+          '[COOLDOWN]',
+          lang === 'en'
+            ? `Transmission relay in cooling down mode. Please wait <strong>${cooldownSeconds}s</strong>.`
+            : `Relay transmisi sedang dalam masa pendinginan. Harap tunggu <strong>${cooldownSeconds} detik</strong>.`
+        );
+        return;
+      }
 
       const sender = senderInput ? senderInput.value.trim() : '';
       const email = emailInput ? emailInput.value.trim() : '';
       const mission = missionSelect ? missionSelect.value : 'General Mission';
       const message = messageInput ? messageInput.value.trim() : '';
-      const lang = getTerminalLang();
-      const t = TERM_STR[lang] || TERM_STR.id;
+      const portalTrap = trapInput ? trapInput.value.trim() : '';
 
       // Validation
-      if (!sender) {
+      if (!sender || sender.length < 2) {
         playGlitchSound();
         appendTerminalLog(
           't-tag-err',
@@ -1919,7 +1953,8 @@
         return;
       }
 
-      if (!email || !email.includes('@')) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
         playGlitchSound();
         appendTerminalLog(
           't-tag-err',
@@ -1930,7 +1965,7 @@
         return;
       }
 
-      if (!message) {
+      if (!message || message.length < 5) {
         playGlitchSound();
         appendTerminalLog(
           't-tag-err',
@@ -1942,6 +1977,7 @@
       }
 
       // Valid: Start Cyber Transmission Sequence
+      isSubmitting = true;
       playTerminalTransmitSound();
 
       if (submitBtn) {
@@ -1965,7 +2001,7 @@
         );
       }, 350);
 
-      setTimeout(() => {
+      setTimeout(async () => {
         playTerminalTransmitSound();
         appendTerminalLog(
           't-tag-ok',
@@ -1973,32 +2009,113 @@
           t.dispatch3
         );
 
-        // Format mailto link
-        const subject = encodeURIComponent(`[CITADEL TRANSMISSION] ${mission} - from ${sender}`);
-        const body = encodeURIComponent(
-          `=== CITADEL SUBSPACE TRANSMISSION PACKET ===\n` +
-          `Dimension     : Earth / C-137\n` +
-          `Sender Name   : ${sender}\n` +
-          `Return Freq   : ${email}\n` +
-          `Mission Type  : ${mission}\n` +
-          `Timestamp     : ${new Date().toLocaleString()}\n\n` +
-          `=== TRANSMISSION PAYLOAD ===\n` +
-          `${message}\n\n` +
-          `============================================\n` +
-          `Dispatched via Citadel Subspace Terminal CLI\n`
-        );
+        let apiSuccess = false;
 
-        const mailtoUrl = `mailto:nisfalfilsa12@gmail.com?subject=${subject}&body=${body}`;
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              sender,
+              email,
+              mission,
+              message,
+              portal_trap: portalTrap,
+              _timeProof: formInitTime
+            })
+          });
 
-        window.location.href = mailtoUrl;
-
-        setTimeout(() => {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            const btnText = submitBtn.querySelector('.t-btn-text');
-            if (btnText) btnText.textContent = 'EXECUTE_TRANSMISSION.sh';
+          if (res.status === 429) {
+            const errJson = await res.json().catch(() => ({}));
+            playGlitchSound();
+            appendTerminalLog(
+              't-tag-err',
+              '[FIREWALL 429]',
+              `🛑 <strong>${errJson.error || 'RATE LIMIT EXCEEDED'}</strong>: ${errJson.message || 'Harap tunggu beberapa menit sebelum mengirim lagi.'}`
+            );
+            isSubmitting = false;
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              const btnText = submitBtn.querySelector('.t-btn-text');
+              if (btnText) btnText.textContent = 'EXECUTE_TRANSMISSION.sh';
+            }
+            return;
           }
-        }, 1200);
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success) {
+              apiSuccess = true;
+              playPortalSound();
+              appendTerminalLog(
+                't-tag-ok',
+                '[SUCCESS // CONFIRMED]',
+                t.dispatchSuccess
+              );
+              termForm.reset();
+
+              // Start Cooldown Lock (30 seconds)
+              cooldownSeconds = 30;
+              if (submitBtn) {
+                submitBtn.disabled = true;
+                const btnText = submitBtn.querySelector('.t-btn-text');
+                if (btnText) btnText.textContent = `COOLDOWN [${cooldownSeconds}s]`;
+
+                cooldownTimer = setInterval(() => {
+                  cooldownSeconds--;
+                  if (cooldownSeconds > 0) {
+                    if (btnText) btnText.textContent = `COOLDOWN [${cooldownSeconds}s]`;
+                  } else {
+                    clearInterval(cooldownTimer);
+                    cooldownTimer = null;
+                    isSubmitting = false;
+                    submitBtn.disabled = false;
+                    if (btnText) btnText.textContent = 'EXECUTE_TRANSMISSION.sh';
+                    formInitTime = Date.now();
+                  }
+                }, 1000);
+              }
+              return;
+            }
+          }
+        } catch (apiErr) {
+          console.warn('Subspace API endpoint unreachable, activating mailto fallback:', apiErr);
+        }
+
+        // Fallback to mailto if API failed
+        if (!apiSuccess) {
+          appendTerminalLog(
+            't-tag-auth',
+            '[FALLBACK // LOCAL CLIENT]',
+            t.dispatchFallback
+          );
+
+          const subject = encodeURIComponent(`[CITADEL TRANSMISSION] ${mission} - from ${sender}`);
+          const body = encodeURIComponent(
+            `=== CITADEL SUBSPACE TRANSMISSION PACKET ===\n` +
+            `Dimension     : Earth / C-137\n` +
+            `Sender Name   : ${sender}\n` +
+            `Return Freq   : ${email}\n` +
+            `Mission Type  : ${mission}\n` +
+            `Timestamp     : ${new Date().toLocaleString()}\n\n` +
+            `=== TRANSMISSION PAYLOAD ===\n` +
+            `${message}\n\n` +
+            `============================================\n` +
+            `Dispatched via Citadel Subspace Terminal CLI\n`
+          );
+
+          const mailtoUrl = `mailto:nisfalfilsa12@gmail.com?subject=${subject}&body=${body}`;
+          window.location.href = mailtoUrl;
+
+          setTimeout(() => {
+            isSubmitting = false;
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              const btnText = submitBtn.querySelector('.t-btn-text');
+              if (btnText) btnText.textContent = 'EXECUTE_TRANSMISSION.sh';
+            }
+          }, 1500);
+        }
       }, 750);
     });
   }
