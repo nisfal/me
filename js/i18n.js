@@ -293,9 +293,21 @@ const I18N_DICTIONARY = {
     not_found_telemetry_flux: 'FLUX TACHYON: 0.0% (ANOMALI)',
     not_found_telemetry_void: 'SEKTOR: VOID-404 ABYSS',
     not_found_btn_c137: 'LONCAT KE DIMENSI C-137',
+    not_found_btn_c137_locked: '🔒 KOORDINAT TERKUNCI (RE-KALIBRASI DULU)',
+    not_found_btn_c137_unlocked: '🚀 JALUR TERBUKA: LONCAT KE DIMENSI C-137 ➔',
     not_found_btn_home: 'KEMBALI KE BUMI (HOME)',
     not_found_btn_recalibrate: 'RE-KALIBRASI PORTAL GUN',
-    not_found_recalibrated_toast: '[SISTEM CITADEL] Portal Gun berhasil dikalibrasi ulang! Jalur dimensi stabil.'
+    not_found_btn_recalibrated_done: '✓ PORTAL GUN TERKALIBRASI',
+    not_found_warn_locked: '⚠️ [PERINGATAN PORTAL GUN] Koordinat dimensi rusak! Tekan "RE-KALIBRASI PORTAL GUN" terlebih dahulu!',
+    not_found_recalibrated_toast: '[SISTEM CITADEL] Koordinat C-137 berhasil dikunci! Jalur portal menuju Dimensi C-137 telah terbuka.',
+    not_found_telemetry_timeline_val_corrupt: 'NULL // PARADOX',
+    not_found_telemetry_timeline_val_stable: 'BUMI DIMENSI C-137 (STABIL)',
+    not_found_telemetry_flux_val_corrupt: '0.000 GHz (OFFLINE)',
+    not_found_telemetry_flux_val_stable: '420.69 GHz (100% OPTIMAL)',
+    not_found_telemetry_void_val_corrupt: 'VOID-404 ABYSS',
+    not_found_telemetry_void_val_stable: 'SEKTOR EARTH PRIME',
+    not_found_telemetry_citadel_val_corrupt: 'TERPUTUS // OFFLINE',
+    not_found_telemetry_citadel_val_stable: 'ONLINE // SINYAL JERNIH'
   },
   en: {
     meta_title_home: 'Nisfal Filsa | Fullstack & Systems Engineer',
@@ -591,9 +603,21 @@ const I18N_DICTIONARY = {
     not_found_telemetry_flux: 'TACHYON FLUX: 0.0% (ANOMALY)',
     not_found_telemetry_void: 'SECTOR: VOID-404 ABYSS',
     not_found_btn_c137: 'JUMP TO DIMENSION C-137',
+    not_found_btn_c137_locked: '🔒 COORDINATES LOCKED (RE-CALIBRATE FIRST)',
+    not_found_btn_c137_unlocked: '🚀 PATHWAY ONLINE: JUMP TO DIMENSION C-137 ➔',
     not_found_btn_home: 'RETURN TO EARTH (HOME)',
     not_found_btn_recalibrate: 'RE-CALIBRATE PORTAL GUN',
-    not_found_recalibrated_toast: '[CITADEL PROTOCOL] Portal Gun successfully re-calibrated! Dimensional pathway stabilized.'
+    not_found_btn_recalibrated_done: '✓ PORTAL GUN CALIBRATED',
+    not_found_warn_locked: '⚠️ [PORTAL GUN WARNING] Dimension coordinates corrupted! Click "RE-CALIBRATE PORTAL GUN" first!',
+    not_found_recalibrated_toast: '[CITADEL PROTOCOL] C-137 coordinates locked! Portal pathway to Dimension C-137 is now open.',
+    not_found_telemetry_timeline_val_corrupt: 'NULL // PARADOX',
+    not_found_telemetry_timeline_val_stable: 'EARTH DIMENSION C-137 (STABLE)',
+    not_found_telemetry_flux_val_corrupt: '0.000 GHz (OFFLINE)',
+    not_found_telemetry_flux_val_stable: '420.69 GHz (100% OPTIMAL)',
+    not_found_telemetry_void_val_corrupt: 'VOID-404 ABYSS',
+    not_found_telemetry_void_val_stable: 'EARTH PRIME SECTOR',
+    not_found_telemetry_citadel_val_corrupt: 'DISCONNECTED // OFFLINE',
+    not_found_telemetry_citadel_val_stable: 'ONLINE // SIGNAL CLEAR'
   }
 };
 
