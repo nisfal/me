@@ -110,7 +110,7 @@
 
   // --- 2. Dynamic Modal Creation & Attachment ---
   let modalBackdrop = null;
-  let targetUrl = 'profile.html';
+  let targetUrl = 'profile';
 
   function createPortalModal() {
     if (document.getElementById('portalTravelModal')) return;
@@ -255,13 +255,13 @@
     }, 780);
   }
 
-  // --- 4. Intercept All Links to profile.html ---
+  // --- 4. Intercept All Links to profile (C-137) ---
   function bindPortalLinks() {
-    const links = document.querySelectorAll('a[href*="profile.html"], .nav-link-portal, .floating-portal-btn');
+    const links = document.querySelectorAll('a[href*="profile.html"], a[href="profile"], a[href*="/profile"], .nav-link-portal, .floating-portal-btn');
     links.forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        targetUrl = link.getAttribute('href') || 'profile.html';
+        targetUrl = link.getAttribute('href') || 'profile';
         initAudio();
         playModalOpenSound();
 

@@ -620,7 +620,7 @@
           'Redis In-Memory Caching & MinIO S3',
           'CASL Granular RBAC/ABAC Security'
         ],
-        linkUrl: 'backend.html',
+        linkUrl: 'backend',
         linkLabel: 'Inspeksi Arsitektur Backend'
       },
       {
@@ -636,7 +636,7 @@
           'E2EE Key Exchange & Auto-Recovery',
           'Interactive Leaflet Map & Rich Dashboards'
         ],
-        linkUrl: 'frontend.html',
+        linkUrl: 'frontend',
         linkLabel: 'Eksplorasi Showcase Frontend'
       }
     ],
@@ -654,7 +654,7 @@
           'Redis In-Memory Caching & MinIO S3',
           'CASL Granular RBAC/ABAC Security'
         ],
-        linkUrl: 'backend.html',
+        linkUrl: 'backend',
         linkLabel: 'Inspect Backend Architecture'
       },
       {
@@ -670,7 +670,7 @@
           'E2EE Key Exchange & Auto-Recovery',
           'Interactive Leaflet Map & Rich Dashboards'
         ],
-        linkUrl: 'frontend.html',
+        linkUrl: 'frontend',
         linkLabel: 'Explore Frontend Showcase'
       }
     ]
@@ -1510,7 +1510,7 @@
 
   // --- 9. Reality Return & Entry Transition VFX ---
   function setupRealityReturnTransitions() {
-    const returnButtons = document.querySelectorAll('#btnBackReality, .footer-portal-button, a[href="index.html"]');
+    const returnButtons = document.querySelectorAll('#btnBackReality, .footer-portal-button, a[href="index.html"], a[href="/"]');
 
     function triggerRealityCollapse(targetUrl) {
       playRealityCollapseSound();
@@ -1542,7 +1542,7 @@
     returnButtons.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const url = btn.getAttribute('href') || 'index.html';
+        const url = btn.getAttribute('href') || '/';
         triggerRealityCollapse(url);
       });
     });

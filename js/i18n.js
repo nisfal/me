@@ -588,9 +588,21 @@ function getInitialLanguage() {
 }
 
 function updateLanguageLinks(lang) {
-  document.querySelectorAll('a[href$=".html"], a[href*=".html#"], a[href*=".html?"]').forEach((link) => {
+  document.querySelectorAll('a[href]').forEach((link) => {
     const href = link.getAttribute('href');
-    if (!href || href.startsWith('http')) return;
+    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+    if (href.startsWith('#')) return;
+
+    // Check if it's an internal page route (supports both clean URLs and .html)
+    const isInternalPage = href.includes('.html') ||
+      href === '/' || href.startsWith('/?') || href.startsWith('/#') ||
+      href === 'backend' || href.startsWith('backend?') || href.startsWith('backend#') ||
+      href === 'frontend' || href.startsWith('frontend?') || href.startsWith('frontend#') ||
+      href === 'profile' || href.startsWith('profile?') || href.startsWith('profile#') ||
+      href === 'index' || href.startsWith('index?') || href.startsWith('index#');
+
+    if (!isInternalPage) return;
+
     const [pathWithQuery, hash = ''] = href.split('#');
     const [path] = pathWithQuery.split('?');
     link.setAttribute('href', `${path}?lang=${lang}${hash ? `#${hash}` : ''}`);
