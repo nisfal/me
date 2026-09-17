@@ -465,7 +465,7 @@
     ctx.arc(currentCenterX, currentCenterY, 340, 0, Math.PI * 2);
     ctx.fill();
 
-    // Spiral swirl particles
+    // Spiral swirl particles (Ultra-fast 2-pass glow, 0% Gaussian shadow filter cost)
     particles.forEach((p) => {
       p.angle += p.speed;
       p.radius -= 0.25;
@@ -479,15 +479,19 @@
       const x = currentCenterX + Math.cos(p.angle) * p.radius;
       const y = currentCenterY + Math.sin(p.angle) * (p.radius * 0.78);
 
+      // Outer soft glow halo
+      ctx.beginPath();
+      ctx.arc(x, y, p.size * 2, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${currentHue}, 90%, 50%, ${p.alpha * 0.22})`;
+      ctx.fill();
+
+      // Inner solid particle core
       ctx.beginPath();
       ctx.arc(x, y, p.size, 0, Math.PI * 2);
       ctx.fillStyle = `hsla(${currentHue + p.colorOffset}, 95%, 60%, ${p.alpha})`;
-      ctx.shadowBlur = 12;
-      ctx.shadowColor = `hsla(${currentHue}, 90%, 50%, 0.8)`;
       ctx.fill();
     });
 
-    ctx.shadowBlur = 0;
     requestAnimationFrame(animate);
   }
 
@@ -1602,18 +1606,34 @@
       'contact': 'transmissions'
     };
 
+    let isScrollTicking = false;
+    let sectionPositions = [];
+
+    function updateSectionPositions() {
+      sectionPositions = Array.from(sections).map(sec => {
+        const top = sec.offsetTop;
+        return {
+          id: sec.getAttribute('id'),
+          top: top,
+          bottom: top + sec.offsetHeight
+        };
+      });
+    }
+
+    updateSectionPositions();
+    window.addEventListener('resize', updateSectionPositions, { passive: true });
+
     function onScroll() {
       const scrollPos = window.scrollY + 180;
       let activeSectionId = null;
 
-      sections.forEach(sec => {
-        const top = sec.offsetTop;
-        const height = sec.offsetHeight;
-        const id = sec.getAttribute('id');
-        if (scrollPos >= top && scrollPos < top + height) {
-          activeSectionId = id;
+      for (let i = 0; i < sectionPositions.length; i++) {
+        const sec = sectionPositions[i];
+        if (scrollPos >= sec.top && scrollPos < sec.bottom) {
+          activeSectionId = sec.id;
+          break;
         }
-      });
+      }
 
       if (activeSectionId) {
         const activeGroup = SECTION_GROUP_MAP[activeSectionId];
@@ -1654,7 +1674,15 @@
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', () => {
+      if (!isScrollTicking) {
+        requestAnimationFrame(() => {
+          onScroll();
+          isScrollTicking = false;
+        });
+        isScrollTicking = true;
+      }
+    }, { passive: true });
     onScroll();
   }
 

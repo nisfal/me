@@ -54,6 +54,10 @@
       height: 100%;
       z-index: 0;
       pointer-events: none;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      contain: strict;
+      backface-visibility: hidden;
     }
 
     .cosmic-void-grid {
@@ -66,6 +70,9 @@
       pointer-events: none;
       z-index: 1;
       opacity: 0.6;
+      transform: translate3d(0, 0, 0);
+      contain: strict;
+      backface-visibility: hidden;
     }
 
     .scanlines-overlay {
@@ -79,8 +86,11 @@
         transparent 3px
       );
       pointer-events: none;
-      z-index: 2;
+      z-index: 1;
       opacity: 0.7;
+      transform: translate3d(0, 0, 0);
+      contain: strict;
+      backface-visibility: hidden;
     }
 
     /* Navigation Header */
@@ -1050,7 +1060,7 @@
           ctx.fillStyle = grad;
           ctx.fillRect(0, 0, width, height);
 
-          // Draw swirling cosmic particles
+          // Draw swirling cosmic particles (Ultra-fast 2-pass glow, 0% Gaussian filter cost)
           particles.forEach(p => {
             p.angle += isCalibrated ? p.speed * 1.5 : p.speed;
             p.distance -= isCalibrated ? 0.4 : 0.25;
@@ -1062,16 +1072,23 @@
             const x = centerX + Math.cos(p.angle) * p.distance;
             const y = centerY + Math.sin(p.angle) * (p.distance * 0.75);
 
-            ctx.save();
-            ctx.globalAlpha = p.alpha;
-            ctx.fillStyle = isCalibrated ? (Math.random() > 0.4 ? '#39ff14' : '#00f0ff') : p.color;
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = ctx.fillStyle;
+            const col = isCalibrated ? (Math.random() > 0.4 ? '#39ff14' : '#00f0ff') : p.color;
+
+            // Outer soft glow halo
+            ctx.beginPath();
+            ctx.arc(x, y, p.radius * 2.2, 0, Math.PI * 2);
+            ctx.fillStyle = col;
+            ctx.globalAlpha = p.alpha * 0.22;
+            ctx.fill();
+
+            // Core bright particle
             ctx.beginPath();
             ctx.arc(x, y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = col;
+            ctx.globalAlpha = p.alpha;
             ctx.fill();
-            ctx.restore();
           });
+          ctx.globalAlpha = 1;
 
           requestAnimationFrame(renderVortex);
         }
