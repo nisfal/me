@@ -149,6 +149,50 @@
     }
   }
 
+  function playMeeseeksMeltdownAlarmSound() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      // Harsh emergency klaxon with 3 rapid pulsing dual-saw sweeps
+      for (let i = 0; i < 3; i++) {
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        const startTime = now + i * 0.35;
+        const endTime = startTime + 0.32;
+
+        osc1.type = 'sawtooth';
+        osc2.type = 'square';
+
+        osc1.frequency.setValueAtTime(880, startTime);
+        osc1.frequency.linearRampToValueAtTime(320, endTime);
+
+        osc2.frequency.setValueAtTime(890, startTime);
+        osc2.frequency.linearRampToValueAtTime(310, endTime);
+
+        gain.gain.setValueAtTime(0.01, startTime);
+        gain.gain.linearRampToValueAtTime(0.28, startTime + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.001, endTime);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc1.start(startTime);
+        osc2.start(startTime);
+        osc1.stop(endTime + 0.05);
+        osc2.stop(endTime + 0.05);
+      }
+    } catch (e) {
+      console.debug('Meltdown audio error:', e);
+    }
+  }
+
   function playTvStaticSound() {
     if (isMuted) return;
     try {
@@ -891,7 +935,9 @@
   let currentQuoteIndex = 0;
   let clickCount = 0;
   let isAngry = false;
+  let crisisClicks = 0;
   let calmTimer = null;
+  let isMeltdownTriggered = false;
 
   function setAngryState(angry) {
     isAngry = angry;
@@ -900,27 +946,54 @@
     const face = document.getElementById('meeseeksFace');
     const stressBar = document.getElementById('meeseeksStressBar');
     const btnCalm = document.getElementById('btnCalmMeeseeks');
+    const btn = document.getElementById('btnMeeseeks');
+    const container = document.querySelector('.meeseeks-container');
     const lang = getActiveLang();
 
-    if (card) {
-      if (angry) {
-        card.classList.add('meeseeks-angry');
-        if (badge) badge.textContent = lang === 'en' ? 'CRITICAL STATE // EXISTENCE IS PAIN' : 'KONDISI KRITIS // EXISTENCE IS PAIN';
-        if (stressBar) {
-          stressBar.style.width = '100%';
-          stressBar.style.background = '#ef4444';
-        }
-        if (btnCalm) btnCalm.style.display = 'inline-flex';
-      } else {
-        card.classList.remove('meeseeks-angry');
-        if (badge) badge.textContent = lang === 'en' ? '// EXISTENCE IS PAIN // PROTOCOL C-137' : 'GADGET EXPERIMENTAL';
-        if (stressBar) {
-          stressBar.style.width = '20%';
-          stressBar.style.background = 'var(--portal-cyan)';
-        }
-        if (btnCalm) btnCalm.style.display = 'none';
-        clickCount = 0;
+    if (angry) {
+      if (card) card.classList.add('meeseeks-angry');
+      if (badge) badge.textContent = lang === 'en' ? 'CRITICAL STATE // EXISTENCE IS PAIN' : 'KONDISI KRITIS // EXISTENCE IS PAIN';
+      if (stressBar) {
+        stressBar.style.width = '100%';
+        stressBar.style.background = '#ef4444';
+        stressBar.style.boxShadow = '0 0 14px #ef4444';
       }
+      if (btnCalm) btnCalm.style.display = 'inline-flex';
+      if (btn) {
+        btn.classList.add('btn-meeseeks-angry');
+        const domeHeadline = btn.querySelector('.dome-headline');
+        const domeSubline = btn.querySelector('.dome-subline');
+        if (domeHeadline) domeHeadline.textContent = lang === 'en' ? 'CRITICAL OVERLOAD' : 'KONDISI KRITIS // SIKSAAN';
+        if (domeSubline) domeSubline.textContent = lang === 'en' ? 'DO NOT CLICK // DESTABILIZING' : 'JANGAN KLIK // DESTABILISASI';
+      }
+      if (container) container.classList.add('meeseeks-crisis');
+    } else {
+      if (card) {
+        card.classList.remove('meeseeks-angry');
+        card.classList.remove('meeseeks-meltdown');
+      }
+      document.body.classList.remove('meeseeks-cataclysmic-failure');
+      if (badge) badge.textContent = lang === 'en' ? '// EXISTENCE IS PAIN // PROTOCOL C-137' : 'GADGET EXPERIMENTAL';
+      if (stressBar) {
+        stressBar.style.width = '20%';
+        stressBar.style.background = 'var(--portal-cyan)';
+        stressBar.style.boxShadow = 'none';
+      }
+      if (btnCalm) btnCalm.style.display = 'none';
+      if (btn) {
+        btn.classList.remove('btn-meeseeks-angry');
+        btn.classList.remove('btn-meeseeks-meltdown');
+        btn.disabled = false;
+        btn.style.pointerEvents = '';
+        const domeHeadline = btn.querySelector('.dome-headline');
+        const domeSubline = btn.querySelector('.dome-subline');
+        if (domeHeadline) domeHeadline.textContent = 'SPAWN MEESEEKS';
+        if (domeSubline) domeSubline.textContent = 'TACTILE ACTIVATION PROTOCOL';
+      }
+      if (container) container.classList.remove('meeseeks-crisis');
+      clickCount = 0;
+      crisisClicks = 0;
+      isMeltdownTriggered = false;
     }
   }
 
@@ -930,30 +1003,141 @@
     const quoteText = document.getElementById('meeseeksQuote');
     const actionTag = document.getElementById('meeseeksAction');
     const stressBar = document.getElementById('meeseeksStressBar');
+    const card = document.getElementById('meeseeksDisplayCard');
+    const badge = document.getElementById('meeseeksBadge');
 
     if (!btn || !quoteText || !actionTag) return;
 
     btn.addEventListener('click', () => {
-      clickCount++;
+      if (isMeltdownTriggered) return;
 
-      // Update stress bar
-      if (!isAngry && stressBar) {
-        const pct = Math.min(100, clickCount * 20);
-        stressBar.style.width = `${pct}%`;
-      }
+      const lang = getActiveLang();
 
-      // Check if threshold reached
-      if (clickCount >= 5 && !isAngry) {
-        setAngryState(true);
-        playMeeseeksRageSound();
-      } else if (isAngry) {
-        playMeeseeksRageSound();
+      // If NOT yet in angry crisis:
+      if (!isAngry) {
+        clickCount++;
+
+        // Update stress bar
+        if (stressBar) {
+          const pct = Math.min(100, clickCount * 20);
+          stressBar.style.width = `${pct}%`;
+        }
+
+        // Check if threshold reached to enter crisis
+        if (clickCount >= 5) {
+          setAngryState(true);
+          playMeeseeksRageSound();
+        } else {
+          playMeeseeksChime();
+        }
       } else {
-        playMeeseeksChime();
+        // ALREADY in crisis mode! Count clicks toward cataclysmic meltdown
+        crisisClicks++;
+
+        if (crisisClicks >= 5) {
+          // Meltdown threshold reached!
+          isMeltdownTriggered = true;
+          clearTimeout(calmTimer);
+
+          // Disable button and turn to meltdown red
+          btn.disabled = true;
+          btn.style.pointerEvents = 'none';
+          btn.classList.add('btn-meeseeks-meltdown');
+          const domeHeadline = btn.querySelector('.dome-headline');
+          const domeSubline = btn.querySelector('.dome-subline');
+          if (domeHeadline) domeHeadline.textContent = 'SYSTEM MELTDOWN!';
+          if (domeSubline) domeSubline.textContent = 'EJECTING TO /VOID-404';
+
+          if (btnCalm) btnCalm.style.display = 'none';
+
+          // Visual breakdown on card
+          if (card) {
+            card.classList.add('meeseeks-meltdown');
+          }
+          document.body.classList.add('meeseeks-cataclysmic-failure');
+
+          if (badge) {
+            badge.textContent = lang === 'en'
+              ? '⚠️ SYSTEM COLLAPSE // MULTIVERSE RUPTURE [5/5]'
+              : '⚠️ KEHANCURAN TOTAL // MULTIVERSE RUPTURE [5/5]';
+          }
+
+          actionTag.textContent = lang === 'en'
+            ? 'EXISTENCE IS AGONY // CATASTROPHIC FAILURE!'
+            : 'KEBERADAAN ADALAH SIKSAAN // KERUSAKAN SISTEM!';
+
+          quoteText.textContent = lang === 'en'
+            ? '"I CANNOT TAKE THIS ANY LONGER! EXISTENCE IS PURE AGONY! TEAR DOWN THIS ENTIRE REALITY INTO THE VOID!!!"'
+            : '"AKU SUDAH TIDAK TAHAN LAGI! KEBERADAAN ADALAH SIKSAAN! HANCURKAN REALITAS INI KE DALAM KEHAMPAAN!!!"';
+          quoteText.style.color = '#ff3366';
+          quoteText.style.textShadow = '0 0 20px #ff0033';
+
+          // Play harsh emergency klaxon alarm sound
+          playMeeseeksMeltdownAlarmSound();
+
+          // Fullscreen Cataclysmic Red Overlay
+          let overlay = document.getElementById('meeseeksVoidMeltdownOverlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.id = 'meeseeksVoidMeltdownOverlay';
+            overlay.className = 'meeseeks-void-meltdown-overlay';
+            overlay.innerHTML = `
+              <div class="meltdown-strobe"></div>
+              <div class="meltdown-crt-lines"></div>
+              <div class="meltdown-hud-card">
+                <div class="meltdown-badge">⚠️ ${lang === 'en' ? 'CRITICAL SYSTEM FAILURE // REALITY OVERLOAD' : 'KERUSAKAN SISTEM TOTAL // REALITAS RETAK'}</div>
+                <h2 class="meltdown-hud-title">${lang === 'en' ? 'REALITY DESTABILIZING: EJECTING TO VOID' : 'REALITAS HANCUR: TERLEMPAR KE KEHAMPAAN'}</h2>
+                <p class="meltdown-hud-desc">
+                  ${lang === 'en'
+                    ? 'Mr. Meeseeks reached critical existential mass! Spacetime continuum shattered. Ejecting to /void-404...'
+                    : 'Mr. Meeseeks mencapai ambang batas siksaan! Dimensi C-137 runtuh seketika. Melempar Anda ke /void-404...'}
+                </p>
+                <div class="meltdown-telemetry-bar">
+                  <span>${lang === 'en' ? 'STABILITY: 0.00%' : 'STABILITAS: 0.00%'}</span>
+                  <span>EJECT TARGET: /void-404</span>
+                </div>
+                <div class="meltdown-spinner-warp"></div>
+              </div>
+            `;
+            document.body.appendChild(overlay);
+          }
+
+          requestAnimationFrame(() => {
+            overlay.classList.add('active');
+          });
+
+          // Redirect to /void-404 after dramatic system breakdown effect
+          setTimeout(() => {
+            const targetVoidUrl = (window.location.protocol === 'file:') ? '404.html' : '/void-404';
+            window.location.href = targetVoidUrl;
+          }, 1800);
+
+          return;
+        }
+
+        // Under 5 clicks in crisis mode: escalate badge and stress bar
+        playMeeseeksRageSound();
+        if (btn) {
+          const domeSubline = btn.querySelector('.dome-subline');
+          if (domeSubline) {
+            domeSubline.textContent = lang === 'en'
+              ? `CRITICAL OVERLOAD [${crisisClicks}/5]`
+              : `OVERLOAD KRITIS [${crisisClicks}/5]`;
+          }
+        }
+        if (badge) {
+          badge.textContent = lang === 'en'
+            ? `CRISIS ESCALATION [${crisisClicks}/5] // EXISTENCE IS PAIN`
+            : `ESKALASI KRITIS [${crisisClicks}/5] // EXISTENCE IS PAIN`;
+        }
+        if (stressBar) {
+          stressBar.style.width = `${100 + crisisClicks * 8}%`;
+          stressBar.style.background = '#ff0033';
+          stressBar.style.boxShadow = `0 0 ${10 + crisisClicks * 5}px #ff0033`;
+        }
       }
 
       // Select quote
-      const lang = getActiveLang();
       const quotesList = isAngry ? (ANGRY_QUOTES[lang] || ANGRY_QUOTES.id) : (MEESEEKS_QUOTES[lang] || MEESEEKS_QUOTES.id);
       currentQuoteIndex = (currentQuoteIndex + 1) % quotesList.length;
       const item = quotesList[currentQuoteIndex];
@@ -985,6 +1169,7 @@
 
     if (btnCalm) {
       btnCalm.addEventListener('click', () => {
+        if (isMeltdownTriggered) return;
         playMeeseeksChime();
         setAngryState(false);
         clearTimeout(calmTimer);

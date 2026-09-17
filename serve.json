@@ -3,6 +3,8 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/c-137", "destination": "/profile.html" },
-    { "source": "c-137", "destination": "/profile.html" }
+    { "source": "c-137", "destination": "/profile.html" },
+    { "source": "/void-404", "destination": "/404.html" },
+    { "source": "void-404", "destination": "/404.html" }
   ]
 }

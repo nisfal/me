@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/c-137", "destination": "/profile" }
+    { "source": "/c-137", "destination": "/profile" },
+    { "source": "/void-404", "destination": "/404.html" }
   ]
 }

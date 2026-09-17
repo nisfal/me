@@ -2144,21 +2144,73 @@ body.portal-arrived {
   font-weight: 600;
 }
 
-/* Meeseeks angry mode for dome button */
+/* Meeseeks angry / crisis mode for dome button */
+.btn-meeseeks-dome.btn-meeseeks-angry,
+.meeseeks-container.meeseeks-crisis .btn-meeseeks-dome,
 .meeseeks-angry .btn-meeseeks-dome {
-  border-color: #ef4444;
-  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
+  background: linear-gradient(145deg, #22060b 0%, #0d0205 100%) !important;
+  border-color: #ef4444 !important;
+  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.65), 0 0 20px rgba(239, 68, 68, 0.45), inset 0 1px 0 rgba(255, 120, 120, 0.3) !important;
+  animation: domeButtonTremble 0.22s infinite alternate;
 }
 
+@keyframes domeButtonTremble {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(-1.5px, 1px); }
+  100% { transform: translate(1px, -1px); }
+}
+
+.btn-meeseeks-dome.btn-meeseeks-angry .dome-bezel,
+.meeseeks-container.meeseeks-crisis .btn-meeseeks-dome .dome-bezel,
+.meeseeks-angry .dome-bezel {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.7), inset 0 2px 5px rgba(0, 0, 0, 0.85) !important;
+  background: linear-gradient(145deg, #3d0d14, #1c0509) !important;
+}
+
+.btn-meeseeks-dome.btn-meeseeks-angry .dome-core,
+.meeseeks-container.meeseeks-crisis .btn-meeseeks-dome .dome-core,
 .meeseeks-angry .dome-core {
-  background: radial-gradient(circle at 35% 30%, #fca5a5 0%, #ef4444 60%, #991b1b 100%);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.8), inset 0 2px 3px rgba(255, 255, 255, 0.6);
-  animation: domeRagePulse 0.4s infinite alternate;
+  background: radial-gradient(circle at 35% 30%, #ff9999 0%, #ef4444 55%, #7f1d1d 100%) !important;
+  box-shadow: 0 0 24px #ef4444, inset 0 2px 4px rgba(255, 255, 255, 0.9) !important;
+  animation: domeRagePulse 0.35s infinite alternate !important;
 }
 
 @keyframes domeRagePulse {
-  from { filter: brightness(1); }
-  to { filter: brightness(1.3); }
+  from { filter: brightness(1); transform: scale(0.98); }
+  to { filter: brightness(1.4); transform: scale(1.05); }
+}
+
+.btn-meeseeks-dome.btn-meeseeks-angry .dome-headline,
+.meeseeks-container.meeseeks-crisis .btn-meeseeks-dome .dome-headline {
+  color: #ffffff !important;
+  text-shadow: 0 0 14px rgba(239, 68, 68, 0.95);
+}
+
+.btn-meeseeks-dome.btn-meeseeks-angry .dome-subline,
+.meeseeks-container.meeseeks-crisis .btn-meeseeks-dome .dome-subline {
+  color: #fca5a5 !important;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+}
+
+.btn-meeseeks-dome.btn-meeseeks-angry:hover,
+.meeseeks-container.meeseeks-crisis .btn-meeseeks-dome:hover {
+  border-color: #ff2a4b !important;
+  box-shadow: 0 10px 40px rgba(239, 68, 68, 0.85), 0 0 30px #ef4444, inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Dome Button Meltdown State */
+.btn-meeseeks-dome.btn-meeseeks-meltdown {
+  background: #35000a !important;
+  border-color: #ff0033 !important;
+  box-shadow: 0 0 60px rgba(255, 0, 51, 1), inset 0 0 25px rgba(255, 0, 51, 0.8) !important;
+  animation: meeseeksMeltdownVibrate 0.08s infinite !important;
+}
+
+.btn-meeseeks-dome.btn-meeseeks-meltdown .dome-core {
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #ff0033 60%, #60000e 100%) !important;
+  box-shadow: 0 0 40px #ff0033 !important;
 }
 
 .btn-calm-meeseeks {
@@ -2353,6 +2405,159 @@ body.portal-arrived {
 .meeseeks-display-card.meeseeks-angry .stress-bar {
   background: #ef4444;
   box-shadow: 0 0 10px #ef4444;
+}
+
+/* Catastrophic Meltdown State - Imminent Void-404 Fracture */
+.meeseeks-display-card.meeseeks-meltdown {
+  background: radial-gradient(circle at center, rgba(180, 10, 30, 0.98), rgba(40, 4, 8, 1)) !important;
+  border-color: #ff0033 !important;
+  box-shadow: 0 0 60px rgba(255, 0, 51, 0.95), inset 0 0 30px rgba(255, 0, 51, 0.6) !important;
+  animation: meeseeksMeltdownVibrate 0.08s infinite !important;
+}
+
+@keyframes meeseeksMeltdownVibrate {
+  0% { transform: translate(-3px, 2px) scale(1.02); filter: brightness(1.4) contrast(180%); }
+  25% { transform: translate(3px, -3px) scale(1.03); filter: brightness(1.8) contrast(200%); }
+  50% { transform: translate(-2px, -2px) scale(1.01); filter: brightness(1.3) contrast(190%); }
+  75% { transform: translate(4px, 1px) scale(1.04); filter: brightness(2) contrast(220%); }
+  100% { transform: translate(-3px, -1px) scale(1.02); filter: brightness(1.5) contrast(180%); }
+}
+
+/* Fullscreen Cataclysmic Reality Shake & Crimson Strobe */
+body.meeseeks-cataclysmic-failure {
+  animation: meeseeksScreenGlitchShake 0.12s infinite alternate !important;
+  overflow: hidden !important;
+}
+
+@keyframes meeseeksScreenGlitchShake {
+  0% { transform: translate(-4px, -2px); filter: contrast(160%) hue-rotate(-20deg); }
+  33% { transform: translate(6px, 4px); filter: contrast(220%) hue-rotate(20deg); }
+  66% { transform: translate(-5px, 6px); filter: contrast(180%) invert(15%); }
+  100% { transform: translate(4px, -5px); filter: contrast(250%) saturate(200%); }
+}
+
+/* Fullscreen Meltdown Overlay with Glitch Scanlines & HUD Warning */
+.meeseeks-void-meltdown-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  background: rgba(18, 2, 6, 0.94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+}
+
+.meeseeks-void-meltdown-overlay.active {
+  opacity: 1;
+}
+
+.meltdown-strobe {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 0, 50, 0.45) 0%, rgba(255, 0, 50, 0.15) 50%, rgba(10, 0, 2, 0.8) 100%);
+  animation: meltdownStrobePulse 0.18s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes meltdownStrobePulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.9; }
+}
+
+.meltdown-crt-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 0, 50, 0.15) 0px,
+    rgba(255, 0, 50, 0.15) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+.meltdown-hud-card {
+  position: relative;
+  z-index: 10;
+  max-width: 620px;
+  width: 100%;
+  background: rgba(15, 3, 6, 0.95);
+  border: 2px solid #ff0033;
+  box-shadow: 0 0 50px rgba(255, 0, 51, 0.8), inset 0 0 30px rgba(255, 0, 51, 0.35);
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  animation: hudWarningPulse 0.4s infinite alternate;
+}
+
+@keyframes hudWarningPulse {
+  0% { transform: scale(0.99); box-shadow: 0 0 30px rgba(255, 0, 51, 0.6); }
+  100% { transform: scale(1.02); box-shadow: 0 0 70px rgba(255, 0, 51, 1); }
+}
+
+.meltdown-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 0, 51, 0.2);
+  border: 1px solid #ff0033;
+  color: #ff3366;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.meltdown-hud-title {
+  color: #ffffff;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+  text-shadow: 0 0 25px #ff0033, -2px -2px 0 #00ffff, 2px 2px 0 #ff0033;
+  font-family: 'Syne', sans-serif;
+}
+
+.meltdown-hud-desc {
+  color: #fecaca;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.meltdown-telemetry-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 0, 51, 0.4);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #ff4d6d;
+}
+
+.meltdown-spinner-warp {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid #ff0033;
+  border-top-color: #ffffff;
+  margin: 18px auto 0;
+  animation: spinPortal 0.4s linear infinite;
+  box-shadow: 0 0 20px #ff0033;
 }
 
 /* ==========================================================================
