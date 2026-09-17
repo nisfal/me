@@ -496,16 +496,64 @@
     const flipper = document.getElementById('citadelFlipper');
     const btnFlipToWanted = document.getElementById('btnFlipToWanted');
     const btnFlipToId = document.getElementById('btnFlipToId');
+    const navFlyoutCitizenId = document.getElementById('navFlyoutCitizenId');
+    const navFlyoutWanted = document.getElementById('navFlyoutWanted');
 
     if (!flipper) return;
 
+    function setFlippedState(flipped, playSound = true) {
+      const isCurrentlyFlipped = flipper.classList.contains('flipped');
+      if (isCurrentlyFlipped !== flipped) {
+        if (playSound) playCardFlipSound();
+        if (flipped) {
+          flipper.classList.add('flipped');
+        } else {
+          flipper.classList.remove('flipped');
+        }
+      }
+      updateDossierFlyoutHighlight(flipped);
+    }
+
     function flipCard() {
-      playCardFlipSound();
-      flipper.classList.toggle('flipped');
+      const targetState = !flipper.classList.contains('flipped');
+      setFlippedState(targetState, true);
+    }
+
+    function updateDossierFlyoutHighlight(isFlipped) {
+      if (navFlyoutCitizenId && navFlyoutWanted) {
+        if (isFlipped) {
+          navFlyoutWanted.classList.add('active');
+          navFlyoutCitizenId.classList.remove('active');
+        } else {
+          navFlyoutCitizenId.classList.add('active');
+          navFlyoutWanted.classList.remove('active');
+        }
+      }
     }
 
     if (btnFlipToWanted) btnFlipToWanted.addEventListener('click', flipCard);
     if (btnFlipToId) btnFlipToId.addEventListener('click', flipCard);
+
+    // Nav Flyout links: switch to Citadel ID or Wanted view and scroll to Citadel
+    if (navFlyoutCitizenId) {
+      navFlyoutCitizenId.addEventListener('click', () => {
+        setFlippedState(false, true);
+        const citadelSec = document.getElementById('citadel');
+        if (citadelSec) {
+          citadelSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    if (navFlyoutWanted) {
+      navFlyoutWanted.addEventListener('click', () => {
+        setFlippedState(true, true);
+        const citadelSec = document.getElementById('citadel');
+        if (citadelSec) {
+          citadelSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
   }
 
   // --- 4. Dimension Shifter Logic with Glitch Warp ---
@@ -1541,9 +1589,11 @@
     const flyoutItems = document.querySelectorAll('.nav-flyout-item');
     const sections = document.querySelectorAll('section[id]');
 
+    const flipper = document.getElementById('citadelFlipper');
+
     const SECTION_GROUP_MAP = {
       'citadel': 'dossier',
-      'arsenal': 'dossier',
+      'arsenal': 'projects',
       'dimension-shifter': 'projects',
       'cable-tv': 'projects',
       'meeseeks': 'lab',
@@ -1582,12 +1632,23 @@
         });
 
         // Highlight specific sub-item in flyout
+        const isFlipped = flipper && flipper.classList.contains('flipped');
         flyoutItems.forEach(item => {
           const target = item.getAttribute('data-target');
-          if (target === activeSectionId) {
-            item.classList.add('active');
+          if (activeSectionId === 'citadel') {
+            if (target === 'wanted' && isFlipped) {
+              item.classList.add('active');
+            } else if (target === 'citadel' && !isFlipped) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
           } else {
-            item.classList.remove('active');
+            if (target === activeSectionId) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
           }
         });
       }

@@ -57,29 +57,29 @@
             </a>
             <div class="nav-flyout">
               <div class="nav-flyout-header" data-i18n="profile_nav_dossier_header">// CITADEL DOSSIER</div>
-              <a href="#citadel" class="nav-flyout-item" data-target="citadel">
+              <a href="#citadel" class="nav-flyout-item" data-target="citadel" id="navFlyoutCitizenId">
                 <span class="flyout-num">01.1</span>
-                <span class="flyout-text" data-i18n="profile_nav_id_card">Citizen ID &amp; Wanted</span>
+                <span class="flyout-text" data-i18n="profile_nav_id_card">Citizen ID</span>
               </a>
-              <a href="#arsenal" class="nav-flyout-item" data-target="arsenal">
+              <a href="#citadel" class="nav-flyout-item" data-target="wanted" id="navFlyoutWanted">
                 <span class="flyout-num">01.2</span>
-                <span class="flyout-text" data-i18n="profile_nav_arsenal">Arsenal &amp; Tech Stack</span>
+                <span class="flyout-text" data-i18n="profile_nav_id_card_warning">Wanted</span>
               </a>
             </div>
           </div>
 
           <!-- Pillar 2: PROJECTS -->
           <div class="nav-group" data-group="projects">
-            <a href="#dimension-shifter" class="rm-nav-link" data-section="dimension-shifter">
+            <a href="#arsenal" class="rm-nav-link" data-section="arsenal">
               <span class="nav-num">02</span>
               <span class="nav-label" data-i18n="profile_nav_projects">PROJECTS</span>
               <span class="nav-chevron" aria-hidden="true">▾</span>
             </a>
             <div class="nav-flyout">
               <div class="nav-flyout-header" data-i18n="profile_nav_projects_header">// DIMENSION LAB</div>
-              <a href="#dimension-shifter" class="nav-flyout-item" data-target="dimension-shifter">
+              <a href="#arsenal" class="nav-flyout-item" data-target="arsenal">
                 <span class="flyout-num">02.1</span>
-                <span class="flyout-text" data-i18n="profile_nav_portal_gun">Portal Gun Projects</span>
+                <span class="flyout-text" data-i18n="profile_nav_arsenal">Arsenal &amp; Tech Stack</span>
               </a>
               <a href="#cable-tv" class="nav-flyout-item" data-target="cable-tv">
                 <span class="flyout-num">02.2</span>
@@ -281,40 +281,6 @@
             </div>
           </div>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTAL GUN DIMENSION SHIFTER -->
-    <section class="dimension-shifter-section" id="dimension-shifter">
-      <div class="shifter-box">
-        <div class="shifter-info">
-          <h2 class="shifter-heading">
-            <svg class="shifter-title-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            <span data-i18n="profile_portal_title">Portal Gun Coordinate Matrix</span>
-          </h2>
-          <p class="shifter-sub" id="currentDimText" data-i18n="profile_portal_active">
-            Aktif di: Earth C-137 // Fluida portal terkalibrasi warna neon hijau
-          </p>
-        </div>
-
-        <div class="shifter-buttons">
-          <button class="btn-dimension active" data-dim="c137" type="button">
-            <span class="dim-coord">C-137</span>
-            <span class="dim-label">Earth Prime</span>
-          </button>
-          <button class="btn-dimension" data-dim="cronenberg" type="button">
-            <span class="dim-coord">CRON-8</span>
-            <span class="dim-label">Cronenberg</span>
-          </button>
-          <button class="btn-dimension" data-dim="purge" type="button">
-            <span class="dim-coord">PURG-09</span>
-            <span class="dim-label">Purge Planet</span>
-          </button>
-          <button class="btn-dimension" data-dim="citadel" type="button">
-            <span class="dim-coord">CIT-Ω</span>
-            <span class="dim-label">Citadel of Ricks</span>
-          </button>
         </div>
       </div>
     </section>
@@ -580,43 +546,114 @@
       </div>
     </section>
 
-    <!-- REAL TALK & BEHIND THE TERMINAL -->
+    <!-- REAL TALK & BEHIND THE TERMINAL (UNWIND ACROSS THE MULTIVERSE) -->
     <section class="real-talk-section" id="santai">
       <header class="section-head">
-        <span class="section-tag" data-i18n="profile_santai_tag">// ZONA SANTAI // FILOSOFI DIMENSI C-137</span>
-        <h2 class="section-main-title" data-i18n="profile_santai_title">Santai Sejenak di Luar Angkasa</h2>
-        <p class="section-sub" data-i18n="profile_santai_desc">Di sela-sela mengutak-atik kode dan memantau pipeline, ini cara gue menjaga kewarasan sebelum portal dimensi berikutnya terbuka.</p>
+        <span class="section-tag" data-i18n="profile_santai_tag">// MULTIVERSE EXPEDITION // ZONA SANTAI</span>
+        <h2 class="section-main-title" data-i18n="profile_santai_title">Unwind Across the Multiverse</h2>
+        <p class="section-sub" data-i18n="profile_santai_desc">Di sela-sela mengutak-atik kode dan memantau pipeline, ini cara gue menjelajah dimensi berbeda buat menjaga stamina, selera musik cadas, dan imajinasi liar.</p>
       </header>
 
       <div class="real-talk-grid">
-        <article class="real-talk-card">
-          <div class="talk-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+        <!-- Card 1: Caffeine Nebula (C-716) -->
+        <article class="real-talk-card talk-card-coffee">
+          <div class="talk-card-top">
+            <div class="talk-dim-badge dim-badge-coffee">
+              <span class="dim-pulse-dot"></span>
+              <span data-i18n="profile_santai_card1_dim">DIMENSI C-716 // THE CAFFEINE NEBULA</span>
+            </div>
+            <div class="talk-icon talk-icon-coffee">
+              <div class="coffee-steam-anim">
+                <span class="steam-line steam1"></span>
+                <span class="steam-line steam2"></span>
+                <span class="steam-line steam3"></span>
+              </div>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                <line x1="6" y1="1" x2="6" y2="4"></line>
+                <line x1="10" y1="1" x2="10" y2="4"></line>
+                <line x1="14" y1="1" x2="14" y2="4"></line>
+              </svg>
+            </div>
           </div>
           <h3 class="talk-title" data-i18n="profile_santai_card1_title">Bahan Bakar Kafein</h3>
           <p class="talk-desc" data-i18n="profile_santai_card1_desc">
-            Kopi hitam tanpa gula adalah katalis utama. Menurut penelitian laboratorium C-137, rasio kafein berbanding lurus dengan kemampuan melacak deadlock di database.
+            Kopi hitam tubruk pekat tanpa gula diekstrak langsung dari Sektor Kafein Dimensi C-716. Menurut log eksperimen laboratorium C-137, asupan kafein murni bertekanan tinggi ini berbanding lurus dengan ketajaman melacak race condition dan database deadlock di 4 dimensi sekaligus.
           </p>
+          <div class="talk-card-footer">
+            <div class="talk-stat-pill" data-i18n="profile_santai_card1_stat">KAFEIN: 99.8% PEKAT · GULA: 0.0%</div>
+            <div class="talk-tags">
+              <span class="talk-tag">#DeadlockHunter</span>
+              <span class="talk-tag">#ZeroSugar</span>
+            </div>
+          </div>
         </article>
 
-        <article class="real-talk-card">
-          <div class="talk-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+        <!-- Card 2: Heavy Sonic Spectrum (C-666 Rock & Metal) -->
+        <article class="real-talk-card talk-card-audio">
+          <div class="talk-card-top">
+            <div class="talk-dim-badge dim-badge-audio">
+              <span class="dim-pulse-dot"></span>
+              <span data-i18n="profile_santai_card2_dim">DIMENSI C-666 // THE DISTORTION &amp; RIFF REALM</span>
+            </div>
+            <div class="talk-icon talk-icon-audio">
+              <div class="audio-spectrum-icon">
+                <span class="eq-bar bar1"></span>
+                <span class="eq-bar bar2"></span>
+                <span class="eq-bar bar3"></span>
+                <span class="eq-bar bar4"></span>
+                <span class="eq-bar bar5"></span>
+              </div>
+              <!-- <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg> -->
+            </div>
           </div>
           <h3 class="talk-title" data-i18n="profile_santai_card2_title">Frekuensi Audio Debugging</h3>
           <p class="talk-desc" data-i18n="profile_santai_card2_desc">
-            Synthwave, dark ambient, atau lo-fi instrumental adalah teman setia pas nulis pipeline kompleks biar otak gak gampang terdistraksi notifikasi dunia nyata.
+            Menyukai semua genre musik, namun nada distorsi tinggi dari HEAVY METAL &amp; ROCK adalah amplifier fokus nomor satu! Dari deru riff gitar agresif, double-pedal blast beats, hingga anthem rock legendaris—frekuensi sonik ini membakar adrenaline pas nulis arsitektur backend berkecepatan tinggi tanpa terdistraksi notifikasi bumi.
           </p>
+          <div class="talk-card-footer">
+            <div class="talk-stat-pill talk-stat-metal" data-i18n="profile_santai_card2_stat">GENRE: SEMUA LAGU (KHUSUSNYA METAL &amp; ROCK)</div>
+            <div class="talk-tags">
+              <span class="talk-tag tag-metal">#HeavyMetal</span>
+              <span class="talk-tag tag-rock">#HardRock</span>
+              <span class="talk-tag">#GuitarRiffs</span>
+            </div>
+          </div>
         </article>
 
-        <article class="real-talk-card">
-          <div class="talk-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="2"></rect></svg>
+        <!-- Card 3: Quantum Sandbox (C-999) -->
+        <article class="real-talk-card talk-card-game">
+          <div class="talk-card-top">
+            <div class="talk-dim-badge dim-badge-game">
+              <span class="dim-pulse-dot"></span>
+              <span data-i18n="profile_santai_card3_dim">DIMENSI C-999 // THE QUANTUM SANDBOX</span>
+            </div>
+            <div class="talk-icon talk-icon-game">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="6" y1="12" x2="10" y2="12"></line>
+                <line x1="8" y1="10" x2="8" y2="14"></line>
+                <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+              </svg>
+            </div>
           </div>
           <h3 class="talk-title" data-i18n="profile_santai_card3_title">Recharging Interdimensional</h3>
           <p class="talk-desc" data-i18n="profile_santai_card3_desc">
-            Main game open-world, ngoprek mikrokontroler/gadget unik, atau sekadar nonton kartun sci-fi absurd buat jaga imajinasi tetap liar dan gak kaku.
+            Menjelajah sandbox tak berbatas di Dimensi C-999: bermain game open-world imersif, merakit sirkuit mikrokontroler dan gadget unik, serta maraton serial kartun sci-fi absurd. Ritual krusial buat menjaga imajinasi tetap liar, inovatif, dan berani mendobrak konvensi rekayasa baru.
           </p>
+          <div class="talk-card-footer">
+            <div class="talk-stat-pill" data-i18n="profile_santai_card3_stat">STATUS: IMAJINASI OVERCLOCKED</div>
+            <div class="talk-tags">
+              <span class="talk-tag">#OpenWorld</span>
+              <span class="talk-tag">#HardwareTinkering</span>
+              <span class="talk-tag">#SciFi</span>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -1305,10 +1342,26 @@
     </footer>
   </main>
 
-  <!-- CITADEL UTILITY DOCK (FLOATING BOTTOM-RIGHT HUD: SFX + REALITY RECALL + BUTTER ROBOT) -->
+  <!-- CITADEL UTILITY DOCK (FLOATING BOTTOM-RIGHT HUD: COORDINATE MATRIX + SFX + REALITY RECALL + BUTTER ROBOT) -->
   <aside class="citadel-hud-dock" id="citadelHudDock" aria-label="Citadel Utility Dock">
-    <!-- Quick Actions Capsule: SFX & Reality Recall -->
+    <!-- Quick Actions Capsule: Portal Gun Coordinate Matrix + SFX & Reality Recall -->
     <div class="hud-capsule" id="hudCapsule">
+      <!-- Portal Gun Coordinate Matrix (Floating Shifter) -->
+      <div class="hud-matrix-group" id="hudMatrixGroup" title="Portal Gun Coordinate Matrix (Loncat Dimensi)">
+        <span class="matrix-hud-indicator">
+          <svg class="matrix-hud-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/><circle cx="12" cy="12" r="3"></circle></svg>
+          <span class="matrix-hud-text">DIM</span>
+        </span>
+        <div class="matrix-hud-buttons">
+          <button class="btn-dimension active" data-dim="c137" type="button" title="Earth Prime (C-137)">C-137</button>
+          <button class="btn-dimension" data-dim="cronenberg" type="button" title="Cronenberg Dimension (CRON-8)">CRON-8</button>
+          <button class="btn-dimension" data-dim="purge" type="button" title="Purge Planet (PURG-09)">PURG-09</button>
+          <button class="btn-dimension" data-dim="citadel" type="button" title="Citadel of Ricks (CIT-Ω)">CIT-Ω</button>
+        </div>
+      </div>
+
+      <span class="hud-divider" aria-hidden="true"></span>
+
       <button id="btnAudioToggle" class="btn-audio-toggle hud-btn" type="button" aria-label="Toggle sound effects" title="Aktifkan/Bisukan Efek Suara Web Audio">
         <span class="audio-status-led"></span>
         <svg class="nav-btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
