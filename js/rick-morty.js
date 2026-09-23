@@ -449,8 +449,9 @@
   let currentCenterY = targetCenterY;
   
   // Easter Egg Orb state
-  let easterOrbAngle = 0;
-  let easterOrbDist = 0;
+  let easterOrbs = [
+    { angle: 0, distRatio: 0.4, speed: 0.003, size: 16 }
+  ];
   let easterOrbFound = false;
 
   function initCanvas() {
@@ -472,12 +473,43 @@
     }
 
     window.addEventListener('click', (e) => {
-      if (!easterOrbFound && canvas.easterOrbInfo) {
-        const dx = e.clientX - canvas.easterOrbInfo.x;
-        const dy = e.clientY - canvas.easterOrbInfo.y;
-        if (Math.hypot(dx, dy) <= canvas.easterOrbInfo.radius + 15) { // 15px padding for easier clicking
+      if (easterOrbFound || !canvas.easterOrbInfos) return;
+      
+      let clickedOrbIndex = -1;
+      // Iterate backwards to click the top-most orb if they overlap
+      for (let i = canvas.easterOrbInfos.length - 1; i >= 0; i--) {
+        const info = canvas.easterOrbInfos[i];
+        const dx = e.clientX - info.x;
+        const dy = e.clientY - info.y;
+        if (Math.hypot(dx, dy) <= info.radius + 15) { // 15px padding for easier clicking
+          clickedOrbIndex = i;
+          break;
+        }
+      }
+      
+      if (clickedOrbIndex !== -1) {
+        let clickedOrb = easterOrbs[clickedOrbIndex];
+        easterOrbs.splice(clickedOrbIndex, 1);
+        
+        const newSize = clickedOrb.size * 0.75;
+        // Trigger easter egg if orbs get too small or there are too many (e.g. 15 orbs)
+        if (newSize < 4 || easterOrbs.length > 15) {
           easterOrbFound = true;
           triggerPortalEasterEgg();
+        } else {
+          // Split into 2 orbs with divergent angles, random distance, and slightly faster speeds
+          easterOrbs.push({
+            angle: clickedOrb.angle + 0.3,
+            distRatio: clickedOrb.distRatio + (Math.random() * 0.1 - 0.05),
+            speed: clickedOrb.speed * 1.1 + 0.001,
+            size: newSize
+          });
+          easterOrbs.push({
+            angle: clickedOrb.angle - 0.3,
+            distRatio: clickedOrb.distRatio + (Math.random() * 0.1 - 0.05),
+            speed: clickedOrb.speed * -1.1 - 0.001, // Reverse direction
+            size: newSize
+          });
         }
       }
     });
@@ -486,7 +518,6 @@
   }
 
   function triggerPortalEasterEgg() {
-    playGlitchSound();
     const eggText = document.createElement('div');
     eggText.textContent = "Wubba Lubba Dub Dub! You found the hidden orb!";
     eggText.style.position = 'fixed';
@@ -580,24 +611,27 @@
       ctx.fill();
     });
 
-    // Easter Egg Orb
+    // Easter Egg Orbs
     if (!easterOrbFound) {
-      easterOrbAngle += 0.003;
-      easterOrbDist = Math.min(canvas.width, canvas.height) * 0.4;
-      const orbX = currentCenterX + Math.cos(easterOrbAngle) * easterOrbDist;
-      const orbY = currentCenterY + Math.sin(easterOrbAngle) * (easterOrbDist * 0.78);
-      
-      // Draw glowing purple orb
-      ctx.beginPath();
-      ctx.arc(orbX, orbY, 16, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(280, 100%, 60%, 0.4)`;
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(orbX, orbY, 8, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(280, 100%, 75%, 1)`;
-      ctx.fill();
+      canvas.easterOrbInfos = [];
+      easterOrbs.forEach(orb => {
+        orb.angle += orb.speed;
+        const dist = Math.min(canvas.width, canvas.height) * orb.distRatio;
+        const orbX = currentCenterX + Math.cos(orb.angle) * dist;
+        const orbY = currentCenterY + Math.sin(orb.angle) * (dist * 0.78);
+        
+        // Draw glowing purple orb
+        ctx.beginPath();
+        ctx.arc(orbX, orbY, orb.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(280, 100%, 60%, 0.4)`;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(orbX, orbY, orb.size / 2, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(280, 100%, 75%, 1)`;
+        ctx.fill();
 
-      canvas.easterOrbInfo = { x: orbX, y: orbY, radius: 16 };
+        canvas.easterOrbInfos.push({ x: orbX, y: orbY, radius: orb.size });
+      });
     }
 
     requestAnimationFrame(animate);
@@ -2755,7 +2789,7 @@
       if (isWaiting) return;
       
       clearTimeout(idleTimer);
-      idleTimer = setTimeout(activateWaitingMode, 15000); // 1000ms for quick testing
+      idleTimer = setTimeout(activateWaitingMode, 30000); // 30000ms for quick testing
     }
 
     function activateWaitingMode() {
