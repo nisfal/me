@@ -518,30 +518,59 @@
   }
 
   function triggerPortalEasterEgg() {
+    // 1. Play Audio Synth Effect
+    try {
+      let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      let osc = audioCtx.createOscillator();
+      let gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(50, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.5);
+      osc.frequency.exponentialRampToValueAtTime(10, audioCtx.currentTime + 2);
+      gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 2);
+    } catch(e) {}
+
+    // 2. Shake screen and invert colors
+    document.body.classList.add('dimension-glitch');
+    setTimeout(() => {
+      document.body.classList.remove('dimension-glitch');
+    }, 2500);
+
+    // 3. Chaos Particles burst from portal
+    if (particles) {
+      for(let i = 0; i < 200; i++) {
+         particles.push({
+            angle: Math.random() * Math.PI * 2,
+            radius: 10,
+            speed: (Math.random() - 0.5) * 0.5,
+            size: 5 + Math.random() * 10,
+            alpha: 1,
+            colorOffset: (Math.random() - 0.5) * 100
+         });
+      }
+    }
+
+    // 4. Glitching Text Box
     const eggText = document.createElement('div');
-    eggText.textContent = "Wubba Lubba Dub Dub! You found the hidden orb!";
-    eggText.style.position = 'fixed';
-    eggText.style.top = '50%';
-    eggText.style.left = '50%';
-    eggText.style.transform = 'translate(-50%, -50%)';
-    eggText.style.color = '#fff';
-    eggText.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)';
-    eggText.style.fontWeight = 'bold';
-    eggText.style.textShadow = '0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff';
-    eggText.style.zIndex = '9999';
-    eggText.style.pointerEvents = 'none';
-    eggText.style.opacity = '1';
-    eggText.style.transition = 'opacity 3s ease-out, transform 3s ease-out';
+    eggText.className = 'wubba-easter-egg-text';
+    eggText.innerHTML = "WUBBA LUBBA<br>DUB DUB!!!";
     document.body.appendChild(eggText);
 
     setTimeout(() => {
+      eggText.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
       eggText.style.opacity = '0';
-      eggText.style.transform = 'translate(-50%, -150%) scale(1.5)';
-    }, 1500);
+      eggText.style.transform = 'translate(-50%, -150%) scale(0.5)';
+      eggText.style.animation = 'none';
+    }, 2000);
     
     setTimeout(() => {
       if(eggText.parentNode) eggText.parentNode.removeChild(eggText);
-    }, 4500);
+    }, 3000);
   }
 
   function resizeCanvas() {
@@ -1349,6 +1378,16 @@
         quote: '"Wubba Lubba Dub Dub!"',
         reply: 'Oper menteganya, robot.',
         after: '...Siap laksanakan, bos ilmuwan.'
+      },
+      {
+        quote: '"Bosan melihat layar ini?"',
+        reply: 'Berdiam dirilah minimal 30 detik. *beep boop*',
+        after: '...Tiba-tiba pesawat lewat.'
+      },
+      {
+        quote: '"Sepertinya ada yang aneh dengan orb portal itu..."',
+        reply: 'Rasanya ingin gue belah berkali-kali.',
+        after: '...Coba aja diklik terus.'
       }
     ],
     en: [
@@ -1376,6 +1415,16 @@
         quote: '"Wubba Lubba Dub Dub!"',
         reply: 'Pass the butter, robot.',
         after: '...Right away, scientist.'
+      },
+      {
+        quote: '"Are you bored staring at this screen?"',
+        reply: 'Just sit idle for 30 seconds. *beep boop*',
+        after: '...Suddenly, a spaceship appears.'
+      },
+      {
+        quote: '"There\'s something weird about that purple portal orb..."',
+        reply: 'I feel like splitting it multiple times.',
+        after: '...Just try clicking it repeatedly.'
       }
     ]
   };
@@ -1406,6 +1455,16 @@
         quote: '"Gue gak mau kehapus di petualangan antardimensi ini, Rick!"',
         reply: 'Lu gak bisa mati Morty, lu kode software! Tinggal git revert aja!',
         after: '...Oh iya bener juga, jadi robot ternyata ada enaknya.'
+      },
+      {
+        quote: '"Aw jeez, Rick... pegel banget klik-klik terus!"',
+        reply: 'Lepas mouse lu 30 detik Morty, rasain sensasi nostalgia retro arcade!',
+        after: '...Wah, beneran muncul space shooter!'
+      },
+      {
+        quote: '"Rick, orb ungu di portal itu kok mencurigakan banget ya?"',
+        reply: 'Klik aja terus Morty, sampe dia membelah diri dan meledak!',
+        after: '...Wubba lubba dub dub, ada pesan rahasia!'
       }
     ],
     en: [
@@ -1433,6 +1492,16 @@
         quote: '"I don\'t wanna get deleted on this cosmic mission, Rick!"',
         reply: 'You can\'t die Morty, you\'re software! Just git revert!',
         after: '...Oh right, being a robot isn\'t so bad after all.'
+      },
+      {
+        quote: '"Aw jeez, Rick... my hand hurts from clicking!"',
+        reply: 'Let go of the mouse for 30 seconds Morty, feel the retro arcade nostalgia!',
+        after: '...Whoa, a space shooter actually appeared!'
+      },
+      {
+        quote: '"Rick, that purple orb in the portal looks really suspicious, right?"',
+        reply: 'Just keep clicking it Morty, until it splits and explodes!',
+        after: '...Wubba lubba dub dub, a secret message!'
       }
     ]
   };
@@ -1463,6 +1532,16 @@
         quote: '"Eksistensi kita cuma kode di portfolio web?!"',
         reply: 'Santai, gue udah pasang script buat nge-hack terminal Subspace Citadel.',
         after: '...Dimensi C-137 gak bakal pernah tunduk ke bug production!'
+      },
+      {
+        quote: '"*Burp*... Lu mau tau rahasia terbesar dimensi ini?"',
+        reply: 'Diem aja selama 30 detik. Lu bakal ditarik ke game space shooter C-137.',
+        after: '...Ayo tunjukin skill lu ngelawan Cromulon!'
+      },
+      {
+        quote: '"Gue bikin orb ungu di portal itu pake teknologi fusi kuantum."',
+        reply: 'Kalo lu klik berkali-kali, dia bakal membelah diri sampe batas maksimalnya.',
+        after: '...Terus meledak. Cobain sana!'
       }
     ],
     en: [
@@ -1490,6 +1569,16 @@
         quote: '"Are we really living inside a web portfolio right now?!"',
         reply: 'Chill out Morty, I already injected a bypass script into the Citadel CLI.',
         after: '...Dimension C-137 will never succumb to production runtime errors!'
+      },
+      {
+        quote: '"*Burp*... You wanna know the biggest secret of this dimension?"',
+        reply: 'Just stay idle for 30 seconds. You\'ll be pulled into the C-137 space shooter.',
+        after: '...Show me what you got against the Cromulon!'
+      },
+      {
+        quote: '"I built that purple portal orb using quantum fusion tech."',
+        reply: 'If you click it repeatedly, it splits until it reaches critical mass.',
+        after: '...Then it explodes. Go try it!'
       }
     ]
   };
