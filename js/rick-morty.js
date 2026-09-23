@@ -447,6 +447,11 @@
   let targetCenterY = window.innerHeight * 0.45;
   let currentCenterX = targetCenterX;
   let currentCenterY = targetCenterY;
+  
+  // Easter Egg Orb state
+  let easterOrbAngle = 0;
+  let easterOrbDist = 0;
+  let easterOrbFound = false;
 
   function initCanvas() {
     if (!canvas) return;
@@ -466,7 +471,46 @@
       particles.push(createParticle());
     }
 
+    window.addEventListener('click', (e) => {
+      if (!easterOrbFound && canvas.easterOrbInfo) {
+        const dx = e.clientX - canvas.easterOrbInfo.x;
+        const dy = e.clientY - canvas.easterOrbInfo.y;
+        if (Math.hypot(dx, dy) <= canvas.easterOrbInfo.radius + 15) { // 15px padding for easier clicking
+          easterOrbFound = true;
+          triggerPortalEasterEgg();
+        }
+      }
+    });
+
     animate();
+  }
+
+  function triggerPortalEasterEgg() {
+    playGlitchSound();
+    const eggText = document.createElement('div');
+    eggText.textContent = "Wubba Lubba Dub Dub! You found the hidden orb!";
+    eggText.style.position = 'fixed';
+    eggText.style.top = '50%';
+    eggText.style.left = '50%';
+    eggText.style.transform = 'translate(-50%, -50%)';
+    eggText.style.color = '#fff';
+    eggText.style.fontSize = 'clamp(1.5rem, 5vw, 3rem)';
+    eggText.style.fontWeight = 'bold';
+    eggText.style.textShadow = '0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff';
+    eggText.style.zIndex = '9999';
+    eggText.style.pointerEvents = 'none';
+    eggText.style.opacity = '1';
+    eggText.style.transition = 'opacity 3s ease-out, transform 3s ease-out';
+    document.body.appendChild(eggText);
+
+    setTimeout(() => {
+      eggText.style.opacity = '0';
+      eggText.style.transform = 'translate(-50%, -150%) scale(1.5)';
+    }, 1500);
+    
+    setTimeout(() => {
+      if(eggText.parentNode) eggText.parentNode.removeChild(eggText);
+    }, 4500);
   }
 
   function resizeCanvas() {
@@ -535,6 +579,26 @@
       ctx.fillStyle = `hsla(${currentHue + p.colorOffset}, 95%, 60%, ${p.alpha})`;
       ctx.fill();
     });
+
+    // Easter Egg Orb
+    if (!easterOrbFound) {
+      easterOrbAngle += 0.003;
+      easterOrbDist = Math.min(canvas.width, canvas.height) * 0.4;
+      const orbX = currentCenterX + Math.cos(easterOrbAngle) * easterOrbDist;
+      const orbY = currentCenterY + Math.sin(easterOrbAngle) * (easterOrbDist * 0.78);
+      
+      // Draw glowing purple orb
+      ctx.beginPath();
+      ctx.arc(orbX, orbY, 16, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(280, 100%, 60%, 0.4)`;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(orbX, orbY, 8, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(280, 100%, 75%, 1)`;
+      ctx.fill();
+
+      canvas.easterOrbInfo = { x: orbX, y: orbY, radius: 16 };
+    }
 
     requestAnimationFrame(animate);
   }
@@ -686,6 +750,22 @@
         ],
         linkUrl: 'frontend',
         linkLabel: 'Eksplorasi Showcase Frontend'
+      },
+      {
+        channelNum: 'CH-03',
+        freq: '666.66 GHz',
+        tag: 'COMMERCIAL BREAK',
+        rating: 'TV-MA (Advanced Tech)',
+        title: 'INTERDIMENSIONAL TECH SERVICES: Arsitektur Skala Galaksi',
+        description: 'Sistem lambat? Aplikasi crash pas lonjakan traffic? Hubungi Nisfal "The Optimizer" untuk refactoring radikal, setup RabbitMQ, dan optimasi Prisma DB sebelum server kamu meledak!',
+        highlights: [
+          'Jasa Refactoring Monolith',
+          'Tuning Performa Server & Database'
+        ],
+        linkUrl: '#contact',
+        linkLabel: 'Kirim Sinyal SOS',
+        isImageAd: true,
+        imgSrc: 'img/tv-ad.jpg'
       }
     ],
     en: [
@@ -720,6 +800,22 @@
         ],
         linkUrl: 'frontend',
         linkLabel: 'Explore Frontend Showcase'
+      },
+      {
+        channelNum: 'CH-03',
+        freq: '666.66 GHz',
+        tag: 'COMMERCIAL BREAK',
+        rating: 'TV-MA (Advanced Tech)',
+        title: 'INTERDIMENSIONAL TECH SERVICES: Galactic-Scale Architecture',
+        description: 'System sluggish? App crashing during traffic spikes? Contact Nisfal "The Optimizer" for radical refactoring, RabbitMQ setups, and Prisma DB optimization before your server goes supernova!',
+        highlights: [
+          'Monolith Refactoring Services',
+          'Server & Database Performance Tuning'
+        ],
+        linkUrl: '#contact',
+        linkLabel: 'Send SOS Signal',
+        isImageAd: true,
+        imgSrc: 'img/tv-ad.jpg'
       }
     ]
   };
@@ -735,6 +831,7 @@
     const knob = document.getElementById('tvRotaryKnob');
     const btnCh0 = document.getElementById('btnCh0');
     const btnCh1 = document.getElementById('btnCh1');
+    const btnCh2 = document.getElementById('btnCh2');
 
     if (!screen || !indicator) return;
 
@@ -751,6 +848,7 @@
     // Sync push button active states
     if (btnCh0) btnCh0.classList.toggle('active', index === 0);
     if (btnCh1) btnCh1.classList.toggle('active', index === 1);
+    if (btnCh2) btnCh2.classList.toggle('active', index === 2);
 
     // Sync rotary knob angle
     if (knob) {
@@ -770,6 +868,7 @@
           <span class="channel-rating">${ch.rating}</span>
         </div>
         <h3 class="channel-broadcast-title">${ch.title}</h3>
+        ${ch.isImageAd ? `<img src="${ch.imgSrc}" alt="Advert" style="width: 100%; border-radius: 8px; margin: 10px 0; border: 1px solid var(--portal-cyan); box-shadow: 0 0 10px var(--portal-cyan); object-fit: cover; max-height: 200px;">` : ''}
         <p class="channel-broadcast-desc">${ch.description}</p>
         <ul class="channel-highlights-list">
           ${ch.highlights.map(h => `<li><span class="ch-bullet-dot"></span><span>${h}</span></li>`).join('')}
@@ -792,6 +891,7 @@
     const rotaryKnob = document.getElementById('tvRotaryKnob');
     const btnCh0 = document.getElementById('btnCh0');
     const btnCh1 = document.getElementById('btnCh1');
+    const btnCh2 = document.getElementById('btnCh2');
 
     renderChannel(currentChannelIndex);
 
@@ -825,6 +925,12 @@
     if (btnCh1) {
       btnCh1.addEventListener('click', () => {
         if (currentChannelIndex !== 1) switchChannel(1);
+      });
+    }
+
+    if (btnCh2) {
+      btnCh2.addEventListener('click', () => {
+        if (currentChannelIndex !== 2) switchChannel(2);
       });
     }
   }
@@ -2639,4 +2745,69 @@
     requestAnimationFrame(loop);
   }
 
+  function setupWaitingMode() {
+    let idleTimer = null;
+    let isWaiting = false;
+    let shooterGame = null;
+
+    function resetIdleTimer() {
+      // Ignore mouse/keyboard interactions if game is active, except the destruct button
+      if (isWaiting) return;
+      
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(activateWaitingMode, 15000); // 1000ms for quick testing
+    }
+
+    function activateWaitingMode() {
+      if (isWaiting) return;
+      isWaiting = true;
+      document.body.classList.add('waiting-mode');
+      
+      let overlay = document.getElementById('waitingOverlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'waitingOverlay';
+        overlay.className = 'waiting-overlay';
+        document.body.appendChild(overlay);
+        
+        let canvas = document.createElement('canvas');
+        canvas.id = 'shooterCanvas';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        overlay.appendChild(canvas);
+        
+        let btn = document.createElement('button');
+        btn.id = 'btnDestructPlane';
+        btn.textContent = 'SELF DESTRUCT (BACK)';
+        btn.onclick = () => {
+          if (shooterGame) {
+            shooterGame.stop();
+            shooterGame = null;
+          }
+          isWaiting = false;
+          document.body.classList.remove('waiting-mode');
+          overlay.classList.remove('active');
+          resetIdleTimer();
+        };
+        overlay.appendChild(btn);
+      }
+      
+      overlay.classList.add('active');
+      
+      let canvas = document.getElementById('shooterCanvas');
+      if (window.initSpaceShooter) {
+        shooterGame = window.initSpaceShooter(canvas);
+      }
+    }
+
+    window.addEventListener('mousemove', resetIdleTimer);
+    window.addEventListener('keydown', resetIdleTimer);
+    window.addEventListener('click', resetIdleTimer);
+    window.addEventListener('scroll', resetIdleTimer);
+    
+    resetIdleTimer();
+  }
+
+  // Call the function
+  setupWaitingMode();
 })();

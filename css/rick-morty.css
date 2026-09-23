@@ -6279,3 +6279,70 @@ body.meeseeks-cataclysmic-failure {
 }
 
 
+
+/* ==========================================================================
+   WAITING MODE (STANDBY)
+   ========================================================================== */
+.waiting-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  overflow: hidden;
+}
+
+.waiting-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.waiting-logo {
+  position: absolute;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #00ffcc;
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  white-space: nowrap;
+}
+
+#shooterCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10001;
+}
+
+#btnDestructPlane {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10002;
+  background: #ff0033;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 2px solid #ff99aa;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px #ff0033;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#btnDestructPlane:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff0033;
+}
