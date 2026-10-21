@@ -101,8 +101,12 @@
                 <span class="flyout-num">03.1</span>
                 <span class="flyout-text" data-i18n="profile_nav_meeseeks">Mr. Meeseeks Task Box</span>
               </a>
-              <a href="#santai" class="nav-flyout-item" data-target="santai">
+              <a href="#brainwave-mask" class="nav-flyout-item" data-target="brainwave-mask">
                 <span class="flyout-num">03.2</span>
+                <span class="flyout-text" data-i18n="profile_nav_brainwave">Brainwave Masking (Morty Waves)</span>
+              </a>
+              <a href="#santai" class="nav-flyout-item" data-target="santai">
+                <span class="flyout-num">03.3</span>
                 <span class="flyout-text" data-i18n="profile_nav_santai">Santai &amp; Multiverse Lore</span>
               </a>
             </div>
@@ -545,6 +549,178 @@
           </blockquote>
           <div class="meeseeks-stress-meter" id="meeseeksStressMeter">
             <div class="stress-bar" id="meeseeksStressBar" style="width: 15%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAINWAVE MASKING MATRIX (MORTY WAVES DATA CLOAKING CHAMBER) -->
+    <section class="brainwave-section" id="brainwave-mask">
+      <header class="section-head">
+        <span class="section-tag" data-i18n="profile_mask_tag">// DEFENSE MECHANISM // PROTOCOL C-137: MORTY WAVES</span>
+        <h2 class="section-main-title" data-i18n="profile_mask_title">Brainwave Masking Matrix</h2>
+        <p class="section-sub" data-i18n="profile_mask_desc">
+          Di multiverse Rick and Morty, pancaran gelombang otak jenius Rick (1.21 THz) sangat mudah dilacak oleh Federasi Galaksi. Rick memanfaatkan gelombang otak Morty yang berkebalikan fase sebagai penyamar alami untuk membatalkan sinyal tersebut. Di sistem software kami, konsep ini diwujudkan oleh modul Data Masker (mask.js)—otomatis menyensor 18+ jenis data sensitif (API Keys, JWT, URI Database, NIK, Kartu Kredit, Nomor Telepon, hingga Private Key) sebelum terdeteksi radar publik!
+        </p>
+      </header>
+
+      <div class="brainwave-grid">
+        <!-- LEFT COLUMN: Oscilloscope & Radar Telemetry -->
+        <div class="brainwave-oscilloscope-card">
+          <div class="osc-card-header">
+            <div class="osc-title-group">
+              <span class="osc-live-beacon"></span>
+              <h3 class="osc-title" data-i18n="profile_mask_osc_title">DUAL OSCILLOSCOPE // RADAR SPECTRUM</h3>
+            </div>
+            <div class="osc-freq-badge">
+              <span class="freq-icon">⚡</span>
+              <span id="oscFreqDisplay">1.21 THz GENIUS FLUX</span>
+            </div>
+          </div>
+
+          <div class="osc-screen-container">
+            <div class="osc-scanlines" aria-hidden="true"></div>
+            <div class="osc-grid-overlay" aria-hidden="true"></div>
+            <canvas id="brainwaveCanvas" width="600" height="240" aria-label="Visualisasi Gelombang Otak Rick and Morty"></canvas>
+            
+            <!-- Radar Warning HUD -->
+            <div class="radar-hud-overlay" id="radarHudOverlay">
+              <div class="radar-status-pill stealth" id="radarStatusPill">
+                <span class="radar-dot"></span>
+                <span class="radar-text" id="radarStatusText" data-i18n="profile_mask_radar_stealth">STATUS RADAR: GHOST MODE // TIDAK TERDETEKSI (0.00 THz)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wave Legend -->
+          <div class="osc-legend">
+            <div class="legend-item legend-rick">
+              <span class="legend-line line-rick"></span>
+              <span class="legend-label" data-i18n="profile_mask_wave_rick">Rick Genius Wave (1.21 THz)</span>
+            </div>
+            <div class="legend-item legend-morty">
+              <span class="legend-line line-morty"></span>
+              <span class="legend-label" data-i18n="profile_mask_wave_morty">Morty Shield Wave (Inverted)</span>
+            </div>
+            <div class="legend-item legend-net">
+              <span class="legend-line line-net"></span>
+              <span class="legend-label" data-i18n="profile_mask_wave_net">Net Signal to Federation Radar</span>
+            </div>
+          </div>
+
+          <!-- Tactical Control Bar -->
+          <div class="osc-controls-bar">
+            <button type="button" class="btn-morty-shield active" id="btnToggleMortyShield" aria-pressed="true" aria-label="Toggle Morty Brainwave Shield">
+              <span class="shield-halo"></span>
+              <span class="shield-icon">🛡️</span>
+              <span class="shield-label" id="mortyShieldLabel" data-i18n="profile_mask_shield_active">SHIELD: AKTIF [CLOAKED]</span>
+            </button>
+
+            <div class="shield-stats-strip">
+              <div class="shield-stat-unit">
+                <span class="shield-stat-k" data-i18n="profile_mask_efficiency">Efisiensi Penyamaran</span>
+                <span class="shield-stat-v highlight-yellow" id="shieldEfficiency">100.0%</span>
+              </div>
+              <div class="shield-stat-unit">
+                <span class="shield-stat-k">Algoritma</span>
+                <span class="shield-stat-v highlight-cyan" data-i18n="profile_mask_rules_count">18 Aturan Entitas AST/Regex</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Interactive Masking Console (Powered by mask.js) -->
+        <div class="brainwave-console-card">
+          <div class="console-card-header">
+            <div class="console-title-group">
+              <svg class="console-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <h3 class="console-title" data-i18n="profile_mask_console_title">DATA CLOAKING CHAMBER // mask.js ENGINE</h3>
+            </div>
+
+            <!-- Format Mode Selector -->
+            <div class="mask-format-selector" role="group" aria-label="Format Masking Data">
+              <button type="button" class="btn-fmt active" data-fmt="auto" data-i18n="profile_mask_fmt_auto">Auto Detect</button>
+              <button type="button" class="btn-fmt" data-fmt="json" data-i18n="profile_mask_fmt_json">Strict JSON</button>
+              <button type="button" class="btn-fmt" data-fmt="text" data-i18n="profile_mask_fmt_text">Plaintext</button>
+            </div>
+          </div>
+
+          <!-- Presets Toolbar -->
+          <div class="mask-presets-bar">
+            <span class="preset-label" data-i18n="profile_mask_preset_label">PRESET MULTIVERSE:</span>
+            <div class="preset-chips">
+              <button type="button" class="btn-preset-chip" data-preset="db" data-i18n="profile_mask_preset_db">🧪 Citadel DB &amp; JWT</button>
+              <button type="button" class="btn-preset-chip" data-preset="citizen" data-i18n="profile_mask_preset_citizen">📜 Citizen ID &amp; CC</button>
+              <button type="button" class="btn-preset-chip" data-preset="portal" data-i18n="profile_mask_preset_portal">🔫 Portal Gun Logs</button>
+              <button type="button" class="btn-preset-chip" data-preset="json" data-i18n="profile_mask_preset_json">📦 Payload JSON</button>
+            </div>
+          </div>
+
+          <!-- Dual Editor Work Area -->
+          <div class="mask-editor-split">
+            <!-- Input Buffer -->
+            <div class="mask-pane mask-pane-input">
+              <div class="pane-header">
+                <span class="pane-tag" data-i18n="profile_mask_input_label">RAW INPUT TELEMETRY (SEBELUM DISENSOR):</span>
+                <span class="pane-counter" id="maskInputChars">0 chars</span>
+              </div>
+              <textarea id="maskInput" class="mask-textarea" rows="6" placeholder="Tempel teks log, JSON payload, koneksi database, nomor NIK/kartu, atau API key di sini..." data-i18n-placeholder="profile_mask_input_ph" spellcheck="false"></textarea>
+            </div>
+
+            <!-- Central Action Bar -->
+            <div class="mask-action-row">
+              <button type="button" class="btn-execute-mask" id="btnExecuteMask" aria-label="Jalankan Brainwave Masking">
+                <span class="exec-btn-glow"></span>
+                <span class="exec-icon">⚡</span>
+                <span class="exec-text" data-i18n="profile_mask_btn_exec">ENGAGE MORTY WAVES // SENSOR DATA</span>
+              </button>
+
+              <button type="button" class="btn-clear-mask" id="btnClearMask" title="Bersihkan editor" data-i18n-title="profile_mask_btn_clear">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span data-i18n="profile_mask_btn_clear">BERSIHKAN CHAMBER</span>
+              </button>
+            </div>
+
+            <!-- Output Cloaked Stream -->
+            <div class="mask-pane mask-pane-output">
+              <div class="pane-header">
+                <span class="pane-tag" data-i18n="profile_mask_output_label">CLOAKED OUTPUT STREAM (SETELAH PENYAMARAN):</span>
+                <div class="pane-status-indicators">
+                  <span class="pane-indicator" id="maskOutputBadge">0 REDACTED</span>
+                </div>
+              </div>
+              <div class="mask-output-container">
+                <pre class="mask-output-pre" id="maskOutputPre"><code id="maskOutputCode" class="mask-output-code">Pilih salah satu preset di atas atau ketik payload sensitif, lalu klik "ENGAGE MORTY WAVES" untuk melihat hasil sensor seketika.</code></pre>
+              </div>
+
+              <!-- Output Telemetry Strip -->
+              <div class="mask-telemetry-strip" id="maskTelemetryStrip">
+                <div class="telemetry-item">
+                  <span class="t-k" data-i18n="profile_mask_stat_redacted">Entitas Disensor:</span>
+                  <strong class="t-v highlight-yellow" id="statRedactedCount">0</strong>
+                </div>
+                <div class="telemetry-item">
+                  <span class="t-k" data-i18n="profile_mask_stat_radar">Visibilitas Radar:</span>
+                  <strong class="t-v highlight-green" id="statRadarVisibility">0.00% (STEALTH)</strong>
+                </div>
+                <div class="telemetry-item tags-item" id="statCategoriesContainer">
+                  <!-- Badges injected dynamically -->
+                </div>
+              </div>
+
+              <!-- Output Action Buttons -->
+              <div class="mask-output-actions">
+                <button type="button" class="btn-copy-masked" id="btnCopyMasked" title="Salin hasil redaksi ke clipboard">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span id="copyMaskedLabel" data-i18n="profile_mask_btn_copy">SALIN HASIL REDAKSI</span>
+                </button>
+
+                <button type="button" class="btn-relay-terminal" id="btnRelayTerminal" title="Kirim data tersensor langsung ke formulir Citadel Subspace Terminal">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                  <span data-i18n="profile_mask_btn_relay">RELAY KE SUBSPACE TERMINAL ↓</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1225,6 +1401,9 @@
                 <button type="button" class="t-cmd-btn" data-cmd="rick-quote" title="Saran motivasi/sarkas dari Rick Sanchez" data-i18n-title="profile_term_cmd_rick_title">
                   <code>--rick-quote</code>
                 </button>
+                <button type="button" class="t-cmd-btn t-cmd-morty" data-cmd="morty-wave" title="Status Morty Brainwave Masking Shield" data-i18n-title="profile_term_cmd_morty_title">
+                  <code>--morty-wave</code>
+                </button>
                 <button type="button" class="t-cmd-btn t-cmd-clear" data-cmd="clear" title="Bersihkan log terminal" data-i18n-title="profile_term_cmd_clear_title">
                   <code>--clear</code>
                 </button>
@@ -1290,6 +1469,22 @@
                     <textarea id="termMessage" class="t-cli-textarea" rows="4" placeholder="Tuliskan detail transmisi, tawaran proyek, atau pesan Anda di sini... Pesan Anda akan langsung dikirimkan ke kotak masuk Nisfal tanpa dicegat agen Federasi Galaksi." data-i18n-placeholder="profile_term_ph_payload" required spellcheck="false"></textarea>
                     <span class="t-quote">"</span>
                   </div>
+                </div>
+              </div>
+
+              <!-- Morty Wave Shield Toggle in Terminal Form -->
+              <div class="t-form-row t-form-row-shield">
+                <span class="t-prompt-label"><span class="t-prompt-usr">c-137:comms$</span></span>
+                <div class="t-field-group t-field-shield-toggle">
+                  <label class="t-shield-switch" for="termMortyShield">
+                    <input type="checkbox" id="termMortyShield" checked>
+                    <span class="t-shield-slider"></span>
+                    <span class="t-shield-text">
+                      <span class="t-shield-icon">🛡️</span>
+                      <strong data-i18n="profile_term_shield_label">MORTY WAVES MASKING:</strong>
+                      <span class="t-shield-status" id="termShieldStatus" data-i18n="profile_term_shield_status">AKTIF [AUTO-REDACT PII &amp; KREDENSIAL]</span>
+                    </span>
+                  </label>
                 </div>
               </div>
 
@@ -1553,6 +1748,7 @@
 
   <script src="js/i18n.js"></script>
   <script src="js/space-shooter.js"></script>
+  <script src="js/mask.js"></script>
   <script src="js/rick-morty.js"></script>
 </body>
 </html>

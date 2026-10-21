@@ -87,6 +87,80 @@
     }
   }
 
+  function playMortyWaveSound() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const gain = audioCtx.createGain();
+
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(220, now);
+      osc1.frequency.exponentialRampToValueAtTime(440, now + 0.15);
+      osc1.frequency.exponentialRampToValueAtTime(330, now + 0.35);
+
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(440, now);
+      osc2.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+      osc2.frequency.exponentialRampToValueAtTime(660, now + 0.35);
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(600, now);
+      filter.frequency.linearRampToValueAtTime(2200, now + 0.18);
+      filter.frequency.exponentialRampToValueAtTime(400, now + 0.38);
+
+      gain.gain.setValueAtTime(0.01, now);
+      gain.gain.linearRampToValueAtTime(0.14, now + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 0.42);
+      osc2.stop(now + 0.42);
+    } catch (e) {
+      console.debug('Audio error:', e);
+    }
+  }
+
+  function playShieldAlertSound() {
+    if (isMuted) return;
+    try {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(330, now);
+      osc.frequency.setValueAtTime(220, now + 0.1);
+
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.29);
+    } catch (e) {
+      console.debug('Audio error:', e);
+    }
+  }
+
   function playMeeseeksChime() {
     if (isMuted) return;
     try {
@@ -1465,6 +1539,11 @@
         quote: '"Rick, orb ungu di portal itu kok mencurigakan banget ya?"',
         reply: 'Klik aja terus Morty, sampe dia membelah diri dan meledak!',
         after: '...Wubba lubba dub dub, ada pesan rahasia!'
+      },
+      {
+        quote: '"Aw jeez, Rick... gelombang otak gue beneran jadi perisai penyamar data lu?!"',
+        reply: 'Tepat sekali Morty! mask.js nyamarin semua API key, token JWT, dan kredensial database biar Federasi Galaksi buta!',
+        after: '...W-wah, berarti otak polos gue berguna banget buat cybersecurity!'
       }
     ],
     en: [
@@ -1502,6 +1581,11 @@
         quote: '"Rick, that purple orb in the portal looks really suspicious, right?"',
         reply: 'Just keep clicking it Morty, until it splits and explodes!',
         after: '...Wubba lubba dub dub, a secret message!'
+      },
+      {
+        quote: '"Aw jeez, Rick... are my brainwaves really acting as a data cloaking shield?!"',
+        reply: 'Spot on Morty! mask.js redacts all API keys, JWT tokens, and database URIs so the Galactic Federation stays blind!',
+        after: '...W-whoa, so my naive brainwaves are actually top-tier cybersecurity!'
       }
     ]
   };
@@ -1911,6 +1995,7 @@
     setupDimensionShifter();
     setupCableTv();
     setupMeeseeksBox();
+    setupBrainwaveMasking();
     setupButterRobot();
     setupMobileNav();
     setupNavGroupDropdowns();
@@ -2015,6 +2100,7 @@
       'dimension-shifter': 'projects',
       'cable-tv': 'projects',
       'meeseeks': 'lab',
+      'brainwave-mask': 'lab',
       'santai': 'lab',
       'microverse': 'transmissions',
       'contact': 'transmissions'
@@ -2260,6 +2346,17 @@
               t.clear
             );
             break;
+
+          case 'morty-wave':
+            playMortyWaveSound();
+            appendTerminalLog(
+              't-tag-morty',
+              '[MORTY_WAVES]',
+              lang === 'en'
+                ? 'Brainwave Masking Shield: <strong>ONLINE [100.0% STEALTH]</strong>. 18 AST/Regex entity rules loaded. Rick\'s genius signature cancelled out to 0.00 THz on Galactic Federation radar.'
+                : 'Perisai Gelombang Otak Morty: <strong>AKTIF [100.0% STEALTH]</strong>. 18 aturan entitas AST/Regex siaga. Sinyal jenius Rick dinetralisir ke 0.00 THz dari radar Federasi Galaksi.'
+            );
+            break;
         }
       });
     });
@@ -2418,6 +2515,27 @@
         return;
       }
 
+      // Check Morty Brainwave Shield for message payload masking
+      let finalMessage = message;
+      const termShieldCheckbox = document.getElementById('termMortyShield');
+      if (termShieldCheckbox && termShieldCheckbox.checked && window.BrainwaveMasker) {
+        try {
+          const maskStats = window.BrainwaveMasker.maskWithStats(finalMessage, 'auto');
+          if (maskStats && maskStats.total > 0) {
+            finalMessage = maskStats.masked;
+            appendTerminalLog(
+              't-tag-morty',
+              '[MORTY_WAVES]',
+              lang === 'en'
+                ? `🛡️ <strong>Morty Waves Shield Engaged!</strong> Redacted ${maskStats.total} sensitive signature(s) before transmission.`
+                : `🛡️ <strong>Perisai Morty Waves Aktif!</strong> Menyamarkan ${maskStats.total} entitas data sensitif sebelum transmisi.`
+            );
+          }
+        } catch (e) {
+          console.debug('Masking error:', e);
+        }
+      }
+
       // Valid: Start Cyber Transmission Sequence
       isSubmitting = true;
       playTerminalTransmitSound();
@@ -2461,7 +2579,7 @@
               sender,
               email,
               mission,
-              message,
+              message: finalMessage,
               portal_trap: portalTrap,
               _timeProof: formInitTime
             })
@@ -2541,7 +2659,7 @@
             `Mission Type  : ${mission}\n` +
             `Timestamp     : ${new Date().toLocaleString()}\n\n` +
             `=== TRANSMISSION PAYLOAD ===\n` +
-            `${message}\n\n` +
+            `${finalMessage}\n\n` +
             `============================================\n` +
             `Dispatched via Citadel Subspace Terminal CLI\n`
           );
@@ -2560,6 +2678,42 @@
         }
       }, 750);
     });
+
+    // Morty Wave Terminal Shield Toggle Listener
+    const termShieldSwitch = document.getElementById('termMortyShield');
+    const termShieldStatus = document.getElementById('termShieldStatus');
+    if (termShieldSwitch) {
+      termShieldSwitch.addEventListener('change', () => {
+        const lang = getTerminalLang();
+        if (termShieldSwitch.checked) {
+          playMortyWaveSound();
+          if (termShieldStatus) {
+            termShieldStatus.textContent = lang === 'en' ? 'ACTIVE [AUTO-REDACT PII & SECRETS]' : 'AKTIF [AUTO-REDACT PII & KREDENSIAL]';
+            termShieldStatus.style.color = '#a3e635';
+          }
+          appendTerminalLog(
+            't-tag-morty',
+            '[MORTY_WAVES]',
+            lang === 'en'
+              ? 'Data Masking Shield: <strong>ONLINE</strong>. Telemetry packets will be auto-sanitized before subspace transmission.'
+              : 'Perisai Data Masking: <strong>AKTIF</strong>. Paket telemetri akan disensor otomatis sebelum dipancarkan.'
+          );
+        } else {
+          playShieldAlertSound();
+          if (termShieldStatus) {
+            termShieldStatus.textContent = lang === 'en' ? 'DISABLED [RAW STREAM // UNMASKED]' : 'NONAKTIF [RAW STREAM // TANPA SENSOR]';
+            termShieldStatus.style.color = '#ef4444';
+          }
+          appendTerminalLog(
+            't-tag-err',
+            '[SHIELD_OFFLINE]',
+            lang === 'en'
+              ? '⚠️ <strong>WARNING:</strong> Morty Waves disabled! Raw transmission may leak credentials to Citadel scanners!'
+              : '⚠️ <strong>PERINGATAN:</strong> Perisai Morty dimatikan! Transmisi polos berisiko bocor ke radar Federasi!'
+          );
+        }
+      });
+    }
   }
 
   /* ── 20. Microverse Battery Testimonials Horizontal Carousel & Filter ── */
@@ -2868,6 +3022,440 @@
     requestAnimationFrame(loop);
   }
 
+  /* ── 21. Brainwave Masking Matrix (Morty Waves Cloaking Chamber) ── */
+  function setupBrainwaveMasking() {
+    const section = document.getElementById('brainwave-mask');
+    if (!section) return;
+
+    const canvas = document.getElementById('brainwaveCanvas');
+    const shieldBtn = document.getElementById('btnToggleMortyShield');
+    const shieldLabel = document.getElementById('mortyShieldLabel');
+    const shieldEfficiency = document.getElementById('shieldEfficiency');
+    const radarStatusPill = document.getElementById('radarStatusPill');
+    const radarStatusText = document.getElementById('radarStatusText');
+    const oscFreqDisplay = document.getElementById('oscFreqDisplay');
+
+    const formatBtns = document.querySelectorAll('.mask-format-selector .btn-fmt');
+    const presetBtns = document.querySelectorAll('.btn-preset-chip');
+    const maskInput = document.getElementById('maskInput');
+    const maskInputChars = document.getElementById('maskInputChars');
+    const btnExecuteMask = document.getElementById('btnExecuteMask');
+    const btnClearMask = document.getElementById('btnClearMask');
+    const maskOutputCode = document.getElementById('maskOutputCode');
+    const maskOutputBadge = document.getElementById('maskOutputBadge');
+    const statRedactedCount = document.getElementById('statRedactedCount');
+    const statRadarVisibility = document.getElementById('statRadarVisibility');
+    const statCategoriesContainer = document.getElementById('statCategoriesContainer');
+    const btnCopyMasked = document.getElementById('btnCopyMasked');
+    const copyMaskedLabel = document.getElementById('copyMaskedLabel');
+    const btnRelayTerminal = document.getElementById('btnRelayTerminal');
+
+    let isShieldActive = true;
+    let currentFormat = 'auto';
+    let lastMaskedCleanText = '';
+
+    // --- A. Oscilloscope & Waveform Animation Engine ---
+    let ctx = null;
+    let width = 600;
+    let height = 240;
+
+    if (canvas) {
+      ctx = canvas.getContext('2d');
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        width = rect.width || 600;
+        height = rect.height || 240;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        if (ctx) ctx.scale(dpr, dpr);
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      let phase = 0;
+      function renderOscilloscope() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+
+        const centerY = height / 2;
+        phase += 0.04;
+
+        // 1. Draw Rick's Genius Wave (Green/Cyan high-energy spiky frequency)
+        ctx.beginPath();
+        ctx.strokeStyle = '#39ff14';
+        ctx.lineWidth = 2.2;
+        ctx.shadowColor = '#39ff14';
+        ctx.shadowBlur = 8;
+
+        for (let x = 0; x < width; x += 3) {
+          const normX = x * 0.035;
+          const y = centerY - 32 + Math.sin(normX + phase * 1.8) * 22 + Math.sin(normX * 2.8 - phase * 2.6) * 11;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // 2. Draw Morty's Shielding Wave (Yellow inverted phase)
+        ctx.beginPath();
+        ctx.strokeStyle = isShieldActive ? '#fbee35' : '#64748b';
+        ctx.lineWidth = 2.2;
+        ctx.shadowColor = isShieldActive ? '#fbee35' : 'transparent';
+        ctx.shadowBlur = isShieldActive ? 8 : 0;
+
+        for (let x = 0; x < width; x += 3) {
+          const normX = x * 0.035;
+          let y = centerY;
+          if (isShieldActive) {
+            y = centerY + 32 - (Math.sin(normX + phase * 1.8) * 22 + Math.sin(normX * 2.8 - phase * 2.6) * 11);
+          } else {
+            y = centerY + 32 + Math.sin(normX * 0.5 + phase * 0.5) * 2;
+          }
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // 3. Draw Net Signal to Federation Radar
+        ctx.beginPath();
+        ctx.strokeStyle = isShieldActive ? '#38bdf8' : '#ef4444';
+        ctx.lineWidth = isShieldActive ? 1.8 : 2.8;
+        ctx.shadowColor = isShieldActive ? '#38bdf8' : '#ef4444';
+        ctx.shadowBlur = isShieldActive ? 6 : 14;
+
+        for (let x = 0; x < width; x += 3) {
+          const normX = x * 0.035;
+          let y = centerY;
+          if (isShieldActive) {
+            y = centerY + Math.sin(normX * 0.4 + phase * 1.2) * 2.2;
+          } else {
+            y = centerY + Math.sin(normX + phase * 1.8) * 36 + Math.sin(normX * 3.2 - phase * 3) * 16;
+          }
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Reset shadow
+        ctx.shadowBlur = 0;
+
+        requestAnimationFrame(renderOscilloscope);
+      }
+
+      renderOscilloscope();
+    }
+
+    // --- B. Tactical Shield Toggle ---
+    function updateShieldUI() {
+      const lang = (window.i18n && typeof window.i18n.getCurrentLanguage === 'function')
+        ? window.i18n.getCurrentLanguage()
+        : (document.documentElement.lang === 'en' ? 'en' : 'id');
+
+      if (isShieldActive) {
+        if (shieldBtn) {
+          shieldBtn.classList.add('active');
+          shieldBtn.classList.remove('disabled');
+          shieldBtn.setAttribute('aria-pressed', 'true');
+        }
+        if (shieldLabel) {
+          shieldLabel.textContent = lang === 'en' ? 'SHIELD: ACTIVE [CLOAKED]' : 'SHIELD: AKTIF [CLOAKED]';
+        }
+        if (shieldEfficiency) {
+          shieldEfficiency.textContent = '100.0%';
+          shieldEfficiency.className = 'shield-stat-v highlight-yellow';
+        }
+        if (radarStatusPill) {
+          radarStatusPill.className = 'radar-status-pill stealth';
+        }
+        if (radarStatusText) {
+          radarStatusText.textContent = lang === 'en'
+            ? 'RADAR STATUS: GHOST MODE // UNDETECTABLE (0.00 THz)'
+            : 'STATUS RADAR: GHOST MODE // TIDAK TERDETEKSI (0.00 THz)';
+        }
+        if (oscFreqDisplay) {
+          oscFreqDisplay.textContent = '0.00 THz CANCELLED';
+        }
+        if (statRadarVisibility) {
+          statRadarVisibility.textContent = '0.00% (STEALTH)';
+          statRadarVisibility.className = 't-v highlight-green';
+        }
+      } else {
+        if (shieldBtn) {
+          shieldBtn.classList.remove('active');
+          shieldBtn.classList.add('disabled');
+          shieldBtn.setAttribute('aria-pressed', 'false');
+        }
+        if (shieldLabel) {
+          shieldLabel.textContent = lang === 'en' ? 'SHIELD: OFFLINE [EXPOSED]' : 'SHIELD: MATI [EXPOSED]';
+        }
+        if (shieldEfficiency) {
+          shieldEfficiency.textContent = '0.0%';
+          shieldEfficiency.className = 'shield-stat-v highlight-red';
+        }
+        if (radarStatusPill) {
+          radarStatusPill.className = 'radar-status-pill danger';
+        }
+        if (radarStatusText) {
+          radarStatusText.textContent = lang === 'en'
+            ? 'RADAR STATUS: DANGER // FEDERATION LOCK (1.21 THz)'
+            : 'STATUS RADAR: BAHAYA // TERKUNCI FEDERASI (1.21 THz)';
+        }
+        if (oscFreqDisplay) {
+          oscFreqDisplay.textContent = '1.21 THz GENIUS RADIATION';
+        }
+        if (statRadarVisibility) {
+          statRadarVisibility.textContent = '100.00% (RADAR LOCK)';
+          statRadarVisibility.className = 't-v highlight-red';
+        }
+      }
+    }
+
+    if (shieldBtn) {
+      shieldBtn.addEventListener('click', () => {
+        isShieldActive = !isShieldActive;
+        if (isShieldActive) {
+          playMortyWaveSound();
+        } else {
+          playShieldAlertSound();
+        }
+        updateShieldUI();
+      });
+    }
+
+    // --- C. Format Selector ---
+    formatBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        playTerminalBeepSound();
+        formatBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFormat = btn.getAttribute('data-fmt') || 'auto';
+        if (maskInput && maskInput.value.trim().length > 0) {
+          runMasking(false);
+        }
+      });
+    });
+
+    // --- D. Multiverse Presets ---
+    const PRESET_DATA = {
+      db: `=== CITADEL ARCHIVES: SECURE CLUSTER DB CREDENTIALS ===
+DB_CONNECTION_STRING=postgresql://rick_c137:SzechuanSauce_SecretPassword99@citadel-db.universe.net:5432/multiverse_telemetry
+JWT_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyaWNrX2MxMzciLCJkaW1lbnNpb24iOiJDLTEzNyIsImFkbWluIjp0cnVlfQ.k8D1q7W_Citadel_SuperSecretSignatureTokenOk
+PRIVATE_KEY:
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA0Y9V6mRkCitadelSecretRickC137KeyDataGeneratedForTest
+-----END RSA PRIVATE KEY-----
+Primary Cluster Node IP: 192.168.137.42
+Subspace IPv6 Node: 2001:0db8:85a3:0000:0000:8a2e:0370:7334`,
+
+      citizen: `=== GALACTIC FEDERATION: HIGH-PRIORITY DOSSIER ===
+Customer Name: Rick Sanchez
+Customer ID: CUST-994208
+Order ID: ORD-137889
+NIK: 3171012345678901
+NPWP: 01.234.567.8-901.000
+Credit Card: 4532 1198 4402 9981
+Phone: +62 812-3456-7890
+Email: rick.sanchez.c137@citadel.universe`,
+
+      portal: `=== PORTAL GUN FIRMWARE 4.13.0 DEBUG TELEMETRY ===
+api_key: portal_gun_sec_key_994208abcdef1234567890
+auth_token: Bearer portal_auth_token_c137_dimension_secret_xyz789
+trx_id: TRX-7788992
+client_secret: citadel_client_secret_994208abcdef1234567890xyz
+Citadel Redis Cache: redis://citadel_admin:SuperSecretPasswd123@redis.citadel.net:6379/0`,
+
+      json: `{
+  "experiment": "Dimension C-137 Subspace Sync",
+  "lead_scientist": "Rick Sanchez",
+  "customer_name": "Rick Sanchez",
+  "customer_id": "CUST-137001",
+  "nik": "3171012345678901",
+  "email": "c137@citadel.universe",
+  "phone": "+6281234567890",
+  "db_uri": "mysql://root:CitadelPassword@10.10.10.1:3306/production",
+  "api_key": "portal_gun_api_secret_key_137_testing_xyz",
+  "jwt_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMzcifQ.signature_secret_test_ok"
+}`
+    };
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        playTerminalBeepSound();
+        const key = btn.getAttribute('data-preset');
+        if (PRESET_DATA[key] && maskInput) {
+          maskInput.value = PRESET_DATA[key];
+          if (maskInputChars) maskInputChars.textContent = `${maskInput.value.length} chars`;
+          if (key === 'json') {
+            formatBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-fmt') === 'json'));
+            currentFormat = 'json';
+          }
+          runMasking(true);
+        }
+      });
+    });
+
+    if (maskInput) {
+      maskInput.addEventListener('input', () => {
+        if (maskInputChars) maskInputChars.textContent = `${maskInput.value.length} chars`;
+      });
+    }
+
+    // --- E. Masking Execution & Visual Redaction Formatter ---
+    function formatRedactedBadges(rawMasked) {
+      const escapeHtml = (str) =>
+        str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+      const escaped = escapeHtml(rawMasked);
+
+      return escaped.replace(/\[REDACTED_([A-Z0-9_]+)\](-[0-9]+)?/g, (match, label, suffix) => {
+        let tagClass = 'tag-default';
+        const l = label.toLowerCase();
+        if (l.includes('db') || l.includes('connection')) tagClass = 'tag-db';
+        else if (l.includes('jwt') || l.includes('auth')) tagClass = 'tag-jwt';
+        else if (l.includes('key') || l.includes('secret') || l.includes('private')) tagClass = 'tag-key';
+        else if (l.includes('nik')) tagClass = 'tag-nik';
+        else if (l.includes('npwp')) tagClass = 'tag-npwp';
+        else if (l.includes('card')) tagClass = 'tag-card';
+        else if (l.includes('email')) tagClass = 'tag-email';
+        else if (l.includes('phone')) tagClass = 'tag-phone';
+        else if (l.includes('ip')) tagClass = 'tag-ip';
+
+        return `<span class="redacted-tag ${tagClass}">[REDACTED_${label}]${suffix || ''}</span>`;
+      });
+    }
+
+    function runMasking(triggerSound = true) {
+      if (!maskInput || !maskOutputCode) return;
+      const raw = maskInput.value;
+      if (!raw.trim()) {
+        maskOutputCode.textContent = 'Input buffer kosong. Tempel data atau pilih preset di atas.';
+        if (maskOutputBadge) maskOutputBadge.textContent = '0 REDACTED';
+        if (statRedactedCount) statRedactedCount.textContent = '0';
+        if (statCategoriesContainer) statCategoriesContainer.innerHTML = '';
+        return;
+      }
+
+      if (!window.BrainwaveMasker || typeof window.BrainwaveMasker.maskWithStats !== 'function') {
+        console.warn('BrainwaveMasker module not loaded yet.');
+        return;
+      }
+
+      try {
+        if (triggerSound) playMortyWaveSound();
+
+        if (!isShieldActive) {
+          isShieldActive = true;
+          updateShieldUI();
+        }
+
+        const stats = window.BrainwaveMasker.maskWithStats(raw, currentFormat);
+        lastMaskedCleanText = stats.masked;
+
+        maskOutputCode.innerHTML = formatRedactedBadges(stats.masked);
+
+        if (maskOutputBadge) {
+          maskOutputBadge.textContent = `${stats.total} REDACTED`;
+        }
+        if (statRedactedCount) {
+          statRedactedCount.textContent = String(stats.total);
+        }
+        if (statRadarVisibility) {
+          statRadarVisibility.textContent = '0.00% (STEALTH)';
+          statRadarVisibility.className = 't-v highlight-green';
+        }
+
+        if (statCategoriesContainer) {
+          statCategoriesContainer.innerHTML = '';
+          for (const [cat, count] of Object.entries(stats.counts)) {
+            const pill = document.createElement('span');
+            pill.className = 'category-pill';
+            pill.textContent = `${cat}: ${count}`;
+            statCategoriesContainer.appendChild(pill);
+          }
+        }
+      } catch (err) {
+        console.error('Masking execution failed:', err);
+        playGlitchSound();
+        maskOutputCode.textContent = `Error masking data: ${err.message}`;
+      }
+    }
+
+    if (btnExecuteMask) {
+      btnExecuteMask.addEventListener('click', () => runMasking(true));
+    }
+
+    if (btnClearMask) {
+      btnClearMask.addEventListener('click', () => {
+        playTerminalBeepSound();
+        if (maskInput) maskInput.value = '';
+        if (maskInputChars) maskInputChars.textContent = '0 chars';
+        if (maskOutputCode) maskOutputCode.textContent = 'Buffer dibersihkan. Chamber siap memproses data baru.';
+        if (maskOutputBadge) maskOutputBadge.textContent = '0 REDACTED';
+        if (statRedactedCount) statRedactedCount.textContent = '0';
+        if (statCategoriesContainer) statCategoriesContainer.innerHTML = '';
+        lastMaskedCleanText = '';
+      });
+    }
+
+    // --- F. Copy to Clipboard ---
+    if (btnCopyMasked) {
+      btnCopyMasked.addEventListener('click', async () => {
+        const textToCopy = lastMaskedCleanText || (maskOutputCode ? maskOutputCode.textContent : '');
+        if (!textToCopy) return;
+
+        playTerminalBeepSound();
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(textToCopy);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = textToCopy;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+
+          if (copyMaskedLabel) {
+            const originalText = copyMaskedLabel.textContent;
+            copyMaskedLabel.textContent = 'TERSELESAIKAN! [COPIED]';
+            setTimeout(() => {
+              copyMaskedLabel.textContent = originalText;
+            }, 2000);
+          }
+        } catch (copyErr) {
+          console.warn('Copy failed:', copyErr);
+        }
+      });
+    }
+
+    // --- G. Relay to Citadel Subspace Terminal ---
+    if (btnRelayTerminal) {
+      btnRelayTerminal.addEventListener('click', () => {
+        playPortalSound();
+        const textToRelay = lastMaskedCleanText || (maskOutputCode ? maskOutputCode.textContent : '');
+        const targetMessageInput = document.getElementById('termMessage');
+        const contactSection = document.getElementById('contact');
+
+        if (targetMessageInput) {
+          targetMessageInput.value = textToRelay;
+          targetMessageInput.focus();
+        }
+
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Initial run with default preset 'db'
+    if (maskInput && !maskInput.value) {
+      maskInput.value = PRESET_DATA.db;
+      if (maskInputChars) maskInputChars.textContent = `${maskInput.value.length} chars`;
+      runMasking(false);
+    }
+  }
+
   function setupWaitingMode() {
     let idleTimer = null;
     let isWaiting = false;
@@ -2878,7 +3466,7 @@
       if (isWaiting) return;
       
       clearTimeout(idleTimer);
-      idleTimer = setTimeout(activateWaitingMode, 30000); // 30000ms for quick testing
+      idleTimer = setTimeout(activateWaitingMode, 120000); // 120s idle timeout
     }
 
     function activateWaitingMode() {
