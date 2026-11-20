@@ -3037,8 +3037,8 @@
     const radarStatusText = document.getElementById('radarStatusText');
     const oscFreqDisplay = document.getElementById('oscFreqDisplay');
 
-    const formatBtns = document.querySelectorAll('.mask-format-selector .btn-fmt');
-    const presetBtns = document.querySelectorAll('.btn-preset-chip');
+    const formatBtns = section.querySelectorAll('.mask-format-selector .btn-fmt');
+    const presetBtns = section.querySelectorAll('.btn-preset-chip');
     const maskInput = document.getElementById('maskInput');
     const maskInputChars = document.getElementById('maskInputChars');
     const btnExecuteMask = document.getElementById('btnExecuteMask');
@@ -3076,8 +3076,14 @@
       window.addEventListener('resize', resizeCanvas);
 
       let phase = 0;
+      let isOscVisible = true;
+      let oscRafId = null;
+
       function renderOscilloscope() {
-        if (!ctx) return;
+        if (!ctx || !isOscVisible) {
+          oscRafId = null;
+          return;
+        }
         ctx.clearRect(0, 0, width, height);
 
         const centerY = height / 2;
@@ -3087,8 +3093,6 @@
         ctx.beginPath();
         ctx.strokeStyle = '#39ff14';
         ctx.lineWidth = 2.2;
-        ctx.shadowColor = '#39ff14';
-        ctx.shadowBlur = 8;
 
         for (let x = 0; x < width; x += 3) {
           const normX = x * 0.035;
@@ -3102,8 +3106,6 @@
         ctx.beginPath();
         ctx.strokeStyle = isShieldActive ? '#fbee35' : '#64748b';
         ctx.lineWidth = 2.2;
-        ctx.shadowColor = isShieldActive ? '#fbee35' : 'transparent';
-        ctx.shadowBlur = isShieldActive ? 8 : 0;
 
         for (let x = 0; x < width; x += 3) {
           const normX = x * 0.035;
@@ -3122,8 +3124,6 @@
         ctx.beginPath();
         ctx.strokeStyle = isShieldActive ? '#38bdf8' : '#ef4444';
         ctx.lineWidth = isShieldActive ? 1.8 : 2.8;
-        ctx.shadowColor = isShieldActive ? '#38bdf8' : '#ef4444';
-        ctx.shadowBlur = isShieldActive ? 6 : 14;
 
         for (let x = 0; x < width; x += 3) {
           const normX = x * 0.035;
@@ -3138,13 +3138,20 @@
         }
         ctx.stroke();
 
-        // Reset shadow
-        ctx.shadowBlur = 0;
-
-        requestAnimationFrame(renderOscilloscope);
+        oscRafId = requestAnimationFrame(renderOscilloscope);
       }
 
-      renderOscilloscope();
+      if (typeof IntersectionObserver !== 'undefined') {
+        const oscObserver = new IntersectionObserver((entries) => {
+          isOscVisible = entries.some((entry) => entry.isIntersecting);
+          if (isOscVisible && !oscRafId) {
+            oscRafId = requestAnimationFrame(renderOscilloscope);
+          }
+        }, { threshold: 0.05 });
+        oscObserver.observe(section);
+      }
+
+      oscRafId = requestAnimationFrame(renderOscilloscope);
     }
 
     // --- B. Tactical Shield Toggle ---
@@ -3830,6 +3837,12 @@ Citadel Redis Cache: redis://citadel_admin:SuperSecretPasswd123@redis.citadel.ne
 
       lastBeautifiedText = formatted;
       outputCode.innerHTML = Q.highlightJsonWithLinesHtml(formatted);
+
+      if (outputBox) {
+        outputBox.classList.remove('json-flash');
+        void outputBox.offsetWidth;
+        outputBox.classList.add('json-flash');
+      }
 
       if (withSound) {
         if (mode === 'minify') playTerminalBeepSound();
