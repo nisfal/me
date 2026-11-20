@@ -105,8 +105,12 @@
                 <span class="flyout-num">03.2</span>
                 <span class="flyout-text" data-i18n="profile_nav_brainwave">Brainwave Masking (Morty Waves)</span>
               </a>
-              <a href="#santai" class="nav-flyout-item" data-target="santai">
+              <a href="#json-synthesizer" class="nav-flyout-item" data-target="json-synthesizer">
                 <span class="flyout-num">03.3</span>
+                <span class="flyout-text" data-i18n="profile_nav_json_lab">Quantum JSON Synthesizer</span>
+              </a>
+              <a href="#santai" class="nav-flyout-item" data-target="santai">
+                <span class="flyout-num">03.4</span>
                 <span class="flyout-text" data-i18n="profile_nav_santai">Santai &amp; Multiverse Lore</span>
               </a>
             </div>
@@ -721,6 +725,332 @@
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUANTUM JSON SYNTHESIZER (DE-CRONENBERGER & TIMELINE DIVERGENCE SCANNER) -->
+    <section class="json-lab-section" id="json-synthesizer">
+      <header class="section-head">
+        <span class="section-tag" data-i18n="profile_json_tag">// LAB UTILITY // PROTOCOL C-137: DE-CRONENBERG &amp; TIMELINE DIFF</span>
+        <h2 class="section-main-title" data-i18n="profile_json_title">Quantum JSON Synthesizer</h2>
+        <p class="section-sub" data-i18n="profile_json_desc">
+          Sembuhkan JSON mutan (Cronenberg) yang berantakan, ter-escape, atau penuh satu baris menjadi struktur rapi ber-indentasi, lalu pindai anomali lintas realitas (Timeline Divergence) antara dua payload JSON. Terintegrasi langsung dengan Morty Waves Data Masker (mask.js) dan Subspace Terminal!
+        </p>
+      </header>
+
+      <div class="json-lab-card">
+        <!-- Card Top Chrome & Mode Switcher -->
+        <div class="json-lab-header">
+          <div class="json-lab-title-group">
+            <span class="json-lab-beacon"></span>
+            <h3 class="json-lab-console-title" data-i18n="profile_json_console_title">MICROVERSE QUANTUM SYNTHESIZER // json-lab.js</h3>
+          </div>
+
+          <div class="json-mode-switcher" role="tablist" aria-label="Quantum JSON Mode">
+            <button type="button" class="btn-json-mode active" id="tabJsonBeautify" data-json-mode="beautify" role="tab" aria-selected="true" aria-controls="panelJsonBeautify">
+              <span class="mode-badge">01</span>
+              <span data-i18n="profile_json_tab_beautify">DE-CRONENBERG (BEAUTIFY)</span>
+            </button>
+            <button type="button" class="btn-json-mode" id="tabJsonCompare" data-json-mode="compare" role="tab" aria-selected="false" aria-controls="panelJsonCompare">
+              <span class="mode-badge">02</span>
+              <span data-i18n="profile_json_tab_compare">TIMELINE DIFF (COMPARE)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             MODE 01: DE-CRONENBERG (BEAUTIFY / MINIFY / UNESCAPE / MASK)
+             =============================================================== -->
+        <div class="json-mode-panel active" id="panelJsonBeautify" role="tabpanel" aria-labelledby="tabJsonBeautify">
+          <!-- Presets & Options Bar -->
+          <div class="json-toolbar-bar">
+            <div class="json-presets-group">
+              <span class="preset-label" data-i18n="profile_json_preset_label">SPECIMEN PRESETS:</span>
+              <div class="preset-chips">
+                <button type="button" class="btn-preset-chip btn-json-preset" data-json-preset="cronenberg" data-i18n="profile_json_preset_cronenberg">🧬 Cronenberg Minified</button>
+                <button type="button" class="btn-preset-chip btn-json-preset" data-json-preset="escaped" data-i18n="profile_json_preset_escaped">📜 Escaped Log String</button>
+                <button type="button" class="btn-preset-chip btn-json-preset" data-json-preset="secrets" data-i18n="profile_json_preset_secrets">🛡️ Payload + Secrets</button>
+                <button type="button" class="btn-preset-chip btn-json-preset" data-json-preset="broken" data-i18n="profile_json_preset_broken">⚠️ Broken Mutant</button>
+              </div>
+            </div>
+
+            <div class="json-options-group">
+              <div class="json-indent-selector" role="group" aria-label="Indentation size">
+                <button type="button" class="btn-indent active" data-indent="2">2SP</button>
+                <button type="button" class="btn-indent" data-indent="4">4SP</button>
+                <button type="button" class="btn-indent" data-indent="tab">TAB</button>
+              </div>
+
+              <label class="json-toggle-pill">
+                <input type="checkbox" id="chkJsonSortKeys" />
+                <span class="pill-box"></span>
+                <span data-i18n="profile_json_opt_sort">Sort Keys A-Z</span>
+              </label>
+
+              <label class="json-toggle-pill">
+                <input type="checkbox" id="chkJsonAutoUnescape" checked />
+                <span class="pill-box"></span>
+                <span data-i18n="profile_json_opt_unescape">Auto-Unescape</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dual Pane: Raw Input vs Cured Output -->
+          <div class="json-beautify-grid">
+            <!-- Left: Raw Cronenberg Input -->
+            <div class="json-pane">
+              <div class="pane-header">
+                <span class="pane-tag" data-i18n="profile_json_raw_label">RAW CRONENBERG INPUT:</span>
+                <span class="pane-counter" id="jsonRawStats">0 lines · 0 chars</span>
+              </div>
+              <div class="json-editor-wrap" id="jsonRawEditorWrap">
+                <div class="json-line-gutter" id="jsonRawGutter" aria-hidden="true"></div>
+                <textarea id="jsonRawInput" class="json-textarea" rows="12" wrap="off" placeholder='{"dimension":"C-137","status":"cronenberg_mutant"}' data-i18n-placeholder="profile_json_raw_ph" spellcheck="false"></textarea>
+              </div>
+            </div>
+
+            <!-- Right: Cured Syntax-Highlighted Output -->
+            <div class="json-pane">
+              <div class="pane-header">
+                <span class="pane-tag" data-i18n="profile_json_cured_label">CURED DNA STRUCTURE (OUTPUT):</span>
+                <div class="pane-status-indicators">
+                  <span class="json-status-pill status-idle" id="jsonStatusPill">STANDBY</span>
+                </div>
+              </div>
+
+              <!-- Error Diagnostic Banner (Hidden when valid) -->
+              <div class="json-error-banner" id="jsonErrorBanner" style="display: none;" role="alert">
+                <div class="json-error-head">
+                  <span class="err-badge">GLITCH DIAGNOSTIC</span>
+                  <span class="err-loc" id="jsonErrorLoc">Line 1, Col 1</span>
+                </div>
+                <p class="json-error-rick" id="jsonErrorRick"></p>
+                <code class="json-error-detail" id="jsonErrorDetail"></code>
+              </div>
+
+              <div class="json-output-box" id="jsonOutputBox">
+                <div class="json-code-viewport" id="jsonOutputCode"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Row -->
+          <div class="json-action-row">
+            <button type="button" class="btn-json-primary" id="btnJsonBeautify">
+              <span class="exec-icon">🧬</span>
+              <span data-i18n="profile_json_btn_beautify">DE-CRONENBERG // BEAUTIFY</span>
+            </button>
+
+            <button type="button" class="btn-json-secondary" id="btnJsonMinify">
+              <span>🗜️</span>
+              <span data-i18n="profile_json_btn_minify">CRONENBERG (MINIFY)</span>
+            </button>
+
+            <button type="button" class="btn-json-cloak" id="btnJsonCloak" title="Sensor data sensitif dengan Morty Waves (mask.js)">
+              <span>🛡️</span>
+              <span data-i18n="profile_json_btn_cloak">CLOAK SECRETS (mask.js)</span>
+            </button>
+
+            <button type="button" class="btn-clear-mask" id="btnJsonClear">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              <span data-i18n="profile_json_btn_clear">CLEAR</span>
+            </button>
+          </div>
+
+          <!-- Telemetry Strip -->
+          <div class="mask-telemetry-strip json-telemetry-strip">
+            <div class="telemetry-item">
+              <span class="t-k" data-i18n="profile_json_stat_size">Ukuran:</span>
+              <strong class="t-v highlight-cyan" id="jsonStatSize">0 B</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="t-k" data-i18n="profile_json_stat_depth">Kedalaman Dimensi:</span>
+              <strong class="t-v highlight-green" id="jsonStatDepth">0</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="t-k" data-i18n="profile_json_stat_keys">Total Key:</span>
+              <strong class="t-v highlight-yellow" id="jsonStatKeys">0</strong>
+            </div>
+            <div class="telemetry-item">
+              <span class="t-k" data-i18n="profile_json_stat_root">Tipe Root:</span>
+              <strong class="t-v" id="jsonStatRoot">—</strong>
+            </div>
+            <div class="telemetry-item tags-item" id="jsonMetaBadges"></div>
+          </div>
+
+          <!-- Bottom Output Actions -->
+          <div class="mask-output-actions">
+            <button type="button" class="btn-copy-masked" id="btnJsonCopy">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="jsonCopyLabel" data-i18n="profile_json_btn_copy">SALIN JSON HASIL</span>
+            </button>
+
+            <button type="button" class="btn-json-send-diff" id="btnJsonSendToDiff">
+              <span>🌌</span>
+              <span data-i18n="profile_json_btn_send_diff">KIRIM KE TIMELINE DIFF →</span>
+            </button>
+
+            <button type="button" class="btn-relay-terminal" id="btnJsonRelayTerminal">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+              <span data-i18n="profile_json_btn_relay">RELAY KE SUBSPACE TERMINAL ↓</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===============================================================
+             MODE 02: TIMELINE DIVERGENCE SCANNER (COMPARE JSON A vs B)
+             =============================================================== -->
+        <div class="json-mode-panel" id="panelJsonCompare" role="tabpanel" aria-labelledby="tabJsonCompare" hidden>
+          <!-- Compare Presets & Options -->
+          <div class="json-toolbar-bar">
+            <div class="json-presets-group">
+              <span class="preset-label" data-i18n="profile_json_diff_preset_label">TIMELINE SCENARIOS:</span>
+              <div class="preset-chips">
+                <button type="button" class="btn-preset-chip btn-diff-preset" data-diff-preset="portal" data-i18n="profile_json_diff_preset_portal">🔫 Portal Gun v1 vs v2</button>
+                <button type="button" class="btn-preset-chip btn-diff-preset" data-diff-preset="decoy" data-i18n="profile_json_diff_preset_decoy">⚖️ Decoy Check (Key Order)</button>
+                <button type="button" class="btn-preset-chip btn-diff-preset" data-diff-preset="secrets" data-i18n="profile_json_diff_preset_secrets">🛡️ API Response + Secrets</button>
+              </div>
+            </div>
+
+            <div class="json-options-group">
+              <label class="json-toggle-pill">
+                <input type="checkbox" id="chkDiffIgnoreOrder" checked />
+                <span class="pill-box"></span>
+                <span data-i18n="profile_json_diff_opt_order">Ignore Key Order (Semantic)</span>
+              </label>
+
+              <label class="json-toggle-pill">
+                <input type="checkbox" id="chkDiffOnlyChanges" />
+                <span class="pill-box"></span>
+                <span data-i18n="profile_json_diff_opt_changes">Only Show Changes</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Dual Dimension Input Grid -->
+          <div class="json-compare-inputs">
+            <div class="json-pane">
+              <div class="pane-header">
+                <span class="pane-tag dim-tag-left" data-i18n="profile_json_dim_left">DIMENSION C-137 (BASELINE JSON A):</span>
+                <div class="pane-mini-actions">
+                  <button type="button" class="btn-pane-mini" id="btnFormatLeft" data-i18n="profile_json_btn_fmt_mini">Beautify</button>
+                  <span class="pane-counter" id="diffLeftChars">0 chars</span>
+                </div>
+              </div>
+              <div class="json-editor-wrap is-compact">
+                <div class="json-line-gutter" id="diffLeftGutter" aria-hidden="true"></div>
+                <textarea id="diffInputLeft" class="json-textarea json-textarea-compact" rows="8" wrap="off" placeholder='{"dimension": "C-137"}' spellcheck="false"></textarea>
+              </div>
+            </div>
+
+            <div class="json-pane">
+              <div class="pane-header">
+                <span class="pane-tag dim-tag-right" data-i18n="profile_json_dim_right">DIMENSION J19ζ7 (TARGET JSON B):</span>
+                <div class="pane-mini-actions">
+                  <button type="button" class="btn-pane-mini" id="btnFormatRight" data-i18n="profile_json_btn_fmt_mini">Beautify</button>
+                  <span class="pane-counter" id="diffRightChars">0 chars</span>
+                </div>
+              </div>
+              <div class="json-editor-wrap is-compact">
+                <div class="json-line-gutter" id="diffRightGutter" aria-hidden="true"></div>
+                <textarea id="diffInputRight" class="json-textarea json-textarea-compact" rows="8" wrap="off" placeholder='{"dimension": "J19ζ7"}' spellcheck="false"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compare Action Row -->
+          <div class="json-action-row">
+            <button type="button" class="btn-json-primary" id="btnRunDiff">
+              <span class="exec-icon">🌌</span>
+              <span data-i18n="profile_json_btn_compare">SCAN TIMELINE DIVERGENCE // COMPARE</span>
+            </button>
+
+            <button type="button" class="btn-json-secondary" id="btnSwapDiff">
+              <span>⇄</span>
+              <span data-i18n="profile_json_btn_swap">SWAP DIMENSIONS</span>
+            </button>
+
+            <button type="button" class="btn-json-cloak" id="btnCloakBothDiff">
+              <span>🛡️</span>
+              <span data-i18n="profile_json_btn_cloak_both">CLOAK BOTH (mask.js)</span>
+            </button>
+
+            <button type="button" class="btn-clear-mask" id="btnClearDiff">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              <span data-i18n="profile_json_btn_clear">CLEAR</span>
+            </button>
+          </div>
+
+          <!-- Compare Error Diagnostic Banner -->
+          <div class="json-error-banner" id="diffErrorBanner" style="display: none;" role="alert">
+            <div class="json-error-head">
+              <span class="err-badge" id="diffErrorSide">DIMENSION GLITCH</span>
+              <span class="err-loc" id="diffErrorLoc">Line 1, Col 1</span>
+            </div>
+            <p class="json-error-rick" id="diffErrorRick"></p>
+            <code class="json-error-detail" id="diffErrorDetail"></code>
+          </div>
+
+          <!-- Timeline Stability Meter & Counters -->
+          <div class="diff-telemetry-panel" id="diffTelemetryPanel">
+            <div class="diff-stability-top">
+              <div class="diff-verdict-group">
+                <span class="diff-verdict-dot" id="diffVerdictDot"></span>
+                <strong class="diff-verdict-text" id="diffVerdictText">READY TO SCAN TIMELINES</strong>
+              </div>
+              <div class="diff-counters-group">
+                <span class="diff-count-badge badge-added" id="diffCountAdded">+0 ADDED</span>
+                <span class="diff-count-badge badge-removed" id="diffCountRemoved">-0 REMOVED</span>
+                <span class="diff-count-badge badge-modified" id="diffCountModified">~0 MODIFIED</span>
+              </div>
+            </div>
+            <div class="diff-stability-track">
+              <div class="diff-stability-fill" id="diffStabilityFill" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <!-- Diff Output View Switcher -->
+          <div class="diff-view-bar">
+            <div class="diff-view-tabs" role="tablist">
+              <button type="button" class="btn-diff-view active" data-diff-view="split" data-i18n="profile_json_view_split">Side-by-Side Diff</button>
+              <button type="button" class="btn-diff-view" data-diff-view="paths" data-i18n="profile_json_view_paths">Anomaly Path Inspector</button>
+            </div>
+
+            <div class="diff-filter-chips" id="diffAnomalyFilters" style="display: none;">
+              <button type="button" class="btn-anomaly-filter active" data-anomaly-filter="all">ALL</button>
+              <button type="button" class="btn-anomaly-filter f-added" data-anomaly-filter="added">+ ADDED</button>
+              <button type="button" class="btn-anomaly-filter f-removed" data-anomaly-filter="removed">- REMOVED</button>
+              <button type="button" class="btn-anomaly-filter f-modified" data-anomaly-filter="modified">~ MODIFIED</button>
+            </div>
+          </div>
+
+          <!-- View 1: Side-by-Side Split Diff Table -->
+          <div class="diff-split-container" id="diffSplitView">
+            <div class="diff-split-head">
+              <div class="diff-col-head">DIMENSION C-137 (BASELINE)</div>
+              <div class="diff-col-head">DIMENSION J19ζ7 (TARGET)</div>
+            </div>
+            <div class="diff-split-body" id="diffSplitBody"></div>
+          </div>
+
+          <!-- View 2: Anomaly Path Inspector -->
+          <div class="diff-paths-container" id="diffPathsView" style="display: none;">
+            <div class="diff-paths-list" id="diffPathsList"></div>
+          </div>
+
+          <!-- Bottom Compare Actions -->
+          <div class="mask-output-actions">
+            <button type="button" class="btn-copy-masked" id="btnCopyDiffReport">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="diffCopyLabel" data-i18n="profile_json_btn_copy_report">SALIN DIFF REPORT</span>
+            </button>
+
+            <button type="button" class="btn-relay-terminal" id="btnRelayDiffTerminal">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+              <span data-i18n="profile_json_btn_relay_report">RELAY REPORT KE SUBSPACE TERMINAL ↓</span>
+            </button>
           </div>
         </div>
       </div>
@@ -1749,6 +2079,7 @@
   <script src="js/i18n.js"></script>
   <script src="js/space-shooter.js"></script>
   <script src="js/mask.js"></script>
+  <script src="js/json-lab.js"></script>
   <script src="js/rick-morty.js"></script>
 </body>
 </html>

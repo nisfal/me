@@ -1996,6 +1996,7 @@
     setupCableTv();
     setupMeeseeksBox();
     setupBrainwaveMasking();
+    setupQuantumJsonLab();
     setupButterRobot();
     setupMobileNav();
     setupNavGroupDropdowns();
@@ -2101,6 +2102,7 @@
       'cable-tv': 'projects',
       'meeseeks': 'lab',
       'brainwave-mask': 'lab',
+      'json-synthesizer': 'lab',
       'santai': 'lab',
       'microverse': 'transmissions',
       'contact': 'transmissions'
@@ -3453,6 +3455,946 @@ Citadel Redis Cache: redis://citadel_admin:SuperSecretPasswd123@redis.citadel.ne
       maskInput.value = PRESET_DATA.db;
       if (maskInputChars) maskInputChars.textContent = `${maskInput.value.length} chars`;
       runMasking(false);
+    }
+  }
+
+  /* ── 22. Quantum JSON Synthesizer (De-Cronenberger & Timeline Divergence Scanner) ── */
+  function setupQuantumJsonLab() {
+    const section = document.getElementById('json-synthesizer');
+    if (!section || !window.QuantumJsonEngine) return;
+
+    const Q = window.QuantumJsonEngine;
+
+    // Mode Switcher Elements
+    const modeTabs = section.querySelectorAll('.btn-json-mode');
+    const panelBeautify = document.getElementById('panelJsonBeautify');
+    const panelCompare = document.getElementById('panelJsonCompare');
+
+    // Mode 01: De-Cronenberger Elements
+    const rawInput = document.getElementById('jsonRawInput');
+    const rawGutter = document.getElementById('jsonRawGutter');
+    const rawStats = document.getElementById('jsonRawStats');
+    const outputCode = document.getElementById('jsonOutputCode');
+    const outputBox = document.getElementById('jsonOutputBox');
+    const statusPill = document.getElementById('jsonStatusPill');
+    const errBanner = document.getElementById('jsonErrorBanner');
+    const errLoc = document.getElementById('jsonErrorLoc');
+    const errRick = document.getElementById('jsonErrorRick');
+    const errDetail = document.getElementById('jsonErrorDetail');
+    const indentBtns = section.querySelectorAll('.btn-indent');
+    const chkSortKeys = document.getElementById('chkJsonSortKeys');
+    const chkAutoUnescape = document.getElementById('chkJsonAutoUnescape');
+    const presetBtns = section.querySelectorAll('.btn-json-preset');
+    const btnBeautify = document.getElementById('btnJsonBeautify');
+    const btnMinify = document.getElementById('btnJsonMinify');
+    const btnCloak = document.getElementById('btnJsonCloak');
+    const btnClear = document.getElementById('btnJsonClear');
+    const statSize = document.getElementById('jsonStatSize');
+    const statDepth = document.getElementById('jsonStatDepth');
+    const statKeys = document.getElementById('jsonStatKeys');
+    const statRoot = document.getElementById('jsonStatRoot');
+    const metaBadges = document.getElementById('jsonMetaBadges');
+    const btnCopyJson = document.getElementById('btnJsonCopy');
+    const copyJsonLabel = document.getElementById('jsonCopyLabel');
+    const btnSendToDiff = document.getElementById('btnJsonSendToDiff');
+    const btnRelayJson = document.getElementById('btnJsonRelayTerminal');
+
+    // Mode 02: Timeline Divergence Elements
+    const diffPresetBtns = section.querySelectorAll('.btn-diff-preset');
+    const chkIgnoreOrder = document.getElementById('chkDiffIgnoreOrder');
+    const chkOnlyChanges = document.getElementById('chkDiffOnlyChanges');
+    const diffInputLeft = document.getElementById('diffInputLeft');
+    const diffLeftGutter = document.getElementById('diffLeftGutter');
+    const diffInputRight = document.getElementById('diffInputRight');
+    const diffRightGutter = document.getElementById('diffRightGutter');
+    const diffLeftChars = document.getElementById('diffLeftChars');
+    const diffRightChars = document.getElementById('diffRightChars');
+    const btnFormatLeft = document.getElementById('btnFormatLeft');
+    const btnFormatRight = document.getElementById('btnFormatRight');
+    const btnRunDiff = document.getElementById('btnRunDiff');
+    const btnSwapDiff = document.getElementById('btnSwapDiff');
+    const btnCloakBoth = document.getElementById('btnCloakBothDiff');
+    const btnClearDiff = document.getElementById('btnClearDiff');
+    const diffErrBanner = document.getElementById('diffErrorBanner');
+    const diffErrSide = document.getElementById('diffErrorSide');
+    const diffErrLoc = document.getElementById('diffErrorLoc');
+    const diffErrRick = document.getElementById('diffErrorRick');
+    const diffErrDetail = document.getElementById('diffErrorDetail');
+    const diffVerdictDot = document.getElementById('diffVerdictDot');
+    const diffVerdictText = document.getElementById('diffVerdictText');
+    const diffStabilityFill = document.getElementById('diffStabilityFill');
+    const diffCountAdded = document.getElementById('diffCountAdded');
+    const diffCountRemoved = document.getElementById('diffCountRemoved');
+    const diffCountModified = document.getElementById('diffCountModified');
+    const diffViewBtns = section.querySelectorAll('.btn-diff-view');
+    const diffAnomalyFilters = document.getElementById('diffAnomalyFilters');
+    const anomalyFilterBtns = section.querySelectorAll('.btn-anomaly-filter');
+    const diffSplitView = document.getElementById('diffSplitView');
+    const diffSplitBody = document.getElementById('diffSplitBody');
+    const diffPathsView = document.getElementById('diffPathsView');
+    const diffPathsList = document.getElementById('diffPathsList');
+    const btnCopyDiffReport = document.getElementById('btnCopyDiffReport');
+    const diffCopyLabel = document.getElementById('diffCopyLabel');
+    const btnRelayDiff = document.getElementById('btnRelayDiffTerminal');
+
+    // Internal State
+    let currentIndent = 2;
+    let lastBeautifiedText = '';
+    let lastBeautifyMode = 'beautify'; // 'beautify' | 'minify'
+    let lastRedactedCount = 0;
+    let lastDiffResult = null;
+    let activeDiffView = 'split';
+    let activeAnomalyFilter = 'all';
+
+    // Specimen Presets (Mode 01)
+    const BEAUTIFY_PRESETS = {
+      cronenberg: '{"dimension":"C-137","operator":"Nisfal Filsa","portal_gun":{"serial":"PG-137-X","fluid_level":98.7,"calibrated":true,"recent_jumps":["Cronenberg World","Citadel of Ricks","Gazorpazorp"]},"telemetry":{"latency_ms":1.8,"throughput_ops":125000,"queue":"RabbitMQ-DLQ","status":"OPTIMAL"},"notes":null}',
+      escaped: JSON.stringify('{"event":"PORTAL_WARP_COMPLETE","dimension":"C-137","payload":{"service":"citadel-gateway","retries":0,"verified":true,"nodes":["earth-jkt-01","citadel-alpha-02"]}}'),
+      secrets: '{"service":"citadel-billing-api","db_uri":"postgresql://rick_c137:SzechuanSauce99!@db.citadel.internal:5432/multiverse","operator_email":"nisfal.c137@citadel.io","phone":"+62 812-3456-7890","citizen_nik":"3174051208980001","jwt_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSLTEzNyIsInJvbGUiOiJzdXBlcl9nZW5pdXMifQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c","api_key":"sk_live_C137PortalGunSecretKey998877","status":"EXPOSED"}',
+      broken: '{\n  "dimension": "C-137",\n  "portal_fluid": 99.5,\n  "squad": ["Rick", "Morty"\n  "calibrated": true,\n}'
+    };
+
+    // Timeline Scenarios (Mode 02)
+    const DIFF_PRESETS = {
+      portal: {
+        left: JSON.stringify({
+          dimension: 'C-137',
+          firmware: 'v4.2.0',
+          portal_gun: {
+            fluid_level: 98.5,
+            safety_lock: true,
+            max_jumps: 42,
+            legacy_bypass: 'ENABLED'
+          },
+          squad: ['Rick C-137', 'Morty Prime', 'Summer']
+        }, null, 2),
+        right: JSON.stringify({
+          dimension: 'J19ζ7',
+          firmware: 'v4.3.1-beta',
+          portal_gun: {
+            fluid_level: 74.0,
+            safety_lock: false,
+            max_jumps: 42,
+            quantum_stabilizer: 'ACTIVE'
+          },
+          squad: ['Rick C-137', 'Evil Morty', 'Summer', 'Birdperson']
+        }, null, 2)
+      },
+      decoy: {
+        left: JSON.stringify({
+          family_id: 'SMITH-C137',
+          is_decoy: false,
+          members: { rick: 'Original', morty: 'Prime', summer: 'Original' },
+          defense_level: 100
+        }, null, 2),
+        right: JSON.stringify({
+          defense_level: 100,
+          members: { summer: 'Original', rick: 'Original', morty: 'Prime' },
+          is_decoy: false,
+          family_id: 'SMITH-C137'
+        }, null, 2)
+      },
+      secrets: {
+        left: JSON.stringify({
+          env: 'staging-c137',
+          database: 'postgresql://rick:OldPass123!@10.137.0.5:5432/citadel',
+          contact: 'rick.sanchez@citadel.io',
+          token: 'sk_live_C137AlphaSecretToken112233',
+          rate_limit: 5000
+        }, null, 2),
+        right: JSON.stringify({
+          env: 'production-c137',
+          database: 'postgresql://rick:NewUltraPass99!@10.137.0.99:5432/citadel',
+          contact: 'rick.sanchez@citadel.io',
+          token: 'sk_live_C137ProdSecretToken998877',
+          rate_limit: 25000,
+          e2ee_enabled: true
+        }, null, 2)
+      }
+    };
+
+    function copyTextToClipboard(text, labelEl, doneText) {
+      if (!text) return;
+      playTerminalBeepSound();
+      const finish = () => {
+        if (!labelEl) return;
+        const original = labelEl.textContent;
+        labelEl.textContent = doneText;
+        setTimeout(() => {
+          labelEl.textContent = original;
+        }, 1800);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(finish).catch(() => {});
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (_) {}
+        document.body.removeChild(ta);
+        finish();
+      }
+    }
+
+    function relayToSubspaceTerminal(text) {
+      if (!text) return;
+      playPortalSound();
+      const targetMessageInput = document.getElementById('termMessage');
+      const contactSection = document.getElementById('contact');
+      if (targetMessageInput) {
+        targetMessageInput.value = text;
+        targetMessageInput.focus();
+      }
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function createLineGutterController(textarea, gutterEl) {
+      if (!textarea || !gutterEl) {
+        return { refresh: () => {}, setErrorLine: () => {} };
+      }
+      let lastLineCount = -1;
+      let lastActiveLine = -1;
+      let errorLine = null;
+      let lastErrorLine = null;
+
+      function getCurrentCursorLine() {
+        if (document.activeElement !== textarea) return -1;
+        const pos = typeof textarea.selectionStart === 'number' ? textarea.selectionStart : 0;
+        return textarea.value.slice(0, pos).split('\n').length;
+      }
+
+      function render(force) {
+        const lineCount = Math.max(1, textarea.value ? textarea.value.split('\n').length : 1);
+        const activeLine = getCurrentCursorLine();
+
+        if (!force && lineCount === lastLineCount && activeLine === lastActiveLine && errorLine === lastErrorLine) {
+          gutterEl.scrollTop = textarea.scrollTop;
+          return;
+        }
+
+        lastLineCount = lineCount;
+        lastActiveLine = activeLine;
+        lastErrorLine = errorLine;
+
+        const parts = new Array(lineCount);
+        for (let i = 1; i <= lineCount; i++) {
+          let cls = 'json-line-num';
+          if (errorLine === i) cls += ' ln-error';
+          else if (activeLine === i) cls += ' ln-active';
+          parts[i - 1] = `<span class="${cls}">${i}</span>`;
+        }
+        gutterEl.innerHTML = parts.join('');
+        gutterEl.scrollTop = textarea.scrollTop;
+      }
+
+      textarea.addEventListener('scroll', () => {
+        gutterEl.scrollTop = textarea.scrollTop;
+      });
+      textarea.addEventListener('input', () => {
+        errorLine = null;
+        render(false);
+      });
+      textarea.addEventListener('keyup', () => render(false));
+      textarea.addEventListener('click', () => render(false));
+      textarea.addEventListener('focus', () => render(false));
+      textarea.addEventListener('blur', () => render(false));
+
+      render(true);
+
+      return {
+        refresh: () => render(true),
+        setErrorLine: (ln) => {
+          errorLine = ln || null;
+          render(true);
+        }
+      };
+    }
+
+    const rawGutterCtrl = createLineGutterController(rawInput, rawGutter);
+    const diffLeftGutterCtrl = createLineGutterController(diffInputLeft, diffLeftGutter);
+    const diffRightGutterCtrl = createLineGutterController(diffInputRight, diffRightGutter);
+
+    function updateRawStats() {
+      if (!rawInput || !rawStats) return;
+      const val = rawInput.value;
+      const lines = val ? val.split('\n').length : 0;
+      rawStats.textContent = `${lines} lines · ${val.length} chars`;
+      rawGutterCtrl.refresh();
+    }
+
+    function updateDiffCharCounters() {
+      if (diffInputLeft && diffLeftChars) {
+        diffLeftChars.textContent = `${diffInputLeft.value.length} chars`;
+      }
+      if (diffInputRight && diffRightChars) {
+        diffRightChars.textContent = `${diffInputRight.value.length} chars`;
+      }
+      diffLeftGutterCtrl.refresh();
+      diffRightGutterCtrl.refresh();
+    }
+
+    function getRickErrorRoast(line, col, sideLabel) {
+      const lang = getActiveLang();
+      if (lang === 'en') {
+        const prefix = sideLabel ? `[${sideLabel}] ` : '';
+        return `${prefix}*Burp* Syntax Error at Line ${line}, Column ${col}, Morty! You broke the JSON structure—check for a missing comma, unclosed bracket, or trailing comma!`;
+      }
+      const prefix = sideLabel ? `[${sideLabel}] ` : '';
+      return `${prefix}*B-burp!* Syntax Error di Baris ${line}, Kolom ${col}, Morty! Struktur JSON-nya mutasi jadi Cronenberg—cek koma yang hilang, kurung belum ditutup, atau trailing comma!`;
+    }
+
+    // --- Mode Switcher ---
+    function switchJsonMode(mode, withSound) {
+      if (withSound) playCardFlipSound();
+      modeTabs.forEach((btn) => {
+        const isTarget = btn.getAttribute('data-json-mode') === mode;
+        btn.classList.toggle('active', isTarget);
+        btn.setAttribute('aria-selected', String(isTarget));
+      });
+      if (panelBeautify) {
+        panelBeautify.hidden = mode !== 'beautify';
+        panelBeautify.classList.toggle('active', mode === 'beautify');
+      }
+      if (panelCompare) {
+        panelCompare.hidden = mode !== 'compare';
+        panelCompare.classList.toggle('active', mode === 'compare');
+      }
+    }
+
+    modeTabs.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-json-mode');
+        switchJsonMode(mode, true);
+      });
+    });
+
+    // --- Mode 01: De-Cronenberger Logic ---
+    function renderBeautifyError(err) {
+      rawGutterCtrl.setErrorLine(err && err.line ? err.line : 1);
+      if (errBanner) errBanner.style.display = 'flex';
+      if (outputBox) outputBox.style.display = 'none';
+      if (errLoc) errLoc.textContent = `LINE ${err.line}, COL ${err.column}`;
+      if (errRick) errRick.textContent = getRickErrorRoast(err.line, err.column, '');
+      if (errDetail) {
+        const snippet = err.lineContent ? `\n> ${err.lineContent}` : '';
+        errDetail.textContent = `${err.message}${snippet}`;
+      }
+      if (statusPill) {
+        statusPill.className = 'json-status-pill status-error';
+        statusPill.textContent = getActiveLang() === 'en' ? 'MUTANT ERROR' : 'ERROR MUTAN';
+      }
+      lastBeautifiedText = '';
+    }
+
+    function executeBeautify(mode, withSound) {
+      if (!rawInput || !outputCode) return;
+      lastBeautifyMode = mode;
+      const raw = rawInput.value;
+      updateRawStats();
+
+      const autoUnescape = chkAutoUnescape ? chkAutoUnescape.checked : true;
+      const sortKeys = chkSortKeys ? chkSortKeys.checked : false;
+      const parsedRes = Q.parseSmartJson(raw, { autoUnescape });
+
+      if (!parsedRes.ok) {
+        if (parsedRes.empty) {
+          rawGutterCtrl.setErrorLine(null);
+          if (errBanner) errBanner.style.display = 'none';
+          if (outputBox) outputBox.style.display = 'block';
+          outputCode.innerHTML = `<div class="diff-empty-notice">${getActiveLang() === 'en' ? 'Chamber empty. Paste raw JSON or pick a specimen preset.' : 'Chamber kosong. Tempel JSON mentah atau pilih preset spesimen.'}</div>`;
+          if (statusPill) {
+            statusPill.className = 'json-status-pill status-idle';
+            statusPill.textContent = 'STANDBY';
+          }
+          return;
+        }
+        if (withSound) playGlitchSound();
+        renderBeautifyError(parsedRes.error);
+        return;
+      }
+
+      rawGutterCtrl.setErrorLine(null);
+      if (errBanner) errBanner.style.display = 'none';
+      if (outputBox) outputBox.style.display = 'block';
+
+      const indentVal = currentIndent === 'tab' ? '\t' : currentIndent;
+      const formatted = Q.formatJson(parsedRes.value, {
+        indent: indentVal,
+        minify: mode === 'minify',
+        sortKeys
+      });
+
+      lastBeautifiedText = formatted;
+      outputCode.innerHTML = Q.highlightJsonWithLinesHtml(formatted);
+
+      if (withSound) {
+        if (mode === 'minify') playTerminalBeepSound();
+        else playPortalSound();
+      }
+
+      // Telemetry
+      const stats = Q.analyzeJson(parsedRes.value, formatted);
+      if (statSize) statSize.textContent = stats.formattedSize;
+      if (statDepth) statDepth.textContent = `${stats.maxDepth} ${getActiveLang() === 'en' ? 'Dims' : 'Dimensi'}`;
+      if (statKeys) statKeys.textContent = String(stats.totalKeys);
+      if (statRoot) statRoot.textContent = stats.rootType.toUpperCase();
+
+      if (statusPill) {
+        statusPill.className = 'json-status-pill status-cured';
+        statusPill.textContent = mode === 'minify'
+          ? 'CRONENBERG (MINIFIED)'
+          : (getActiveLang() === 'en' ? 'CURED // VALID JSON' : 'SEMBUH // JSON VALID');
+      }
+
+      if (metaBadges) {
+        metaBadges.innerHTML = '';
+        const badges = [];
+        if (parsedRes.unescaped) badges.push('AUTO-UNESCAPED');
+        if (sortKeys) badges.push('KEYS A-Z');
+        if (lastRedactedCount > 0) badges.push(`🛡️ ${lastRedactedCount} REDACTED`);
+        badges.forEach((txt) => {
+          const span = document.createElement('span');
+          span.className = 'category-pill';
+          span.textContent = txt;
+          metaBadges.appendChild(span);
+        });
+      }
+    }
+
+    indentBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        playTerminalBeepSound();
+        indentBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const val = btn.getAttribute('data-indent');
+        currentIndent = val === 'tab' ? 'tab' : Number(val);
+        if (rawInput && rawInput.value.trim()) executeBeautify('beautify', false);
+      });
+    });
+
+    if (chkSortKeys) {
+      chkSortKeys.addEventListener('change', () => {
+        playTerminalBeepSound();
+        if (rawInput && rawInput.value.trim()) executeBeautify(lastBeautifyMode, false);
+      });
+    }
+
+    if (chkAutoUnescape) {
+      chkAutoUnescape.addEventListener('change', () => {
+        playTerminalBeepSound();
+        if (rawInput && rawInput.value.trim()) executeBeautify(lastBeautifyMode, false);
+      });
+    }
+
+    presetBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-json-preset');
+        if (!BEAUTIFY_PRESETS[key] || !rawInput) return;
+        lastRedactedCount = 0;
+        rawInput.value = BEAUTIFY_PRESETS[key];
+        updateRawStats();
+        executeBeautify('beautify', true);
+      });
+    });
+
+    if (rawInput) {
+      rawInput.addEventListener('input', () => {
+        lastRedactedCount = 0;
+        updateRawStats();
+      });
+    }
+
+    if (btnBeautify) {
+      btnBeautify.addEventListener('click', () => executeBeautify('beautify', true));
+    }
+
+    if (btnMinify) {
+      btnMinify.addEventListener('click', () => executeBeautify('minify', true));
+    }
+
+    // Integration #4: Cloak Secrets with Morty Waves (mask.js)
+    if (btnCloak) {
+      btnCloak.addEventListener('click', () => {
+        if (!rawInput || !window.BrainwaveMasker) return;
+        const autoUnescape = chkAutoUnescape ? chkAutoUnescape.checked : true;
+        const parsedRes = Q.parseSmartJson(rawInput.value, { autoUnescape });
+        if (!parsedRes.ok) {
+          playGlitchSound();
+          if (!parsedRes.empty) renderBeautifyError(parsedRes.error);
+          return;
+        }
+        try {
+          const cleanStr = Q.formatJson(parsedRes.value, { indent: 2, sortKeys: chkSortKeys ? chkSortKeys.checked : false });
+          const maskedStats = window.BrainwaveMasker.maskWithStats(cleanStr, 'json');
+          lastRedactedCount = maskedStats.total || 0;
+          rawInput.value = maskedStats.masked;
+          playMortyWaveSound();
+          executeBeautify('beautify', false);
+        } catch (err) {
+          playGlitchSound();
+          console.error('Cloak JSON failed:', err);
+        }
+      });
+    }
+
+    if (btnClear) {
+      btnClear.addEventListener('click', () => {
+        playTerminalBeepSound();
+        lastRedactedCount = 0;
+        lastBeautifiedText = '';
+        if (rawInput) rawInput.value = '';
+        rawGutterCtrl.setErrorLine(null);
+        updateRawStats();
+        if (errBanner) errBanner.style.display = 'none';
+        if (outputBox) outputBox.style.display = 'block';
+        if (outputCode) {
+          outputCode.innerHTML = `<div class="diff-empty-notice">${getActiveLang() === 'en' ? 'Chamber cleared. Ready for next JSON specimen.' : 'Chamber dibersihkan. Siap menerima spesimen JSON baru.'}</div>`;
+        }
+        if (statusPill) {
+          statusPill.className = 'json-status-pill status-idle';
+          statusPill.textContent = 'STANDBY';
+        }
+        if (statSize) statSize.textContent = '0 B';
+        if (statDepth) statDepth.textContent = '0';
+        if (statKeys) statKeys.textContent = '0';
+        if (statRoot) statRoot.textContent = '—';
+        if (metaBadges) metaBadges.innerHTML = '';
+      });
+    }
+
+    if (btnCopyJson) {
+      btnCopyJson.addEventListener('click', () => {
+        const text = lastBeautifiedText || (rawInput ? rawInput.value : '');
+        copyTextToClipboard(text, copyJsonLabel, getActiveLang() === 'en' ? 'COPIED TO CLIPBOARD!' : 'TERSALIN KE CLIPBOARD!');
+      });
+    }
+
+    if (btnSendToDiff) {
+      btnSendToDiff.addEventListener('click', () => {
+        const text = lastBeautifiedText || (rawInput ? rawInput.value : '');
+        if (diffInputLeft && text) {
+          diffInputLeft.value = text;
+          updateDiffCharCounters();
+        }
+        switchJsonMode('compare', true);
+        if (diffInputLeft && diffInputRight && diffInputLeft.value.trim() && diffInputRight.value.trim()) {
+          executeDiff(false);
+        }
+      });
+    }
+
+    if (btnRelayJson) {
+      btnRelayJson.addEventListener('click', () => {
+        const text = lastBeautifiedText || (rawInput ? rawInput.value : '');
+        relayToSubspaceTerminal(text);
+      });
+    }
+
+    // --- Mode 02: Timeline Divergence Scanner Logic ---
+    function renderDiffError(sideLabel, err) {
+      if (diffErrBanner) diffErrBanner.style.display = 'flex';
+      if (diffErrSide) diffErrSide.textContent = `${sideLabel} GLITCH`;
+      if (diffErrLoc) diffErrLoc.textContent = `LINE ${err.line}, COL ${err.column}`;
+      if (diffErrRick) diffErrRick.textContent = getRickErrorRoast(err.line, err.column, sideLabel);
+      if (diffErrDetail) {
+        const snippet = err.lineContent ? `\n> ${err.lineContent}` : '';
+        diffErrDetail.textContent = `${err.message}${snippet}`;
+      }
+    }
+
+    function renderSplitDiffView(result) {
+      if (!diffSplitBody) return;
+      const onlyChanges = chkOnlyChanges ? chkOnlyChanges.checked : false;
+      const rows = onlyChanges
+        ? result.sideBySideRows.filter((r) => r.type !== 'equal')
+        : result.sideBySideRows;
+
+      if (rows.length === 0) {
+        const msg = getActiveLang() === 'en'
+          ? '✅ Zero divergences! Dimension C-137 and Dimension J19ζ7 are 100% synchronized.'
+          : '✅ Nol anomali! Dimensi C-137 dan Dimensi J19ζ7 tersinkronisasi 100%.';
+        diffSplitBody.innerHTML = `<div class="diff-empty-notice">${msg}</div>`;
+        return;
+      }
+
+      const html = rows
+        .map((row) => {
+          let leftCellClass = 'diff-cell';
+          let rightCellClass = 'diff-cell';
+          let leftSign = ' ';
+          let rightSign = ' ';
+
+          if (row.type === 'removed') {
+            leftCellClass += ' cell-removed';
+            rightCellClass += ' cell-empty';
+            leftSign = '-';
+          } else if (row.type === 'added') {
+            leftCellClass += ' cell-empty';
+            rightCellClass += ' cell-added';
+            rightSign = '+';
+          } else if (row.type === 'modified') {
+            leftCellClass += ' cell-modified-left';
+            rightCellClass += ' cell-modified-right';
+            leftSign = '~';
+            rightSign = '~';
+          }
+
+          const leftHtml = row.leftLineNum !== null ? Q.highlightJsonLineHtml(row.leftText) : '';
+          const rightHtml = row.rightLineNum !== null ? Q.highlightJsonLineHtml(row.rightText) : '';
+
+          return (
+            `<div class="diff-row row-${row.type}">` +
+              `<div class="${leftCellClass}">` +
+                `<span class="diff-gutter">${row.leftLineNum !== null ? row.leftLineNum : ''}</span>` +
+                `<span class="diff-sign">${leftSign}</span>` +
+                `<span class="diff-code">${leftHtml}</span>` +
+              `</div>` +
+              `<div class="${rightCellClass}">` +
+                `<span class="diff-gutter">${row.rightLineNum !== null ? row.rightLineNum : ''}</span>` +
+                `<span class="diff-sign">${rightSign}</span>` +
+                `<span class="diff-code">${rightHtml}</span>` +
+              `</div>` +
+            `</div>`
+          );
+        })
+        .join('');
+
+      diffSplitBody.innerHTML = html;
+    }
+
+    function renderAnomalyPathsView(result) {
+      if (!diffPathsList) return;
+      const lang = getActiveLang();
+
+      const filtered = result.anomalies.filter((a) => {
+        if (activeAnomalyFilter === 'all') return true;
+        if (activeAnomalyFilter === 'modified') {
+          return a.type === 'modified' || a.type === 'type_changed';
+        }
+        return a.type === activeAnomalyFilter;
+      });
+
+      if (filtered.length === 0) {
+        const msg = result.anomalies.length === 0
+          ? (lang === 'en'
+            ? '✅ REAL FAMILY CONFIRMED: Zero semantic anomalies between both dimensions!'
+            : '✅ REAL FAMILY TERKONFIRMASI: Nol anomali semantik di antara kedua dimensi!')
+          : (lang === 'en'
+            ? 'No anomalies match the selected filter.'
+            : 'Tidak ada anomali pada filter ini.');
+        diffPathsList.innerHTML = `<div class="diff-empty-notice">${msg}</div>`;
+        return;
+      }
+
+      const typeLabelMap = {
+        added: lang === 'en' ? '+ MUTATION ADDED' : '+ MUTASI DITAMBAHKAN',
+        removed: lang === 'en' ? '- ERASED FROM TIMELINE' : '- HILANG DARI TIMELINE',
+        modified: lang === 'en' ? '~ QUANTUM SHIFT' : '~ PERUBAHAN NILAI',
+        type_changed: lang === 'en' ? '~ SCHEMA TYPE DRIFT' : '~ TIPE DATA BERUBAH'
+      };
+
+      diffPathsList.innerHTML = filtered
+        .map((a) => {
+          let valHtml = '';
+          if (a.type === 'added') {
+            valHtml = `<span class="anomaly-val val-new">+ ${Q.escapeHtml(a.rightPreview)}</span>`;
+          } else if (a.type === 'removed') {
+            valHtml = `<span class="anomaly-val val-old">- ${Q.escapeHtml(a.leftPreview)}</span>`;
+          } else {
+            valHtml =
+              `<span class="anomaly-val val-old">${Q.escapeHtml(a.leftPreview)}</span>` +
+              `<span class="anomaly-arrow">→</span>` +
+              `<span class="anomaly-val val-new">${Q.escapeHtml(a.rightPreview)}</span>`;
+          }
+
+          return (
+            `<div class="anomaly-item type-${a.type}">` +
+              `<div class="anomaly-item-head">` +
+                `<button type="button" class="anomaly-path-btn" data-copy-path="${Q.escapeHtml(a.path)}" title="Click to copy JSONPath">${Q.escapeHtml(a.path)}</button>` +
+                `<span class="anomaly-type-pill pill-${a.type}">${typeLabelMap[a.type] || a.type}</span>` +
+              `</div>` +
+              `<div class="anomaly-values">${valHtml}</div>` +
+            `</div>`
+          );
+        })
+        .join('');
+
+      diffPathsList.querySelectorAll('.anomaly-path-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const pathStr = btn.getAttribute('data-copy-path');
+          copyTextToClipboard(pathStr, btn, `✓ ${pathStr}`);
+        });
+      });
+    }
+
+    function updateDiffTelemetryUI(result) {
+      const lang = getActiveLang();
+      const pct = result.stabilityPct.toFixed(1);
+
+      if (diffCountAdded) diffCountAdded.textContent = `+${result.counts.added} ${lang === 'en' ? 'ADDED' : 'TAMBAH'}`;
+      if (diffCountRemoved) diffCountRemoved.textContent = `-${result.counts.removed} ${lang === 'en' ? 'REMOVED' : 'HILANG'}`;
+      if (diffCountModified) diffCountModified.textContent = `~${result.counts.modified} ${lang === 'en' ? 'MODIFIED' : 'BERUBAH'}`;
+
+      if (diffStabilityFill) {
+        diffStabilityFill.style.width = `${Math.max(4, result.stabilityPct)}%`;
+        diffStabilityFill.classList.remove('fill-warn', 'fill-danger');
+        if (result.stabilityPct < 60) diffStabilityFill.classList.add('fill-danger');
+        else if (result.stabilityPct < 100) diffStabilityFill.classList.add('fill-warn');
+      }
+
+      if (diffVerdictDot) {
+        diffVerdictDot.classList.remove('verdict-warn', 'verdict-danger');
+        if (result.stabilityPct < 60) diffVerdictDot.classList.add('verdict-danger');
+        else if (!result.isIdentical) diffVerdictDot.classList.add('verdict-warn');
+      }
+
+      if (diffVerdictText) {
+        if (result.isIdentical) {
+          diffVerdictText.textContent = lang === 'en'
+            ? `100.0% TIMELINE MATCH // REAL FAMILY (ZERO ANOMALIES)`
+            : `100.0% TIMELINE COCOK // REAL FAMILY (NOL ANOMALI)`;
+        } else if (result.keyOrderDriftOnly) {
+          diffVerdictText.textContent = lang === 'en'
+            ? `${pct}% STABILITY // KEY ORDER DRIFT ONLY (ENABLE SEMANTIC MODE)`
+            : `${pct}% STABILITAS // HANYA URUTAN KEY BERBEDA (AKTIFKAN MODE SEMANTIK)`;
+        } else {
+          diffVerdictText.textContent = lang === 'en'
+            ? `${pct}% TIMELINE STABILITY // ${result.counts.total} ANOMALIES DETECTED`
+            : `${pct}% STABILITAS TIMELINE // ${result.counts.total} ANOMALI TERDETEKSI`;
+        }
+      }
+    }
+
+    function executeDiff(withSound) {
+      if (!diffInputLeft || !diffInputRight) return;
+      updateDiffCharCounters();
+
+      const leftRes = Q.parseSmartJson(diffInputLeft.value, { autoUnescape: true });
+      if (!leftRes.ok) {
+        if (withSound) playGlitchSound();
+        diffLeftGutterCtrl.setErrorLine(leftRes.error.line);
+        diffRightGutterCtrl.setErrorLine(null);
+        renderDiffError('DIMENSION C-137 (LEFT)', leftRes.error);
+        return;
+      }
+
+      const rightRes = Q.parseSmartJson(diffInputRight.value, { autoUnescape: true });
+      if (!rightRes.ok) {
+        if (withSound) playGlitchSound();
+        diffLeftGutterCtrl.setErrorLine(null);
+        diffRightGutterCtrl.setErrorLine(rightRes.error.line);
+        renderDiffError('DIMENSION J19ζ7 (RIGHT)', rightRes.error);
+        return;
+      }
+
+      diffLeftGutterCtrl.setErrorLine(null);
+      diffRightGutterCtrl.setErrorLine(null);
+      if (diffErrBanner) diffErrBanner.style.display = 'none';
+
+      const ignoreKeyOrder = chkIgnoreOrder ? chkIgnoreOrder.checked : true;
+      const result = Q.diffJson(leftRes.value, rightRes.value, { ignoreKeyOrder, indent: 2 });
+      lastDiffResult = result;
+
+      updateDiffTelemetryUI(result);
+      renderSplitDiffView(result);
+      renderAnomalyPathsView(result);
+
+      if (withSound) playPortalSound();
+    }
+
+    diffPresetBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-diff-preset');
+        if (!DIFF_PRESETS[key]) return;
+        if (diffInputLeft) diffInputLeft.value = DIFF_PRESETS[key].left;
+        if (diffInputRight) diffInputRight.value = DIFF_PRESETS[key].right;
+        updateDiffCharCounters();
+        executeDiff(true);
+      });
+    });
+
+    if (diffInputLeft) diffInputLeft.addEventListener('input', updateDiffCharCounters);
+    if (diffInputRight) diffInputRight.addEventListener('input', updateDiffCharCounters);
+
+    if (btnFormatLeft) {
+      btnFormatLeft.addEventListener('click', () => {
+        if (!diffInputLeft) return;
+        const res = Q.parseSmartJson(diffInputLeft.value, { autoUnescape: true });
+        if (!res.ok) {
+          playGlitchSound();
+          renderDiffError('DIMENSION C-137 (LEFT)', res.error);
+          return;
+        }
+        playTerminalBeepSound();
+        diffInputLeft.value = Q.formatJson(res.value, { indent: 2 });
+        updateDiffCharCounters();
+      });
+    }
+
+    if (btnFormatRight) {
+      btnFormatRight.addEventListener('click', () => {
+        if (!diffInputRight) return;
+        const res = Q.parseSmartJson(diffInputRight.value, { autoUnescape: true });
+        if (!res.ok) {
+          playGlitchSound();
+          renderDiffError('DIMENSION J19ζ7 (RIGHT)', res.error);
+          return;
+        }
+        playTerminalBeepSound();
+        diffInputRight.value = Q.formatJson(res.value, { indent: 2 });
+        updateDiffCharCounters();
+      });
+    }
+
+    if (btnRunDiff) {
+      btnRunDiff.addEventListener('click', () => executeDiff(true));
+    }
+
+    if (chkIgnoreOrder) {
+      chkIgnoreOrder.addEventListener('change', () => {
+        playTerminalBeepSound();
+        if (lastDiffResult) executeDiff(false);
+      });
+    }
+
+    if (chkOnlyChanges) {
+      chkOnlyChanges.addEventListener('change', () => {
+        playTerminalBeepSound();
+        if (lastDiffResult) renderSplitDiffView(lastDiffResult);
+      });
+    }
+
+    if (btnSwapDiff) {
+      btnSwapDiff.addEventListener('click', () => {
+        if (!diffInputLeft || !diffInputRight) return;
+        playCardFlipSound();
+        const tmp = diffInputLeft.value;
+        diffInputLeft.value = diffInputRight.value;
+        diffInputRight.value = tmp;
+        updateDiffCharCounters();
+        executeDiff(false);
+      });
+    }
+
+    if (btnCloakBoth) {
+      btnCloakBoth.addEventListener('click', () => {
+        if (!diffInputLeft || !diffInputRight || !window.BrainwaveMasker) return;
+        const leftRes = Q.parseSmartJson(diffInputLeft.value, { autoUnescape: true });
+        if (!leftRes.ok) {
+          playGlitchSound();
+          renderDiffError('DIMENSION C-137 (LEFT)', leftRes.error);
+          return;
+        }
+        const rightRes = Q.parseSmartJson(diffInputRight.value, { autoUnescape: true });
+        if (!rightRes.ok) {
+          playGlitchSound();
+          renderDiffError('DIMENSION J19ζ7 (RIGHT)', rightRes.error);
+          return;
+        }
+        try {
+          const maskedLeft = window.BrainwaveMasker.maskWithStats(Q.formatJson(leftRes.value, { indent: 2 }), 'json');
+          const maskedRight = window.BrainwaveMasker.maskWithStats(Q.formatJson(rightRes.value, { indent: 2 }), 'json');
+          diffInputLeft.value = maskedLeft.masked;
+          diffInputRight.value = maskedRight.masked;
+          playMortyWaveSound();
+          executeDiff(false);
+        } catch (err) {
+          playGlitchSound();
+          console.error('Cloak Both failed:', err);
+        }
+      });
+    }
+
+    if (btnClearDiff) {
+      btnClearDiff.addEventListener('click', () => {
+        playTerminalBeepSound();
+        lastDiffResult = null;
+        if (diffInputLeft) diffInputLeft.value = '';
+        if (diffInputRight) diffInputRight.value = '';
+        if (diffErrBanner) diffErrBanner.style.display = 'none';
+        diffLeftGutterCtrl.setErrorLine(null);
+        diffRightGutterCtrl.setErrorLine(null);
+        updateDiffCharCounters();
+        if (diffSplitBody) diffSplitBody.innerHTML = '';
+        if (diffPathsList) diffPathsList.innerHTML = '';
+        if (diffVerdictText) diffVerdictText.textContent = getActiveLang() === 'en' ? 'READY TO SCAN TIMELINES' : 'SIAP MEMINDAI TIMELINE';
+        if (diffCountAdded) diffCountAdded.textContent = '+0';
+        if (diffCountRemoved) diffCountRemoved.textContent = '-0';
+        if (diffCountModified) diffCountModified.textContent = '~0';
+        if (diffStabilityFill) {
+          diffStabilityFill.style.width = '100%';
+          diffStabilityFill.classList.remove('fill-warn', 'fill-danger');
+        }
+      });
+    }
+
+    // View Tabs (Split vs Anomaly Path Inspector)
+    diffViewBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        playTerminalBeepSound();
+        activeDiffView = btn.getAttribute('data-diff-view');
+        diffViewBtns.forEach((b) => b.classList.toggle('active', b === btn));
+        if (diffSplitView) diffSplitView.style.display = activeDiffView === 'split' ? 'block' : 'none';
+        if (diffPathsView) diffPathsView.style.display = activeDiffView === 'paths' ? 'block' : 'none';
+        if (diffAnomalyFilters) diffAnomalyFilters.style.display = activeDiffView === 'paths' ? 'inline-flex' : 'none';
+      });
+    });
+
+    // Anomaly Filter Chips
+    anomalyFilterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        playTerminalBeepSound();
+        activeAnomalyFilter = btn.getAttribute('data-anomaly-filter');
+        anomalyFilterBtns.forEach((b) => b.classList.toggle('active', b === btn));
+        if (lastDiffResult) renderAnomalyPathsView(lastDiffResult);
+      });
+    });
+
+    if (btnCopyDiffReport) {
+      btnCopyDiffReport.addEventListener('click', () => {
+        if (!lastDiffResult) return;
+        copyTextToClipboard(
+          lastDiffResult.reportText,
+          diffCopyLabel,
+          getActiveLang() === 'en' ? 'REPORT COPIED!' : 'REPORT TERSALIN!'
+        );
+      });
+    }
+
+    if (btnRelayDiff) {
+      btnRelayDiff.addEventListener('click', () => {
+        if (!lastDiffResult) return;
+        relayToSubspaceTerminal(lastDiffResult.reportText);
+      });
+    }
+
+    // Re-sync dynamic telemetry copy on language switch
+    window.addEventListener('languageChanged', () => {
+      if (rawInput && rawInput.value.trim()) {
+        executeBeautify(lastBeautifyMode, false);
+      }
+      if (lastDiffResult) {
+        updateDiffTelemetryUI(lastDiffResult);
+        renderSplitDiffView(lastDiffResult);
+        renderAnomalyPathsView(lastDiffResult);
+      }
+    });
+
+    // Initial Preload: Populate Mode 01 with Cronenberg Minified & Mode 02 with Portal Gun v1 vs v2
+    if (rawInput && !rawInput.value) {
+      rawInput.value = BEAUTIFY_PRESETS.cronenberg;
+      updateRawStats();
+      executeBeautify('beautify', false);
+    }
+    if (diffInputLeft && diffInputRight && !diffInputLeft.value && !diffInputRight.value) {
+      diffInputLeft.value = DIFF_PRESETS.portal.left;
+      diffInputRight.value = DIFF_PRESETS.portal.right;
+      updateDiffCharCounters();
+      executeDiff(false);
     }
   }
 
